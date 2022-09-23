@@ -8,8 +8,8 @@ const rootReducer = combineReducers({
 });
 
 const configureStore = () => {
-  const enhacer = composeWithDevTools();
-  return createStore(rootReducer, enhacer);
+  const enhancer = composeWithDevTools();
+  return createStore(rootReducer, enhancer);
 };
 
 const store = configureStore();
