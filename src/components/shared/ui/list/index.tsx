@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   IconButton,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -11,30 +10,33 @@ import {
   Tooltip,
 } from '@mui/material';
 
+import styles from './list.module.css';
 import { ListProps, RowData } from './types';
 
 const List = <T extends RowData>(props: ListProps<T>) => {
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
+    <TableContainer className={styles.container}>
+      <Table className={styles.table}>
+        <TableHead className={styles.tableHeader}>
           <TableRow>
             {props.headers.map((row) => (
-              <TableCell key={row.key}>{row.header}</TableCell>
+              <TableCell key={row.key} className={styles.columnTitle}>
+                {row.header}
+              </TableCell>
             ))}
-            {props.showButtons && <TableCell>Actions</TableCell>}
+            {props.showButtons && <TableCell className={styles.columnTitle}>Actions</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>
           {props.data.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow key={row.id} hover={true}>
               {props.headers.map((header, index) => (
-                <TableCell key={index} component="th" scope="row">
+                <TableCell key={index} scope="row" className={styles.cell}>
                   {row[header.key]}
                 </TableCell>
               ))}
               {props.showButtons && (
-                <TableCell>
+                <TableCell className={styles.cell}>
                   {props.buttons.map(
                     (btn, index) =>
                       btn.active && (
