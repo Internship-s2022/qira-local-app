@@ -1,6 +1,8 @@
 export interface ListProps<Data extends RowData> {
   headers: Headers[];
   data: Data[];
+  showButtons?: boolean;
+  buttons?: TableButton[];
 }
 
 export interface RowData {
@@ -10,4 +12,11 @@ export interface RowData {
 export interface Headers {
   header: string;
   key: string;
+}
+
+export interface TableButton {
+  active: boolean;
+  icon: JSX.Element;
+  title: string;
+  onClick: () => void;
 }
