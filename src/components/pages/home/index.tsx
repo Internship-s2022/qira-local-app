@@ -5,7 +5,7 @@ import { resetStore } from 'src/redux/test/actions';
 
 import styles from './home.module.css';
 
-const Home = () => {
+const Home = (): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
