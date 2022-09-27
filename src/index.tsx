@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 
-import { Paths } from 'src/constants';
+import { MainRoutes } from 'src/constants';
 
 import Layout from './components/layout';
 import { Home, Login } from './components/pages';
@@ -15,18 +15,18 @@ import { mainTheme } from './utils/materialTheme';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <ThemeProvider theme={mainTheme}>
+    <Provider store={store}>
+      <ThemeProvider theme={mainTheme}>
+        <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
-              <Route path={Paths.HOME} element={<Home />} />
-              <Route path={Paths.LOGIN} element={<Login />} />
+              <Route path={MainRoutes.HOME} element={<Home />} />
+              <Route path={MainRoutes.LOGIN} element={<Login />} />
             </Route>
           </Routes>
-        </ThemeProvider>
-      </Provider>
-    </BrowserRouter>
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
