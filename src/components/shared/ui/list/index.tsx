@@ -20,11 +20,11 @@ const List = <T extends RowData>(props: ListProps<T>) => {
         <TableHead className={styles.tableHeader}>
           <TableRow>
             {props.headers.map((row) => (
-              <TableCell key={row.key} className={styles.columnTitle}>
+              <TableCell key={row.key} className={styles.columnHeader}>
                 {row.header}
               </TableCell>
             ))}
-            {props.showButtons && <TableCell className={styles.columnTitle}>Actions</TableCell>}
+            {props.showButtons && <TableCell className={styles.columnHeader}>Actions</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>

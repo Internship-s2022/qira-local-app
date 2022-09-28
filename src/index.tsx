@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
+import { StyledEngineProvider } from '@mui/material/styles';
 
 import { MainRoutes } from 'src/constants';
 
@@ -16,16 +17,18 @@ import { mainTheme } from './utils/materialTheme';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={mainTheme}>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path={MainRoutes.HOME} element={<Home />} />
-              <Route path={MainRoutes.LOGIN} element={<Login />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={mainTheme}>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route path={MainRoutes.HOME} element={<Home />} />
+                <Route path={MainRoutes.LOGIN} element={<Login />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
