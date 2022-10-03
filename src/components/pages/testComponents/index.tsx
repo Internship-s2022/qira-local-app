@@ -1,3 +1,4 @@
+import { Resolver } from 'dns/promises';
 import Joi from 'joi';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -7,6 +8,8 @@ import { Button, Paper } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 
 import { InputText } from 'src/components/shared/input';
+import { SharedSelect } from 'src/components/shared/select';
+import { Options } from 'src/components/shared/select/types';
 
 import styles from './test.module.css';
 import { TestCompValues } from './types';
@@ -15,6 +18,7 @@ const schema = Joi.object({
   firstName: Joi.string().required(),
   email: Joi.string().required(),
   password: Joi.string().required(),
+  select: Joi.string().required(),
 });
 
 const TestComponents = (): JSX.Element => {
@@ -27,6 +31,12 @@ const TestComponents = (): JSX.Element => {
     mode: 'onSubmit',
     resolver: joiResolver(schema),
   });
+
+  const options: Options[] = [
+    { label: 'Opcion1', value: 'Value1' },
+    { label: 'Opcion2', value: 'Value2' },
+    { label: 'Opcion3', value: 'Value3' },
+  ];
 
   const onSubmit = (data) => {
     console.log('Data: ', data);
@@ -77,6 +87,7 @@ const TestComponents = (): JSX.Element => {
           size="small"
           fullWidth={true}
         />
+        <SharedSelect name={'select'} control={control} label="Select" options={options} />
         <div>
           <Button onClick={() => reset()} variant="outlined" className={styles.button}>
             Reset

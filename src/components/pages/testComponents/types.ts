@@ -3,4 +3,5 @@ export interface TestCompValues {
   lastName: string;
   email: string;
   password: string;
+  select: string;
 }
