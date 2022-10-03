@@ -4,15 +4,16 @@ import { Check, Close } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
-import { resetStore } from 'src/redux/test/actions';
+import { getCategory } from 'src/redux/category/thunk';
+import { AppDispatch } from 'src/types';
 
 import styles from './home.module.css';
 
 const Home = (): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch<null> = useDispatch();
 
   useEffect(() => {
-    dispatch(resetStore());
+    dispatch(getCategory());
   }, []);
 
   const headers: Headers[] = [
