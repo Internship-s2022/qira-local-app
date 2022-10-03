@@ -1,18 +1,31 @@
+import Joi from 'joi';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Button, Paper } from '@mui/material';
+import InputAdornment from '@mui/material/InputAdornment';
 
 import { InputText } from 'src/components/shared/input';
 
+import styles from './test.module.css';
 import { TestCompValues } from './types';
 
-const TestComponents2 = (): JSX.Element => {
+const schema = Joi.object({
+  firstName: Joi.string().required(),
+  email: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
+const TestComponents = (): JSX.Element => {
   const { handleSubmit, control, reset } = useForm<TestCompValues>({
     defaultValues: {
       firstName: '',
-      lastName: '',
+      email: '',
+      password: '',
     },
     mode: 'onSubmit',
+    resolver: joiResolver(schema),
   });
 
   const onSubmit = (data) => {
@@ -24,7 +37,7 @@ const TestComponents2 = (): JSX.Element => {
       <Paper
         style={{
           display: 'grid',
-          gridRowGap: '20px',
+          gridRowGap: '10px',
           padding: '20px',
           margin: '10px 300px',
         }}
@@ -32,22 +45,45 @@ const TestComponents2 = (): JSX.Element => {
         <InputText
           control={control}
           name="firstName"
-          label="First Name"
+          label="First name"
           variant="outlined"
-          margin="normal"
+          margin="dense"
+          size="small"
+          fullWidth={true}
         />
         <InputText
           control={control}
-          name="lastName"
-          label="Last Name"
+          name="email"
+          optionalLabel="Email"
+          variant="outlined"
+          margin="dense"
+          size="small"
+          fullWidth={true}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <MailOutlineIcon style={{ color: '#F05523' }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <InputText
+          control={control}
+          name="password"
+          type="password"
+          optionalLabel="Password"
           variant="outlined"
           margin="normal"
+          size="small"
+          fullWidth={true}
         />
         <div>
-          <Button onClick={() => reset()} variant="outlined">
+          <Button onClick={() => reset()} variant="outlined" className={styles.button}>
             Reset
           </Button>
-          <Button onClick={handleSubmit(onSubmit)} variant="contained">
+        </div>
+        <div>
+          <Button onClick={handleSubmit(onSubmit)} variant="contained" className={styles.button}>
             Submit
           </Button>
         </div>
@@ -56,4 +92,4 @@ const TestComponents2 = (): JSX.Element => {
   );
 };
 
-export default TestComponents2;
+export default TestComponents;
