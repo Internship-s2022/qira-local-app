@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Delete, Edit } from '@mui/icons-material';
+import { Check, Close, Delete, Edit } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
@@ -24,34 +24,23 @@ const Home = (): JSX.Element => {
     id: string;
     name: string;
     email: string;
+    isActive: boolean;
   }
 
   const data: Admin[] = [
-    { id: '1', name: 'Fran', email: 'fran@gmail.com' },
-    { id: '2', name: 'Gina', email: 'gina@gmail.com' },
-    { id: '3', name: 'Chaki', email: 'chaki@gmail.com' },
-    { id: '4', name: 'Ari', email: 'ari@gmail.com' },
+    { id: '1', name: 'Fran', email: 'fran@gmail.com', isActive: true },
+    { id: '2', name: 'Gina', email: 'gina@gmail.com', isActive: false },
+    { id: '3', name: 'Chaki', email: 'chaki@gmail.com', isActive: true },
+    { id: '4', name: 'Ari', email: 'ari@gmail.com', isActive: false },
   ];
 
-  const buttons: TableButton[] = [
-    {
+  const buttons: ((rowData?: Admin) => TableButton)[] = [
+    (rowData) => ({
       active: true,
-      icon: <Delete />,
-      title: 'Delete',
-      onClick: () => console.log('delete'),
-    },
-    {
-      active: false,
-      icon: <Edit />,
-      title: 'Edit',
-      onClick: () => console.log('edit'),
-    },
-    {
-      active: true,
-      icon: <Edit />,
-      title: 'Edit',
-      onClick: () => console.log('edit'),
-    },
+      icon: rowData.isActive ? <Close /> : <Check />,
+      title: rowData.isActive ? 'Disable' : 'Enable',
+      onClick: rowData.isActive ? () => console.log('Disabled') : () => console.log('Enabled'),
+    }),
   ];
 
   return (

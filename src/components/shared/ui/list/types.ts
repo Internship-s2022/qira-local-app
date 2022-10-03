@@ -2,7 +2,7 @@ export interface ListProps<Data extends RowData> {
   headers: Headers[];
   data: Data[];
   showButtons?: boolean;
-  buttons?: TableButton[];
+  buttons?: ((rowData: Data) => TableButton)[];
 }
 
 export interface RowData {

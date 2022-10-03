@@ -39,9 +39,9 @@ const List = <T extends RowData>(props: ListProps<T>) => {
                 <TableCell className={styles.cell}>
                   {props.buttons.map(
                     (btn, index) =>
-                      btn.active && (
-                        <Tooltip key={index} title={btn.title}>
-                          <IconButton onClick={btn.onClick}>{btn.icon}</IconButton>
+                      btn(row).active && (
+                        <Tooltip key={index} title={btn(row).title}>
+                          <IconButton onClick={btn(row).onClick}>{btn(row).icon}</IconButton>
                         </Tooltip>
                       ),
                   )}
