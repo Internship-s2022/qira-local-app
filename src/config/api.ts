@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 export const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -7,3 +7,5 @@ export const api = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+export const responseBody = (response: AxiosResponse) => response.data;

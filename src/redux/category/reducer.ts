@@ -19,7 +19,7 @@ export const categoryReducer = (state = initialState, action) => {
         ...state,
         categories: action.payload,
         isPending: false,
-        error: action.payload,
+        error: undefined,
       };
     case Actions.GET_CATEGORIES_ERROR:
       return {
