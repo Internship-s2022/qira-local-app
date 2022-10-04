@@ -19,18 +19,13 @@ export const SharedModal = (props: SharedModalProps): JSX.Element => {
   };
 
   return (
-    <Modal
-      open={props.open}
-      onClose={props.onClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
+    <Modal open={props.open} onClose={props.onClose}>
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Text in a modal
+          {props.title}
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          {props.message}
         </Typography>
       </Box>
     </Modal>
