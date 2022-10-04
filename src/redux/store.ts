@@ -1,6 +1,6 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { Action, ActionCreator, applyMiddleware, combineReducers, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import thunk, { ThunkAction } from 'redux-thunk';
 
 import { categoryReducer } from './category/reducer';
 
@@ -17,3 +17,5 @@ const store = configureStore();
 
 export default store;
 export type RootState = ReturnType<typeof rootReducer>;
+export type AppThunk = ActionCreator<ThunkAction<void, RootState, null, Action<null>>>;
+export type ApiResponse<T> = { message: string; data: T; error: boolean };

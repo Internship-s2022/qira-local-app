@@ -1,19 +1,19 @@
 import { Dispatch } from 'redux';
 
-import { AppThunk } from '../category/api';
-import { getCategoryError, getCategoryPending, getCategorySuccess } from './actions';
+import { AppThunk } from '../store';
+import { getCategoriesActions } from './actions';
 import { getCategories } from './api';
 
 export const getCategory: AppThunk = () => {
   return async (dispatch: Dispatch) => {
     try {
-      dispatch(getCategoryPending());
+      dispatch(getCategoriesActions.request(''));
       const response = await getCategories();
       if (response.data?.length) {
-        return dispatch(getCategorySuccess(response.data));
+        return dispatch(getCategoriesActions.success(response.data));
       }
     } catch (error) {
-      dispatch(getCategoryError(error));
+      dispatch(getCategoriesActions.failure(error));
     }
   };
 };
