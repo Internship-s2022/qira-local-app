@@ -1,3 +1,4 @@
+import { ActionsType } from './api';
 import { Actions } from './constants';
 
 const initialState = {
@@ -7,7 +8,7 @@ const initialState = {
   message: '',
 };
 
-export const categoryReducer = (state = initialState, action) => {
+export const categoryReducer = (state = initialState, action: ActionsType) => {
   switch (action.type) {
     case Actions.GET_CATEGORIES_PENDING:
       return {
