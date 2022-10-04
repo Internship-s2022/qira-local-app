@@ -35,6 +35,9 @@ const Header = () => {
           <li>
             <a href="/login">login</a>
           </li>
+          <li>
+            <a href="/test">test components</a>
+          </li>
         </ul>
       </nav>
     </header>
