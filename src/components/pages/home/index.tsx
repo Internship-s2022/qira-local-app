@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Check, Close } from '@mui/icons-material';
 
+import { SharedModal } from 'src/components/shared/modal';
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
 import { getCategory } from 'src/redux/category/thunk';
@@ -11,6 +12,9 @@ import styles from './home.module.css';
 
 const Home = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     dispatch(getCategory());
@@ -48,6 +52,10 @@ const Home = (): JSX.Element => {
     <section className={styles.container}>
       <h2>Home screen</h2>
       <List<Admin> headers={headers} data={data} showButtons={true} buttons={buttons}></List>
+      <SharedModal open={open} onClose={handleClose}>
+        <div>Hi im modal</div>
+      </SharedModal>
+      <button onClick={handleOpen}>Modal</button>
     </section>
   );
 };
