@@ -59,9 +59,9 @@ const Storybook = (): JSX.Element => {
 
   const data: Admin[] = [
     { id: '1', name: 'Francisco', email: 'francisco@gmail.com', value: 'Valor 2', isActive: true },
-    { id: '2', name: 'Gina', email: 'gina@gmail.com', value: 'Valor 3', isActive: false },
+    { id: '2', name: 'Gina', email: 'gina@gmail.com', value: 'Valor 3', isActive: true },
     { id: '3', name: 'Ivan', email: 'ivan@gmail.com', value: 'Valor 3', isActive: true },
-    { id: '4', name: 'Ariana', email: 'ariana@gmail.com', value: 'Valor 1', isActive: false },
+    { id: '4', name: 'Ariana', email: 'ariana@gmail.com', value: 'Valor 1', isActive: true },
   ];
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -78,7 +78,11 @@ const Storybook = (): JSX.Element => {
       active: true,
       icon: rowData.isActive ? <Close /> : <Check />,
       title: rowData.isActive ? 'Disable' : 'Enable',
-      onClick: rowData.isActive ? () => console.log('Disabled') : () => console.log('Enabled'),
+      onClick: () => {
+        const newData = listData.filter((item) => item.id !== rowData.id);
+        return setListData(newData);
+      },
+      // onClick: () => window.location.reload(),
     }),
   ];
   const onSubmit = (data) => {
@@ -90,7 +94,8 @@ const Storybook = (): JSX.Element => {
       value: data.select,
       isActive: true,
     };
-    listData.push(newAdmin);
+    setListData([...listData, newAdmin]);
+    // listData.push(newAdmin);
     handleClose();
     reset();
   };
