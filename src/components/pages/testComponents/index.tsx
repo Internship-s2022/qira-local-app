@@ -1,4 +1,3 @@
-import { Resolver } from 'dns/promises';
 import Joi from 'joi';
 import React from 'react';
 import { useForm } from 'react-hook-form';

@@ -1,10 +1,8 @@
 import React from 'react';
 import { FieldValues, useController } from 'react-hook-form';
 import { TextField } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
-// import styles from './inputText.module.css';
 import { SharedSelectProps } from './types';
 
 export const SharedSelect = <TValuesSelect extends FieldValues>({
@@ -27,9 +25,9 @@ export const SharedSelect = <TValuesSelect extends FieldValues>({
         helperText={error?.message != undefined ? error.message : ' '}
         error={error?.message != undefined}
       >
-        {props.options.map((op, index) => (
-          <MenuItem key={index} value={op.value}>
-            {op.label}
+        {props.options.map((option, index) => (
+          <MenuItem key={index} value={option.value}>
+            {option.label}
           </MenuItem>
         ))}
       </TextField>
