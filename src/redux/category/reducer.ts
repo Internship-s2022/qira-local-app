@@ -1,5 +1,4 @@
-import { ActionsType } from './api';
-import { Actions } from './constants';
+import { Actions, ActionsType } from './types';
 
 const initialState = {
   categories: [],

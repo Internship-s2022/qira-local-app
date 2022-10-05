@@ -1,8 +1,7 @@
 import { createAsyncAction } from 'typesafe-actions';
 
 import { ApiResponse } from '../store';
-import { Actions } from './constants';
-import { Category } from './types';
+import { Actions, Category } from './types';
 
 export const getCategoriesActions = createAsyncAction(
   Actions.GET_CATEGORIES_PENDING,

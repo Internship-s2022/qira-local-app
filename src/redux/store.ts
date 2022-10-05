@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk, { ThunkAction } from 'redux-thunk';
 
 import { categoryReducer } from './category/reducer';
+import { ActionsType as CategoryActionsTypes } from './category/types';
 
 const rootReducer = combineReducers({
   categories: categoryReducer,
@@ -15,7 +16,9 @@ const configureStore = () => {
 
 const store = configureStore();
 
-export default store;
 export type RootState = ReturnType<typeof rootReducer>;
+export type RootAction = CategoryActionsTypes;
 export type AppThunk = ActionCreator<ThunkAction<void, RootState, null, Action<null>>>;
 export type ApiResponse<T> = { message: string; data: T; error: boolean };
+
+export default store;
