@@ -12,11 +12,12 @@
 }
 
 .tableHeader {
-  background-color: #3a9fcf;
+  background-color: #f05523;
 }
 
 .columnHeader {
   font-weight: bolder;
+  color: white;
   text-align: center;
 }
 
