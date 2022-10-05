@@ -30,13 +30,15 @@ const Header = () => {
         </div>
       </div>
       <nav className={styles.navbar}>
-        <div className={styles.appName}>App</div>
+        <a className={styles.appName} href="/">
+          Qira
+        </a>
         <ul className={styles.routes}>
           <li>
             <a href="/login">login</a>
           </li>
           <li>
-            <a href="/test">test components</a>
+            <a href="/storybook">Storybook</a>
           </li>
         </ul>
       </nav>
