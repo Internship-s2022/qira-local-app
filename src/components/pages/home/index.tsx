@@ -52,12 +52,9 @@ const Home = (): JSX.Element => {
     <section className={styles.container}>
       <h2>Home screen</h2>
       <List<Admin> headers={headers} data={data} showButtons={true} buttons={buttons}></List>
-      <SharedModal
-        open={open}
-        onClose={handleClose}
-        title={'Title Modal'}
-        message={'Hi Im a modal'}
-      />
+      <SharedModal open={open} onClose={handleClose}>
+        <div>Hi im modal</div>
+      </SharedModal>
       <button onClick={handleOpen}>Modal</button>
     </section>
   );
