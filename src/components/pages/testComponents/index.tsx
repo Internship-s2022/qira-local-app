@@ -26,6 +26,7 @@ const TestComponents = (): JSX.Element => {
       firstName: '',
       email: '',
       password: '',
+      select: '',
     },
     mode: 'onSubmit',
     resolver: joiResolver(schema),
