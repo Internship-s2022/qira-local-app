@@ -1,16 +1,10 @@
-import { Actions } from './constants';
-import { Category } from './types';
+import { createAsyncAction } from 'typesafe-actions';
 
-export const getCategoryPending = () => ({
-  type: Actions.GET_CATEGORIES_PENDING,
-});
+import { ApiResponse } from '../store';
+import { Actions, Category } from './types';
 
-export const getCategorySuccess = (categories: Category[]) => ({
-  type: Actions.GET_CATEGORIES_SUCCESS,
-  payload: categories,
-});
-
-export const getCategoryError = (error: string) => ({
-  type: Actions.GET_CATEGORIES_ERROR,
-  payload: error,
-});
+export const getCategoriesActions = createAsyncAction(
+  Actions.GET_CATEGORIES_PENDING,
+  Actions.GET_CATEGORIES_SUCCESS,
+  Actions.GET_CATEGORIES_ERROR,
+)<string, Category[], ApiResponse<unknown>>();

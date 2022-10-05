@@ -1,7 +1,6 @@
-import { Action, ActionCreator } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { ActionType } from 'typesafe-actions';
 
-import { RootState } from '../store';
+import * as actions from './actions';
 
 interface Image {
   key: string;
@@ -14,4 +13,10 @@ export interface Category {
   logicDelete: boolean;
 }
 
-export type AppThunk = ActionCreator<ThunkAction<void, RootState, null, Action<null>>>;
+export type ActionsType = ActionType<typeof actions>;
+
+export enum Actions {
+  GET_CATEGORIES_SUCCESS = 'GET_CATEGORIES_SUCCESS',
+  GET_CATEGORIES_PENDING = 'GET_CATEGORIES_PENDING',
+  GET_CATEGORIES_ERROR = 'GET_CATEGORIES_ERROR',
+}
