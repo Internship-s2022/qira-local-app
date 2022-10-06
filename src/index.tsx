@@ -9,7 +9,7 @@ import { StyledEngineProvider } from '@mui/material/styles';
 import { MainRoutes } from 'src/constants';
 
 import Layout from './components/layout';
-import { Home, Login, TestComponents } from './components/pages';
+import { Home, Login, Storybook } from './components/pages';
 import store from './redux/store';
 import reportWebVitals from './report-web-vitals';
 import { mainTheme } from './utils/materialTheme';
@@ -24,7 +24,7 @@ ReactDOM.render(
               <Route element={<Layout />}>
                 <Route path={MainRoutes.HOME} element={<Home />} />
                 <Route path={MainRoutes.LOGIN} element={<Login />} />
-                <Route path={MainRoutes.TESTCOMPONENTS} element={<TestComponents />} />
+                <Route path={MainRoutes.STORYBOOK} element={<Storybook />} />
               </Route>
             </Routes>
           </BrowserRouter>

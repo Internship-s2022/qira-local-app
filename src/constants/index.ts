@@ -1,5 +1,5 @@
 export enum MainRoutes {
   HOME = '/',
   LOGIN = '/login',
-  TESTCOMPONENTS = '/test',
+  STORYBOOK = '/storybook',
 }
