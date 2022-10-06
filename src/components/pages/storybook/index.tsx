@@ -7,12 +7,12 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Button } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { InputText } from 'src/components/shared/input';
-import { SharedModal } from 'src/components/shared/modal';
-import { SharedSelect } from 'src/components/shared/select';
-import { Options } from 'src/components/shared/select/types';
+import { InputText } from 'src/components/shared/ui/input';
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
+import { SharedModal } from 'src/components/shared/ui/modal';
+import { SharedSelect } from 'src/components/shared/ui/select';
+import { Options } from 'src/components/shared/ui/select/types';
 
 import styles from './storybook.module.css';
 import { TestCompValues } from './types';
@@ -82,7 +82,6 @@ const Storybook = (): JSX.Element => {
         const newData = listData.filter((item) => item.id !== rowData.id);
         return setListData(newData);
       },
-      // onClick: () => window.location.reload(),
     }),
   ];
   const onSubmit = (data) => {
@@ -95,7 +94,6 @@ const Storybook = (): JSX.Element => {
       isActive: true,
     };
     setListData([...listData, newAdmin]);
-    // listData.push(newAdmin);
     handleClose();
     reset();
   };
