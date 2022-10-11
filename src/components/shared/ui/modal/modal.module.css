@@ -21,3 +21,7 @@
   font-size: 20px;
   cursor: pointer;
 }
+
+.fileName {
+  padding: 20px;
+}

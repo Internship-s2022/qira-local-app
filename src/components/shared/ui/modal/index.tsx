@@ -8,6 +8,7 @@ import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import style from './modal.module.css';
+import { PdfModal } from './pdfModal';
 import { UploadImage } from './upload-image/index';
 
 export const SharedModal = (): JSX.Element => {
