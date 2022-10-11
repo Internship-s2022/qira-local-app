@@ -2,14 +2,10 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import { StyledEngineProvider } from '@mui/material/styles';
 
-import { MainRoutes } from 'src/constants';
-
-import Layout from './components/layout';
-import { Home, Login, Storybook } from './components/pages';
+import Router from './app';
 import store from './redux/store';
 import reportWebVitals from './report-web-vitals';
 import { mainTheme } from './utils/materialTheme';
@@ -19,15 +15,7 @@ ReactDOM.render(
     <Provider store={store}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={mainTheme}>
-          <BrowserRouter>
-            <Routes>
-              <Route element={<Layout />}>
-                <Route path={MainRoutes.HOME} element={<Home />} />
-                <Route path={MainRoutes.LOGIN} element={<Login />} />
-                <Route path={MainRoutes.STORYBOOK} element={<Storybook />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
+          <Router></Router>
         </ThemeProvider>
       </StyledEngineProvider>
     </Provider>

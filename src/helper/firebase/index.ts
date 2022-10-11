@@ -1,5 +1,5 @@
-import { getAnalytics } from 'firebase/analytics';
 import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -11,7 +11,21 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(app);
+export const firebaseApp = initializeApp(firebaseConfig);
 
-export default app;
+// export const tokenListener = () => {
+//   firebase.auth().onIdTokenChanged(async (user) => {
+//     if (user) {
+//       const token = await user.getIdToken();
+//       const {
+//         claims: { role },
+//       } = await user.getIdTokenResult();
+//       const uid = user.uid;
+//       sessionStorage.setItem('token', token);
+//       sessionStorage.setItem('role', role);
+//       sessionStorage.setItem('uid', uid);
+//     }
+//   });
+// };
+
+export const auth = getAuth(firebaseApp);
