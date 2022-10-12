@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { MainRoutes } from 'src/constants';
-import { RootState } from 'src/redux/store';
-import { AppDispatch } from 'src/types';
+import { AppDispatch, RootState } from 'src/redux/store';
 
 import Layout from './components/layout';
 import { Home, Login, Storybook } from './components/pages';

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { login } from 'src/redux/auth/thunks';
-import { AppDispatch } from 'src/types';
+import { AppDispatch } from 'src/redux/store';
 import { capitalizeFirstLetter } from 'src/utils/formatters';
 
 import styles from './login.module.css';

@@ -1,5 +1,4 @@
-import { Actions, AuthActionsType } from '../store';
-import { AuthState } from './types';
+import { Actions, ActionsType, AuthState } from './types';
 
 const initialState: AuthState = {
   user: undefined,
@@ -10,9 +9,10 @@ const initialState: AuthState = {
   error: undefined,
 };
 
-export const authReducer = (state: AuthState = initialState, action: AuthActionsType) => {
+export const authReducer = (state: AuthState = initialState, action: ActionsType): AuthState => {
   switch (action.type) {
-    case (Actions.LOGIN_PENDING, Actions.GET_AUTH_PENDING):
+    case Actions.LOGIN_PENDING:
+    case Actions.GET_AUTH_PENDING:
       return {
         ...state,
         isFetching: true,
@@ -27,21 +27,17 @@ export const authReducer = (state: AuthState = initialState, action: AuthActions
         token: action.payload.token,
         role: action.payload.role,
       };
-    case (Actions.LOGIN_ERROR, Actions.GET_AUTH_ERROR):
+    case Actions.LOGIN_ERROR:
+    case Actions.GET_AUTH_ERROR:
       return {
         ...state,
         isFetching: false,
         error: true,
-        message: action.payload,
+        message: action.payload.message,
       };
     case Actions.LOGOUT_USER:
       sessionStorage.clear();
-      return {
-        ...state,
-        user: undefined,
-        token: undefined,
-        role: undefined,
-      };
+      return initialState;
     case Actions.GET_AUTH_SUCCESS:
       return {
         ...state,

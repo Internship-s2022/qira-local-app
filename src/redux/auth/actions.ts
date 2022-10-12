@@ -1,6 +1,7 @@
 import { action, createAsyncAction } from 'typesafe-actions';
 
-import { Actions, ApiResponse, User, UserCredentials } from '../store';
+import { ApiResponse } from '../store';
+import { Actions, User, UserCredentials } from './types';
 
 export const loginActions = createAsyncAction(
   Actions.LOGIN_PENDING,
