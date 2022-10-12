@@ -30,14 +30,17 @@ export const ImageModal = () => {
 
   return (
     <>
-      <Button variant="contained" component="label">
-        Upload File
-        <input hidden type="file" onChange={onSelectFile} />
-      </Button>
-      <div>
+      <div className={styles.titleModalImage}>Select a image</div>
+      <div className={styles.imageContainer}>
         {selectedFile && <img className={styles.image} src={preview} />}
+      </div>
+      <div className={styles.buttonContainer}>
+        <Button variant="contained" className={preview ? styles.buttonEdit : ''} component="label">
+          {preview ? <> Edit File </> : <> Upload File </>}
+          <input hidden type="file" onChange={onSelectFile} />
+        </Button>
         {preview && (
-          <Button variant="contained" component="label">
+          <Button className={styles.buttonSend} variant="contained" component="label">
             subir
           </Button>
         )}

@@ -1,7 +1,7 @@
 .container {
   width: 50%;
   padding: 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   border: '2px solid #000';
   border-radius: 5px;
   box-shadow: '2px';
@@ -14,8 +14,37 @@
   justify-content: center;
 }
 
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+  border: 20px, #f05523;
+}
+
 .image {
-  width: 400px;
-  height: auto;
-  border: 3px, blue;
+  align-self: center;
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+.buttonEdit {
+  align-self: center;
+  color: #f05523;
+  background-color: white;
+  border: solid 1px #f05523;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.titleModalImage {
+  padding: 5px 10px;
+  color: white;
+  background-color: #f05523;
+  border-radius: 5px;
+  box-shadow: solid 2px;
 }
