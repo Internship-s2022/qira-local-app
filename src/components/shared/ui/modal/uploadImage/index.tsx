@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 
-import styles from './modal.module.css';
+import styles from './uploadImage.module.css';
 
-export const ImageModal = () => {
-  const [selectedFile, setSelectedFile] = useState();
+export const UploadImage = () => {
+  const [selectedFile, setSelectedFile] = useState<MediaSource>();
   const [preview, setPreview] = useState<string>();
 
   useEffect(() => {
     if (!selectedFile) {
-      setPreview(undefined);
-      return;
+      return setPreview(undefined);
     }
 
     const objectUrl = URL.createObjectURL(selectedFile);
@@ -20,12 +19,9 @@ export const ImageModal = () => {
   }, [selectedFile]);
 
   const onSelectFile = (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
+    if (e.target.files.length) {
+      setSelectedFile(e.target.files[0]);
     }
-
-    setSelectedFile(e.target.files[0]);
   };
 
   return (

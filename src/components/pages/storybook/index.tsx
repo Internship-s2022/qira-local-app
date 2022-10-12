@@ -12,8 +12,8 @@ import { InputText } from 'src/components/shared/ui/input';
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
 import { SharedModal } from 'src/components/shared/ui/modal';
-import { ImageModal } from 'src/components/shared/ui/modal/imageModal';
 import { modalTypes } from 'src/components/shared/ui/modal/types';
+import { UploadImage } from 'src/components/shared/ui/modal/uploadImage/index';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options } from 'src/components/shared/ui/select/types';
 
@@ -163,11 +163,11 @@ const Storybook = (): JSX.Element => {
       </SharedModal>
       <Button onClick={() => setOpenModalImage(true)}>Add image</Button>
       <SharedModal
-        modalType={modalTypes.IMAGE_MODAL}
+        modalType={modalTypes.UPLOAD_IMAGE}
         open={openModalImage}
         onClose={handleCloseModalImage}
       >
-        <ImageModal />
+        <UploadImage />
       </SharedModal>
       <Button className={styles.button} onClick={handleOpen} variant="contained">
         Add new user
