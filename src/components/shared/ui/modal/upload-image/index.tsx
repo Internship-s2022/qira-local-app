@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 
+import { UploadImageModalProps } from './types';
 import styles from './uploadImage.module.css';
 
-export const UploadImage = () => {
+export const UploadImage = (props: UploadImageModalProps) => {
   const [selectedFile, setSelectedFile] = useState<MediaSource>();
   const [preview, setPreview] = useState<string>();
 
@@ -26,17 +27,22 @@ export const UploadImage = () => {
 
   return (
     <>
-      <div className={styles.titleModalImage}>Select a image</div>
+      <div className={styles.titleModalImage}>Selecciona una imagen</div>
       <div className={styles.imageContainer}>
         {selectedFile && <img className={styles.image} src={preview} />}
       </div>
       <div className={styles.buttonContainer}>
         <Button variant="contained" className={preview ? styles.buttonEdit : ''} component="label">
-          {preview ? <> Edit File </> : <> Upload File </>}
+          {preview ? <> Elegir otro archivo </> : <> Subir imagen </>}
           <input hidden type="file" onChange={onSelectFile} />
         </Button>
         {preview && (
-          <Button className={styles.buttonSend} variant="contained" component="label">
+          <Button
+            onClick={props.onClose}
+            className={styles.buttonSend}
+            variant="contained"
+            component="label"
+          >
             subir
           </Button>
         )}

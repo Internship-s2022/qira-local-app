@@ -2,9 +2,9 @@ export interface SharedModalProps {
   open: boolean;
   onClose: () => void;
   children: JSX.Element;
-  modalType: modalTypes;
+  modalType: ModalTypes;
 }
-export enum modalTypes {
+export enum ModalTypes {
   BASIC_MODAL = 'BASIC_MODAL',
   UPLOAD_IMAGE = 'UPLOAD_IMAGE',
 }

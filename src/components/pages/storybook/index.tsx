@@ -1,5 +1,4 @@
 import Joi from 'joi';
-import { text } from 'stream/consumers';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -12,8 +11,8 @@ import { InputText } from 'src/components/shared/ui/input';
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
 import { SharedModal } from 'src/components/shared/ui/modal';
-import { modalTypes } from 'src/components/shared/ui/modal/types';
-import { UploadImage } from 'src/components/shared/ui/modal/uploadImage/index';
+import { ModalTypes } from 'src/components/shared/ui/modal/types';
+import { UploadImage } from 'src/components/shared/ui/modal/upload-image/index';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options } from 'src/components/shared/ui/select/types';
 
@@ -107,7 +106,7 @@ const Storybook = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <List<Admin> headers={headers} data={listData} showButtons={true} buttons={buttons}></List>
-      <SharedModal modalType={modalTypes.BASIC_MODAL} open={open} onClose={handleClose}>
+      <SharedModal modalType={ModalTypes.BASIC_MODAL} open={open} onClose={handleClose}>
         <form>
           <div className={styles.formContainer}>
             <InputText
@@ -163,11 +162,11 @@ const Storybook = (): JSX.Element => {
       </SharedModal>
       <Button onClick={() => setOpenModalImage(true)}>Add image</Button>
       <SharedModal
-        modalType={modalTypes.UPLOAD_IMAGE}
+        modalType={ModalTypes.UPLOAD_IMAGE}
         open={openModalImage}
         onClose={handleCloseModalImage}
       >
-        <UploadImage />
+        <UploadImage onClose={handleCloseModalImage} />
       </SharedModal>
       <Button className={styles.button} onClick={handleOpen} variant="contained">
         Add new user
