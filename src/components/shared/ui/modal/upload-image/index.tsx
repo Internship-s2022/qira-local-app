@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 
 import { UploadImageModalProps } from './types';
-import styles from './uploadImage.module.css';
+import styles from './upload-image.module.css';
 
 export const UploadImage = (props: UploadImageModalProps) => {
   const [selectedFile, setSelectedFile] = useState<MediaSource>();
@@ -26,7 +26,7 @@ export const UploadImage = (props: UploadImageModalProps) => {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.titleModalImage}>Selecciona una imagen</div>
       <div className={styles.imageContainer}>
         {selectedFile && <img className={styles.image} src={preview} />}
@@ -47,6 +47,6 @@ export const UploadImage = (props: UploadImageModalProps) => {
           </Button>
         )}
       </div>
-    </>
+    </div>
   );
 };
