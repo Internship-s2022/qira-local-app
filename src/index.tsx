@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
 import { StyledEngineProvider } from '@mui/material/styles';
 
-import Router from './app';
+import App from './app';
 import store from './redux/store';
 import reportWebVitals from './report-web-vitals';
 import { mainTheme } from './utils/materialTheme';
@@ -15,7 +15,7 @@ ReactDOM.render(
     <Provider store={store}>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={mainTheme}>
-          <Router></Router>
+          <App />
         </ThemeProvider>
       </StyledEngineProvider>
     </Provider>

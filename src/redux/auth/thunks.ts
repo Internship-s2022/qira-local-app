@@ -3,12 +3,12 @@ import { Dispatch } from 'redux';
 
 import { auth } from 'src/helper/firebase';
 
-import { AppThunk } from '../store';
+import { AppThunk, RootAction } from '../store';
 import { getAuthUserActions, loginActions } from './actions';
 import { getAuthUser } from './api';
 
 export const login: AppThunk = (credentials) => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch<RootAction>) => {
     try {
       dispatch(loginActions.request(''));
       const response = await signInWithEmailAndPassword(
@@ -26,18 +26,17 @@ export const login: AppThunk = (credentials) => {
       sessionStorage.setItem('role', role);
       dispatch(loginActions.success({ user: userData.data, token: token, role: role }));
     } catch (error) {
-      console.log(error);
       return dispatch(loginActions.failure(error));
     }
   };
 };
 
 export const getAuthUserThunk: AppThunk = () => {
-  return async (dispatch: Dispatch) => {
+  return async (dispatch: Dispatch<RootAction>) => {
     try {
       dispatch(getAuthUserActions.request(''));
       const response = await getAuthUser();
-      if (response.data?.length) {
+      if (response.data) {
         dispatch(getAuthUserActions.success(response.data));
       }
     } catch (error) {

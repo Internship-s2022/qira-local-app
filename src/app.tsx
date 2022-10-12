@@ -4,13 +4,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { MainRoutes } from 'src/constants';
 import { RootState } from 'src/redux/store';
-import { AppDispatch } from 'src/types/types';
+import { AppDispatch } from 'src/types';
 
 import Layout from './components/layout';
 import { Home, Login, Storybook } from './components/pages';
 import { setAuthentication } from './redux/auth/actions';
 
-const Router = () => {
+const App = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
 
   const token = useSelector((state: RootState) => state.auth.token);
@@ -39,4 +39,4 @@ const Router = () => {
   );
 };
 
-export default Router;
+export default App;

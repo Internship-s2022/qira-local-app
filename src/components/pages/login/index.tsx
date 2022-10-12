@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { login } from 'src/redux/auth/thunks';
-import { AppDispatch } from 'src/types/types';
+import { AppDispatch } from 'src/types';
 import { capitalizeFirstLetter } from 'src/utils/formatters';
 
 import styles from './login.module.css';
@@ -10,12 +10,11 @@ import styles from './login.module.css';
 const Login = () => {
   const dispatch: AppDispatch<null> = useDispatch();
 
-  const user = {
-    email: 'admin@qira.com',
-    password: 'admin1234',
-  };
-
   useEffect(() => {
+    const user = {
+      email: 'admin@qira.com',
+      password: 'admin1234',
+    };
     dispatch(login(user));
   }, []);
 

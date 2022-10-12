@@ -2,7 +2,7 @@ import { Actions, ActionsType } from './types';
 
 const initialState = {
   categories: [],
-  isPending: false,
+  isFetching: false,
   error: undefined,
   message: '',
 };
@@ -12,19 +12,19 @@ export const categoryReducer = (state = initialState, action: ActionsType) => {
     case Actions.GET_CATEGORIES_PENDING:
       return {
         ...state,
-        isPending: true,
+        isFetching: true,
       };
     case Actions.GET_CATEGORIES_SUCCESS:
       return {
         ...state,
         categories: action.payload,
-        isPending: false,
+        isFetching: false,
         error: undefined,
       };
     case Actions.GET_CATEGORIES_ERROR:
       return {
         ...state,
-        isPending: false,
+        isFetching: false,
         error: action.payload,
       };
     default:

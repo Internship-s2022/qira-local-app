@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { getCategory } from 'src/redux/category/thunk';
-import { AppDispatch } from 'src/types/types';
+import { AppDispatch } from 'src/types';
 
 import styles from './home.module.css';
 

@@ -1,5 +1,5 @@
 import { api, responseBody } from 'src/config/api';
 
-import { User } from './types';
+import { User } from '../store';
 
-export const getAuthUser = () => api.get<User>('/client/auth').then(responseBody);
+export const getAuthUser = () => api.get<User>('/auth').then(responseBody);

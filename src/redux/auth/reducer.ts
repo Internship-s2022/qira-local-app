@@ -1,74 +1,62 @@
-import { Actions, ActionsType } from './types';
+import { Actions, AuthActionsType } from '../store';
+import { AuthState } from './types';
 
-const initialState = {
+const initialState: AuthState = {
   user: undefined,
   token: undefined,
   role: undefined,
-  isPending: false,
+  isFetching: false,
   message: '',
   error: undefined,
 };
 
-export const authReducer = (state = initialState, action: ActionsType) => {
+export const authReducer = (state: AuthState = initialState, action: AuthActionsType) => {
   switch (action.type) {
-    case Actions.LOGIN_PENDING:
+    case (Actions.LOGIN_PENDING, Actions.GET_AUTH_PENDING):
       return {
         ...state,
-        isPending: true,
+        isFetching: true,
       };
     case Actions.LOGIN_SUCCESS:
       return {
         ...state,
-        isPending: false,
+        isFetching: false,
         error: false,
         message: 'Login successfully',
         user: action.payload.user,
         token: action.payload.token,
         role: action.payload.role,
       };
-    case Actions.LOGIN_ERROR:
+    case (Actions.LOGIN_ERROR, Actions.GET_AUTH_ERROR):
       return {
         ...state,
-        isPending: false,
+        isFetching: false,
         error: true,
-        message: 'The email or password are incorrect',
+        message: action.payload,
       };
     case Actions.LOGOUT_USER:
+      sessionStorage.clear();
       return {
         ...state,
         user: undefined,
-      };
-    case Actions.GET_AUTH_PENDING:
-      return {
-        ...state,
-        isPending: true,
+        token: undefined,
+        role: undefined,
       };
     case Actions.GET_AUTH_SUCCESS:
       return {
         ...state,
-        isPending: false,
+        isFetching: false,
         error: false,
         user: action.payload,
-      };
-    case Actions.GET_AUTH_ERROR:
-      return {
-        ...state,
-        isPending: false,
-        error: action.payload,
       };
     case Actions.SET_AUTHENTICATION:
       return {
         ...state,
-        isPending: false,
+        isFetching: false,
         error: false,
         user: action.payload.user,
         token: action.payload.token,
         role: action.payload.role,
-      };
-    case Actions.RESET_MESSAGE:
-      return {
-        ...state,
-        message: '',
       };
     default:
       return state;

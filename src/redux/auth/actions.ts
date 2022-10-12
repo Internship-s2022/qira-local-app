@@ -1,7 +1,6 @@
 import { action, createAsyncAction } from 'typesafe-actions';
 
-import { ApiResponse } from '../store';
-import { Actions, User, UserCredentials } from './types';
+import { Actions, ApiResponse, User, UserCredentials } from '../store';
 
 export const loginActions = createAsyncAction(
   Actions.LOGIN_PENDING,
@@ -18,4 +17,3 @@ export const getAuthUserActions = createAsyncAction(
 export const logoutUser = () => action(Actions.LOGOUT_USER);
 export const setAuthentication = (user: UserCredentials) =>
   action(Actions.SET_AUTHENTICATION, user);
-export const resetMessage = () => action(Actions.RESET_MESSAGE);
