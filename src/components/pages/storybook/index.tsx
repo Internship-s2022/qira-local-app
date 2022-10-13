@@ -7,6 +7,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Button } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 
+import { SharedCheckbox } from 'src/components/shared/ui/checkbox';
 import { InputText } from 'src/components/shared/ui/input';
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
@@ -22,6 +23,7 @@ const schema = Joi.object({
   email: Joi.string().required(),
   password: Joi.string().required(),
   select: Joi.string().required(),
+  checkbox: Joi.boolean(),
 });
 
 interface Admin {
@@ -33,18 +35,9 @@ interface Admin {
 }
 const Storybook = (): JSX.Element => {
   const options: Options[] = [
-    {
-      label: 'Valor 1',
-      value: 'Valor 1',
-    },
-    {
-      label: 'Valor 2',
-      value: 'Valor 2',
-    },
-    {
-      label: 'Valor 3',
-      value: 'Valor 3',
-    },
+    { label: 'Valor 1', value: 'Valor 1' },
+    { label: 'Valor 2', value: 'Valor 2' },
+    { label: 'Valor 3', value: 'Valor 3' },
   ];
   const { handleSubmit, control, reset } = useForm<TestCompValues>({
     defaultValues: {
@@ -52,6 +45,7 @@ const Storybook = (): JSX.Element => {
       email: '',
       password: '',
       select: '',
+      checkbox: false,
     },
     mode: 'onSubmit',
     resolver: joiResolver(schema),
@@ -145,6 +139,7 @@ const Storybook = (): JSX.Element => {
               control={control}
               fullWidth
             />
+            <SharedCheckbox label="CheckBox" name="checkbox" control={control} />
             <Button onClick={handleSubmit(onSubmit)} variant="contained" className={styles.button}>
               Submit
             </Button>
