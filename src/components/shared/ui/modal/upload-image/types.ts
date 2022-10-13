@@ -1,3 +1,3 @@
 export interface UploadImageModalProps {
-  onClose: () => void;
+  onConfirm: () => void;
 }

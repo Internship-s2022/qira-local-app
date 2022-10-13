@@ -166,7 +166,7 @@ const Storybook = (): JSX.Element => {
         open={openModalImage}
         onClose={handleCloseModalImage}
       >
-        <UploadImage onClose={handleCloseModalImage} />
+        <UploadImage onConfirm={handleCloseModalImage} />
       </SharedModal>
       <Button className={styles.button} onClick={handleOpen} variant="contained">
         Add new user

@@ -34,11 +34,11 @@ export const UploadImage = (props: UploadImageModalProps) => {
       <div className={styles.buttonContainer}>
         <Button variant="contained" className={preview ? styles.buttonEdit : ''} component="label">
           {preview ? <> Elegir otro archivo </> : <> Subir imagen </>}
-          <input hidden type="file" onChange={onSelectFile} />
+          <input hidden type="file" accept="image/*" onChange={onSelectFile} />
         </Button>
         {preview && (
           <Button
-            onClick={props.onClose}
+            onClick={props.onConfirm}
             className={styles.buttonSend}
             variant="contained"
             component="label"

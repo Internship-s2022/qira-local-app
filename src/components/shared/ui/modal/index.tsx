@@ -10,14 +10,19 @@ export const SharedModal = (props: SharedModalProps): JSX.Element => {
   let modalComponent;
   switch (props.modalType) {
     case ModalTypes.UPLOAD_IMAGE:
-      modalComponent = <UploadImage onClose={props.onClose} />;
+      modalComponent = <UploadImage onConfirm={props.onClose} />;
       break;
     default:
       modalComponent = props.children;
   }
   return (
     <Modal className={style.modal} open={props.open} onClose={props.onClose}>
-      <Box className={style.container}>{modalComponent}</Box>
+      <Box className={style.container}>
+        <div onClick={props.onClose} className={style.closeModal}>
+          x
+        </div>
+        {modalComponent}
+      </Box>
     </Modal>
   );
 };
