@@ -13,7 +13,8 @@
   align-items: center;
 }
 
-.sidebarTitle .sidebarFooter {
+.sidebarTitle,
+.sidebarFooter {
   display: flex;
   align-items: center;
   justify-content: center;
