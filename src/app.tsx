@@ -6,7 +6,6 @@ import { MainRoutes } from 'src/constants';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import Layout from './components/layout';
-import AdminLayout from './components/layout/admin';
 import { Home, Login, Storybook } from './components/pages';
 import AdminRouter from './components/pages/admin';
 import { setAuthentication } from './redux/auth/actions';
