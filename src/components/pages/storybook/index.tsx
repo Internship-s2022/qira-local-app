@@ -12,6 +12,7 @@ import { InputText } from 'src/components/shared/ui/input';
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
 import { SharedModal } from 'src/components/shared/ui/modal';
+import { ModalTypes } from 'src/components/shared/ui/modal/types';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options } from 'src/components/shared/ui/select/types';
 
@@ -60,6 +61,12 @@ const Storybook = (): JSX.Element => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [openModalImage, setOpenModalImage] = React.useState(false);
+  const handleCloseModalImage = () => {
+    setOpenModalImage(false);
+  };
+
   const [listData, setListData] = useState(data);
   const headers: Headers[] = [
     { header: 'Name', key: 'name' },
@@ -94,7 +101,7 @@ const Storybook = (): JSX.Element => {
   return (
     <div className={styles.container}>
       <List<Admin> headers={headers} data={listData} showButtons={true} buttons={buttons}></List>
-      <SharedModal open={open} onClose={handleClose}>
+      <SharedModal modalType={ModalTypes.BASIC_MODAL} open={open} onClose={handleClose}>
         <form>
           <div className={styles.formContainer}>
             <InputText
@@ -149,6 +156,13 @@ const Storybook = (): JSX.Element => {
           </div>
         </form>
       </SharedModal>
+      <Button onClick={() => setOpenModalImage(true)}>Add image</Button>
+      <SharedModal
+        modalType={ModalTypes.UPLOAD_IMAGE}
+        open={openModalImage}
+        onClose={handleCloseModalImage}
+        onConfirm={handleCloseModalImage}
+      />
       <Button className={styles.button} onClick={handleOpen} variant="contained">
         Add new user
       </Button>
