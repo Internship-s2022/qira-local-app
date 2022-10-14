@@ -4,4 +4,5 @@ export interface TestCompValues {
   email: string;
   password: string;
   select: string;
+  checkbox: boolean;
 }
