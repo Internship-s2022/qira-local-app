@@ -5,8 +5,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { MainRoutes } from 'src/constants';
 import { AppDispatch, RootState } from 'src/redux/store';
 
-import AdminLayout from './components/admin-layout';
+import Layout from './components/layout';
+import AdminLayout from './components/layout/admin';
 import { Home, Login, Storybook } from './components/pages';
+import AdminRouter from './components/pages/admin';
 import { setAuthentication } from './redux/auth/actions';
 
 const App = (): JSX.Element => {
@@ -28,12 +30,13 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<AdminLayout />}>
+        <Route element={<Layout />}>
           <Route path={MainRoutes.HOME} element={<Home />} />
           <Route path={MainRoutes.LOGIN} element={<Login />} />
           <Route path={MainRoutes.STORYBOOK} element={<Storybook />} />
         </Route>
       </Routes>
+      <AdminRouter />
     </BrowserRouter>
   );
 };
