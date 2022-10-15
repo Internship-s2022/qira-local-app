@@ -7,6 +7,6 @@ export interface SharedModalProps {
 }
 export enum ModalTypes {
   BASIC_MODAL = 'BASIC_MODAL',
-  IMAGE_MODAL = 'IMAGE_MODAL',
+  UPLOAD_IMAGE = 'UPLOAD_IMAGE',
   PDF_MODAL = 'PDF_MODAL',
 }

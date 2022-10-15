@@ -10,6 +10,7 @@ import { AppDispatch, RootState } from 'src/redux/store';
 import style from './modal.module.css';
 import { PdfModal } from './pdfModal';
 import { UploadImage } from './upload-image/index';
+import { UploadPdf } from './upload-pdf';
 
 export const SharedModal = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
