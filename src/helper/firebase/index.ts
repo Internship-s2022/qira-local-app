@@ -28,4 +28,4 @@ export const firebaseApp = initializeApp(firebaseConfig);
 //   });
 // };
 
-export const auth = getAuth(firebaseApp);
+export const auth = () => getAuth(firebaseApp);
