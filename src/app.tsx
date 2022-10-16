@@ -2,12 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { MainRoutes } from 'src/constants';
 import { AppDispatch, RootState } from 'src/redux/store';
 
-import Layout from './components/layout';
-import { Home, Login, Storybook } from './components/pages';
 import AdminRouter from './components/pages/admin';
+import ClientRouter from './components/pages/client';
 import { setAuthentication } from './redux/auth/actions';
 
 const App = (): JSX.Element => {
@@ -29,13 +27,9 @@ const App = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path={MainRoutes.HOME} element={<Home />} />
-          <Route path={MainRoutes.LOGIN} element={<Login />} />
-          <Route path={MainRoutes.STORYBOOK} element={<Storybook />} />
-        </Route>
+        <Route path="*" element={<ClientRouter />} />
+        <Route path="/admin/*" element={<AdminRouter />} />
       </Routes>
-      <AdminRouter />
     </BrowserRouter>
   );
 };

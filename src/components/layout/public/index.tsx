@@ -1,10 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { Footer, Header } from '../shared/common';
+import { Footer, Header } from 'src/components/shared/common';
+
 import styles from './layout.module.css';
 
-const Layout = () => {
+const PublicLayout = () => {
   return (
     <div className={styles.container}>
       <Header />
@@ -14,4 +15,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default PublicLayout;

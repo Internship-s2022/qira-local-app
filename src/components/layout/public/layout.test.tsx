@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import Layout from '.';
+import PublicLayout from '.';
 
 test('renders learn react link', () => {
-  render(<Layout />);
+  render(<PublicLayout />);
   const linkElement = screen.getByTestId('test');
   expect(linkElement).toBeInTheDocument();
 });
