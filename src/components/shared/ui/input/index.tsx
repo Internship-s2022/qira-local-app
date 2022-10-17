@@ -3,7 +3,6 @@ import { FieldValues, useController } from 'react-hook-form';
 import { TextField } from '@mui/material';
 
 import { InputProps } from './types';
-
 export const InputText = <TValuesForm extends FieldValues>({
   name,
   control,
