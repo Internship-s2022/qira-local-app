@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 export const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -8,4 +8,10 @@ export const api = axios.create({
   },
 });
 
-export const responseBody = (response: AxiosResponse) => response.data;
+api.interceptors.response.use((response) => {
+  const formattedResponse = {
+    ...response.data,
+    status: response.status,
+  };
+  return formattedResponse;
+});
