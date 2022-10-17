@@ -12,7 +12,7 @@ export const login: AppThunk = (credentials) => {
     try {
       dispatch(loginActions.request(''));
       const response = await signInWithEmailAndPassword(
-        auth,
+        auth(),
         credentials.email,
         credentials.password,
       );
