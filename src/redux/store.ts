@@ -6,12 +6,14 @@ import { authReducer } from './auth/reducer';
 import { ActionsType as AuthActionsType } from './auth/types';
 import { categoryReducer } from './category/reducer';
 import { ActionsType as CategoryActionsType } from './category/types';
+import { clientReducer } from './clients/reducer';
 import { modalReducer } from './modal/reducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   categories: categoryReducer,
   modal: modalReducer,
+  clients: clientReducer,
 });
 
 const configureStore = () => {
