@@ -1,5 +1,3 @@
-import { IvaCondition } from 'src/types';
-
 export interface SignUpFormValues {
   email: string;
   password: string;
