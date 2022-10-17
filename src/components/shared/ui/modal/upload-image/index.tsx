@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 
+import { CustomFile } from '../types';
 import { UploadImageModalProps } from './types';
 import styles from './upload-image.module.css';
 
 export const UploadImage = (props: UploadImageModalProps) => {
-  const [selectedFile, setSelectedFile] = useState<MediaSource>();
+  const [selectedFile, setSelectedFile] = useState<CustomFile>();
   const [preview, setPreview] = useState<string>();
 
   useEffect(() => {
