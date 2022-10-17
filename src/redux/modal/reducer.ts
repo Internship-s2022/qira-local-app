@@ -1,20 +1,21 @@
-import { ModalAction, ModalActionTypes, ModalState } from './types';
+import { Actions, ActionsType, ModalState } from './types';
 
 const initialState = {
-  modal: false,
+  isOpen: false,
+  type: undefined,
+  options: undefined,
 };
-export const modalReducer = (state: ModalState = initialState, action: ModalAction): ModalState => {
+export const modalReducer = (state: ModalState = initialState, action: ActionsType): ModalState => {
   switch (action.type) {
-    case ModalActionTypes.ShowModal:
+    case Actions.OPEN_MODAL:
       return {
         ...state,
-        modal: true,
+        isOpen: true,
+        type: action.payload.type,
+        options: action.payload.options,
       };
-    case ModalActionTypes.HideModal:
-      return {
-        ...state,
-        modal: false,
-      };
+    case Actions.CLOSE_MODAL:
+      return initialState;
     default:
       return state;
   }
