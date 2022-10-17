@@ -1,15 +1,19 @@
-import { Actions, ActionsType, ModalState } from './types';
+import { ModalAction, ModalActionTypes, ModalState } from './types';
 
-const initialState: ModalState = {
-  open: false,
+const initialState = {
+  modal: false,
 };
-
-export const authReducer = (state: ModalState = initialState, action: ActionsType): ModalState => {
+export const modalReducer = (state: ModalState = initialState, action: ModalAction): ModalState => {
   switch (action.type) {
-    case Actions.OPEN_MODAL:
+    case ModalActionTypes.ShowModal:
       return {
         ...state,
-        open: true,
+        modal: true,
+      };
+    case ModalActionTypes.HideModal:
+      return {
+        ...state,
+        modal: false,
       };
     default:
       return state;
