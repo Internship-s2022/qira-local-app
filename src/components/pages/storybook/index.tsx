@@ -1,8 +1,5 @@
-// import Joi from 'joi';
 import React, { useState } from 'react';
-// import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-// import { joiResolver } from '@hookform/resolvers/joi';
 import { Check, Close } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
