@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 
 import { CustomFile } from '../types';
-import { UploadImageModalProps } from './types';
-import styles from './upload-image.module.css';
+import { UploadPdfProps } from './types';
+import styles from './upload-pdf.module.css';
 
-export const UploadImage = (props: UploadImageModalProps) => {
+export const UploadPdf = (props: UploadPdfProps) => {
   const [selectedFile, setSelectedFile] = useState<CustomFile>();
   const [preview, setPreview] = useState<string>();
 
@@ -13,11 +13,7 @@ export const UploadImage = (props: UploadImageModalProps) => {
     if (!selectedFile) {
       return setPreview(undefined);
     }
-
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreview(objectUrl);
-
-    return () => URL.revokeObjectURL(objectUrl);
+    setPreview(selectedFile.name);
   }, [selectedFile]);
 
   const onSelectFile = (e) => {
@@ -28,14 +24,14 @@ export const UploadImage = (props: UploadImageModalProps) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.titleModalImage}>Selecciona una imagen</div>
-      <div className={styles.imageContainer}>
-        {selectedFile && <img className={styles.image} src={preview} />}
+      <div className={styles.titleModalImage}>Selecciona un archivo</div>
+      <div className={styles.fileContainer}>
+        {preview && <div className={styles.fileName}>{preview}</div>}
       </div>
       <div className={styles.buttonContainer}>
         <Button variant="contained" className={preview ? styles.buttonEdit : ''} component="label">
-          {preview ? <> Elegir otro archivo </> : <> Subir imagen </>}
-          <input hidden type="file" accept="image/*" onChange={onSelectFile} />
+          {preview ? <> Elegir otro archivo </> : <> Subir Archivo </>}
+          <input hidden type="file" accept=".pdf" onChange={onSelectFile} />
         </Button>
         {preview && (
           <Button
@@ -44,7 +40,7 @@ export const UploadImage = (props: UploadImageModalProps) => {
             variant="contained"
             component="label"
           >
-            subir
+            Subir
           </Button>
         )}
       </div>
