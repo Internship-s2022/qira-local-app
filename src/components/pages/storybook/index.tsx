@@ -1,34 +1,31 @@
-import Joi from 'joi';
+// import Joi from 'joi';
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
-import { joiResolver } from '@hookform/resolvers/joi';
+// import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+// import { joiResolver } from '@hookform/resolvers/joi';
 import { Check, Close } from '@mui/icons-material';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Button } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
 
-import { SharedCheckbox } from 'src/components/shared/ui/checkbox';
-import { InputText } from 'src/components/shared/ui/input';
+// import { SharedCheckbox } from 'src/components/shared/ui/checkbox';
+// import { InputText } from 'src/components/shared/ui/input';
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
-import { SharedModal } from 'src/components/shared/ui/modal';
-import { SharedSelect } from 'src/components/shared/ui/select';
-import { Options } from 'src/components/shared/ui/select/types';
-import { closeModal, openModal } from 'src/redux/modal/actions';
+// import { SharedSelect } from 'src/components/shared/ui/select';
+// import { Options } from 'src/components/shared/ui/select/types';
+import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { AppDispatch, RootState } from 'src/redux/store';
+import { AppDispatch } from 'src/redux/store';
 
 import styles from './storybook.module.css';
-import { TestCompValues } from './types';
+// import { TestCompValues } from './types';
 
-const schema = Joi.object({
-  firstName: Joi.string().required(),
-  email: Joi.string().required(),
-  password: Joi.string().required(),
-  select: Joi.string().required(),
-  checkbox: Joi.boolean(),
-});
+// const schema = Joi.object({
+//   firstName: Joi.string().required(),
+//   email: Joi.string().required(),
+//   password: Joi.string().required(),
+//   select: Joi.string().required(),
+//   checkbox: Joi.boolean(),
+// });
 
 interface Admin {
   id: string;
@@ -39,23 +36,24 @@ interface Admin {
 }
 const Storybook = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
-  const options: Options[] = [
-    { label: 'Valor 1', value: 'Valor 1' },
-    { label: 'Valor 2', value: 'Valor 2' },
-    { label: 'Valor 3', value: 'Valor 3' },
-  ];
-  const { handleSubmit, control, reset } = useForm<TestCompValues>({
-    defaultValues: {
-      firstName: '',
-      email: '',
-      password: '',
-      select: '',
-      checkbox: false,
-    },
-    mode: 'onSubmit',
-    resolver: joiResolver(schema),
-  });
-  const modalOpen = useSelector((state: RootState) => state.modal.isOpen);
+
+  // const options: Options[] = [
+  //   { label: 'Valor 1', value: 'Valor 1' },
+  //   { label: 'Valor 2', value: 'Valor 2' },
+  //   { label: 'Valor 3', value: 'Valor 3' },
+  // ];
+
+  // const { handleSubmit, control, reset } = useForm<TestCompValues>({
+  //   defaultValues: {
+  //     firstName: '',
+  //     email: '',
+  //     password: '',
+  //     select: '',
+  //     checkbox: false,
+  //   },
+  //   mode: 'onSubmit',
+  //   resolver: joiResolver(schema),
+  // });
 
   const data: Admin[] = [
     { id: '1', name: 'Francisco', email: 'francisco@gmail.com', value: 'Valor 2', isActive: true },
@@ -82,24 +80,24 @@ const Storybook = (): JSX.Element => {
       },
     }),
   ];
-  const onSubmit = (data) => {
-    console.log('Data: ', data);
-    const newAdmin = {
-      id: '01',
-      name: data.firstName,
-      email: data.email,
-      value: data.select,
-      isActive: true,
-    };
-    setListData([...listData, newAdmin]);
-    dispatch(closeModal());
-    reset();
-  };
+  // const onSubmit = (data) => {
+  //   console.log('Data: ', data);
+  //   const newAdmin = {
+  //     id: '01',
+  //     name: data.firstName,
+  //     email: data.email,
+  //     value: data.select,
+  //     isActive: true,
+  //   };
+  //   setListData([...listData, newAdmin]);
+  //   dispatch(closeModal());
+  //   reset();
+  // };
   return (
     <div className={styles.container}>
       <List<Admin> headers={headers} data={listData} showButtons={true} buttons={buttons}></List>
-      <SharedModal open={modalOpen} onClose={() => dispatch(closeModal())}>
-        <form>
+      {/* <SharedModal open={modalOpen} onClose={() => dispatch(closeModal())} /> */}
+      {/* <form>
           <div className={styles.formContainer}>
             <InputText
               control={control}
@@ -151,8 +149,7 @@ const Storybook = (): JSX.Element => {
               Reset
             </Button>
           </div>
-        </form>
-      </SharedModal>
+        </form> */}
       <Button onClick={() => dispatch(openModal(ModalTypes.UPLOAD_IMAGE))}>Add image</Button>
       <Button
         className={styles.button}

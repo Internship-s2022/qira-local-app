@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from 'src/redux/store';
 
 import AdminRouter from './components/pages/admin';
 import ClientRouter from './components/pages/client';
+import { SharedModal } from './components/shared/ui/modal';
 import { setAuthentication } from './redux/auth/actions';
 
 const App = (): JSX.Element => {
@@ -26,6 +27,7 @@ const App = (): JSX.Element => {
 
   return (
     <BrowserRouter>
+      <SharedModal />
       <Routes>
         <Route path="*" element={<ClientRouter />} />
         <Route path="/admin/*" element={<AdminRouter />} />
