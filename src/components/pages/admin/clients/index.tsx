@@ -21,22 +21,13 @@ const Clients = (): JSX.Element => {
     dispatch(getClients());
   }, []);
 
-  // const data: Client[] = [
-  //   { id: '1', name: 'Francisco', email: 'francisco@gmail.com', value: 'Valor 2', isActive: true },
-  //   { id: '2', name: 'Gina', email: 'gina@gmail.com', value: 'Valor 3', isActive: true },
-  //   { id: '3', name: 'Ivan', email: 'ivan@gmail.com', value: 'Valor 3', isActive: true },
-  //   { id: '4', name: 'Ariana', email: 'ariana@gmail.com', value: 'Valor 1', isActive: true },
-  // ];
-
   const clients = useSelector((state: RootState) => state.clients.clients);
-  // const [listData, setListData] = useState(data);
   const headers: Headers[] = [
     { header: 'Name', key: 'name' },
     { header: 'Email', key: 'email' },
     { header: 'Value', key: 'value' },
   ];
 
-  // setListData(clients);
   return (
     <div>
       <List<Client> headers={headers} data={clients}></List>
