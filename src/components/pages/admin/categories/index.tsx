@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import { useDispatch, useSelector } from 'react-redux';
 import List from 'src/components/shared/ui/list';
+import { getCategory } from 'src/redux/category/thunk';
+import { AppDispatch, RootState } from 'src/redux/store';
 
-// import { getCategory } from 'src/redux/category/thunk';
-// import { AppDispatch, RootState } from 'src/redux/store';
 import { Headers } from '../../../shared/ui/list/types';
 import styles from './categories.module.css';
 
@@ -15,30 +15,35 @@ interface Category {
 }
 
 const Categories = (): JSX.Element => {
-  // const dispatch: AppDispatch<null> = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getCategory());
-  // }, []);
+  const dispatch: AppDispatch<null> = useDispatch();
+  const categories = useSelector((state: RootState) => state.categories.categories);
+  const isFetching = useSelector((state: RootState) => state.categories.isFetching);
 
-  const data: Category[] = [
-    { id: '1', name: 'Francisco', isActive: true },
-    { id: '2', name: 'Gina', isActive: false },
-    { id: '3', name: 'Ivan', isActive: true },
-    { id: '4', name: 'Ariana', isActive: false },
-  ];
+  useEffect(() => {
+    dispatch(getCategory());
+  }, []);
 
-  // const categories = useSelector((state: RootState) => state.categories.categories);
-  const [listData, setListData] = useState(data);
+  const formatData = (data) => {
+    const listData = data.map((category) => {
+      return {
+        id: category._id,
+        name: category.name,
+        isActive: category.isActive ? 'Activada' : 'Desactivada',
+      };
+    });
+    console.log(listData);
+    return listData;
+  };
+
   const headers: Headers[] = [
     { header: 'ID', key: 'id' },
     { header: 'Categories', key: 'name' },
-    { header: 'Activo', key: 'isActive' },
+    { header: 'Estado', key: 'isActive' },
   ];
 
-  //setListData(data);
   return (
     <div className={styles.container}>
-      <List<Category> headers={headers} data={listData}></List>
+      {isFetching ? <></> : <List<Category> headers={headers} data={formatData(categories)}></List>}
     </div>
   );
 };
