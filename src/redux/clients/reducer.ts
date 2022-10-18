@@ -1,4 +1,4 @@
-import { Actions, ActionsType } from './types';
+import { Actions, ActionsType, ClientState } from './types';
 
 const initialState = {
   clients: [],
@@ -6,8 +6,9 @@ const initialState = {
   error: undefined,
   message: '',
 };
+let newListClients = [];
 
-export const clientReducer = (state = initialState, action: ActionsType) => {
+export const clientReducer = (state: ClientState = initialState, action: ActionsType) => {
   switch (action.type) {
     case Actions.GET_CLIENT_PENDING:
       return {
@@ -17,11 +18,59 @@ export const clientReducer = (state = initialState, action: ActionsType) => {
     case Actions.GET_CLIENT_SUCCESS:
       return {
         ...state,
-        categories: action.payload,
+        clients: action.payload,
         isFetching: false,
         error: undefined,
       };
     case Actions.GET_CLIENT_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+      };
+    case Actions.ACTIVATE_CLIENT_PENDING:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case Actions.ACTIVATE_CLIENT_SUCCESS:
+      newListClients = state.clients.map((client) => {
+        if (client._id === action.payload._id) {
+          return action.payload;
+        } else {
+          return client;
+        }
+      });
+      return {
+        ...state,
+        clients: newListClients,
+        isFetching: true,
+      };
+    case Actions.ACTIVATE_CLIENT_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload,
+      };
+    case Actions.INACTIVATE_CLIENT_PENDING:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case Actions.INACTIVATE_CLIENT_SUCCESS:
+      newListClients = state.clients.map((client) => {
+        if (client._id === action.payload._id) {
+          return action.payload;
+        } else {
+          return client;
+        }
+      });
+      return {
+        ...state,
+        clients: newListClients,
+        isFetching: true,
+      };
+    case Actions.INACTIVATE_CLIENT_ERROR:
       return {
         ...state,
         isFetching: false,
