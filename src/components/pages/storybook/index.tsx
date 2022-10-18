@@ -49,6 +49,7 @@ const Storybook = (): JSX.Element => {
     <div className={styles.container}>
       <List<Admin> headers={headers} data={listData} showButtons={true} buttons={buttons}></List>
       <Button onClick={() => dispatch(openModal(ModalTypes.UPLOAD_IMAGE))}>Add image</Button>
+      <Button onClick={() => dispatch(openModal(ModalTypes.UPLOAD_PDF))}>Add PDF</Button>
       <Button
         className={styles.button}
         onClick={() => dispatch(openModal(ModalTypes.BASIC_MODAL))}

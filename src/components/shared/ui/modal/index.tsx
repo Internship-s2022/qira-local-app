@@ -8,7 +8,6 @@ import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import style from './modal.module.css';
-import { PdfModal } from './pdfModal';
 import { UploadImage } from './upload-image/index';
 import { UploadPdf } from './upload-pdf/index';
 
@@ -22,6 +21,15 @@ export const SharedModal = (): JSX.Element => {
     case ModalTypes.UPLOAD_IMAGE:
       modalComponent = (
         <UploadImage
+          onConfirm={() => {
+            dispatch(closeModal());
+          }}
+        />
+      );
+      break;
+    case ModalTypes.UPLOAD_PDF:
+      modalComponent = (
+        <UploadPdf
           onConfirm={() => {
             dispatch(closeModal());
           }}
