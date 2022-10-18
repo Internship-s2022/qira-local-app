@@ -5,37 +5,3 @@
   align-items: center;
   justify-content: space-around;
 }
-
-.title {
-  align-self: flex-start;
-  color: #f05523;
-}
-
-.formContainer {
-  display: flex;
-  justify-content: space-around;
-}
-
-.columnContainer {
-  width: 45%;
-}
-
-.input {
-  width: 100%;
-}
-
-.shortInput {
-  width: 75px;
-}
-
-.phoneInputs,
-.addressInputs {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.signUpBtn {
-  width: 55%;
-  font-weight: bold;
-}

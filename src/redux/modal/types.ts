@@ -27,4 +27,5 @@ export enum ModalTypes {
   CONFIRM = 'CONFIRM',
   LOGIN = 'LOGIN',
   ERROR = 'ERROR',
+  REGISTER_FORM = 'REGISTER_FORM',
 }
