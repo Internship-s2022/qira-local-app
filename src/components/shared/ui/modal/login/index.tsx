@@ -8,11 +8,12 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { Button, InputAdornment } from '@mui/material';
 
 import { login } from 'src/redux/auth/thunks';
+import { Actions as AuthActions } from 'src/redux/auth/types';
 import { AppDispatch } from 'src/redux/store';
 
-import { InputText } from '../shared/ui/input';
+import { InputText } from '../../input';
 import styles from './login.module.css';
-import { FormValues } from './types';
+import { FormValues, LoginModalProps } from './types';
 
 const loginValidation = Joi.object({
   email: Joi.string()
@@ -30,7 +31,7 @@ const loginValidation = Joi.object({
   }),
 });
 
-export const LoginForm = () => {
+export const LoginModal = (props: LoginModalProps) => {
   const dispatch: AppDispatch<null> = useDispatch();
   const { handleSubmit, control } = useForm<FormValues>({
     defaultValues: {
@@ -41,14 +42,19 @@ export const LoginForm = () => {
     resolver: joiResolver(loginValidation),
   });
 
-  const onSubmit = (User) => {
+  const onSubmit = async (User) => {
     console.log('User: ', User);
-    dispatch(login(User));
+    const response = await dispatch(login(User));
+    if (response.type === AuthActions.LOGIN_SUCCESS) {
+      console.log('success');
+      props.onConfirm();
+    } else {
+      props.onClose();
+    }
   };
 
   return (
-    <div>
-      <h2>LOG IN</h2>
+    <div className={styles.container}>
       <form>
         <div className={styles.formContainer}>
           <div className={styles.titleContainer}>

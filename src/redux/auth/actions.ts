@@ -18,3 +18,5 @@ export const getAuthUserActions = createAsyncAction(
 export const logoutUser = () => action(Actions.LOGOUT_USER);
 export const setAuthentication = (user: UserCredentials) =>
   action(Actions.SET_AUTHENTICATION, user);
+
+export const resetMessage = () => action(Actions.RESET_MESSAGE);
