@@ -13,7 +13,7 @@ import { UploadImage } from './upload-image/index';
 export const SharedModal = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const modalType = useSelector((state: RootState) => state.modal.type);
-  const modal = useSelector((state: RootState) => state.modal.isOpen);
+  const open = useSelector((state: RootState) => state.modal.isOpen);
 
   let modalComponent;
   switch (modalType) {
@@ -32,7 +32,7 @@ export const SharedModal = (): JSX.Element => {
   return (
     <Modal
       className={style.modal}
-      open={modal}
+      open={open}
       onClose={() => {
         dispatch(closeModal());
       }}

@@ -6,27 +6,13 @@ import { useDispatch } from 'react-redux';
 import { Check, Close } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
-// import { SharedCheckbox } from 'src/components/shared/ui/checkbox';
-// import { InputText } from 'src/components/shared/ui/input';
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
-// import { SharedSelect } from 'src/components/shared/ui/select';
-// import { Options } from 'src/components/shared/ui/select/types';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch } from 'src/redux/store';
 
 import styles from './storybook.module.css';
-// import { TestCompValues } from './types';
-
-// const schema = Joi.object({
-//   firstName: Joi.string().required(),
-//   email: Joi.string().required(),
-//   password: Joi.string().required(),
-//   select: Joi.string().required(),
-//   checkbox: Joi.boolean(),
-// });
-
 interface Admin {
   id: string;
   name: string;
@@ -36,24 +22,6 @@ interface Admin {
 }
 const Storybook = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
-
-  // const options: Options[] = [
-  //   { label: 'Valor 1', value: 'Valor 1' },
-  //   { label: 'Valor 2', value: 'Valor 2' },
-  //   { label: 'Valor 3', value: 'Valor 3' },
-  // ];
-
-  // const { handleSubmit, control, reset } = useForm<TestCompValues>({
-  //   defaultValues: {
-  //     firstName: '',
-  //     email: '',
-  //     password: '',
-  //     select: '',
-  //     checkbox: false,
-  //   },
-  //   mode: 'onSubmit',
-  //   resolver: joiResolver(schema),
-  // });
 
   const data: Admin[] = [
     { id: '1', name: 'Francisco', email: 'francisco@gmail.com', value: 'Valor 2', isActive: true },
@@ -80,76 +48,9 @@ const Storybook = (): JSX.Element => {
       },
     }),
   ];
-  // const onSubmit = (data) => {
-  //   console.log('Data: ', data);
-  //   const newAdmin = {
-  //     id: '01',
-  //     name: data.firstName,
-  //     email: data.email,
-  //     value: data.select,
-  //     isActive: true,
-  //   };
-  //   setListData([...listData, newAdmin]);
-  //   dispatch(closeModal());
-  //   reset();
-  // };
   return (
     <div className={styles.container}>
       <List<Admin> headers={headers} data={listData} showButtons={true} buttons={buttons}></List>
-      {/* <SharedModal open={modalOpen} onClose={() => dispatch(closeModal())} /> */}
-      {/* <form>
-          <div className={styles.formContainer}>
-            <InputText
-              control={control}
-              name="email"
-              optionalLabel="Email"
-              variant="outlined"
-              margin="dense"
-              size="small"
-              fullWidth={true}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <MailOutlineIcon style={{ color: '#F05523' }} />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <InputText
-              control={control}
-              name="password"
-              type="password"
-              optionalLabel="Password"
-              variant="outlined"
-              margin="dense"
-              size="small"
-              fullWidth={true}
-            />
-            <InputText
-              control={control}
-              name="firstName"
-              variant="outlined"
-              optionalLabel="Name"
-              margin="dense"
-              size="small"
-              fullWidth={true}
-            />
-            <SharedSelect
-              label="Select"
-              options={options}
-              name="select"
-              control={control}
-              fullWidth
-            />
-            <SharedCheckbox label="CheckBox" name="checkbox" control={control} />
-            <Button onClick={handleSubmit(onSubmit)} variant="contained" className={styles.button}>
-              Submit
-            </Button>
-            <Button onClick={() => reset()} variant="outlined" className={styles.button}>
-              Reset
-            </Button>
-          </div>
-        </form> */}
       <Button onClick={() => dispatch(openModal(ModalTypes.UPLOAD_IMAGE))}>Add image</Button>
       <Button
         className={styles.button}
