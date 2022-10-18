@@ -67,6 +67,7 @@ const SignUpForm = (props: SignUpModalProps) => {
   const submitHandler = (data) => {
     const formattedUser = formatSubmitData(data);
     dispatch(register(formattedUser));
+    props.onConfirm();
     reset();
   };
 
