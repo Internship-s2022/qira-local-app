@@ -23,7 +23,7 @@ import styles from './login.module.css';
 const Login = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const [showSignUpModal, setShowSignUpModal] = useState(false);
-  const { handleSubmit, control } = useForm<SignUpFormValues>({
+  const { handleSubmit, control, reset } = useForm<SignUpFormValues>({
     defaultValues: {
       email: '',
       password: '',
@@ -72,6 +72,7 @@ const Login = () => {
     const formattedUser = formatSubmitData(data);
     dispatch(register(formattedUser));
     setShowSignUpModal(false);
+    reset();
   };
 
   return (
