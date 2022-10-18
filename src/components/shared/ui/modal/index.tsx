@@ -1,24 +1,49 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
+import { closeModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
+import { AppDispatch, RootState } from 'src/redux/store';
+
 import style from './modal.module.css';
-import { ModalTypes, SharedModalProps } from './types';
 import { UploadImage } from './upload-image/index';
 
-export const SharedModal = (props: SharedModalProps): JSX.Element => {
+export const SharedModal = (): JSX.Element => {
+  const dispatch: AppDispatch<null> = useDispatch();
+  const modalType = useSelector((state: RootState) => state.modal.type);
+  const open = useSelector((state: RootState) => state.modal.isOpen);
+
   let modalComponent;
-  switch (props.modalType) {
+  switch (modalType) {
     case ModalTypes.UPLOAD_IMAGE:
-      modalComponent = <UploadImage onConfirm={props.onClose} />;
+      modalComponent = (
+        <UploadImage
+          onConfirm={() => {
+            dispatch(closeModal());
+          }}
+        />
+      );
       break;
     default:
-      modalComponent = props.children;
   }
+
   return (
-    <Modal className={style.modal} open={props.open} onClose={props.onClose}>
+    <Modal
+      className={style.modal}
+      open={open}
+      onClose={() => {
+        dispatch(closeModal());
+      }}
+    >
       <Box className={style.container}>
-        <div onClick={props.onClose} className={style.closeModal}>
+        <div
+          onClick={() => {
+            dispatch(closeModal());
+          }}
+          className={style.closeModal}
+        >
           x
         </div>
         {modalComponent}
