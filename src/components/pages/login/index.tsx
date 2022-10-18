@@ -11,6 +11,7 @@ import { SharedModal } from 'src/components/shared/ui/modal';
 import { ModalTypes } from 'src/components/shared/ui/modal/types';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options } from 'src/components/shared/ui/select/types';
+import { register } from 'src/redux/auth/thunks';
 import { AppDispatch } from 'src/redux/store';
 import { IvaCondition } from 'src/types';
 import { capitalizeFirstLetter } from 'src/utils/formatters';
@@ -46,6 +47,32 @@ const Login = () => {
     { label: 'Consumidor Final', value: IvaCondition.finalConsumer },
     { label: 'Monotributista', value: IvaCondition.selfEmployment },
   ];
+
+  const formatSubmitData = (data) => {
+    const formattedUser = {
+      businessName: data.businessName,
+      cuit: data.cuit,
+      ivaCondition: data.ivaCondition,
+      address: {
+        province: data.province,
+        city: data.city,
+        zipCode: data.zipCode,
+        street: data.street,
+      },
+      phoneNumber: data.codeArea + data.phoneNumber,
+      email: data.email,
+      password: data.password,
+      isActive: true,
+      logicDelete: false,
+    };
+    return formattedUser;
+  };
+
+  const submitHandler = (data) => {
+    const formattedUser = formatSubmitData(data);
+    dispatch(register(formattedUser));
+    setShowSignUpModal(false);
+  };
 
   return (
     <section className={styles.container}>
@@ -225,7 +252,7 @@ const Login = () => {
             color="primary"
             variant="contained"
             className={styles.signUpBtn}
-            onClick={() => setShowSignUpModal(false)}
+            onClick={handleSubmit(submitHandler)}
           >
             Crear cuenta
           </Button>

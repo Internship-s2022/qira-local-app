@@ -9,6 +9,12 @@ export const loginActions = createAsyncAction(
   Actions.LOGIN_ERROR,
 )<string, UserCredentials, ApiResponse<unknown>>();
 
+export const registerActions = createAsyncAction(
+  Actions.REGISTER_PENDING,
+  Actions.REGISTER_SUCCESS,
+  Actions.REGISTER_ERROR,
+)<string, User, ApiResponse<unknown>>();
+
 export const getAuthUserActions = createAsyncAction(
   Actions.GET_AUTH_PENDING,
   Actions.GET_AUTH_SUCCESS,
