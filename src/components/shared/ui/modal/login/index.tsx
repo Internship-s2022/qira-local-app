@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { joiResolver } from '@hookform/resolvers/joi';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -9,11 +9,13 @@ import { Button, InputAdornment } from '@mui/material';
 
 import { login } from 'src/redux/auth/thunks';
 import { Actions as AuthActions } from 'src/redux/auth/types';
-import { AppDispatch } from 'src/redux/store';
+import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
+import { AppDispatch, RootState } from 'src/redux/store';
 
 import { InputText } from '../../input';
 import styles from './login.module.css';
-import { FormValues, LoginModalProps } from './types';
+import { FormValues } from './types';
 
 const loginValidation = Joi.object({
   email: Joi.string()
@@ -31,8 +33,11 @@ const loginValidation = Joi.object({
   }),
 });
 
-export const LoginModal = (props: LoginModalProps) => {
+export const LoginModal = () => {
   const dispatch: AppDispatch<null> = useDispatch();
+
+  const message = useSelector((state: RootState) => state.auth.message);
+
   const { handleSubmit, control } = useForm<FormValues>({
     defaultValues: {
       email: '',
@@ -46,10 +51,14 @@ export const LoginModal = (props: LoginModalProps) => {
     console.log('User: ', User);
     const response = await dispatch(login(User));
     if (response.type === AuthActions.LOGIN_SUCCESS) {
-      console.log('success');
-      props.onConfirm();
+      dispatch(closeModal());
     } else {
-      props.onClose();
+      dispatch(
+        openModal(ModalTypes.ERROR, {
+          message,
+          onConfirmCallback: () => dispatch(openModal(ModalTypes.LOGIN)),
+        }),
+      );
     }
   };
 

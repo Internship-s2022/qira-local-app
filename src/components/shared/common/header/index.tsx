@@ -1,8 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
+import { AppDispatch } from 'src/redux/store';
 
 import styles from './header.module.css';
 
 const Header = () => {
+  const dispatch: AppDispatch<null> = useDispatch();
+
   return (
     <header>
       <div className={styles.container}>
@@ -35,7 +42,7 @@ const Header = () => {
         </a>
         <ul className={styles.routes}>
           <li>
-            <a href="/login">login</a>
+            <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>login</a>
           </li>
           <li>
             <a href="/storybook">Storybook</a>

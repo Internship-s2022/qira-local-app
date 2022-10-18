@@ -43,10 +43,10 @@ export const SharedModal = (): JSX.Element => {
       modalComponent = <Confirm />;
       break;
     case ModalTypes.LOGIN:
-      modalComponent = <LoginModal onConfirm={() => undefined} onClose={() => undefined} />;
+      modalComponent = <LoginModal />;
       break;
     case ModalTypes.ERROR:
-      modalComponent = <Error onConfirm={() => undefined} />;
+      modalComponent = <Error />;
       break;
     default:
   }
