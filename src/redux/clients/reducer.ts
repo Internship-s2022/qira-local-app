@@ -26,7 +26,8 @@ export const clientReducer = (state: ClientState = initialState, action: Actions
       return {
         ...state,
         isFetching: false,
-        error: action.payload,
+        error: action.payload.error,
+        message: action.payload.message,
       };
     case Actions.ACTIVATE_CLIENT_PENDING:
       return {
@@ -44,13 +45,14 @@ export const clientReducer = (state: ClientState = initialState, action: Actions
       return {
         ...state,
         clients: newListClients,
-        isFetching: true,
+        isFetching: false,
       };
     case Actions.ACTIVATE_CLIENT_ERROR:
       return {
         ...state,
         isFetching: false,
-        error: action.payload,
+        error: action.payload.error,
+        message: action.payload.message,
       };
     case Actions.INACTIVATE_CLIENT_PENDING:
       return {
@@ -68,13 +70,14 @@ export const clientReducer = (state: ClientState = initialState, action: Actions
       return {
         ...state,
         clients: newListClients,
-        isFetching: true,
+        isFetching: false,
       };
     case Actions.INACTIVATE_CLIENT_ERROR:
       return {
         ...state,
         isFetching: false,
-        error: action.payload,
+        error: action.payload.error,
+        message: action.payload.message,
       };
     default:
       return state;

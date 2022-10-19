@@ -34,7 +34,8 @@ const Clients = (): JSX.Element => {
         businessName: client.businessName,
         email: client.email,
         phoneNumber: client.phoneNumber,
-        isActive: client.isActive ? 'Aprobado' : 'Pendiente',
+        isActive: client.isActive,
+        state: client.isActive ? 'Aprobado' : 'Pendiente',
       };
     });
     console.log(listData);
@@ -46,10 +47,10 @@ const Clients = (): JSX.Element => {
     { header: 'Razón Social', key: 'businessName' },
     { header: 'Email', key: 'email' },
     { header: 'Telefono', key: 'phoneNumber' },
-    { header: 'Estado', key: 'isActive' },
+    { header: 'Estado', key: 'state' },
   ];
 
-  const buttons: ((rowData?: Client) => TableButton)[] = [
+  const buttons: ((rowData: Client) => TableButton)[] = [
     (rowData) => ({
       active: true,
       icon: rowData.isActive ? <Close /> : <Check />,
