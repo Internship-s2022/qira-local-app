@@ -12,7 +12,7 @@ import { Error } from './error';
 import { LoginModal } from './login';
 import style from './modal.module.css';
 import { UploadImage } from './upload-image/index';
-import { UploadPdf } from './upload-pdf/index';
+import { UploadPdf } from './upload-pdf';
 
 export const SharedModal = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();

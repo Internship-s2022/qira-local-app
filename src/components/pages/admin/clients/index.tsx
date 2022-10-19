@@ -4,6 +4,8 @@ import { Check, Close } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
 import * as thunks from 'src/redux/clients/thunk';
+import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import { Headers, TableButton } from '../../../shared/ui/list/types';
@@ -57,8 +59,20 @@ const Clients = (): JSX.Element => {
       title: rowData.isActive ? 'Desactivar' : 'Activar',
       onClick: () => {
         rowData.isActive
-          ? dispatch(thunks.inactivateClient(rowData.id))
-          : dispatch(thunks.activateClient(rowData.id));
+          ? dispatch(
+              openModal(ModalTypes.CONFIRM, {
+                message: '¿Está seguro que desea desactivar el cliente?',
+                onConfirmCallback: () => dispatch(thunks.inactivateClient(rowData.id)),
+                onCloseCallback: () => dispatch(closeModal()),
+              }),
+            )
+          : dispatch(
+              openModal(ModalTypes.CONFIRM, {
+                message: '¿Está seguro que desea activar el cliente?',
+                onConfirmCallback: () => dispatch(thunks.activateClient(rowData.id)),
+                onCloseCallback: () => dispatch(closeModal()),
+              }),
+            );
       },
     }),
   ];

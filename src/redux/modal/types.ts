@@ -21,7 +21,6 @@ export enum Actions {
 }
 
 export enum ModalTypes {
-  BASIC_MODAL = 'BASIC_MODAL',
   UPLOAD_IMAGE = 'UPLOAD_IMAGE',
   UPLOAD_PDF = 'UPLOAD_PDF',
   CONFIRM = 'CONFIRM',

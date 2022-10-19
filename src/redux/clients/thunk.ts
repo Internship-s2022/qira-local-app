@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 
+import { closeModal } from '../modal/actions';
 import { AppThunk } from '../store';
 import { activateActions, getClientActions, inactivateActions } from './actions';
 import * as API from './api';
@@ -24,7 +25,7 @@ export const activateClient: AppThunk = (id) => {
       dispatch(activateActions.request(''));
       const response = await API.activateClient(id);
       if (response.data) {
-        return dispatch(activateActions.success(response.data));
+        return dispatch(activateActions.success(response.data)), dispatch(closeModal());
       }
     } catch (error) {
       dispatch(activateActions.failure(error));
@@ -38,7 +39,7 @@ export const inactivateClient: AppThunk = (id) => {
       dispatch(inactivateActions.request(''));
       const response = await API.inactivateClient(id);
       if (response.data) {
-        return dispatch(activateActions.success(response.data));
+        return dispatch(activateActions.success(response.data)), dispatch(closeModal());
       }
     } catch (error) {
       dispatch(activateActions.failure(error));
