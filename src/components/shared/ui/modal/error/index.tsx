@@ -15,11 +15,13 @@ export const Error = () => {
 
   return (
     <div className={styles.container}>
-      <h2>Notification</h2>
-      <p>Email or password incorrect</p>
-      <Button onClick={handleConfirm} variant="contained">
-        Aceptar
-      </Button>
+      <h2>Ha ocurrido un error</h2>
+      <p>{options?.message}</p>
+      <div className={styles.button}>
+        <Button onClick={handleConfirm} variant="contained">
+          Aceptar
+        </Button>
+      </div>
     </div>
   );
 };

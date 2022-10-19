@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 import { auth } from 'src/helper/firebase';
 
 import { RootAction } from '../store';
-import { loginActions } from './actions';
+import { getAuthUserActions, loginActions } from './actions';
 import { getAuthUser } from './api';
 
 export const login = (credentials) => {
@@ -27,6 +27,20 @@ export const login = (credentials) => {
       return dispatch(loginActions.success({ user: userData.data, token: token, role: role }));
     } catch (error) {
       return dispatch(loginActions.failure(error));
+    }
+  };
+};
+
+export const getAuthUserThunk = (token) => {
+  return async (dispatch: Dispatch<RootAction>) => {
+    try {
+      dispatch(getAuthUserActions.request(''));
+      const response = await getAuthUser(token);
+      if (response.data) {
+        dispatch(getAuthUserActions.success(response.data));
+      }
+    } catch (error) {
+      dispatch(getAuthUserActions.failure(error));
     }
   };
 };

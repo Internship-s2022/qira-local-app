@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { joiResolver } from '@hookform/resolvers/joi';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -11,7 +11,7 @@ import { login } from 'src/redux/auth/thunks';
 import { Actions as AuthActions } from 'src/redux/auth/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { AppDispatch, RootState } from 'src/redux/store';
+import { AppDispatch } from 'src/redux/store';
 
 import { InputText } from '../../input';
 import styles from './login.module.css';
@@ -23,20 +23,19 @@ const loginValidation = Joi.object({
     .min(7)
     .required()
     .messages({
-      'string.min': 'Invalid Email, it must contain at least 7 characters.',
-      'any.required': 'Email is a required field.',
-      'string.email': 'Invalid Email, it must be a valid email format',
+      'string.min': 'Email inválido, debe contener al menos 7 caracteres.',
+      'string.empty': 'Campo requerido.',
+      'string.email': 'Formato de email inválido.',
     }),
   password: Joi.string().alphanum().required().min(8).messages({
-    'any.required': 'Password is a required field.',
-    'string.min': 'Invalid password, it must contain at least 8 characters.',
+    'string.empty': 'Campo requerido.',
+    'string.alphanum': 'La contraseña debe ser alfanumérica',
+    'string.min': 'Contraseña inválida, debe contener al menos 8 carateres.',
   }),
 });
 
 export const LoginModal = () => {
   const dispatch: AppDispatch<null> = useDispatch();
-
-  const message = useSelector((state: RootState) => state.auth.message);
 
   const { handleSubmit, control } = useForm<FormValues>({
     defaultValues: {
@@ -48,14 +47,13 @@ export const LoginModal = () => {
   });
 
   const onSubmit = async (User) => {
-    console.log('User: ', User);
     const response = await dispatch(login(User));
     if (response.type === AuthActions.LOGIN_SUCCESS) {
       dispatch(closeModal());
     } else {
       dispatch(
         openModal(ModalTypes.ERROR, {
-          message,
+          message: 'Usuario o contraseña incorrecta.',
           onConfirmCallback: () => dispatch(openModal(ModalTypes.LOGIN)),
         }),
       );
