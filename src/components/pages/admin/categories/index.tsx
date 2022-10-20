@@ -10,6 +10,8 @@ import {
   getCategory,
   inactivateCategory,
 } from 'src/redux/category/thunk';
+import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './categories.module.css';
@@ -54,8 +56,20 @@ const Categories = (): JSX.Element => {
       title: rowData.isActive ? 'Desactivar' : 'Activar',
       onClick: () => {
         rowData.isActive
-          ? dispatch(inactivateCategory(rowData.id))
-          : dispatch(activateCategory(rowData.id));
+          ? dispatch(
+              openModal(ModalTypes.CONFIRM, {
+                message: '¿Está seguro que desea desactivar la categoría?',
+                onConfirmCallback: () => dispatch(inactivateCategory(rowData.id)),
+                onCloseCallback: () => dispatch(closeModal()),
+              }),
+            )
+          : dispatch(
+              openModal(ModalTypes.CONFIRM, {
+                message: '¿Está seguro que desea activar la categoría?',
+                onConfirmCallback: () => dispatch(activateCategory(rowData.id)),
+                onCloseCallback: () => dispatch(closeModal()),
+              }),
+            );
       },
     }),
     (rowData) => ({
@@ -64,7 +78,13 @@ const Categories = (): JSX.Element => {
       title: 'Borrar',
       onClick: () => {
         rowData.logicDelete;
-        dispatch(deleteCategory(rowData.id));
+        dispatch(
+          openModal(ModalTypes.CONFIRM, {
+            message: '¿Está seguro que desea eliminar la categoría?',
+            onConfirmCallback: () => dispatch(deleteCategory(rowData.id)),
+            onCloseCallback: () => dispatch(closeModal()),
+          }),
+        );
       },
     }),
   ];
