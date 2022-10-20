@@ -7,7 +7,7 @@ import { ImageInput } from 'src/components/shared/ui/image-input';
 import { InputText } from 'src/components/shared/ui/input';
 
 import styles from './form.module.css';
-import { CategoryFormValues } from './types';
+import { CategoryFormValues, toBase64 } from './types';
 import { CategoryValidations } from './validations';
 
 const CategoryForm = (): JSX.Element => {
@@ -20,8 +20,24 @@ const CategoryForm = (): JSX.Element => {
     resolver: joiResolver(CategoryValidations),
   });
 
-  const onSubmit = (data) => {
-    console.log('data', data);
+  const onSubmit = async (data) => {
+    let image = data.image;
+    if (image.isNew) {
+      const imageFile: any = await toBase64(image.file);
+      if (imageFile) {
+        image = {
+          base64: imageFile,
+          name: image.file.name,
+          type: image.file.type,
+          isNew: true,
+        };
+      }
+    }
+    const submitData = {
+      name: data.name,
+      image: image,
+    };
+    return submitData;
   };
 
   return (
