@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import AdminLayout from 'src/components/layout/admin';
 import { AdminRoutes } from 'src/constants';
 
+import Client from '../admin/client/';
 import Categories from './categories';
 import CategoryForm from './category';
 import Clients from './clients';

@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title {
+  color: #f05523;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.columnContainer {
+  width: 45%;
+}
+
+.shortInput {
+  width: 75px;
+  margin-right: 5px;
+}
+
+.phoneInputs {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sendBtn {
+  width: 55%;
+  font-weight: bold;
+}
