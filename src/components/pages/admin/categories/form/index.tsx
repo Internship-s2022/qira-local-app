@@ -14,14 +14,17 @@ const CategoryForm = (): JSX.Element => {
   const { handleSubmit, control, reset } = useForm<CategoryFormValues>({
     defaultValues: {
       name: '',
+      image: '',
     },
-    mode: 'onSubmit',
+    mode: 'onBlur',
     resolver: joiResolver(CategoryValidations),
   });
   return (
     <>
-      <h1 className={styles.title}>Agregar nueva categoría</h1>
-      <div className={styles.formContainer}>
+      <div className={styles.titleContainer}>
+        <h1>Agregar nueva categoría</h1>
+      </div>
+      <form className={styles.formContainer}>
         <InputText
           control={control}
           name="name"
@@ -32,11 +35,11 @@ const CategoryForm = (): JSX.Element => {
           margin="dense"
           size="small"
         />
-        <ImageInput optionalLabel="Imagen" />
+        <ImageInput control={control} name="image" optionalLabel="Imagen" />
         <Button className={styles.button} variant="contained" color="info">
           Agregar
         </Button>
-      </div>
+      </form>
     </>
   );
 };

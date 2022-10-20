@@ -1,10 +1,11 @@
 import { Actions, ActionsType, CategoryState } from './types';
 
-const initialState = {
+const initialState: CategoryState = {
   categories: [],
   isFetching: false,
   error: undefined,
   message: '',
+  imageUrl: '',
 };
 let categoryNewList = [];
 
@@ -103,6 +104,11 @@ export const categoryReducer = (state: CategoryState = initialState, action: Act
         isFetching: false,
         error: action.payload.error,
         message: action.payload.message,
+      };
+    case Actions.SET_IMAGE:
+      return {
+        ...state,
+        imageUrl: action.payload,
       };
     default:
       return state;

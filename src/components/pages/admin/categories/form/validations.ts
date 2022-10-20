@@ -10,6 +10,7 @@ export const CategoryValidations = Joi.object({
       'string.min': 'Nombre inválido, debe contener al menos 3 caracteres.',
       'string.max': 'Nombre inválido, debe contener menos de 50 caracteres.',
       'string.pattern.base': 'Nombre inválido, debe contener solo letras.',
-      'string.required': 'Nombre es un campo requerido.',
+      'string.empty': 'Nombre es un campo requerido.',
     }),
+  image: Joi.string().required(),
 });
