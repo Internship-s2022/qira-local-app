@@ -19,6 +19,8 @@ api.interceptors.response.use((response) => {
 });
 
 api.interceptors.request.use((config) => {
-  config.headers.token = store.getState().auth.token;
+  if (!config.headers.token) {
+    config.headers.token = store.getState().auth.token;
+  }
   return config;
 });

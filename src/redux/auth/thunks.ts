@@ -20,7 +20,7 @@ export const login = (credentials) => {
       const {
         claims: { role },
       } = await response.user.getIdTokenResult();
-      const userData = await getAuthUser();
+      const userData = await getAuthUser(token);
       sessionStorage.setItem('user', JSON.stringify(userData.data));
       sessionStorage.setItem('token', token);
       sessionStorage.setItem('role', role);
