@@ -54,6 +54,11 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
         token: action.payload.token,
         role: action.payload.role,
       };
+    case Actions.RESET_MESSAGE:
+      return {
+        ...state,
+        message: '',
+      };
     default:
       return state;
   }

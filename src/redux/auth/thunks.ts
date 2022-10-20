@@ -3,11 +3,11 @@ import { Dispatch } from 'redux';
 
 import { auth } from 'src/helper/firebase';
 
-import { AppThunk, RootAction } from '../store';
+import { RootAction } from '../store';
 import { getAuthUserActions, loginActions } from './actions';
 import { getAuthUser } from './api';
 
-export const login: AppThunk = (credentials) => {
+export const login = (credentials) => {
   return async (dispatch: Dispatch<RootAction>) => {
     try {
       dispatch(loginActions.request(''));
@@ -20,22 +20,22 @@ export const login: AppThunk = (credentials) => {
       const {
         claims: { role },
       } = await response.user.getIdTokenResult();
-      const userData = await getAuthUser();
+      const userData = await getAuthUser(token);
       sessionStorage.setItem('user', JSON.stringify(userData.data));
       sessionStorage.setItem('token', token);
       sessionStorage.setItem('role', role);
-      dispatch(loginActions.success({ user: userData.data, token: token, role: role }));
+      return dispatch(loginActions.success({ user: userData.data, token: token, role: role }));
     } catch (error) {
       return dispatch(loginActions.failure(error));
     }
   };
 };
 
-export const getAuthUserThunk: AppThunk = () => {
+export const getAuthUserThunk = (token) => {
   return async (dispatch: Dispatch<RootAction>) => {
     try {
       dispatch(getAuthUserActions.request(''));
-      const response = await getAuthUser();
+      const response = await getAuthUser(token);
       if (response.data) {
         dispatch(getAuthUserActions.success(response.data));
       }

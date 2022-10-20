@@ -25,4 +25,6 @@ export enum ModalTypes {
   UPLOAD_IMAGE = 'UPLOAD_IMAGE',
   UPLOAD_PDF = 'UPLOAD_PDF',
   CONFIRM = 'CONFIRM',
+  LOGIN = 'LOGIN',
+  ERROR = 'ERROR',
 }

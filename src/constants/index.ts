@@ -1,5 +1,4 @@
 export enum MainRoutes {
-  LOGIN = '/login',
   STORYBOOK = '/storybook',
 }
 
