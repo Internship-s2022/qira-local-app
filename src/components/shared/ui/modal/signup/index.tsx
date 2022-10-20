@@ -10,14 +10,15 @@ import { InputText } from 'src/components/shared/ui/input';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options } from 'src/components/shared/ui/select/types';
 import { register } from 'src/redux/auth/thunks';
+import { closeModal } from 'src/redux/modal/actions';
 import { AppDispatch } from 'src/redux/store';
 import { IvaCondition } from 'src/types';
 
 import styles from './signup.module.css';
-import { SignUpFormValues, SignUpModalProps } from './types';
+import { SignUpFormValues } from './types';
 import { signUpValidations } from './validations';
 
-const SignUpForm = (props: SignUpModalProps) => {
+const SignUpForm = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const { handleSubmit, control, reset } = useForm<SignUpFormValues>({
     defaultValues: {
@@ -34,7 +35,7 @@ const SignUpForm = (props: SignUpModalProps) => {
       zipCode: '',
       street: '',
     },
-    mode: 'onSubmit',
+    mode: 'onBlur',
     resolver: joiResolver(signUpValidations),
   });
   const IvaConditionOptions: Options[] = [
@@ -64,10 +65,10 @@ const SignUpForm = (props: SignUpModalProps) => {
     return formattedUser;
   };
 
-  const submitHandler = (data) => {
+  const onSubmit = (data) => {
     const formattedUser = formatSubmitData(data);
     dispatch(register(formattedUser));
-    props.onConfirm();
+    dispatch(closeModal());
     reset();
   };
 
@@ -167,15 +168,17 @@ const SignUpForm = (props: SignUpModalProps) => {
             margin="dense"
             size="small"
           />
-          <SharedSelect
-            className={styles.input}
-            control={control}
-            name="ivaCondition"
-            optionalLabel="Condición de IVA"
-            margin="dense"
-            size="small"
-            options={IvaConditionOptions}
-          />
+          <div className={styles.input}>
+            <SharedSelect
+              control={control}
+              name="ivaCondition"
+              optionalLabel="Condición de IVA"
+              margin="dense"
+              size="small"
+              options={IvaConditionOptions}
+            />
+          </div>
+
           <InputText
             className={styles.input}
             control={control}
@@ -240,7 +243,7 @@ const SignUpForm = (props: SignUpModalProps) => {
         color="primary"
         variant="contained"
         className={styles.signUpBtn}
-        onClick={handleSubmit(submitHandler)}
+        onClick={handleSubmit(onSubmit)}
       >
         Crear cuenta
       </Button>

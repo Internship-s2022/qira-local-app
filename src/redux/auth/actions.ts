@@ -13,7 +13,7 @@ export const registerActions = createAsyncAction(
   Actions.REGISTER_PENDING,
   Actions.REGISTER_SUCCESS,
   Actions.REGISTER_ERROR,
-)<string, User, ApiResponse<unknown>>();
+)<void, void, ApiResponse<unknown>>();
 
 export const getAuthUserActions = createAsyncAction(
   Actions.GET_AUTH_PENDING,

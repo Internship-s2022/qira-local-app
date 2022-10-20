@@ -50,13 +50,7 @@ export const SharedModal = (): JSX.Element => {
       modalComponent = <Error />;
       break;
     case ModalTypes.REGISTER_FORM:
-      modalComponent = (
-        <SignUpForm
-          onConfirm={() => {
-            dispatch(closeModal());
-          }}
-        />
-      );
+      modalComponent = <SignUpForm />;
       break;
     default:
   }

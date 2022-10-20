@@ -34,7 +34,6 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
         isFetching: false,
         error: false,
         message: 'Register successfully',
-        user: action.payload,
       };
     case Actions.LOGIN_ERROR:
     case Actions.GET_AUTH_ERROR:

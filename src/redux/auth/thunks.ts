@@ -48,10 +48,10 @@ export const getAuthUserThunk = () => {
 export const register: AppThunk = (user) => {
   return async (dispatch: Dispatch<RootAction>) => {
     try {
-      dispatch(registerActions.request(''));
+      dispatch(registerActions.request());
       const response = await registerUser(user);
       if (response.data) {
-        dispatch(registerActions.success(response.data));
+        dispatch(registerActions.success());
       }
     } catch (error) {
       return dispatch(registerActions.failure(error));

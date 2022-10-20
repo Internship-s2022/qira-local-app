@@ -18,7 +18,7 @@ api.interceptors.response.use((response) => {
   return formattedResponse;
 });
 
-api.interceptors.request.use(async (config) => {
+api.interceptors.request.use((config) => {
   config.headers.token = store.getState().auth.token;
   return config;
 });
