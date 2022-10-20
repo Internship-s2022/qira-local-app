@@ -105,11 +105,6 @@ export const categoryReducer = (state: CategoryState = initialState, action: Act
         error: action.payload.error,
         message: action.payload.message,
       };
-    case Actions.SET_IMAGE:
-      return {
-        ...state,
-        imageUrl: action.payload,
-      };
     default:
       return state;
   }

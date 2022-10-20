@@ -12,5 +12,7 @@ export const CategoryValidations = Joi.object({
       'string.pattern.base': 'Nombre inválido, debe contener solo letras.',
       'string.empty': 'Nombre es un campo requerido.',
     }),
-  image: Joi.string().required(),
+  image: Joi.object().required().messages({
+    'any.only': 'Imagen es un campo requerido.',
+  }),
 });

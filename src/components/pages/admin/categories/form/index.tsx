@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Button } from '@mui/material';
@@ -11,14 +11,19 @@ import { CategoryFormValues } from './types';
 import { CategoryValidations } from './validations';
 
 const CategoryForm = (): JSX.Element => {
-  const { handleSubmit, control, reset } = useForm<CategoryFormValues>({
+  const { handleSubmit, control, reset, setValue } = useForm<CategoryFormValues>({
     defaultValues: {
       name: '',
-      image: '',
+      image: undefined,
     },
     mode: 'onBlur',
     resolver: joiResolver(CategoryValidations),
   });
+
+  const onSubmit = (data) => {
+    console.log('data', data);
+  };
+
   return (
     <>
       <div className={styles.titleContainer}>
@@ -35,8 +40,13 @@ const CategoryForm = (): JSX.Element => {
           margin="dense"
           size="small"
         />
-        <ImageInput control={control} name="image" optionalLabel="Imagen" />
-        <Button className={styles.button} variant="contained" color="info">
+        <ImageInput control={control} name="image" optionalLabel="Imagen" setValue={setValue} />
+        <Button
+          className={styles.button}
+          variant="contained"
+          color="info"
+          onClick={handleSubmit(onSubmit)}
+        >
           Agregar
         </Button>
       </form>

@@ -15,3 +15,18 @@
   height: 120px;
   background-color: #f0f0f0;
 }
+
+.hideError {
+  visibility: hidden;
+}
+
+.showError {
+  margin: 4px 14px 0;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.66;
+  color: #ae2d04;
+  text-align: left;
+  letter-spacing: 0.0333em;
+}

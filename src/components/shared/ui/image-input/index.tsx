@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FieldValues, useController } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { AddCircle } from '@mui/icons-material';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 
 import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch } from 'src/redux/store';
 
-import { CustomFile, ModalTypes } from '../modal/types';
+import { CustomFile } from '../modal/types';
 import styles from './image-input.module.css';
 import { ImageInputProps } from './types';
 
@@ -16,6 +17,7 @@ export const ImageInput = <TValuesForm extends FieldValues>({
   control,
   defaultValue,
   optionalLabel,
+  setValue,
   ...props
 }: ImageInputProps<TValuesForm>): JSX.Element => {
   const {
@@ -24,31 +26,27 @@ export const ImageInput = <TValuesForm extends FieldValues>({
   } = useController({ name, control, defaultValue });
 
   const dispatch: AppDispatch<null> = useDispatch();
-  const [selectedFile, setSelectedFile] = useState<CustomFile>();
   const [preview, setPreview] = useState<string>();
 
-  const onSubmit = () => {
-    if (!selectedFile) {
+  const onSubmit = (image: CustomFile) => {
+    if (!image) {
       return setPreview(undefined);
     }
-    console.log('aca');
-    const objectUrl = URL.createObjectURL(selectedFile);
+    setValue('image', {
+      file: image,
+      isNew: true,
+    });
+    const objectUrl = URL.createObjectURL(image);
     setPreview(objectUrl);
     dispatch(closeModal());
     return () => URL.revokeObjectURL(objectUrl);
-  };
-
-  const onSelectFile = (e) => {
-    if (e.target.files.length) {
-      setSelectedFile(e.target.files[0]);
-    }
   };
 
   return (
     <div className={styles.container}>
       <label htmlFor={optionalLabel}>{optionalLabel}</label>
       <div className={styles.imageContainer}>
-        {selectedFile ? (
+        {preview ? (
           <img className={styles.image} src={preview} />
         ) : (
           <>
@@ -59,16 +57,16 @@ export const ImageInput = <TValuesForm extends FieldValues>({
               onClick={() =>
                 dispatch(
                   openModal(ModalTypes.UPLOAD_IMAGE, {
-                    onConfirmCallback() {
-                      onSubmit();
-                    },
+                    onConfirmCallback: onSubmit,
                   }),
                 )
               }
             >
               <AddCircle color="info"></AddCircle>
             </Button>
-            <input hidden type="file" accept="image/*" onChange={onSelectFile} />
+            <div className={error ? styles.showError : styles.hideError}>
+              <p>{error?.message}</p>
+            </div>
           </>
         )}
       </div>
