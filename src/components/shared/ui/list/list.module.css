@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible;
 }
 
 .table {
@@ -12,7 +13,7 @@
 }
 
 .tableHeader {
-  background-color: #f05523;
+  background-color: #3a9fcf;
 }
 
 .columnHeader {
@@ -22,5 +23,10 @@
 }
 
 .cell {
+  text-align: center;
+}
+
+.cellButton {
+  display: flex;
   text-align: center;
 }

@@ -7,6 +7,7 @@ import { closeModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
+import { Confirm } from './confirm';
 import style from './modal.module.css';
 import { UploadImage } from './upload-image/index';
 import { UploadPdf } from './upload-pdf/index';
@@ -35,6 +36,9 @@ export const SharedModal = (): JSX.Element => {
           }}
         />
       );
+      break;
+    case ModalTypes.CONFIRM:
+      modalComponent = <Confirm />;
       break;
     default:
   }

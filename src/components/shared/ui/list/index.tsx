@@ -36,7 +36,7 @@ const List = <T extends RowData>(props: ListProps<T>) => {
                 </TableCell>
               ))}
               {props.showButtons && (
-                <TableCell className={styles.cell}>
+                <TableCell className={styles.cellButton}>
                   {props.buttons.map(
                     (btn, index) =>
                       btn(row).active && (
