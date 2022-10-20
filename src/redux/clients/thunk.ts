@@ -1,3 +1,4 @@
+import { getAuth, updatePassword } from 'firebase/auth';
 import { Dispatch } from 'redux';
 
 import { closeModal } from '../modal/actions';

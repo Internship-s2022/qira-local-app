@@ -22,7 +22,9 @@ const AdminLayout = (): JSX.Element => {
   return (
     <div className={styles.mainContainer}>
       <Sidebar baseUrl={baseUrl} links={adminLinks} title={title} bottomText={bottomText} />
-      <Outlet />
+      <div className={styles.contentContainer}>
+        <Outlet />
+      </div>
     </div>
   );
 };

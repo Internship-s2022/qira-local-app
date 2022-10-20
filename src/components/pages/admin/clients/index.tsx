@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Check, Close } from '@mui/icons-material';
+import { Check, Close, LockPerson } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
 import * as thunks from 'src/redux/clients/thunk';
@@ -38,6 +38,7 @@ const Clients = (): JSX.Element => {
         phoneNumber: client.phoneNumber,
         isActive: client.isActive,
         state: client.isActive ? 'Aprobado' : 'Pendiente',
+        firebaseUid: client.firebaseUid ? client.firebaseUid : '',
       };
     });
     console.log(listData);
@@ -73,6 +74,20 @@ const Clients = (): JSX.Element => {
                 onCloseCallback: () => dispatch(closeModal()),
               }),
             );
+      },
+    }),
+    (rowData) => ({
+      active: false,
+      icon: <LockPerson />,
+      title: 'Cambiar contraseña',
+      onClick: () => {
+        dispatch(
+          openModal(ModalTypes.CHANGE_PASSWORD, {
+            message: `Esta cambiando la contraseña del cliente: "${rowData.businessName}"`,
+            onConfirmCallback: () => dispatch(thunks.inactivateClient(rowData.id)),
+            onCloseCallback: () => dispatch(closeModal()),
+          }),
+        );
       },
     }),
   ];

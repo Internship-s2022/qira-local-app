@@ -11,6 +11,7 @@ export interface Options {
   onCloseCallback?: (a?: any) => void;
   onConfirmCallback?: (a?: any) => void;
   message?: string;
+  id?: string;
 }
 
 export type ActionsType = ActionType<typeof actions>;
