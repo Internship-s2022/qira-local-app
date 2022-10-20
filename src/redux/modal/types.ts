@@ -11,6 +11,7 @@ export interface Options {
   onCloseCallback?: (a?: any) => void;
   onConfirmCallback?: (a?: any) => void;
   message?: string;
+  id?: string;
 }
 
 export type ActionsType = ActionType<typeof actions>;
@@ -21,10 +22,10 @@ export enum Actions {
 }
 
 export enum ModalTypes {
-  BASIC_MODAL = 'BASIC_MODAL',
   UPLOAD_IMAGE = 'UPLOAD_IMAGE',
   UPLOAD_PDF = 'UPLOAD_PDF',
   CONFIRM = 'CONFIRM',
+  CHANGE_PASSWORD = 'CHANGE_PASSWORD',
   LOGIN = 'LOGIN',
   ERROR = 'ERROR',
 }

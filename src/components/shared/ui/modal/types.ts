@@ -1,3 +1,5 @@
+import { ModalTypes } from 'src/redux/modal/types';
+
 export interface SharedModalProps {
   open: boolean;
   onClose: () => void;
@@ -5,12 +7,6 @@ export interface SharedModalProps {
   modalType: ModalTypes;
   onConfirm?: () => void;
 }
-export enum ModalTypes {
-  BASIC_MODAL = 'BASIC_MODAL',
-  UPLOAD_IMAGE = 'UPLOAD_IMAGE',
-  UPLOAD_PDF = 'UPLOAD_PDF',
-}
-
 export interface CustomFile extends File {
   lastModified: number;
   lastModifiedDate: Date;
