@@ -27,11 +27,15 @@ const loginValidation = Joi.object({
       'string.empty': 'Campo requerido.',
       'string.email': 'Formato de email inválido.',
     }),
-  password: Joi.string().alphanum().required().min(8).messages({
-    'string.empty': 'Campo requerido.',
-    'string.alphanum': 'La contraseña debe ser alfanumérica',
-    'string.min': 'Contraseña inválida, debe contener al menos 8 carateres.',
-  }),
+  password: Joi.string()
+    .required()
+    .min(8)
+    .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+    .messages({
+      'string.empty': 'Campo requerido.',
+      'string.min': 'Contraseña inválida, debe contener al menos 8 carateres.',
+      'string.pattern.base': 'Debe contener números y letras.',
+    }),
 });
 
 export const LoginModal = () => {
@@ -42,7 +46,7 @@ export const LoginModal = () => {
       email: '',
       password: '',
     },
-    mode: 'onSubmit',
+    mode: 'onBlur',
     resolver: joiResolver(loginValidation),
   });
 
@@ -67,39 +71,43 @@ export const LoginModal = () => {
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>Iniciar sesión</h2>
           </div>
-          <InputText
-            control={control}
-            name="email"
-            optionalLabel="Email *"
-            variant="outlined"
-            margin="dense"
-            size="small"
-            fullWidth={true}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <MailOutlineIcon style={{ color: '#F05523' }} />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <InputText
-            control={control}
-            name="password"
-            type="password"
-            optionalLabel="Password *"
-            variant="outlined"
-            margin="dense"
-            size="small"
-            fullWidth={true}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <LockOutlinedIcon style={{ color: '#F05523' }} />
-                </InputAdornment>
-              ),
-            }}
-          />
+          <div className={styles.input}>
+            <InputText
+              control={control}
+              name="email"
+              optionalLabel="Email *"
+              variant="outlined"
+              margin="dense"
+              size="small"
+              fullWidth={true}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <MailOutlineIcon style={{ color: '#F05523' }} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+          <div className={styles.input}>
+            <InputText
+              control={control}
+              name="password"
+              type="password"
+              optionalLabel="Password *"
+              variant="outlined"
+              margin="dense"
+              size="small"
+              fullWidth={true}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <LockOutlinedIcon style={{ color: '#F05523' }} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
           <Button onClick={handleSubmit(onSubmit)} variant="contained" className={styles.button}>
             Iniciar sesión
           </Button>

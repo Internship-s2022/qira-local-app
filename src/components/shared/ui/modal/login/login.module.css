@@ -32,3 +32,7 @@
   line-height: 28px;
   color: #f05523;
 }
+
+.input {
+  max-width: 250px;
+}
