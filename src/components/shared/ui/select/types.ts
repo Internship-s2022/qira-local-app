@@ -7,6 +7,7 @@ export type SharedSelectProps<TValuesSelect> = UseControllerProps<TValuesSelect>
 
 interface CustomProps {
   options: Options[];
+  optionalLabel?: string;
 }
 export interface Options {
   label: string;

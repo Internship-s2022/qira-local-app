@@ -45,6 +45,9 @@ const Header = () => {
             <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>login</a>
           </li>
           <li>
+            <a onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}>Sign up</a>
+          </li>
+          <li>
             <a href="/storybook">Storybook</a>
           </li>
           <li>

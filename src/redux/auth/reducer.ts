@@ -13,6 +13,7 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
   switch (action.type) {
     case Actions.LOGIN_PENDING:
     case Actions.GET_AUTH_PENDING:
+    case Actions.REGISTER_PENDING:
       return {
         ...state,
         isFetching: true,
@@ -27,8 +28,16 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
         token: action.payload.token,
         role: action.payload.role,
       };
+    case Actions.REGISTER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: false,
+        message: 'Register successfully',
+      };
     case Actions.LOGIN_ERROR:
     case Actions.GET_AUTH_ERROR:
+    case Actions.REGISTER_ERROR:
       return {
         ...state,
         isFetching: false,

@@ -28,4 +28,5 @@ export enum ModalTypes {
   CHANGE_PASSWORD = 'CHANGE_PASSWORD',
   LOGIN = 'LOGIN',
   ERROR = 'ERROR',
+  REGISTER_FORM = 'REGISTER_FORM',
 }

@@ -3,13 +3,13 @@ import { FieldValues, useController } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 
-import styles from './select.module.css';
 import { SharedSelectProps } from './types';
 
 export const SharedSelect = <TValuesSelect extends FieldValues>({
   name,
   control,
   defaultValue,
+  optionalLabel,
   ...props
 }: SharedSelectProps<TValuesSelect>): JSX.Element => {
   const {
@@ -17,7 +17,10 @@ export const SharedSelect = <TValuesSelect extends FieldValues>({
     fieldState: { error },
   } = useController({ name, control, defaultValue });
   return (
-    <div className={styles.card}>
+    <div>
+      <div>
+        <label htmlFor={optionalLabel}>{optionalLabel}</label>
+      </div>
       <TextField
         {...field}
         {...props}
