@@ -4,3 +4,9 @@ export enum IvaCondition {
   exempt = 'EXENTO',
   finalConsumer = 'CONSUMIDOR_FINAL',
 }
+
+export enum UserRole {
+  SUPERADMIN = 'SUPERADMIN',
+  ADMIN = 'ADMIN',
+  CLIENT = 'CLIENT',
+}
