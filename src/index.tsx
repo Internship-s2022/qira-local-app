@@ -1,15 +1,26 @@
 import './index.css';
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from '@mui/material';
+import { StyledEngineProvider } from '@mui/material/styles';
 
-import Layout from './components/layout';
+import App from './app';
+import store from './redux/store';
 import reportWebVitals from './report-web-vitals';
+import { mainTheme } from './utils/materialTheme';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <Layout />
+    <Provider store={store}>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={mainTheme}>
+          <App />
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </Provider>
   </React.StrictMode>,
 );
 

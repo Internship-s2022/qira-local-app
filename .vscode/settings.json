@@ -16,5 +16,10 @@
   "eslint.validate": ["javascript", "javascriptreact", "html", "typescriptreact"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "typescript.preferences.importModuleSpecifier": "shortest",
-  "cSpell.words": ["stylelint", "nodemodules", "vercel"]
+  "cSpell.words": [
+    "nodemodules",
+    "stylelint",
+    "subir",
+    "vercel"
+  ]
 }

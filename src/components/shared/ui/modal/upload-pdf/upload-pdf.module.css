@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  padding: 15px;
+}
+
+.fileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+  border: 20px, #f05523;
+}
+
+.buttonEdit {
+  align-self: center;
+  color: #f05523;
+  background-color: white;
+  border: solid 1px #f05523;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.titleModalImage {
+  padding: 5px 10px;
+  font-size: 25px;
+  border-radius: 5px;
+  box-shadow: solid 2px;
+}

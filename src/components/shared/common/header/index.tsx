@@ -1,8 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
+import { AppDispatch } from 'src/redux/store';
 
 import styles from './header.module.css';
 
 const Header = () => {
+  const dispatch: AppDispatch<null> = useDispatch();
+
   return (
     <header>
       <div className={styles.container}>
@@ -30,10 +37,21 @@ const Header = () => {
         </div>
       </div>
       <nav className={styles.navbar}>
-        <div className={styles.appName}>App</div>
+        <a className={styles.appName} href="/">
+          Qira
+        </a>
         <ul className={styles.routes}>
           <li>
-            <a href="/login">login</a>
+            <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>login</a>
+          </li>
+          <li>
+            <a onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}>Sign up</a>
+          </li>
+          <li>
+            <a href="/storybook">Storybook</a>
+          </li>
+          <li>
+            <a href="/admin">Admin</a>
           </li>
         </ul>
       </nav>

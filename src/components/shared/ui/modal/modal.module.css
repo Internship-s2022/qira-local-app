@@ -1,0 +1,27 @@
+.container {
+  position: relative;
+  width: max-content;
+  padding: 10px;
+  background-color: white;
+  border: '2px solid #000';
+  border-radius: 5px;
+  box-shadow: '2px';
+  transform: 'translate(-50%, -50%)';
+}
+
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closeModal {
+  position: absolute;
+  right: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.fileName {
+  padding: 20px;
+}
