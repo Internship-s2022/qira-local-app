@@ -5,7 +5,7 @@ import AdminLayout from 'src/components/layout/admin';
 import { AdminRoutes } from 'src/constants';
 
 import Categories from './categories';
-import CategoryForm from './categories/form';
+import CategoryForm from './category';
 import Clients from './clients';
 
 const AdminRouter = (): JSX.Element => {

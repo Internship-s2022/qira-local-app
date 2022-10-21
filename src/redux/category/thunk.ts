@@ -4,10 +4,12 @@ import { closeModal } from '../modal/actions';
 import { AppThunk } from '../store';
 import {
   activateCategoryActions,
+  createCategoryActions,
   deleteCategoryActions,
   getCategoriesActions,
   getCategoryActions,
   inactivateCategoryActions,
+  updateCategoryActions,
 } from './actions';
 import * as API from './api';
 
@@ -30,11 +32,33 @@ export const getCategoryById: AppThunk = (_id) => {
     try {
       dispatch(getCategoryActions.request());
       const response = await API.getCategoryById(_id);
-      if (response.data) {
-        return dispatch(getCategoryActions.success(response.data));
-      }
+      return dispatch(getCategoryActions.success(response.data));
     } catch (error) {
       dispatch(getCategoryActions.failure(error));
+    }
+  };
+};
+
+export const createCategory: AppThunk = (category) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(createCategoryActions.request());
+      const response = await API.createCategory(category);
+      return dispatch(createCategoryActions.success(response.data));
+    } catch (error) {
+      dispatch(createCategoryActions.failure(error));
+    }
+  };
+};
+
+export const updateCategory: AppThunk = (_id, category) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(updateCategoryActions.request());
+      const response = await API.updateCategory(_id, category);
+      return dispatch(updateCategoryActions.success(response.data));
+    } catch (error) {
+      dispatch(updateCategoryActions.failure(error));
     }
   };
 };

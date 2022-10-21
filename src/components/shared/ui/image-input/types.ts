@@ -1,7 +1,7 @@
 import { UseControllerProps, UseFormSetValue } from 'react-hook-form';
 import { TextFieldProps } from '@mui/material';
 
-import { CategoryFormValues } from 'src/components/pages/admin/categories/form/types';
+import { CategoryFormValues } from 'src/components/pages/admin/category/types';
 
 import { CustomFile } from '../modal/types';
 
