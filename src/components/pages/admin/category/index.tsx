@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Button } from '@mui/material';
 
 import { ImageInput } from 'src/components/shared/ui/image-input';
 import { InputText } from 'src/components/shared/ui/input';
+import { createCategory } from 'src/redux/category/thunk';
+import { AppDispatch } from 'src/redux/store';
 
 import styles from './form.module.css';
-import { CategoryFormValues, toBase64 } from './types';
+import { CategoryFormValues, ImageToSend, toBase64 } from './types';
 import { CategoryValidations } from './validations';
 
 const CategoryForm = (): JSX.Element => {
+  const dispatch: AppDispatch<null> = useDispatch();
   const { handleSubmit, control, reset, setValue } = useForm<CategoryFormValues>({
     defaultValues: {
       name: '',
@@ -21,11 +25,12 @@ const CategoryForm = (): JSX.Element => {
   });
 
   const onSubmit = async (data) => {
-    let image = data.image;
-    if (image.isNew) {
+    const image = data.image;
+    let imageToSend: ImageToSend;
+    if (image?.isNew) {
       const imageFile: any = await toBase64(image.file);
       if (imageFile) {
-        image = {
+        imageToSend = {
           base64: imageFile,
           name: image.file.name,
           type: image.file.type,
@@ -35,9 +40,10 @@ const CategoryForm = (): JSX.Element => {
     }
     const submitData = {
       name: data.name,
-      image: image,
+      image: imageToSend,
     };
-    return submitData;
+    dispatch(createCategory(submitData));
+    reset();
   };
 
   return (

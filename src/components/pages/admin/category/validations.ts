@@ -12,14 +12,7 @@ export const CategoryValidations = Joi.object({
       'string.pattern.base': 'Nombre inválido, debe contener solo letras.',
       'string.empty': 'Nombre es un campo requerido.',
     }),
-  image: Joi.object({
-    base64: Joi.string().required(),
-    name: Joi.string().required(),
-    type: Joi.string().required(),
-    isNew: Joi.boolean().required(),
-  })
-    .required()
-    .messages({
-      'any.only': 'Imagen es un campo requerido.',
-    }),
+  image: Joi.object().required().messages({
+    'any.only': 'Imagen es un campo requerido.',
+  }),
 });

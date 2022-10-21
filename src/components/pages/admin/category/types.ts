@@ -5,6 +5,13 @@ export interface CategoryFormValues {
   image: NewFile;
 }
 
+export interface ImageToSend {
+  base64: string;
+  name: string;
+  type: string;
+  isNew: boolean;
+}
+
 export const toBase64 = (file: any) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
