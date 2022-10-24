@@ -7,7 +7,7 @@ import { AppDispatch, RootState } from 'src/redux/store';
 import AdminRouter from './components/pages/admin';
 import ClientRouter from './components/pages/client';
 import { SharedModal } from './components/shared/ui/modal';
-import PrivateRoute from './helper/routes/private-routes/private-route';
+import PrivateRoute from './helper/routes/private-routes';
 import { setAuthentication } from './redux/auth/actions';
 import { UserRole } from './types';
 
