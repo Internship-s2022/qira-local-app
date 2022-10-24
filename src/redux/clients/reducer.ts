@@ -1,28 +1,32 @@
 import { Actions, ActionsType, ClientState } from './types';
 
-const initialState = {
+const initialState: ClientState = {
   clients: [],
+  selectedClient: undefined,
   isFetching: false,
   error: undefined,
   message: '',
 };
 let newListClients = [];
 
-export const clientReducer = (state: ClientState = initialState, action: ActionsType) => {
+export const clientReducer = (
+  state: ClientState = initialState,
+  action: ActionsType,
+): ClientState => {
   switch (action.type) {
-    case Actions.GET_CLIENT_PENDING:
+    case Actions.GET_CLIENTS_PENDING:
       return {
         ...state,
         isFetching: true,
       };
-    case Actions.GET_CLIENT_SUCCESS:
+    case Actions.GET_CLIENTS_SUCCESS:
       return {
         ...state,
         clients: action.payload,
         isFetching: false,
         error: undefined,
       };
-    case Actions.GET_CLIENT_ERROR:
+    case Actions.GET_CLIENTS_ERROR:
       return {
         ...state,
         isFetching: false,
@@ -73,6 +77,42 @@ export const clientReducer = (state: ClientState = initialState, action: Actions
         isFetching: false,
       };
     case Actions.INACTIVATE_CLIENT_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload.error,
+        message: action.payload.message,
+      };
+    case Actions.GET_CLIENT_PENDING:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case Actions.GET_CLIENT_SUCCESS:
+      return {
+        ...state,
+        selectedClient: action.payload,
+        isFetching: false,
+      };
+    case Actions.GET_CLIENT_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload.error,
+        message: action.payload.message,
+      };
+    case Actions.UPDATE_CLIENT_PENDING:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case Actions.UPDATE_CLIENT_SUCCESS:
+      return {
+        ...state,
+        selectedClient: action.payload,
+        isFetching: false,
+      };
+    case Actions.UPDATE_CLIENT_ERROR:
       return {
         ...state,
         isFetching: false,

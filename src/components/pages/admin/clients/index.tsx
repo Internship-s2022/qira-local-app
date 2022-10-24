@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Check, Close, LockPerson } from '@mui/icons-material';
+import EditIcon from '@mui/icons-material/Edit';
 
 import List from 'src/components/shared/ui/list';
 import * as thunks from 'src/redux/clients/thunk';
@@ -21,6 +23,7 @@ interface Client {
 
 const Clients = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const navigate = useNavigate();
   const clients = useSelector((state: RootState) => state.clients.clients);
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
 
@@ -88,6 +91,14 @@ const Clients = (): JSX.Element => {
             onCloseCallback: () => dispatch(closeModal()),
           }),
         );
+      },
+    }),
+    (rowData) => ({
+      active: true,
+      icon: <EditIcon />,
+      title: 'Editar Cliente',
+      onClick: () => {
+        navigate(`/admin/client/${rowData.id}`);
       },
     }),
   ];
