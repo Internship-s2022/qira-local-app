@@ -11,6 +11,8 @@ import { InputText } from 'src/components/shared/ui/input';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options } from 'src/components/shared/ui/select/types';
 import { Actions } from 'src/redux/clients/types';
+import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { IvaCondition } from 'src/types';
 
@@ -93,6 +95,13 @@ const ClientData = (): JSX.Element => {
     const response = await dispatch(thunks.updateClient(params.id, formatDataFunction(data)));
     if (response.type === Actions.UPDATE_CLIENT_SUCCESS) {
       navigate('/admin/clients');
+    } else {
+      dispatch(
+        openModal(ModalTypes.ERROR, {
+          message: 'Ha ocurrido un error al editar el cliente',
+          onConfirmCallback: () => dispatch(closeModal),
+        }),
+      );
     }
     reset();
   };
