@@ -10,3 +10,13 @@ export enum UserRole {
   ADMIN = 'ADMIN',
   CLIENT = 'CLIENT',
 }
+
+export enum Currency {
+  dollar = 'DOLLAR',
+  peso = 'PESO',
+}
+
+export interface S3File {
+  key: string;
+  url: string;
+}

@@ -1,55 +1,53 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Check, Close } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import React from 'react';
 
-import List from 'src/components/shared/ui/list';
-import { Headers, TableButton } from 'src/components/shared/ui/list/types';
-import { openModal } from 'src/redux/modal/actions';
-import { ModalTypes } from 'src/redux/modal/types';
-import { AppDispatch } from 'src/redux/store';
+import ProductCard from 'src/components/shared/ui/product-card';
+import { Category, Product } from 'src/components/shared/ui/product-card/types';
+import { Currency, S3File } from 'src/types';
 
 import styles from './storybook.module.css';
-interface Admin {
-  id: string;
-  name: string;
-  email: string;
-  value: string;
-  isActive: boolean;
-}
+
 const Storybook = (): JSX.Element => {
-  const dispatch: AppDispatch<null> = useDispatch();
+  const exampleCategory: Category = {
+    name: 'Fungicidas',
+  };
 
-  const data: Admin[] = [
-    { id: '1', name: 'Francisco', email: 'francisco@gmail.com', value: 'Valor 2', isActive: true },
-    { id: '2', name: 'Gina', email: 'gina@gmail.com', value: 'Valor 3', isActive: true },
-    { id: '3', name: 'Ivan', email: 'ivan@gmail.com', value: 'Valor 3', isActive: true },
-    { id: '4', name: 'Ariana', email: 'ariana@gmail.com', value: 'Valor 1', isActive: true },
-  ];
+  const exampleImage: S3File = {
+    key: 'asd',
+    url: 'https://arcencohogar.vtexassets.com/arquivos/ids/312630-500-auto?v=637764719471770000&width=500&height=auto&aspect=true',
+  };
 
-  const [listData, setListData] = useState(data);
-  const headers: Headers[] = [
-    { header: 'Name', key: 'name' },
-    { header: 'Email', key: 'email' },
-    { header: 'Value', key: 'value' },
-  ];
+  const exampleProduct: Product = {
+    brand: 'Marca',
+    name: 'Modelo 1',
+    price: 156.68,
+    category: exampleCategory,
+    image: exampleImage,
+    currency: Currency.dollar,
+    stock: 10,
+    isNew: true,
+    isActive: true,
+    logicDelete: false,
+  };
 
-  const buttons: ((rowData?: Admin) => TableButton)[] = [
-    (rowData) => ({
-      active: true,
-      icon: rowData.isActive ? <Close /> : <Check />,
-      title: rowData.isActive ? 'Disable' : 'Enable',
-      onClick: () => {
-        const newData = listData.filter((item) => item.id !== rowData.id);
-        return setListData(newData);
-      },
-    }),
-  ];
+  const exampleProduct2: Product = {
+    brand: 'Marca',
+    name: 'Modelo 2',
+    price: 3943.98,
+    category: exampleCategory,
+    image: exampleImage,
+    currency: Currency.peso,
+    stock: 0,
+    isNew: false,
+    isActive: true,
+    logicDelete: false,
+  };
+
   return (
     <div className={styles.container}>
-      <List<Admin> headers={headers} data={listData} showButtons={true} buttons={buttons}></List>
-      <Button onClick={() => dispatch(openModal(ModalTypes.UPLOAD_IMAGE))}>Add image</Button>
-      <Button onClick={() => dispatch(openModal(ModalTypes.UPLOAD_PDF))}>Add PDF</Button>
+      <ProductCard product={exampleProduct} />
+      <ProductCard product={exampleProduct2} />
+      <ProductCard product={exampleProduct} />
+      <ProductCard product={exampleProduct2} />
     </div>
   );
 };
