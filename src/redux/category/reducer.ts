@@ -12,6 +12,7 @@ let categoryNewList = [];
 export const categoryReducer = (state: CategoryState = initialState, action: ActionsType) => {
   switch (action.type) {
     case Actions.GET_CATEGORIES_PENDING:
+    case Actions.GET_CATEGORY_PENDING:
     case Actions.ACTIVATE_CATEGORY_PENDING:
     case Actions.INACTIVATE_CATEGORY_PENDING:
     case Actions.DELETE_CATEGORY_PENDING:
@@ -20,6 +21,7 @@ export const categoryReducer = (state: CategoryState = initialState, action: Act
         isFetching: true,
       };
     case Actions.GET_CATEGORIES_ERROR:
+    case Actions.GET_CATEGORY_ERROR:
     case Actions.ACTIVATE_CATEGORY_ERROR:
     case Actions.INACTIVATE_CATEGORY_ERROR:
     case Actions.DELETE_CATEGORY_ERROR:

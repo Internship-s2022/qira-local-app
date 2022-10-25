@@ -15,6 +15,7 @@ export interface ImageInputCustomProps {
 }
 
 export interface NewFile {
-  file: CustomFile;
+  file?: CustomFile;
+  url: string;
   isNew: boolean;
 }

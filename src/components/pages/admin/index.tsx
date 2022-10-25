@@ -17,6 +17,7 @@ const AdminRouter = (): JSX.Element => {
         <Route path={AdminRoutes.PRODUCTS} element={<h1>Productos</h1>} />
         <Route path={AdminRoutes.CATEGORY} element={<Categories />} />
         <Route path={AdminRoutes.CATEGORY_FORM} element={<CategoryForm />} />
+        <Route path={AdminRoutes.CATEGORY_EDIT} element={<CategoryForm />} />
         <Route path={AdminRoutes.DELIVER} element={<h1>Entregar pedido</h1>} />
         <Route path="*" element={<Navigate to="orders" replace />} />
       </Route>

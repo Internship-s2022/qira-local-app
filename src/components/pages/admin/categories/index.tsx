@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Check, Close, DeleteForever } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { Check, Close, DeleteForever, Edit } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
@@ -25,6 +26,7 @@ interface Category {
 
 const Categories = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const navigate = useNavigate();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const isFetching = useSelector((state: RootState) => state.categories.isFetching);
   const [categoriesList, setCategoriesList] = useState([]);
@@ -50,6 +52,14 @@ const Categories = (): JSX.Element => {
   }, [categories]);
 
   const buttons: ((rowData?: Category) => TableButton)[] = [
+    (rowData) => ({
+      active: true,
+      icon: <Edit />,
+      title: 'Editar',
+      onClick: () => {
+        navigate(`/admin/category/${rowData.id}`);
+      },
+    }),
     (rowData) => ({
       active: true,
       icon: rowData.isActive ? <Close /> : <Check />,

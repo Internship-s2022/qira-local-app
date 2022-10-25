@@ -9,4 +9,5 @@ export enum AdminRoutes {
   CATEGORY = '/categories',
   DELIVER = '/deliver',
   CATEGORY_FORM = '/category',
+  CATEGORY_EDIT = '/category/:id',
 }

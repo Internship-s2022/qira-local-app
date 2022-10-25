@@ -1,27 +1,49 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.imageContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .image {
   align-self: center;
   object-fit: cover;
-  width: 200px;
-  height: 200px;
+  width: 220px;
+  height: 220px;
+  margin-bottom: 10px;
 }
 
 .button {
-  width: 240px;
-  height: 120px;
+  width: 220px;
+  height: 220px;
   background-color: #f0f0f0;
 }
 
+.editButton {
+  position: absolute;
+  top: 5px;
+  left: 175px;
+  background-color: #ffffffcc;
+}
+
 .hideError {
+  height: 19px;
   visibility: hidden;
 }
 
 .showError {
-  margin: 4px 14px 0;
+  height: 19px;
+  margin: 0 14px;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-size: 0.75rem;
   font-weight: 400;

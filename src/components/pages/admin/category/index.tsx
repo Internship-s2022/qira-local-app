@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { Button } from '@mui/material';
 
 import { ImageInput } from 'src/components/shared/ui/image-input';
 import { InputText } from 'src/components/shared/ui/input';
-import { createCategory } from 'src/redux/category/thunk';
-import { AppDispatch } from 'src/redux/store';
+import { createCategory, getCategoryById, updateCategory } from 'src/redux/category/thunk';
+import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './form.module.css';
 import { CategoryFormValues, ImageToSend, toBase64 } from './types';
@@ -15,6 +16,9 @@ import { CategoryValidations } from './validations';
 
 const CategoryForm = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const params = useParams();
+  const navigate = useNavigate();
+  const category = useSelector((state: RootState) => state.categories.category);
   const { handleSubmit, control, reset, setValue } = useForm<CategoryFormValues>({
     defaultValues: {
       name: '',
@@ -23,6 +27,22 @@ const CategoryForm = (): JSX.Element => {
     mode: 'onBlur',
     resolver: joiResolver(CategoryValidations),
   });
+
+  useEffect(() => {
+    dispatch(getCategoryById(params.id));
+  }, []);
+
+  useEffect(() => {
+    if (category?._id) {
+      reset({
+        name: category?.name,
+        image: {
+          url: category?.image.url,
+          isNew: false,
+        },
+      });
+    }
+  }, [category]);
 
   const onSubmit = async (data) => {
     const image = data.image;
@@ -42,14 +62,17 @@ const CategoryForm = (): JSX.Element => {
       name: data.name,
       image: imageToSend,
     };
-    dispatch(createCategory(submitData));
+    params.id
+      ? dispatch(updateCategory(params.id, submitData))
+      : dispatch(createCategory(submitData));
+    navigate('/admin/categories');
     reset();
   };
 
   return (
     <>
       <div className={styles.titleContainer}>
-        <h1>Agregar nueva categoría</h1>
+        <h1>{params.id ? 'Editar categoría' : 'Agregar nueva categoría'}</h1>
       </div>
       <form className={styles.formContainer}>
         <InputText
@@ -69,7 +92,7 @@ const CategoryForm = (): JSX.Element => {
           color="info"
           onClick={handleSubmit(onSubmit)}
         >
-          Agregar
+          {params.id ? 'Editar' : 'Agregar'}
         </Button>
       </form>
     </>

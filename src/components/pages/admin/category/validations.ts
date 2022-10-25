@@ -13,6 +13,6 @@ export const CategoryValidations = Joi.object({
       'string.empty': 'Nombre es un campo requerido.',
     }),
   image: Joi.object().required().messages({
-    'any.only': 'Imagen es un campo requerido.',
+    'any.required': 'Imagen es un campo requerido.',
   }),
 });
