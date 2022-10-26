@@ -34,6 +34,7 @@
 
 .mainHeader {
   display: flex;
+  align-items: center;
   justify-content: space-around;
   background-color: #f05523;
 }
@@ -41,6 +42,12 @@
 .searchContainer {
   display: flex;
   margin: 20px;
+}
+
+.searchBar {
+  width: 300px;
+  background-color: white;
+  border-radius: 5px;
 }
 
 /* .brand {
@@ -74,7 +81,7 @@
 }
 */
 .categories {
-  width: 200px;
+  width: 150px;
   margin-right: 10px;
   border: solid white 1.5px;
   border-radius: 5px;

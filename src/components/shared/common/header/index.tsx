@@ -53,7 +53,13 @@ const Header = () => {
             </TextField>
           </div>
           <div>
-            <TextField id="search-bar" label="Buscar..." type="search" size="small" />
+            <TextField
+              className={styles.searchBar}
+              id="search-bar"
+              label="Buscar..."
+              type="search"
+              size="small"
+            />
           </div>
         </div>
         <div className={styles.routes}>
