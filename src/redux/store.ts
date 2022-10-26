@@ -8,12 +8,14 @@ import { categoryReducer } from './category/reducer';
 import { ActionsType as CategoryActionsType } from './category/types';
 import { clientReducer } from './clients/reducer';
 import { modalReducer } from './modal/reducer';
+import { shoppingCartReducer } from './shopping-cart/reducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   categories: categoryReducer,
   modal: modalReducer,
   clients: clientReducer,
+  shoppingCart: shoppingCartReducer,
 });
 
 const configureStore = () => {
