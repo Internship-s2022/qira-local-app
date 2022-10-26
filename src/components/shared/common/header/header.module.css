@@ -41,7 +41,6 @@
 
 .searchContainer {
   display: flex;
-  margin: 20px;
 }
 
 .searchBar {
@@ -50,27 +49,13 @@
   border-radius: 5px;
 }
 
-/* .brand {
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
-} */
-
-/* .appName {
-  font-size: 2rem;
-  font-weight: bold;
-  color: black;
-  text-decoration: none;
+.categories {
+  width: 150px;
+  margin-right: 10px;
+  border-radius: 5px;
 }
 
-.routes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  list-style-type: none;
-}
-
-.routes > li > a {
+/* .routes > li > a {
   margin-left: 15px;
   font-size: 1rem;
   font-weight: 600;
@@ -78,14 +63,32 @@
   text-decoration: none;
   text-transform: capitalize;
   cursor: pointer;
+} */
+
+.routes {
+  display: flex;
+  color: white;
 }
-*/
-.categories {
-  width: 150px;
-  margin-right: 10px;
-  border: solid white 1.5px;
+
+.btnSignUp {
+  padding: 8px 10px;
+  margin-right: 20px;
+  border: white solid 1px;
   border-radius: 5px;
 }
+
+.btnSignUp :hover {
+  cursor: pointer;
+}
+
+.shoppingCart {
+  color: white;
+}
+
+.shoppingCart :hover {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 750px) {
   /* .container {
     padding: 0 20%;

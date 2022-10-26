@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCart } from '@mui/icons-material';
+import { Search, ShoppingCart } from '@mui/icons-material';
 import { MenuItem, TextField } from '@mui/material';
 
 import { getCategoriesAsOptions } from 'src/redux/category/selectors/getCategoryAsOptions';
@@ -43,34 +43,49 @@ const Header = () => {
           />
         </div>
         <div className={styles.searchContainer}>
-          <div className={styles.categories}>
-            <TextField select label="Categorías" fullWidth size="small">
+          <div /*className={styles.categories}*/>
+            <TextField
+              // margin="dense"
+              select
+              label="Categorías"
+              className={styles.categories}
+              fullWidth
+              size="small"
+            >
               {categories.map((category, index) => (
                 <MenuItem key={index} onClick={() => navigate('/')} value={category.value}>
                   {category.label}
                 </MenuItem>
               ))}
             </TextField>
+            {/* <select  className={styles.categories}>
+              {categories.map((category, index) => (
+                <option key={index} onClick={() => navigate('/')} value={category.value}>
+                  {category.label}
+                </option>
+              ))}
+            </select> */}
           </div>
           <div>
             <TextField
               className={styles.searchBar}
               id="search-bar"
-              label="Buscar..."
+              placeholder="Buscar..."
               type="search"
               size="small"
+              color="secondary"
             />
           </div>
         </div>
         <div className={styles.routes}>
-          <div>
-            <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>login</a>
+          <div className={styles.btnSignUp}>
+            <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Login</a>
           </div>
-          <div>
-            <a onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}>Sign up</a>
+          <div className={styles.btnSignUp}>
+            <a onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}>Sign Up</a>
           </div>
         </div>
-        <ShoppingCart color="secondary" />
+        <ShoppingCart className={styles.shoppingCart} />
       </nav>
     </header>
   );
