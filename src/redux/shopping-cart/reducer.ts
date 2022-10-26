@@ -11,9 +11,7 @@ export const shoppingCartReducer = (
   switch (action.type) {
     case Actions.ADD_PRODUCT:
       if (state.products.some((product) => product.product._id === action.payload.product._id)) {
-        return {
-          ...state,
-        };
+        return state;
       }
       return {
         ...state,
@@ -39,12 +37,10 @@ export const shoppingCartReducer = (
     case Actions.DECREASE_PRODUCT_QUANTITY: {
       const newList = [];
       state.products.forEach((product) => {
-        if (product.product._id === action.payload) {
-          if (product.quantity !== 1) {
-            newList.push({ product: product.product, quantity: product.quantity-- });
-          }
-        } else {
+        if (product.product._id !== action.payload) {
           newList.push(product);
+        } else if (product.quantity > 1) {
+          newList.push({ product: product.product, quantity: product.quantity-- });
         }
       });
       return {
