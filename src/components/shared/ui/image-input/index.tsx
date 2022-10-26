@@ -18,7 +18,6 @@ export const ImageInput = <TValuesForm extends FieldValues>({
   defaultValue,
   optionalLabel,
   setValue,
-  ...props
 }: ImageInputProps<TValuesForm>): JSX.Element => {
   const {
     field,

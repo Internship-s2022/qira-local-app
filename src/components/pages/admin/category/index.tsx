@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -23,6 +23,7 @@ const CategoryForm = (): JSX.Element => {
     defaultValues: {
       name: '',
       image: undefined,
+      url: '',
     },
     mode: 'onBlur',
     resolver: joiResolver(CategoryValidations),
@@ -40,6 +41,7 @@ const CategoryForm = (): JSX.Element => {
           url: category?.image.url,
           isNew: false,
         },
+        url: category?.url,
       });
     }
   }, [category]);
@@ -61,6 +63,7 @@ const CategoryForm = (): JSX.Element => {
     const submitData = {
       name: data.name,
       image: imageToSend,
+      url: data.url,
     };
     params.id
       ? dispatch(updateCategory(params.id, submitData))
@@ -75,17 +78,31 @@ const CategoryForm = (): JSX.Element => {
         <h1>{params.id ? 'Editar categoría' : 'Agregar nueva categoría'}</h1>
       </div>
       <form className={styles.formContainer}>
-        <InputText
-          control={control}
-          name="name"
-          type="text"
-          color="info"
-          optionalLabel="Nombre de la categoría"
-          variant="outlined"
-          margin="dense"
-          size="small"
-        />
-        <ImageInput control={control} name="image" optionalLabel="Imagen" setValue={setValue} />
+        <div className={styles.columnsContainer}>
+          <div className={styles.inputsContainer}>
+            <InputText
+              control={control}
+              name="name"
+              type="text"
+              color="info"
+              optionalLabel="Nombre de la categoría"
+              variant="outlined"
+              margin="dense"
+              size="small"
+            />
+            <InputText
+              control={control}
+              name="url"
+              type="text"
+              color="info"
+              optionalLabel="Url de la categoría"
+              variant="outlined"
+              margin="dense"
+              size="small"
+            />
+          </div>
+          <ImageInput control={control} name="image" optionalLabel="Imagen" setValue={setValue} />
+        </div>
         <Button
           className={styles.button}
           variant="contained"

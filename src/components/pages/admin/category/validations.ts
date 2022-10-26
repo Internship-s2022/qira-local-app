@@ -15,4 +15,11 @@ export const CategoryValidations = Joi.object({
   image: Joi.object().required().messages({
     'any.required': 'Imagen es un campo requerido.',
   }),
+  url: Joi.string()
+    .regex(/^([a-z-]*)$/)
+    .required()
+    .messages({
+      'string.pattern.base': 'URL inválida, debe contener solo minúsculas y -.',
+      'string.empty': 'URL es un campo requerido.',
+    }),
 });

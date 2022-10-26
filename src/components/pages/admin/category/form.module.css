@@ -11,10 +11,22 @@
   align-items: center;
   justify-content: center;
   width: 80%;
-  height: 80%;
+  height: 70%;
   background-color: white;
   border-radius: 5px;
   box-shadow: rgb(0 0 0 / 25%) 0 14px 28px, rgb(0 0 0 / 22%) 0 10px 10px;
+}
+
+.columnsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 48%;
 }
 
 .button {

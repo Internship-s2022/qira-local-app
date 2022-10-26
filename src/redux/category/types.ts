@@ -10,6 +10,7 @@ export interface Category {
   _id: string;
   name: string;
   image: Image;
+  url: string;
   isActive: boolean;
   logicDelete: boolean;
 }

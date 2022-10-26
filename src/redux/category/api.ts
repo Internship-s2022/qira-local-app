@@ -4,7 +4,7 @@ import { Category } from './types';
 
 export const getCategories = () => api.get<Category[]>('/admin/category');
 
-export const getCategoryById = (_id) => api.get<Category>(`admin/category/${_id}`);
+export const getCategoryById = (_id) => api.get<Category>(`/admin/category/${_id}`);
 
 export const createCategory = (category) => api.post<Category>('/admin/category', category);
 

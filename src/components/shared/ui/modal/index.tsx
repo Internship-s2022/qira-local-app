@@ -7,7 +7,6 @@ import { closeModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
-import { ChangePassword } from './change-password';
 import { Confirm } from './confirm';
 import { Error } from './error';
 import { LoginModal } from './login';
