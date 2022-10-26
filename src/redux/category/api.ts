@@ -9,7 +9,7 @@ export const getCategoryById = (_id) => api.get<Category>(`/admin/category/${_id
 export const createCategory = (category) => api.post<Category>('/admin/category', category);
 
 export const updateCategory = (_id, category) =>
-  api.patch<Category>(`admin/category/${_id}`, category);
+  api.patch<Category>(`/admin/category/${_id}`, category);
 
 export const activateCategory = (_id) => api.patch<Category>(`/admin/category/activate/${_id}`);
 
