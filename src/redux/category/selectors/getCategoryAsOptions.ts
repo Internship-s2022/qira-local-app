@@ -6,6 +6,6 @@ const getCategories = (state: RootState) => state.categories.categories;
 
 export const getCategoriesAsOptions = createSelector([getCategories], (list) => {
   return list.map((category) => {
-    return { key: category.name, value: category.name };
+    return { label: category.name, value: category.name };
   });
 });

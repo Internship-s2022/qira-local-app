@@ -1,90 +1,70 @@
-import React, { OptionHTMLAttributes, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ShoppingCart } from '@mui/icons-material';
+import { MenuItem, TextField } from '@mui/material';
 
 import { getCategoriesAsOptions } from 'src/redux/category/selectors/getCategoryAsOptions';
 import * as thunks from 'src/redux/category/thunk';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { AppDispatch, RootState } from 'src/redux/store';
+import { AppDispatch } from 'src/redux/store';
 
-import { SharedSelect } from '../../ui/select';
-// import { Options } from '../../ui/select/types';
 import styles from './header.module.css';
 
 const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
-  const categories = useSelector((state: RootState) => state.categories.categories);
-  // const options = getCategoriesAsOptions(categories);
-  // const categoryOptions
-  // const [categoryOptions, setCategoryOptions] = useState<Options[]>();
-  const { control } = useForm({});
+  const navigate = useNavigate();
+  const categories = useSelector(getCategoriesAsOptions);
+  console.log(categories);
 
   useEffect(() => {
     dispatch(thunks.getCategory());
   }, []);
 
-  // useEffect(() => {
-  //   if (categories.length) {
-  //     categories.map((category) =>
-  //       setCategoryOptions({ key: `${category.name}`, value: category.name }),
-  //     );
-  //   }
-  // }, [categories]);
-
   return (
-    <header>
-      <div className={styles.container}>
-        <div className={styles.brand}>Radium Rocket</div>
-        <div className={styles.brand}>SHOW_ENV: {process.env.REACT_APP_SHOW_ENV}</div>
-        <div>
-          <a href="https://www.facebook.com/radiumrocket" target="_blank" rel="noreferrer">
-            <img
-              className={styles.socialIcon}
-              src={`${process.env.PUBLIC_URL}/assets/images/facebook.svg`}
-            />
-          </a>
-          <a href="https://twitter.com/radiumrocket" target="_blank" rel="noreferrer">
-            <img
-              className={styles.socialIcon}
-              src={`${process.env.PUBLIC_URL}/assets/images/twitter.svg`}
-            />
-          </a>
-          <a href="https://www.instagram.com/radium.rocket/" target="_blank" rel="noreferrer">
-            <img
-              className={styles.socialIcon}
-              src={`${process.env.PUBLIC_URL}/assets/images/instagram.svg`}
-            />
-          </a>
-        </div>
+    <header className={styles.headerContainer}>
+      <div className={styles.navBarContainer}>
+        <div className={styles.currency}>Tipo de cambio</div>
+        <nav className={styles.navbar}>
+          <ul className={styles.navBarLinks}>
+            <li>Quienes Somos?</li>
+            <li>Preguntas Frecuentes</li>
+            <li>Medios de Pago</li>
+          </ul>
+        </nav>
       </div>
-      <nav className={styles.navbar}>
-        <a className={styles.appName} href="/">
-          Qira
-        </a>
+      <nav className={styles.mainHeader}>
         <div>
-          <SharedSelect
-            control={control}
-            name="Categories"
-            margin="dense"
-            size="medium"
-            options={[]}
+          <img
+            className={styles.logoQira}
+            src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.svg`}
+            alt=""
           />
         </div>
-        <ul className={styles.routes}>
-          <li>
+        <div className={styles.searchContainer}>
+          <div className={styles.categories}>
+            <TextField select label="Categorías" fullWidth size="small">
+              {categories.map((category, index) => (
+                <MenuItem key={index} onClick={() => navigate('/')} value={category.value}>
+                  {category.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </div>
+          <div>
+            <TextField id="search-bar" label="Buscar..." type="search" size="small" />
+          </div>
+        </div>
+        <div className={styles.routes}>
+          <div>
             <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>login</a>
-          </li>
-          <li>
+          </div>
+          <div>
             <a onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}>Sign up</a>
-          </li>
-          <li>
-            <a href="/storybook">Storybook</a>
-          </li>
-          <li>
-            <a href="/admin">Admin</a>
-          </li>
-        </ul>
+          </div>
+        </div>
+        <ShoppingCart color="secondary" />
       </nav>
     </header>
   );
