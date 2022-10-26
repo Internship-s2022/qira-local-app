@@ -1,4 +1,4 @@
-import { createAsyncAction } from 'typesafe-actions';
+import { action, createAsyncAction } from 'typesafe-actions';
 
 import { ApiResponse } from '../store';
 import { Actions, Category } from './types';
@@ -44,3 +44,5 @@ export const deleteCategoryActions = createAsyncAction(
   Actions.DELETE_CATEGORY_SUCCESS,
   Actions.DELETE_CATEGORY_ERROR,
 )<void, Category, ApiResponse<unknown>>();
+
+export const resetCategory = () => action(Actions.RESET_CATEGORY);

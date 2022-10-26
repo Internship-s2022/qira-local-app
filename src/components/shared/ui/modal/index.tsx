@@ -9,6 +9,7 @@ import { AppDispatch, RootState } from 'src/redux/store';
 
 import { Confirm } from './confirm';
 import { Error } from './error';
+import { Info } from './info';
 import { LoginModal } from './login';
 import style from './modal.module.css';
 import SignUpForm from './signup';
@@ -42,6 +43,9 @@ export const SharedModal = (): JSX.Element => {
       break;
     case ModalTypes.ERROR:
       modalComponent = <Error />;
+      break;
+    case ModalTypes.INFO:
+      modalComponent = <Info />;
       break;
     case ModalTypes.REGISTER_FORM:
       modalComponent = <SignUpForm />;

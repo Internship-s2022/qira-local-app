@@ -22,7 +22,7 @@ export const getCategory: AppThunk = () => {
         return dispatch(getCategoriesActions.success(response.data));
       }
     } catch (error) {
-      dispatch(getCategoriesActions.failure(error));
+      return dispatch(getCategoriesActions.failure(error));
     }
   };
 };
@@ -34,7 +34,7 @@ export const getCategoryById: AppThunk = (_id) => {
       const response = await API.getCategoryById(_id);
       return dispatch(getCategoryActions.success(response.data));
     } catch (error) {
-      dispatch(getCategoryActions.failure(error));
+      return dispatch(getCategoryActions.failure(error));
     }
   };
 };
@@ -46,7 +46,7 @@ export const createCategory: AppThunk = (category) => {
       const response = await API.createCategory(category);
       return dispatch(createCategoryActions.success(response.data));
     } catch (error) {
-      dispatch(createCategoryActions.failure(error));
+      return dispatch(createCategoryActions.failure(error));
     }
   };
 };
@@ -58,7 +58,7 @@ export const updateCategory: AppThunk = (_id, category) => {
       const response = await API.updateCategory(_id, category);
       return dispatch(updateCategoryActions.success(response.data));
     } catch (error) {
-      dispatch(updateCategoryActions.failure(error));
+      return dispatch(updateCategoryActions.failure(error));
     }
   };
 };
@@ -72,7 +72,7 @@ export const activateCategory: AppThunk = (_id) => {
         return dispatch(activateCategoryActions.success(response.data)), dispatch(closeModal());
       }
     } catch (error) {
-      dispatch(activateCategoryActions.failure(error));
+      return dispatch(activateCategoryActions.failure(error));
     }
   };
 };
@@ -86,7 +86,7 @@ export const inactivateCategory: AppThunk = (_id) => {
         return dispatch(inactivateCategoryActions.success(response.data)), dispatch(closeModal());
       }
     } catch (error) {
-      dispatch(inactivateCategoryActions.failure(error));
+      return dispatch(inactivateCategoryActions.failure(error));
     }
   };
 };
@@ -100,7 +100,7 @@ export const deleteCategory: AppThunk = (_id) => {
         return dispatch(deleteCategoryActions.success(response.data)), dispatch(closeModal());
       }
     } catch (error) {
-      dispatch(deleteCategoryActions.failure(error));
+      return dispatch(deleteCategoryActions.failure(error));
     }
   };
 };

@@ -4,6 +4,7 @@
   justify-content: space-between;
   width: max-content;
   min-height: 100vh;
+  max-height: 100vh;
   background-color: #3d8bcd;
 }
 

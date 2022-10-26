@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Check, Close, DeleteForever, Edit } from '@mui/icons-material';
+import { Add, Check, Close, DeleteForever, Edit } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
+import { resetCategory } from 'src/redux/category/actions';
 import {
   activateCategory,
   deleteCategory,
@@ -45,6 +47,7 @@ const Categories = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(getCategory());
+    dispatch(resetCategory());
   }, []);
 
   useEffect(() => {
@@ -100,12 +103,26 @@ const Categories = (): JSX.Element => {
   ];
 
   const headers: Headers[] = [
-    { header: 'Categories', key: 'name' },
+    { header: 'Categorías', key: 'name' },
     { header: 'Estado', key: 'status' },
   ];
 
   return (
     <div className={styles.container}>
+      <div className={styles.titleContainer}>
+        <h1>Categorías</h1>
+        <div className={styles.addNewCategory}>
+          <h3>Agregar nueva categoría</h3>
+          <IconButton
+            className={styles.addButton}
+            disableRipple={true}
+            size="large"
+            onClick={() => navigate('/admin/category')}
+          >
+            <Add></Add>
+          </IconButton>
+        </div>
+      </div>
       {isFetching ? (
         <></>
       ) : (

@@ -7,19 +7,19 @@ export const CategoryValidations = Joi.object({
     .required()
     .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
     .messages({
-      'string.min': 'Nombre inválido, debe contener al menos 3 caracteres.',
-      'string.max': 'Nombre inválido, debe contener menos de 50 caracteres.',
-      'string.pattern.base': 'Nombre inválido, debe contener solo letras.',
-      'string.empty': 'Nombre es un campo requerido.',
+      'string.min': 'Debe contener al menos 3 caracteres.',
+      'string.max': 'Debe contener menos de 50 caracteres.',
+      'string.pattern.base': 'Debe contener solo letras.',
+      'string.empty': 'Campo requerido.',
     }),
   image: Joi.object().required().messages({
-    'any.required': 'Imagen es un campo requerido.',
+    'any.required': 'Campo requerido.',
   }),
   url: Joi.string()
     .regex(/^([a-z-]*)$/)
     .required()
     .messages({
-      'string.pattern.base': 'URL inválida, debe contener solo minúsculas y -.',
-      'string.empty': 'URL es un campo requerido.',
+      'string.pattern.base': 'Debe contener solo minúsculas y -.',
+      'string.empty': 'Campo requerido.',
     }),
 });

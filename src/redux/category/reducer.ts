@@ -100,6 +100,11 @@ export const categoryReducer = (state: CategoryState = initialState, action: Act
         categories: categoryNewList.filter((category) => category._id !== action.payload._id),
         isFetching: false,
       };
+    case Actions.RESET_CATEGORY:
+      return {
+        ...state,
+        category: undefined,
+      };
     default:
       return state;
   }
