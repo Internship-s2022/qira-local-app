@@ -2,10 +2,10 @@ import { action } from 'typesafe-actions';
 
 import { Actions } from './types';
 
-export const addProduct = (Product) => action(Actions.ADD_PRODUCT, Product);
+export const addProduct = (product) => action(Actions.ADD_PRODUCT, product);
 
-export const closeModal = (Product) => action(Actions.DELETE_PRODUCT, Product);
+export const deleteProduct = (product) => action(Actions.DELETE_PRODUCT, product);
 
-export const increaseProductQuantity = (Id) => action(Actions.INCREASE_PRODUCT_QUANTITY, Id);
+export const increaseProductQuantity = (id) => action(Actions.INCREASE_PRODUCT_QUANTITY, id);
 
-export const decreaseProductQuantity = (Id) => action(Actions.DECREASE_PRODUCT_QUANTITY, Id);
+export const decreaseProductQuantity = (id) => action(Actions.DECREASE_PRODUCT_QUANTITY, id);

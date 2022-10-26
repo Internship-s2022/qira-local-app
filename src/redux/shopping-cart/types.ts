@@ -8,7 +8,7 @@ export interface ShoppingCartState {
   products: ShoppingCartProduct[];
 }
 export interface Product {
-  id: string;
+  _id: string;
 }
 export interface ShoppingCartProduct {
   product: Product;
