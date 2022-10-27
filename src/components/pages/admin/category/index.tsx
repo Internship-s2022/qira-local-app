@@ -8,6 +8,7 @@ import { Button } from '@mui/material';
 import { ImageInput } from 'src/components/shared/ui/image-input';
 import { InputText } from 'src/components/shared/ui/input';
 import { toBase64 } from 'src/helper/form';
+import { resetCategory } from 'src/redux/category/actions';
 import { createCategory, getCategoryById, updateCategory } from 'src/redux/category/thunk';
 import { Actions } from 'src/redux/category/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
@@ -35,6 +36,9 @@ const CategoryForm = (): JSX.Element => {
 
   useEffect(() => {
     params.id && dispatch(getCategoryById(params.id));
+    return () => {
+      dispatch(resetCategory());
+    };
   }, []);
 
   useEffect(() => {

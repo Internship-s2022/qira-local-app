@@ -55,9 +55,8 @@ export const categoryReducer = (state = initialState, action: ActionsType): Cate
       const categoryNewList = state.categories.map((category) => {
         if (category._id === action.payload._id) {
           return action.payload;
-        } else {
-          return category;
         }
+        return category;
       });
       return {
         ...state,
@@ -70,9 +69,8 @@ export const categoryReducer = (state = initialState, action: ActionsType): Cate
       const categoryNewList = state.categories.map((category) => {
         if (category._id === action.payload._id) {
           return action.payload;
-        } else {
-          return category;
         }
+        return category;
       });
       return {
         ...state,
@@ -84,9 +82,8 @@ export const categoryReducer = (state = initialState, action: ActionsType): Cate
       const categoryNewList = state.categories.map((category) => {
         if (category._id === action.payload._id) {
           return action.payload;
-        } else {
-          return category;
         }
+        return category;
       });
       return {
         ...state,
@@ -98,9 +95,8 @@ export const categoryReducer = (state = initialState, action: ActionsType): Cate
       const categoryNewList = state.categories.map((category) => {
         if (category._id === action.payload._id) {
           return action.payload;
-        } else {
-          return category;
         }
+        return category;
       });
       return {
         ...state,

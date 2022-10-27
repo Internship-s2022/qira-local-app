@@ -6,7 +6,6 @@ import { IconButton } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
-import { resetCategory } from 'src/redux/category/actions';
 import {
   activateCategory,
   deleteCategory,
@@ -47,7 +46,6 @@ const Categories = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(getCategory());
-    dispatch(resetCategory());
   }, []);
 
   useEffect(() => {
