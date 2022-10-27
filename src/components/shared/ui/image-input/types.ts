@@ -10,7 +10,7 @@ export type ImageInputProps<TValuesForm> = UseControllerProps<TValuesForm> &
   ImageInputCustomProps;
 
 export interface ImageInputCustomProps {
-  optionalLabel?: string;
+  label?: string;
   setValue: UseFormSetValue<CategoryFormValues>;
 }
 

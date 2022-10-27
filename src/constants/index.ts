@@ -6,8 +6,8 @@ export enum AdminRoutes {
   ORDERS = '/orders',
   CLIENTS = '/clients',
   PRODUCTS = '/products',
-  CATEGORY = '/categories',
+  CATEGORIES = '/categories',
   DELIVER = '/deliver',
-  CATEGORY_FORM = '/category',
+  CATEGORY_CREATE = '/category',
   CATEGORY_EDIT = '/category/:id',
 }

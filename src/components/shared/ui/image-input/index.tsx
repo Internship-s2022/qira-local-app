@@ -16,7 +16,7 @@ export const ImageInput = <TValuesForm extends FieldValues>({
   name,
   control,
   defaultValue,
-  optionalLabel,
+  label,
   setValue,
 }: ImageInputProps<TValuesForm>): JSX.Element => {
   const {
@@ -42,7 +42,7 @@ export const ImageInput = <TValuesForm extends FieldValues>({
 
   return (
     <div className={styles.container}>
-      <label htmlFor={optionalLabel}>{optionalLabel}</label>
+      <label htmlFor={label}>{label}</label>
       <div className={styles.imageContainer}>
         {field.value?.url ? (
           <div className={styles.imageContainer}>

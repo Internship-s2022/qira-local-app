@@ -103,7 +103,7 @@ const Categories = (): JSX.Element => {
   ];
 
   const headers: Headers[] = [
-    { header: 'Categorías', key: 'name' },
+    { header: 'Categoría', key: 'name' },
     { header: 'Estado', key: 'status' },
   ];
 
@@ -119,7 +119,7 @@ const Categories = (): JSX.Element => {
             size="large"
             onClick={() => navigate('/admin/category')}
           >
-            <Add></Add>
+            <Add />
           </IconButton>
         </div>
       </div>

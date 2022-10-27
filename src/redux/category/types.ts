@@ -20,7 +20,7 @@ export interface CategoryState {
   isFetching: boolean;
   error: unknown;
   message: string;
-  category: Category;
+  selectedCategory: Category;
 }
 
 export type ActionsType = ActionType<typeof actions>;

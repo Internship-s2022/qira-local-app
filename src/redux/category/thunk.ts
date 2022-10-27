@@ -1,7 +1,6 @@
 import { Dispatch } from 'redux';
 
 import { closeModal } from '../modal/actions';
-import { AppThunk } from '../store';
 import {
   activateCategoryActions,
   createCategoryActions,
@@ -13,25 +12,23 @@ import {
 } from './actions';
 import * as API from './api';
 
-export const getCategory: AppThunk = () => {
+export const getCategory = () => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getCategoriesActions.request());
       const response = await API.getCategories();
-      if (response.data?.length) {
-        return dispatch(getCategoriesActions.success(response.data));
-      }
+      return dispatch(getCategoriesActions.success(response.data));
     } catch (error) {
       return dispatch(getCategoriesActions.failure(error));
     }
   };
 };
 
-export const getCategoryById: AppThunk = (_id) => {
+export const getCategoryById = (id) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getCategoryActions.request());
-      const response = await API.getCategoryById(_id);
+      const response = await API.getCategoryById(id);
       return dispatch(getCategoryActions.success(response.data));
     } catch (error) {
       return dispatch(getCategoryActions.failure(error));
@@ -39,7 +36,7 @@ export const getCategoryById: AppThunk = (_id) => {
   };
 };
 
-export const createCategory: AppThunk = (category) => {
+export const createCategory = (category) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(createCategoryActions.request());
@@ -51,11 +48,11 @@ export const createCategory: AppThunk = (category) => {
   };
 };
 
-export const updateCategory: AppThunk = (_id, category) => {
+export const updateCategory = (id, category) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(updateCategoryActions.request());
-      const response = await API.updateCategory(_id, category);
+      const response = await API.updateCategory(id, category);
       return dispatch(updateCategoryActions.success(response.data));
     } catch (error) {
       return dispatch(updateCategoryActions.failure(error));
@@ -63,42 +60,36 @@ export const updateCategory: AppThunk = (_id, category) => {
   };
 };
 
-export const activateCategory: AppThunk = (_id) => {
+export const activateCategory = (id) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(activateCategoryActions.request());
-      const response = await API.activateCategory(_id);
-      if (response.data) {
-        return dispatch(activateCategoryActions.success(response.data)), dispatch(closeModal());
-      }
+      const response = await API.activateCategory(id);
+      return dispatch(activateCategoryActions.success(response.data)), dispatch(closeModal());
     } catch (error) {
       return dispatch(activateCategoryActions.failure(error));
     }
   };
 };
 
-export const inactivateCategory: AppThunk = (_id) => {
+export const inactivateCategory = (id) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(inactivateCategoryActions.request());
-      const response = await API.inactivateCategory(_id);
-      if (response.data) {
-        return dispatch(inactivateCategoryActions.success(response.data)), dispatch(closeModal());
-      }
+      const response = await API.inactivateCategory(id);
+      return dispatch(inactivateCategoryActions.success(response.data)), dispatch(closeModal());
     } catch (error) {
       return dispatch(inactivateCategoryActions.failure(error));
     }
   };
 };
 
-export const deleteCategory: AppThunk = (_id) => {
+export const deleteCategory = (id) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(deleteCategoryActions.request());
-      const response = await API.deleteCategory(_id);
-      if (response.data) {
-        return dispatch(deleteCategoryActions.success(response.data)), dispatch(closeModal());
-      }
+      const response = await API.deleteCategory(id);
+      return dispatch(deleteCategoryActions.success(response.data)), dispatch(closeModal());
     } catch (error) {
       return dispatch(deleteCategoryActions.failure(error));
     }

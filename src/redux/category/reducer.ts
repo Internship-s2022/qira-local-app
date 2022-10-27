@@ -5,11 +5,10 @@ const initialState: CategoryState = {
   isFetching: false,
   error: undefined,
   message: '',
-  category: undefined,
+  selectedCategory: undefined,
 };
-let categoryNewList = [];
 
-export const categoryReducer = (state: CategoryState = initialState, action: ActionsType) => {
+export const categoryReducer = (state = initialState, action: ActionsType): CategoryState => {
   switch (action.type) {
     case Actions.GET_CATEGORIES_PENDING:
     case Actions.GET_CATEGORY_PENDING:
@@ -43,26 +42,32 @@ export const categoryReducer = (state: CategoryState = initialState, action: Act
         ...state,
         isFetching: false,
         error: undefined,
-        category: action.payload,
+        selectedCategory: action.payload,
       };
     case Actions.CREATE_CATEGORY_SUCCESS:
       return {
         ...state,
         isFetching: false,
         error: undefined,
-        message: 'Category created successfully',
-        category: action.payload,
+        categories: [...state.categories, action.payload],
       };
-    case Actions.UPDATE_CATEGORY_SUCCESS:
+    case Actions.UPDATE_CATEGORY_SUCCESS: {
+      const categoryNewList = state.categories.map((category) => {
+        if (category._id === action.payload._id) {
+          return action.payload;
+        } else {
+          return category;
+        }
+      });
       return {
         ...state,
         isFetching: false,
         error: undefined,
-        message: 'Category updated successfully',
-        category: action.payload,
+        categories: categoryNewList,
       };
-    case Actions.ACTIVATE_CATEGORY_SUCCESS:
-      categoryNewList = state.categories.map((category) => {
+    }
+    case Actions.ACTIVATE_CATEGORY_SUCCESS: {
+      const categoryNewList = state.categories.map((category) => {
         if (category._id === action.payload._id) {
           return action.payload;
         } else {
@@ -74,8 +79,9 @@ export const categoryReducer = (state: CategoryState = initialState, action: Act
         categories: categoryNewList,
         isFetching: false,
       };
-    case Actions.INACTIVATE_CATEGORY_SUCCESS:
-      categoryNewList = state.categories.map((category) => {
+    }
+    case Actions.INACTIVATE_CATEGORY_SUCCESS: {
+      const categoryNewList = state.categories.map((category) => {
         if (category._id === action.payload._id) {
           return action.payload;
         } else {
@@ -87,8 +93,9 @@ export const categoryReducer = (state: CategoryState = initialState, action: Act
         categories: categoryNewList,
         isFetching: false,
       };
-    case Actions.DELETE_CATEGORY_SUCCESS:
-      categoryNewList = state.categories.map((category) => {
+    }
+    case Actions.DELETE_CATEGORY_SUCCESS: {
+      const categoryNewList = state.categories.map((category) => {
         if (category._id === action.payload._id) {
           return action.payload;
         } else {
@@ -100,10 +107,11 @@ export const categoryReducer = (state: CategoryState = initialState, action: Act
         categories: categoryNewList.filter((category) => category._id !== action.payload._id),
         isFetching: false,
       };
+    }
     case Actions.RESET_CATEGORY:
       return {
         ...state,
-        category: undefined,
+        selectedCategory: undefined,
       };
     default:
       return state;

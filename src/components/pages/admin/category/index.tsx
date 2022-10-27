@@ -3,26 +3,26 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { HelpOutline } from '@mui/icons-material';
-import { Button, Tooltip } from '@mui/material';
+import { Button } from '@mui/material';
 
 import { ImageInput } from 'src/components/shared/ui/image-input';
 import { InputText } from 'src/components/shared/ui/input';
+import { toBase64 } from 'src/helper/form';
 import { createCategory, getCategoryById, updateCategory } from 'src/redux/category/thunk';
 import { Actions } from 'src/redux/category/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
-import { ModalTypes } from 'src/redux/modal/types';
+import { ModalTypes, Options } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './form.module.css';
-import { CategoryFormValues, ImageToSend, toBase64 } from './types';
+import { CategoryFormValues, ImageToSend } from './types';
 import { CategoryValidations } from './validations';
 
 const CategoryForm = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const params = useParams();
   const navigate = useNavigate();
-  const category = useSelector((state: RootState) => state.categories.category);
+  const category = useSelector((state: RootState) => state.categories.selectedCategory);
   const { handleSubmit, control, reset, setValue } = useForm<CategoryFormValues>({
     defaultValues: {
       name: '',
@@ -40,17 +40,17 @@ const CategoryForm = (): JSX.Element => {
   useEffect(() => {
     if (category?._id) {
       reset({
-        name: category?.name,
+        name: category.name,
         image: {
-          url: category?.image.url,
+          url: category.image.url,
           isNew: false,
         },
-        url: category?.url,
+        url: category.url,
       });
     }
   }, [category]);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: CategoryFormValues) => {
     const image = data.image;
     let imageToSend: ImageToSend;
     if (image?.isNew) {
@@ -69,48 +69,32 @@ const CategoryForm = (): JSX.Element => {
       image: imageToSend,
       url: data.url,
     };
-    let response;
+    const modalOptions: Options = {};
     if (params.id) {
-      response = await dispatch(updateCategory(params.id, submitData));
-      if (response?.type === Actions.UPDATE_CATEGORY_ERROR) {
-        dispatch(
-          openModal(ModalTypes.INFO, {
-            message: 'Ha ocurrido un error',
-          }),
-        );
-      } else {
+      const response = await dispatch(updateCategory(params.id, submitData));
+      if (response?.type === Actions.UPDATE_CATEGORY_SUCCESS) {
+        modalOptions.message = 'Categoría editada exitosamente.';
+        modalOptions.onCloseCallback = () => {
+          dispatch(closeModal());
+          navigate('/admin/categories');
+        };
         reset();
-        dispatch(
-          openModal(ModalTypes.INFO, {
-            message: 'Categoría editada exitosamente.',
-            onCloseCallback: () => {
-              dispatch(closeModal());
-              navigate('/admin/categories');
-            },
-          }),
-        );
       }
     } else {
-      response = await dispatch(createCategory(submitData));
-      if (response?.type === Actions.CREATE_CATEGORY_ERROR) {
-        dispatch(
-          openModal(ModalTypes.INFO, {
-            message: 'Ha ocurrido un error',
-          }),
-        );
-      } else {
+      const response = await dispatch(createCategory(submitData));
+      if (response?.type === Actions.CREATE_CATEGORY_SUCCESS) {
+        modalOptions.message = 'Categoría creada exitosamente.';
+        modalOptions.onCloseCallback = () => {
+          dispatch(closeModal());
+          navigate('/admin/categories');
+        };
         reset();
-        dispatch(
-          openModal(ModalTypes.INFO, {
-            message: 'Categoría creada exitosamente.',
-            onCloseCallback: () => {
-              dispatch(closeModal());
-              navigate('/admin/categories');
-            },
-          }),
-        );
       }
     }
+    if (!modalOptions.message) {
+      modalOptions.message = 'Ha ocurrido un error';
+    }
+    dispatch(openModal(ModalTypes.INFO, modalOptions));
   };
 
   return (
@@ -141,20 +125,9 @@ const CategoryForm = (): JSX.Element => {
               margin="dense"
               size="small"
             />
-            <Tooltip
-              className={styles.helpTooltip}
-              title="La URL será utilizada para redirigir al usuario a los productos con esa categoría. Debe ser descriptiva, contener letras minúsculas y guiónes en lugar de espacios."
-            >
-              <HelpOutline />
-            </Tooltip>
           </div>
           <div className={styles.imageInputContainer}>
-            <ImageInput
-              control={control}
-              name="image"
-              optionalLabel="Imagen *"
-              setValue={setValue}
-            />
+            <ImageInput control={control} name="image" label="Imagen *" setValue={setValue} />
           </div>
         </div>
         <Button
