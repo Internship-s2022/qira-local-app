@@ -121,7 +121,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="businessName"
                   type="text"
-                  label="Razón Social"
+                  optionalLabel="Razón Social"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -130,7 +130,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="cuit"
                   type="text"
-                  label="CUIT"
+                  optionalLabel="CUIT"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -138,7 +138,7 @@ const ClientForm = (): JSX.Element => {
                 <SharedSelect
                   control={control}
                   name="ivaCondition"
-                  label="Condición de IVA"
+                  optionalLabel="Condición de IVA"
                   margin="dense"
                   size="small"
                   options={IvaConditionOptions}
@@ -146,7 +146,7 @@ const ClientForm = (): JSX.Element => {
                 <InputText
                   control={control}
                   name="email"
-                  label="Email"
+                  optionalLabel="Email"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -164,7 +164,7 @@ const ClientForm = (): JSX.Element => {
                     control={control}
                     name="codeArea"
                     type="text"
-                    label="Cod. área"
+                    optionalLabel="Cod. área"
                     variant="outlined"
                     margin="dense"
                     size="small"
@@ -173,7 +173,7 @@ const ClientForm = (): JSX.Element => {
                     control={control}
                     name="phoneNumber"
                     type="text"
-                    label="Teléfono"
+                    optionalLabel="Teléfono"
                     variant="outlined"
                     margin="dense"
                     size="small"
@@ -192,7 +192,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="street"
                   type="text"
-                  label="Dirección"
+                  optionalLabel="Dirección"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -201,7 +201,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="zipCode"
                   type="text"
-                  label="Código postal"
+                  optionalLabel="Código postal"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -210,7 +210,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="city"
                   type="text"
-                  label="Localidad"
+                  optionalLabel="Localidad"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -219,7 +219,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="province"
                   type="text"
-                  label="Provincia"
+                  optionalLabel="Provincia"
                   variant="outlined"
                   margin="dense"
                   size="small"
