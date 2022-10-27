@@ -19,14 +19,14 @@ export const updateClientValidations = Joi.object({
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 2-4 caracteres numéricos',
+      'string.pattern.base': 'Datos invalidos',
     }),
   phoneNumber: Joi.string()
     .regex(/^[0-9\-+]{7,8}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 7-8 caracteres númericos.',
+      'string.pattern.base': 'Datos invalidos',
     }),
   businessName: Joi.string()
     .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)

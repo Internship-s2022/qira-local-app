@@ -9,13 +9,19 @@
   border-radius: 10px;
 }
 
+.titleContainer {
+  border-bottom: solid #f05523 1.5px;
+}
+
 .title {
   color: #f05523;
 }
 
 .formContainer {
   display: flex;
+  align-self: center;
   justify-content: space-around;
+  padding: 25px 5px 5px 25px;
 }
 
 .columnContainer {
@@ -35,5 +41,6 @@
 
 .sendBtn {
   width: 55%;
+  margin-bottom: 40px;
   font-weight: bold;
 }

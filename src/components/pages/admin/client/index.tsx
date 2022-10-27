@@ -110,128 +110,132 @@ const ClientForm = (): JSX.Element => {
       {isFetching ? (
         <></>
       ) : (
-        <form className={styles.container}>
-          <h2 className={styles.title}>Datos del cliente</h2>
-          <div className={styles.formContainer}>
-            <div className={styles.columnContainer}>
-              <InputText
-                control={control}
-                name="businessName"
-                type="text"
-                label="Razón Social"
-                variant="outlined"
-                margin="dense"
-                size="small"
-              />
-              <InputText
-                control={control}
-                name="cuit"
-                type="text"
-                label="CUIT"
-                variant="outlined"
-                margin="dense"
-                size="small"
-              />
-              <SharedSelect
-                control={control}
-                name="ivaCondition"
-                label="Condición de IVA"
-                margin="dense"
-                size="small"
-                options={IvaConditionOptions}
-              />
-              <InputText
-                control={control}
-                name="email"
-                label="Email"
-                variant="outlined"
-                margin="dense"
-                size="small"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <MailOutlineOutlined color="primary" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <div className={styles.phoneInputs}>
+        <section>
+          <div className={styles.titleContainer}>
+            <h2 className={styles.title}>Datos del cliente</h2>
+          </div>
+          <form className={styles.container}>
+            <div className={styles.formContainer}>
+              <div className={styles.columnContainer}>
                 <InputText
-                  className={styles.shortInput}
                   control={control}
-                  name="codeArea"
+                  name="businessName"
                   type="text"
-                  label="Cod. área"
+                  label="Razón Social"
                   variant="outlined"
                   margin="dense"
                   size="small"
                 />
                 <InputText
                   control={control}
-                  name="phoneNumber"
+                  name="cuit"
                   type="text"
-                  label="Teléfono"
+                  label="CUIT"
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                />
+                <SharedSelect
+                  control={control}
+                  name="ivaCondition"
+                  label="Condición de IVA"
+                  margin="dense"
+                  size="small"
+                  options={IvaConditionOptions}
+                />
+                <InputText
+                  control={control}
+                  name="email"
+                  label="Email"
                   variant="outlined"
                   margin="dense"
                   size="small"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <PhoneOutlined color="primary" />
+                        <MailOutlineOutlined color="primary" />
                       </InputAdornment>
                     ),
                   }}
                 />
+                <div className={styles.phoneInputs}>
+                  <InputText
+                    className={styles.shortInput}
+                    control={control}
+                    name="codeArea"
+                    type="text"
+                    label="Cod. área"
+                    variant="outlined"
+                    margin="dense"
+                    size="small"
+                  />
+                  <InputText
+                    control={control}
+                    name="phoneNumber"
+                    type="text"
+                    label="Teléfono"
+                    variant="outlined"
+                    margin="dense"
+                    size="small"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PhoneOutlined color="primary" />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </div>
+              </div>
+              <div className={styles.columnContainer}>
+                <InputText
+                  control={control}
+                  name="street"
+                  type="text"
+                  label="Dirección"
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                />
+                <InputText
+                  control={control}
+                  name="zipCode"
+                  type="text"
+                  label="Código postal"
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                />
+                <InputText
+                  control={control}
+                  name="city"
+                  type="text"
+                  label="Localidad"
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                />
+                <InputText
+                  control={control}
+                  name="province"
+                  type="text"
+                  label="Provincia"
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                />
               </div>
             </div>
-            <div className={styles.columnContainer}>
-              <InputText
-                control={control}
-                name="street"
-                type="text"
-                label="Dirección"
-                variant="outlined"
-                margin="dense"
-                size="small"
-              />
-              <InputText
-                control={control}
-                name="zipCode"
-                type="text"
-                label="Código postal"
-                variant="outlined"
-                margin="dense"
-                size="small"
-              />
-              <InputText
-                control={control}
-                name="city"
-                type="text"
-                label="Localidad"
-                variant="outlined"
-                margin="dense"
-                size="small"
-              />
-              <InputText
-                control={control}
-                name="province"
-                type="text"
-                label="Provincia"
-                variant="outlined"
-                margin="dense"
-                size="small"
-              />
-            </div>
-          </div>
-          <Button
-            color="primary"
-            variant="contained"
-            className={styles.sendBtn}
-            onClick={handleSubmit(onSubmit)}
-          >
-            Editar Cliente
-          </Button>
-        </form>
+            <Button
+              color="primary"
+              variant="contained"
+              className={styles.sendBtn}
+              onClick={handleSubmit(onSubmit)}
+            >
+              Editar Cliente
+            </Button>
+          </form>
+        </section>
       )}
     </>
   );
