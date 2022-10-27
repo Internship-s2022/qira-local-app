@@ -16,7 +16,7 @@ import * as API from './api';
 export const getClients: AppThunk = () => {
   return async (dispatch: Dispatch) => {
     try {
-      dispatch(getClientsActions.request(''));
+      dispatch(getClientsActions.request());
       const response = await API.getClients();
       return dispatch(getClientsActions.success(response.data));
     } catch (error) {
@@ -74,13 +74,7 @@ export const updateClient = (id, data) => {
       const response = await API.updateClient(id, data);
       return dispatch(updateClientActions.success(response.data));
     } catch (error) {
-      dispatch(updateClientActions.failure(error)),
-        dispatch(
-          openModal(ModalTypes.ERROR, {
-            message: 'Ha ocurrido un error',
-            onConfirmCallback: () => dispatch(closeModal()),
-          }),
-        );
+      dispatch(updateClientActions.failure(error));
     }
   };
 };

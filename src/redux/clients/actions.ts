@@ -7,7 +7,7 @@ export const getClientsActions = createAsyncAction(
   Actions.GET_CLIENTS_PENDING,
   Actions.GET_CLIENTS_SUCCESS,
   Actions.GET_CLIENTS_ERROR,
-)<string, Client[], ApiResponse<unknown>>();
+)<void, Client[], ApiResponse<unknown>>();
 
 export const inactivateActions = createAsyncAction(
   Actions.INACTIVATE_CLIENT_PENDING,

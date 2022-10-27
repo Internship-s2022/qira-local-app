@@ -5,12 +5,14 @@ import { IvaCondition } from 'src/types';
 export const updateClientValidations = Joi.object({
   email: Joi.string()
     .email({ tlds: { allow: false } })
+    .pattern(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)
     .min(7)
     .required()
     .messages({
       'string.min': 'Debe contener al menos 7 caracteres.',
       'string.empty': 'Campo requerido.',
       'string.email': 'Debe tener formato válido de email',
+      'string.pattern.base': 'Debe tener formato válido de email',
     }),
   codeArea: Joi.string()
     .regex(/^[0-9\-+]{2,4}$/)

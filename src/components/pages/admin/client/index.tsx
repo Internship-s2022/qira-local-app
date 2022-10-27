@@ -9,10 +9,10 @@ import { Button, InputAdornment } from '@mui/material';
 
 import { InputText } from 'src/components/shared/ui/input';
 import { SharedSelect } from 'src/components/shared/ui/select';
-import { Options } from 'src/components/shared/ui/select/types';
+import { Options as SelectOptions } from 'src/components/shared/ui/select/types';
 import { Actions } from 'src/redux/clients/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
-import { ModalTypes } from 'src/redux/modal/types';
+import { ModalTypes, Options } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { IvaCondition } from 'src/types';
 
@@ -21,7 +21,7 @@ import styles from './client.module.css';
 import { UpdateClientValues } from './types';
 import { updateClientValidations } from './validations';
 
-const ClientData = (): JSX.Element => {
+const ClientForm = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -62,11 +62,11 @@ const ClientData = (): JSX.Element => {
       zipCode: '',
       street: '',
     },
-    mode: 'onSubmit',
+    mode: 'onBlur',
     resolver: joiResolver(updateClientValidations),
   });
 
-  const IvaConditionOptions: Options[] = [
+  const IvaConditionOptions: SelectOptions[] = [
     { label: 'Responsable Inscripto', value: IvaCondition.registeredResponsible },
     { label: 'Exento', value: IvaCondition.exempt },
     { label: 'Consumidor Final', value: IvaCondition.finalConsumer },
@@ -90,22 +90,21 @@ const ClientData = (): JSX.Element => {
     return dataFormated;
   };
 
-  const submitHandler = async (data) => {
-    console.log(formatDataFunction(data));
+  const onSubmit = async (data) => {
+    const modalOptions: Options = {};
     const response = await dispatch(thunks.updateClient(params.id, formatDataFunction(data)));
-    if (response.type === Actions.UPDATE_CLIENT_SUCCESS) {
-      navigate('/admin/clients');
-    } else {
-      dispatch(
-        openModal(ModalTypes.ERROR, {
-          message: 'Ha ocurrido un error al editar el cliente',
-          onConfirmCallback: () => dispatch(closeModal),
-        }),
-      );
+    if (response?.type === Actions.UPDATE_CLIENT_SUCCESS) {
+      modalOptions.message = 'Cliente editado exitosamente.';
+      modalOptions.onCloseCallback = () => {
+        dispatch(closeModal());
+        navigate('/admin/clients');
+      };
     }
-    reset();
+    if (!modalOptions.message) {
+      modalOptions.message = 'Ha ocurrido un error';
+    }
+    dispatch(openModal(ModalTypes.INFO, modalOptions));
   };
-
   return (
     <>
       {isFetching ? (
@@ -119,7 +118,7 @@ const ClientData = (): JSX.Element => {
                 control={control}
                 name="businessName"
                 type="text"
-                optionalLabel="Razón Social"
+                label="Razón Social"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -128,7 +127,7 @@ const ClientData = (): JSX.Element => {
                 control={control}
                 name="cuit"
                 type="text"
-                optionalLabel="CUIT"
+                label="CUIT"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -136,7 +135,7 @@ const ClientData = (): JSX.Element => {
               <SharedSelect
                 control={control}
                 name="ivaCondition"
-                // optionalLabel="Condición de IVA"
+                label="Condición de IVA"
                 margin="dense"
                 size="small"
                 options={IvaConditionOptions}
@@ -144,7 +143,7 @@ const ClientData = (): JSX.Element => {
               <InputText
                 control={control}
                 name="email"
-                optionalLabel="Email"
+                label="Email"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -162,7 +161,7 @@ const ClientData = (): JSX.Element => {
                   control={control}
                   name="codeArea"
                   type="text"
-                  optionalLabel="Cod. área"
+                  label="Cod. área"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -171,7 +170,7 @@ const ClientData = (): JSX.Element => {
                   control={control}
                   name="phoneNumber"
                   type="text"
-                  optionalLabel="Teléfono"
+                  label="Teléfono"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -190,7 +189,7 @@ const ClientData = (): JSX.Element => {
                 control={control}
                 name="street"
                 type="text"
-                optionalLabel="Dirección"
+                label="Dirección"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -199,7 +198,7 @@ const ClientData = (): JSX.Element => {
                 control={control}
                 name="zipCode"
                 type="text"
-                optionalLabel="Código postal"
+                label="Código postal"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -208,7 +207,7 @@ const ClientData = (): JSX.Element => {
                 control={control}
                 name="city"
                 type="text"
-                optionalLabel="Localidad"
+                label="Localidad"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -217,7 +216,7 @@ const ClientData = (): JSX.Element => {
                 control={control}
                 name="province"
                 type="text"
-                optionalLabel="Provincia"
+                label="Provincia"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -228,7 +227,7 @@ const ClientData = (): JSX.Element => {
             color="primary"
             variant="contained"
             className={styles.sendBtn}
-            onClick={handleSubmit(submitHandler)}
+            onClick={handleSubmit(onSubmit)}
           >
             Editar Cliente
           </Button>
@@ -237,4 +236,4 @@ const ClientData = (): JSX.Element => {
     </>
   );
 };
-export default ClientData;
+export default ClientForm;
