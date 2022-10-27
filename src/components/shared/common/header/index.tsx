@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Search, ShoppingCart } from '@mui/icons-material';
+import { ShoppingCart } from '@mui/icons-material';
 import { MenuItem, TextField } from '@mui/material';
 
 import { getCategoriesAsOptions } from 'src/redux/category/selectors/getCategoryAsOptions';
-import * as thunks from 'src/redux/category/thunk';
+import * as thunksCategories from 'src/redux/category/thunk';
+import * as thunksExchangeRate from 'src/redux/exchange-rate/thunk';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { AppDispatch } from 'src/redux/store';
+import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './header.module.css';
 
@@ -16,11 +17,15 @@ const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
   const categories = useSelector(getCategoriesAsOptions);
-  console.log(categories);
+  const exchangeRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate);
+  const currentUser = useSelector((state: RootState) => state.auth.user);
 
   useEffect(() => {
-    dispatch(thunks.getCategory());
+    dispatch(thunksCategories.getCategory());
+    dispatch(thunksExchangeRate.getExchangeRate());
   }, []);
+
+  // console.log(exchangeRate);
 
   return (
     <header className={styles.headerContainer}>
@@ -43,11 +48,10 @@ const Header = () => {
           />
         </div>
         <div className={styles.searchContainer}>
-          <div /*className={styles.categories}*/>
+          <div>
             <TextField
-              // margin="dense"
               select
-              label="Categorías"
+              placeholder="Categorías"
               className={styles.categories}
               fullWidth
               size="small"
@@ -58,13 +62,6 @@ const Header = () => {
                 </MenuItem>
               ))}
             </TextField>
-            {/* <select  className={styles.categories}>
-              {categories.map((category, index) => (
-                <option key={index} onClick={() => navigate('/')} value={category.value}>
-                  {category.label}
-                </option>
-              ))}
-            </select> */}
           </div>
           <div>
             <TextField
@@ -78,12 +75,15 @@ const Header = () => {
           </div>
         </div>
         <div className={styles.routes}>
-          <div className={styles.btnSignUp}>
-            <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Login</a>
-          </div>
-          <div className={styles.btnSignUp}>
-            <a onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}>Sign Up</a>
-          </div>
+          {currentUser?.email ? (
+            <div className={styles.btnLogin}>
+              <a onClick={() => navigate('client/')}>Go to profile</a>
+            </div>
+          ) : (
+            <div className={styles.btnLogin}>
+              <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Login</a>
+            </div>
+          )}
         </div>
         <ShoppingCart className={styles.shoppingCart} />
       </nav>
