@@ -143,7 +143,7 @@ const CategoryForm = (): JSX.Element => {
             />
             <Tooltip
               className={styles.helpTooltip}
-              title="La URL será utilizada para redirigir al usuario a los productos con esa categoría. Debe ser descriptiva, contener letras minúsculas y en lugar de un espacio entre palabras utilice un guión(-)."
+              title="La URL será utilizada para redirigir al usuario a los productos con esa categoría. Debe ser descriptiva, contener letras minúsculas y guiónes en lugar de espacios."
             >
               <HelpOutline />
             </Tooltip>
