@@ -78,6 +78,7 @@ export const LoginModal = () => {
               variant="outlined"
               margin="dense"
               size="small"
+              data-testid="login-email"
               fullWidth={true}
               InputProps={{
                 startAdornment: (
@@ -97,6 +98,7 @@ export const LoginModal = () => {
               variant="outlined"
               margin="dense"
               size="small"
+              data-testid="login-password"
               fullWidth={true}
               InputProps={{
                 startAdornment: (
@@ -110,7 +112,7 @@ export const LoginModal = () => {
           {isFetching ? (
             <Loader />
           ) : (
-            <Button onClick={handleSubmit(onSubmit)} variant="contained" className={styles.button}>
+            <Button onClick={handleSubmit(onSubmit)} variant="contained" className={styles.button} data-testid="login-submit">
               Iniciar sesión
             </Button>
           )}

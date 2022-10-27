@@ -1,41 +1,30 @@
-
-
-import Page from './page';
-
-/**
- * sub page containing specific selectors and methods for a specific page
- */
-class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    get inputUsername () {
-        return $('#username');
+class LoginPage {
+  // Getters
+    get loginButton () {
+      return $('#login-button');
     }
-
+    get inputEmail () {
+      return $('#login-email');
+    }
     get inputPassword () {
-        return $('#password');
+      return $('#login-password');
     }
-
     get btnSubmit () {
-        return $('button[type="submit"]');
+      return $('#login-submit');
+    }
+    get crossModal () {
+      return $('#cross-modal');
     }
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
-    async login (username, password) {
-        await this.inputUsername.setValue(username);
-        await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
+  // Methods
+    async login (email, password) {
+      await this.inputEmail.setValue(email);
+      await this.inputPassword.setValue(password);
+      await this.btnSubmit.click();
     }
 
-    /**
-     * overwrite specific options to adapt it to page object
-     */
-    open () {
-        return super.open('login');
+    async openBrowser () {
+      browser.url('https://test.qira-local.server.radiumrocket.com/');
     }
 }
 
