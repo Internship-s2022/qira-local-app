@@ -25,7 +25,7 @@ export const shoppingCartReducer = (
     case Actions.INCREASE_PRODUCT_QUANTITY: {
       const newList = state.products.map((product) => {
         if (product.product._id === action.payload) {
-          return { product: product.product, quantity: product.quantity++ };
+          return { product: product.product, quantity: product.quantity + 1 };
         }
         return product;
       });
@@ -40,7 +40,7 @@ export const shoppingCartReducer = (
         if (product.product._id !== action.payload) {
           newList.push(product);
         } else if (product.quantity > 1) {
-          newList.push({ product: product.product, quantity: product.quantity-- });
+          newList.push({ product: product.product, quantity: product.quantity - 1 });
         }
       });
       return {

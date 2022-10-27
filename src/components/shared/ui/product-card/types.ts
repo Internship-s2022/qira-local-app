@@ -5,6 +5,7 @@ export interface ProductCardProps {
 }
 
 export interface Product {
+  _id: string;
   brand: string;
   name: string;
   description?: string;

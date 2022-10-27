@@ -17,6 +17,7 @@ const Storybook = (): JSX.Element => {
   };
 
   const exampleProduct: Product = {
+    _id: '1',
     brand: 'Marca',
     name: 'Modelo 1',
     price: 156.68,
@@ -30,6 +31,7 @@ const Storybook = (): JSX.Element => {
   };
 
   const exampleProduct2: Product = {
+    _id: '2',
     brand: 'Marca',
     name: 'Modelo 2',
     price: 3943.98,
