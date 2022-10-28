@@ -110,12 +110,12 @@ const ClientForm = (): JSX.Element => {
       {isFetching ? (
         <></>
       ) : (
-        <section>
+        <section className={styles.sectionContainer}>
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>Datos del cliente</h2>
           </div>
-          <form className={styles.container}>
-            <div className={styles.formContainer}>
+          <form className={styles.formContainer}>
+            <div className={styles.container}>
               <div className={styles.columnContainer}>
                 <InputText
                   control={control}
@@ -125,6 +125,7 @@ const ClientForm = (): JSX.Element => {
                   variant="outlined"
                   margin="dense"
                   size="small"
+                  fullWidth
                 />
                 <InputText
                   control={control}
@@ -134,6 +135,7 @@ const ClientForm = (): JSX.Element => {
                   variant="outlined"
                   margin="dense"
                   size="small"
+                  fullWidth
                 />
                 <SharedSelect
                   control={control}
@@ -142,6 +144,7 @@ const ClientForm = (): JSX.Element => {
                   margin="dense"
                   size="small"
                   options={IvaConditionOptions}
+                  fullWidth
                 />
                 <InputText
                   control={control}
@@ -150,6 +153,7 @@ const ClientForm = (): JSX.Element => {
                   variant="outlined"
                   margin="dense"
                   size="small"
+                  fullWidth
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -196,6 +200,7 @@ const ClientForm = (): JSX.Element => {
                   variant="outlined"
                   margin="dense"
                   size="small"
+                  fullWidth
                 />
                 <InputText
                   control={control}
@@ -205,6 +210,7 @@ const ClientForm = (): JSX.Element => {
                   variant="outlined"
                   margin="dense"
                   size="small"
+                  fullWidth
                 />
                 <InputText
                   control={control}
@@ -214,6 +220,7 @@ const ClientForm = (): JSX.Element => {
                   variant="outlined"
                   margin="dense"
                   size="small"
+                  fullWidth
                 />
                 <InputText
                   control={control}
@@ -223,6 +230,7 @@ const ClientForm = (): JSX.Element => {
                   variant="outlined"
                   margin="dense"
                   size="small"
+                  fullWidth
                 />
               </div>
             </div>

@@ -1,8 +1,7 @@
 import { Dispatch } from 'redux';
 
-import { closeModal, openModal } from 'src/redux/modal/actions';
+import { closeModal } from 'src/redux/modal/actions';
 
-import { ModalTypes } from '../modal/types';
 import { AppThunk } from '../store';
 import {
   activateActions,
@@ -28,7 +27,7 @@ export const getClients: AppThunk = () => {
 export const activateClient: AppThunk = (id) => {
   return async (dispatch: Dispatch) => {
     try {
-      dispatch(activateActions.request(''));
+      dispatch(activateActions.request());
       const response = await API.activateClient(id);
       if (response.data) {
         return dispatch(activateActions.success(response.data)), dispatch(closeModal());
@@ -42,7 +41,7 @@ export const activateClient: AppThunk = (id) => {
 export const inactivateClient: AppThunk = (id) => {
   return async (dispatch: Dispatch) => {
     try {
-      dispatch(inactivateActions.request(''));
+      dispatch(inactivateActions.request());
       const response = await API.inactivateClient(id);
       if (response.data) {
         return dispatch(activateActions.success(response.data)), dispatch(closeModal());
@@ -56,7 +55,7 @@ export const inactivateClient: AppThunk = (id) => {
 export const getClient: AppThunk = (id) => {
   return async (dispatch: Dispatch) => {
     try {
-      dispatch(getClientActions.request(''));
+      dispatch(getClientActions.request());
       const response = await API.getClient(id);
       if (response.data) {
         return dispatch(getClientActions.success(response.data));
@@ -70,7 +69,7 @@ export const getClient: AppThunk = (id) => {
 export const updateClient = (id, data) => {
   return async (dispatch: Dispatch) => {
     try {
-      dispatch(updateClientActions.request(''));
+      dispatch(updateClientActions.request());
       const response = await API.updateClient(id, data);
       return dispatch(updateClientActions.success(response.data));
     } catch (error) {
