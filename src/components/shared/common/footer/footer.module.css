@@ -15,7 +15,7 @@
 .logoContainer {
   display: flex;
   flex-direction: column;
-  margin: 15px 100px;
+  margin: 15px 15px 15px 100px;
 }
 
 .logo {
@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 100px;
+  padding-right: 100px;
 }
 
 .titelSocialMedia {
@@ -42,9 +42,20 @@
   margin-left: 5px;
 }
 
-@media screen and (min-width: 750px) {
-  .main {
-    width: unset;
-    padding: 0 20%;
+@media screen and (max-width: 678px) {
+  .socialMediaContainer {
+    padding: 0;
+  }
+
+  .container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    text-align: center;
   }
 }
