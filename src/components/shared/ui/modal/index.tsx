@@ -7,9 +7,9 @@ import { closeModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
-import { ChangePassword } from './change-password';
 import { Confirm } from './confirm';
 import { Error } from './error';
+import { Info } from './info';
 import { LoginModal } from './login';
 import style from './modal.module.css';
 import SignUpForm from './signup';
@@ -24,13 +24,7 @@ export const SharedModal = (): JSX.Element => {
   let modalComponent;
   switch (modalType) {
     case ModalTypes.UPLOAD_IMAGE:
-      modalComponent = (
-        <UploadImage
-          onConfirm={() => {
-            dispatch(closeModal());
-          }}
-        />
-      );
+      modalComponent = <UploadImage />;
       break;
     case ModalTypes.UPLOAD_PDF:
       modalComponent = (
@@ -49,6 +43,9 @@ export const SharedModal = (): JSX.Element => {
       break;
     case ModalTypes.ERROR:
       modalComponent = <Error />;
+      break;
+    case ModalTypes.INFO:
+      modalComponent = <Info />;
       break;
     case ModalTypes.REGISTER_FORM:
       modalComponent = <SignUpForm />;
