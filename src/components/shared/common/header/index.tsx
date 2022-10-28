@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCart } from '@mui/icons-material';
-import { MenuItem, TextField } from '@mui/material';
+import { KeyboardArrowDown, ShoppingCart } from '@mui/icons-material';
+import { TextField } from '@mui/material';
 
 import { getCategoriesAsOptions } from 'src/redux/category/selectors/getCategoryAsOptions';
 import * as thunksCategories from 'src/redux/category/thunk';
-import * as thunksExchangeRate from 'src/redux/exchange-rate/thunk';
+// import * as thunksExchangeRate from 'src/redux/exchange-rate/thunk';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -17,12 +17,12 @@ const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
   const categories = useSelector(getCategoriesAsOptions);
-  const exchangeRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate);
+  // const exchangeRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate);
   const currentUser = useSelector((state: RootState) => state.auth.user);
-
+  const [openSelect, setOpenSelect] = useState<boolean>(false);
   useEffect(() => {
     dispatch(thunksCategories.getCategory());
-    dispatch(thunksExchangeRate.getExchangeRate());
+    // dispatch(thunksExchangeRate.getExchangeRate());
   }, []);
 
   // console.log(exchangeRate);
@@ -49,19 +49,29 @@ const Header = () => {
         </div>
         <div className={styles.searchContainer}>
           <div>
-            <TextField
-              select
-              placeholder="Categorías"
-              className={styles.categories}
-              fullWidth
-              size="small"
+            <div
+              className={styles.buttonCategories}
+              onMouseEnter={() => setOpenSelect(true)}
+              onMouseLeave={() => setOpenSelect(false)}
             >
-              {categories.map((category, index) => (
-                <MenuItem key={index} onClick={() => navigate('/')} value={category.value}>
-                  {category.label}
-                </MenuItem>
-              ))}
-            </TextField>
+              Categorías
+              <KeyboardArrowDown className={styles.categoriesArrow} />
+            </div>
+            {openSelect && (
+              <div
+                className={styles.optionsContainer}
+                onMouseEnter={() => setOpenSelect(true)}
+                onMouseLeave={() => setOpenSelect(false)}
+              >
+                {categories.map((category, index) => (
+                  <span className={styles.categoryOption} key={index} onClick={() => navigate('/')}>
+                    <a href="" className={styles.categoryLinks}>
+                      {category.label}
+                    </a>
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
           <div>
             <TextField
