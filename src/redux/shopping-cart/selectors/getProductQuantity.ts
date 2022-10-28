@@ -8,12 +8,7 @@ const getProductFromParam = (state: RootState, id: string) => id;
 export const getProductQuantity = createSelector(
   [getShoppingCartProducts, getProductFromParam],
   (list, productId) => {
-    let quantity = 0;
-    list.forEach((cartProduct) => {
-      if (productId === cartProduct.product._id) {
-        quantity = cartProduct.quantity;
-      }
-    });
-    return quantity;
+    const product = list.find((cartProduct) => cartProduct.product._id === productId);
+    return product?.quantity || 0;
   },
 );

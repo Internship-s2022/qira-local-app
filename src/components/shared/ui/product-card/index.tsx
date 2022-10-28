@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Add, Remove } from '@mui/icons-material';
 import { Button, IconButton } from '@mui/material';
 
+import { formatPriceText } from 'src/helper/products';
 import {
   addProduct,
   decreaseProductQuantity,
@@ -10,7 +11,6 @@ import {
 } from 'src/redux/shopping-cart/actions';
 import { getProductQuantity } from 'src/redux/shopping-cart/selectors/getProductQuantity';
 import { AppDispatch, RootState } from 'src/redux/store';
-import { Currency } from 'src/types';
 
 import styles from './product-card.module.css';
 import { ProductCardProps } from './types';
@@ -18,23 +18,6 @@ import { ProductCardProps } from './types';
 const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const productQuantity = useSelector((state: RootState) => getProductQuantity(state, product._id));
-  const formatPriceText = () => {
-    let text = '';
-    if (product.currency === Currency.dollar) {
-      if (productQuantity > 0) {
-        text = 'USD ' + (product.price * productQuantity).toFixed(2);
-      } else {
-        text = 'USD ' + product.price.toFixed(2);
-      }
-    } else {
-      if (productQuantity > 0) {
-        text = 'AR$ ' + (product.price * productQuantity).toFixed(2);
-      } else {
-        text = 'AR$ ' + product.price.toFixed(2);
-      }
-    }
-    return text;
-  };
 
   const addToCart = () => {
     const shoppingCartProduct = {
@@ -44,7 +27,6 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
     dispatch(addProduct(shoppingCartProduct));
   };
 
-  console.log(productQuantity);
   return (
     <div className={styles.cardContainer}>
       <div className={styles.imageContainer}>
@@ -55,7 +37,7 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
         <p className={styles.categoryText}>{product.category.name}</p>
         <p className={styles.nameText}>{product.brand + ' ' + product.name}</p>
         <div className={styles.priceContainer}>
-          <p className={styles.priceText}>{formatPriceText()}</p>
+          <p className={styles.priceText}>{formatPriceText(product, productQuantity)}</p>
           <p className={styles.ivaText}> + IVA</p>
         </div>
       </div>
