@@ -65,7 +65,7 @@ const Header = () => {
               >
                 {categories.map((category, index) => (
                   <span className={styles.categoryOption} key={index} onClick={() => navigate('/')}>
-                    <a href="" className={styles.categoryLinks}>
+                    <a href="#" className={styles.categoryLinks}>
                       {category.label}
                     </a>
                   </span>
