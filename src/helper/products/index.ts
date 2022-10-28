@@ -1,4 +1,4 @@
-import { Product } from 'src/components/shared/ui/product-card/types';
+import { Product } from 'src/redux/products/types';
 import { Currency } from 'src/types';
 
 export const formatPriceText = (product: Product, quantity: number) => {

@@ -1,19 +1,25 @@
 import React from 'react';
 
 import ProductCard from 'src/components/shared/ui/product-card';
-import { Category, Product } from 'src/components/shared/ui/product-card/types';
+import { Category } from 'src/redux/category/types';
+import { Product } from 'src/redux/products/types';
 import { Currency, S3File } from 'src/types';
 
 import styles from './storybook.module.css';
 
 const Storybook = (): JSX.Element => {
-  const exampleCategory: Category = {
-    name: 'Fungicidas',
-  };
-
   const exampleImage: S3File = {
     key: 'asd',
     url: 'https://arcencohogar.vtexassets.com/arquivos/ids/312630-500-auto?v=637764719471770000&width=500&height=auto&aspect=true',
+  };
+
+  const exampleCategory: Category = {
+    _id: '1',
+    image: exampleImage,
+    name: 'Fungicidas',
+    url: '',
+    isActive: true,
+    logicDelete: false,
   };
 
   const exampleProduct: Product = {
