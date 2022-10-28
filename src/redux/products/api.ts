@@ -1,3 +1,5 @@
 import { api } from 'src/config/api';
 
-export const getProducts = () => api.get('/public/products');
+import { Product } from './types';
+
+export const getProducts = () => api.get<Product[]>('/public/products');

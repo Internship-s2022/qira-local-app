@@ -24,6 +24,18 @@ export const getCategory = () => {
   };
 };
 
+export const publicGetCategory = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(getCategoriesActions.request());
+      const response = await API.publicGetCategories();
+      return dispatch(getCategoriesActions.success(response.data));
+    } catch (error) {
+      return dispatch(getCategoriesActions.failure(error));
+    }
+  };
+};
+
 export const getCategoryById = (id) => {
   return async (dispatch: Dispatch) => {
     try {
