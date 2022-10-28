@@ -1,6 +1,7 @@
+import { Product } from 'src/components/shared/ui/product-card/types';
 import { Currency } from 'src/types';
 
-export const formatPriceText = (product, quantity) => {
+export const formatPriceText = (product: Product, quantity: number) => {
   let text = '';
   if (product.currency === Currency.dollar) {
     text = 'USD ';
