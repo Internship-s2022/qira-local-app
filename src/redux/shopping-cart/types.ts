@@ -14,6 +14,13 @@ export interface ShoppingCartProduct {
   product: Product;
   quantity: number;
 }
+
+export interface Amounts {
+  products: number;
+  taxes: number;
+  total: number;
+}
+
 export enum Actions {
   ADD_PRODUCT = 'ADD_PRODUCT',
   DELETE_PRODUCT = 'DELETE_PRODUCT',
