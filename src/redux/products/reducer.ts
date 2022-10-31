@@ -11,9 +11,30 @@ const initialState: ProductsState = {
 export const productsReducer = (state = initialState, action: ActionsType): ProductsState => {
   switch (action.type) {
     case Actions.GET_PUBLIC_PRODUCTS_PENDING:
+    case Actions.GET_PRODUCT_PENDING:
+    case Actions.GET_PRODUCTS_PENDING:
+    case Actions.CREATE_PRODUCT_PENDING:
+    case Actions.UPDATE_PRODUCT_PENDING:
+    case Actions.ACTIVATE_PRODUCT_PENDING:
+    case Actions.INACTIVATE_PRODUCT_PENDING:
+    case Actions.DELETE_PRODUCT_PENDING:
       return {
         ...state,
         isFetching: true,
+      };
+    case Actions.GET_PUBLIC_PRODUCTS_ERROR:
+    case Actions.GET_PRODUCTS_ERROR:
+    case Actions.GET_PRODUCT_ERROR:
+    case Actions.CREATE_PRODUCT_ERROR:
+    case Actions.UPDATE_PRODUCT_ERROR:
+    case Actions.ACTIVATE_PRODUCT_ERROR:
+    case Actions.INACTIVATE_PRODUCT_ERROR:
+    case Actions.DELETE_PRODUCT_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload.error,
+        message: action.payload.message,
       };
     case Actions.GET_PUBLIC_PRODUCTS_SUCCESS:
       return {
@@ -22,18 +43,6 @@ export const productsReducer = (state = initialState, action: ActionsType): Prod
         isFetching: false,
         error: false,
       };
-    case Actions.GET_PUBLIC_PRODUCTS_ERROR:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.payload.error,
-        message: action.payload.message,
-      };
-    case Actions.GET_PRODUCTS_PENDING:
-      return {
-        ...state,
-        isFetching: true,
-      };
     case Actions.GET_PRODUCTS_SUCCESS:
       return {
         ...state,
@@ -41,36 +50,12 @@ export const productsReducer = (state = initialState, action: ActionsType): Prod
         isFetching: false,
         error: undefined,
       };
-    case Actions.GET_PRODUCTS_ERROR:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.payload.error,
-        message: action.payload.message,
-      };
-    case Actions.GET_PRODUCT_PENDING:
-      return {
-        ...state,
-        isFetching: true,
-      };
     case Actions.GET_PRODUCT_SUCCESS:
       return {
         ...state,
         isFetching: false,
         error: undefined,
         selectedProduct: action.payload,
-      };
-    case Actions.GET_PRODUCT_ERROR:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.payload.error,
-        message: action.payload.message,
-      };
-    case Actions.CREATE_PRODUCT_PENDING:
-      return {
-        ...state,
-        isFetching: true,
       };
     case Actions.CREATE_PRODUCT_SUCCESS:
       return {
@@ -80,18 +65,6 @@ export const productsReducer = (state = initialState, action: ActionsType): Prod
         message: 'Product created successfully',
         selectedProduct: action.payload,
       };
-    case Actions.CREATE_PRODUCT_ERROR:
-      return {
-        ...state,
-        isFetching: false,
-        error: action.payload.error,
-        message: action.payload.message,
-      };
-    case Actions.UPDATE_PRODUCT_PENDING:
-      return {
-        ...state,
-        isFetching: true,
-      };
     case Actions.UPDATE_PRODUCT_SUCCESS:
       return {
         ...state,
@@ -100,13 +73,48 @@ export const productsReducer = (state = initialState, action: ActionsType): Prod
         message: 'Product updated successfully',
         selectedProduct: action.payload,
       };
-    case Actions.UPDATE_PRODUCT_ERROR:
+    case Actions.ACTIVATE_PRODUCT_SUCCESS: {
+      const productNewList = state.products.map((product) => {
+        if (product._id === action.payload._id) {
+          return action.payload;
+        }
+        return product;
+      });
       return {
         ...state,
+        products: productNewList,
         isFetching: false,
-        error: action.payload.error,
-        message: action.payload.message,
       };
+    }
+    case Actions.INACTIVATE_PRODUCT_SUCCESS: {
+      const productNewList = state.products.map((product) => {
+        if (product._id === action.payload._id) {
+          return action.payload;
+        }
+        return product;
+      });
+      return {
+        ...state,
+        products: productNewList,
+        isFetching: false,
+        error: undefined,
+        message: 'Product updated successfully',
+        selectedProduct: action.payload,
+      };
+    }
+    case Actions.DELETE_PRODUCT_SUCCESS: {
+      const productNewList = state.products.map((product) => {
+        if (product._id === action.payload._id) {
+          return action.payload;
+        }
+        return product;
+      });
+      return {
+        ...state,
+        products: productNewList.filter((product) => product._id !== action.payload._id),
+        isFetching: false,
+      };
+    }
     case Actions.RESET_PRODUCT:
       return {
         ...state,

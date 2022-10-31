@@ -9,6 +9,7 @@ import Categories from './categories';
 import CategoryForm from './category';
 import Clients from './clients';
 import ProductForm from './product';
+import Products from './products';
 
 const AdminRouter = (): JSX.Element => {
   return (
@@ -18,7 +19,7 @@ const AdminRouter = (): JSX.Element => {
         <Route path={AdminRoutes.CLIENTS} element={<Clients />} />
         <Route path={AdminRoutes.CLIENT} element={<ClientForm />} />
         <Route path={AdminRoutes.PRODUCT} element={<ProductForm />} />
-        <Route path={AdminRoutes.PRODUCTS} element={<h1>Productos</h1>} />
+        <Route path={AdminRoutes.PRODUCTS} element={<Products />} />
         <Route path={AdminRoutes.CATEGORIES} element={<Categories />} />
         <Route path={AdminRoutes.CATEGORY_CREATE} element={<CategoryForm />} />
         <Route path={AdminRoutes.CATEGORY_EDIT} element={<CategoryForm />} />
