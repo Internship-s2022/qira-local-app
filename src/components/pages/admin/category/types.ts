@@ -1,8 +1,8 @@
-import { NewFile } from 'src/components/shared/ui/image-input/types';
+import { NewImageFile } from 'src/components/shared/ui/image-input/types';
 
 export interface CategoryFormValues {
   name: string;
-  image: NewFile;
+  image: NewImageFile;
   url: string;
 }
 

@@ -3,17 +3,17 @@ import { TextFieldProps } from '@mui/material';
 
 import { CustomFile } from '../modal/types';
 
-export type ImageInputProps<TValuesForm> = UseControllerProps<TValuesForm> &
+export type PdfInputProps<TValuesForm> = UseControllerProps<TValuesForm> &
   TextFieldProps &
-  ImageInputCustomProps;
+  PdfInputCustomProps;
 
-export interface ImageInputCustomProps {
+export interface PdfInputCustomProps {
   label?: string;
   setValue: UseFormSetValue<any>;
 }
 
-export interface NewImageFile {
+export interface NewPdfFile {
   file?: CustomFile;
-  url: string;
+  name?: string;
   isNew: boolean;
 }

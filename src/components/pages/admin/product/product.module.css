@@ -1,0 +1,58 @@
+.titleContainer {
+  align-self: flex-start;
+  width: 80%;
+  margin: 1rem 7rem;
+  border-bottom: solid 2px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  width: 80%;
+  margin-bottom: 50px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 25%) 0 14px 28px, rgb(0 0 0 / 22%) 0 10px 10px;
+}
+
+.columnsContainer {
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.column {
+  width: 45%;
+}
+
+.column > div {
+  width: 100%;
+}
+
+.sendBtn {
+  margin: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+.categories {
+  width: 70%;
+}
+
+.priceInputs {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.currency {
+  width: 35%;
+}
+
+.price {
+  width: 55%;
+}

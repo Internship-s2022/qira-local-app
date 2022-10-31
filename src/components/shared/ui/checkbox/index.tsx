@@ -3,6 +3,7 @@ import { FieldValues, useController } from 'react-hook-form';
 import { Box, FormLabel } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 
+import styles from './checkbox.module.css';
 import { SharedCheckboxProps } from './types';
 
 export const SharedCheckbox = <TValuesCheckbox extends FieldValues>({
@@ -15,8 +16,8 @@ export const SharedCheckbox = <TValuesCheckbox extends FieldValues>({
 
   return (
     <Box>
-      <FormLabel>{label}</FormLabel>
-      <Checkbox {...field} {...props} />
+      <FormLabel className={styles.label}>{label}</FormLabel>
+      <Checkbox checked={field.value} {...field} {...props} />
     </Box>
   );
 };
