@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Check, Close, DeleteForever } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { Add, Check, Close, DeleteForever, Edit } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
@@ -10,10 +12,12 @@ import * as thunks from 'src/redux/products/thunk';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { Currency } from 'src/types';
 
+import styles from './products.module.css';
 import { Product } from './types';
 
 const Products = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const navigate = useNavigate();
   const products = useSelector((state: RootState) => state.products.products);
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
 
@@ -47,6 +51,14 @@ const Products = (): JSX.Element => {
   ];
 
   const buttons: ((rowData: Product) => TableButton)[] = [
+    (rowData) => ({
+      active: true,
+      icon: <Edit />,
+      title: 'Editar',
+      onClick: () => {
+        navigate(`/admin/product/${rowData.id}`);
+      },
+    }),
     (rowData) => ({
       active: true,
       icon: rowData.isActive ? <Close /> : <Check />,
@@ -87,7 +99,21 @@ const Products = (): JSX.Element => {
   ];
 
   return (
-    <div>
+    <div className={styles.container}>
+      <div className={styles.titleContainer}>
+        <h1>Productos</h1>
+        <div className={styles.addNewProduct}>
+          <h3>Agregar nuevo producto</h3>
+          <IconButton
+            className={styles.addButton}
+            disableRipple={true}
+            size="large"
+            onClick={() => navigate('/admin/product')}
+          >
+            <Add />
+          </IconButton>
+        </div>
+      </div>
       {isFetching ? (
         <></>
       ) : (
