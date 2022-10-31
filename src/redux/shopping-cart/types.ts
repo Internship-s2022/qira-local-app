@@ -1,5 +1,7 @@
 import { ActionType } from 'typesafe-actions';
 
+import { Product } from 'src/components/shared/ui/product-card/types';
+
 import * as actions from './actions';
 
 export type ActionsType = ActionType<typeof actions>;
@@ -7,9 +9,7 @@ export type ActionsType = ActionType<typeof actions>;
 export interface ShoppingCartState {
   products: ShoppingCartProduct[];
 }
-export interface Product {
-  _id: string;
-}
+
 export interface ShoppingCartProduct {
   product: Product;
   quantity: number;
