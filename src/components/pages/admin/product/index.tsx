@@ -82,7 +82,6 @@ const ProductForm = (): JSX.Element => {
   }, [product]);
 
   const onSubmit = async (data: ProductFormValues) => {
-    console.log(data);
     const image = data.image;
     let imageToSend: FileToSend;
     if (image?.isNew) {

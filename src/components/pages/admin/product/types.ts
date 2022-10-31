@@ -13,3 +13,10 @@ export interface ProductFormValues {
   stock: number;
   isNew?: boolean;
 }
+
+export interface FileToSend {
+  base64: string;
+  name: string;
+  type: string;
+  isNew: boolean;
+}

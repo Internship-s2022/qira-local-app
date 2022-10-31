@@ -27,8 +27,8 @@ export const ProductValidation = Joi.object({
   price: Joi.number().positive().precision(2).required().messages({
     'number.positive': 'Precio inválido.',
     'number.precision': 'Máximo 2 decimales.',
-    'any.required': 'Campo requerido',
-    'number.base': 'Solo números',
+    'any.required': 'Campo requerido.',
+    'number.base': 'Solo números.',
   }),
   image: Joi.object().required().messages({
     'any.required': 'Campo requerido.',
@@ -55,9 +55,9 @@ export const ProductValidation = Joi.object({
   }),
   stock: Joi.number().positive().integer().allow(0).required().messages({
     'number.positive': 'Stock inválido.',
-    'any.required': 'Campo requerido',
-    'number.base': 'Solo números',
-    'number.integer': 'Solo números enteros',
+    'any.required': 'Campo requerido.',
+    'number.base': 'Solo números.',
+    'number.integer': 'Solo números enteros.',
   }),
   isNew: Joi.boolean(),
 });
