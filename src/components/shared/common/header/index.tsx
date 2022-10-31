@@ -31,24 +31,17 @@ const Header = () => {
     <header className={styles.headerContainer}>
       <div className={styles.navBarContainer}>
         <div className={styles.currency}>Tipo de cambio</div>
-        <nav className={styles.navbar}>
-          <ul className={styles.navBarLinks}>
-            <li>Quienes Somos?</li>
-            <li>Preguntas Frecuentes</li>
-            <li>Medios de Pago</li>
-          </ul>
-        </nav>
       </div>
-      <nav className={styles.mainHeader}>
-        <div>
-          <img
-            className={styles.logoQira}
-            src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.svg`}
-            alt=""
-          />
-        </div>
-        <div className={styles.searchContainer}>
+      <nav className={styles.mainHeaderContainer}>
+        <div className={styles.mainHeader}>
           <div>
+            <img
+              className={styles.logoQira}
+              src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.svg`}
+              alt=""
+            />
+          </div>
+          <div className={styles.searchContainer}>
             <div
               className={styles.buttonCategories}
               onMouseEnter={() => setOpenSelect(true)}
@@ -72,30 +65,32 @@ const Header = () => {
                 ))}
               </div>
             )}
+            <div>
+              <TextField
+                className={styles.searchBar}
+                id="search-bar"
+                placeholder="Buscar..."
+                type="search"
+                size="small"
+                color="secondary"
+              />
+            </div>
           </div>
-          <div>
-            <TextField
-              className={styles.searchBar}
-              id="search-bar"
-              placeholder="Buscar..."
-              type="search"
-              size="small"
-              color="secondary"
-            />
+          <div className={styles.profileContainer}>
+            <div className={styles.routes}>
+              {currentUser?.email ? (
+                <div className={styles.btnLogin}>
+                  <a onClick={() => navigate('client/')}>Go to profile</a>
+                </div>
+              ) : (
+                <div className={styles.btnLogin}>
+                  <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Login</a>
+                </div>
+              )}
+            </div>
+            <ShoppingCart className={styles.shoppingCart} />
           </div>
         </div>
-        <div className={styles.routes}>
-          {currentUser?.email ? (
-            <div className={styles.btnLogin}>
-              <a onClick={() => navigate('client/')}>Go to profile</a>
-            </div>
-          ) : (
-            <div className={styles.btnLogin}>
-              <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Login</a>
-            </div>
-          )}
-        </div>
-        <ShoppingCart className={styles.shoppingCart} />
       </nav>
     </header>
   );
