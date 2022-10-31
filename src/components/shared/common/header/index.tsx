@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { AccountCircle, KeyboardArrowDown, ShoppingCart } from '@mui/icons-material';
+import { AccountCircle, KeyboardArrowDown, Search, ShoppingCart } from '@mui/icons-material';
 import { TextField } from '@mui/material';
 
 import * as thunksCategories from 'src/redux/category/thunk';
@@ -19,10 +19,10 @@ const Header = () => {
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const currentRole = useSelector((state: RootState) => state.auth.role);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
+  const [searchInput, setSearchInput] = useState<string>('');
   useEffect(() => {
     dispatch(thunksCategories.getCategory());
   }, []);
-  console.log(typeof currentUser);
 
   return (
     <header className={styles.headerContainer}>
@@ -65,14 +65,25 @@ const Header = () => {
               </div>
             )}
             <div>
-              <TextField
-                className={styles.searchBar}
-                id="search-bar"
-                placeholder="Buscar..."
-                type="search"
-                size="small"
-                color="secondary"
-              />
+              <div className={styles.searchBar}>
+                <input
+                  type="text"
+                  placeholder="Buscar..."
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      navigate(`/search-results/${searchInput}`);
+                    }
+                  }}
+                />
+                <Search
+                  className={styles.searchIcon}
+                  color="secondary"
+                  onClick={() => {
+                    navigate(`/search-results/${searchInput}`);
+                  }}
+                />
+              </div>
             </div>
           </div>
           <div className={styles.profileContainer}>
