@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { AccountCircle, KeyboardArrowDown, ShoppingCart } from '@mui/icons-material';
 import { TextField } from '@mui/material';
 
-import { getCategoriesAsOptions } from 'src/redux/category/selectors/getCategoryAsOptions';
 import * as thunksCategories from 'src/redux/category/thunk';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
@@ -16,7 +15,7 @@ import styles from './header.module.css';
 const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
-  const categories = useSelector(getCategoriesAsOptions);
+  const categories = useSelector((state: RootState) => state.categories.categories);
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const currentRole = useSelector((state: RootState) => state.auth.role);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
@@ -57,9 +56,9 @@ const Header = () => {
                 onMouseLeave={() => setOpenSelect(false)}
               >
                 {categories.map((category, index) => (
-                  <span className={styles.categoryOption} key={index} onClick={() => navigate('/')}>
-                    <a href="#" className={styles.categoryLinks}>
-                      {category.label}
+                  <span className={styles.categoryOption} key={index}>
+                    <a href={`/category/${category.url}`} className={styles.categoryLinks}>
+                      {category.name}
                     </a>
                   </span>
                 ))}
@@ -89,7 +88,8 @@ const Header = () => {
                 </div>
               ) : (
                 <div className={styles.btnLogin}>
-                  <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Login</a>
+                  <AccountCircle className={styles.userIcon} />
+                  <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Iniciar Sesion</a>
                 </div>
               )}
             </div>

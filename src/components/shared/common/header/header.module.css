@@ -101,7 +101,9 @@
 .btnLogin {
   display: flex;
   align-items: center;
-  width: 200px;
+  width: 150px;
+
+  /* width: 200px; */
   padding: 8px 10px;
 }
 
