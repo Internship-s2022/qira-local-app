@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { KeyboardArrowDown, ShoppingCart } from '@mui/icons-material';
+import { AccountCircle, KeyboardArrowDown, ShoppingCart } from '@mui/icons-material';
 import { TextField } from '@mui/material';
 
 import { getCategoriesAsOptions } from 'src/redux/category/selectors/getCategoryAsOptions';
 import * as thunksCategories from 'src/redux/category/thunk';
-// import * as thunksExchangeRate from 'src/redux/exchange-rate/thunk';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
+import { UserRole } from 'src/types';
 
 import styles from './header.module.css';
 
@@ -17,15 +17,13 @@ const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
   const categories = useSelector(getCategoriesAsOptions);
-  // const exchangeRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate);
   const currentUser = useSelector((state: RootState) => state.auth.user);
+  const currentRole = useSelector((state: RootState) => state.auth.role);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   useEffect(() => {
     dispatch(thunksCategories.getCategory());
-    // dispatch(thunksExchangeRate.getExchangeRate());
   }, []);
-
-  // console.log(exchangeRate);
+  console.log(typeof currentUser);
 
   return (
     <header className={styles.headerContainer}>
@@ -35,11 +33,13 @@ const Header = () => {
       <nav className={styles.mainHeaderContainer}>
         <div className={styles.mainHeader}>
           <div>
-            <img
-              className={styles.logoQira}
-              src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.svg`}
-              alt=""
-            />
+            <a href="/">
+              <img
+                className={styles.logoQira}
+                src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.svg`}
+                alt=""
+              />
+            </a>
           </div>
           <div className={styles.searchContainer}>
             <div
@@ -80,7 +80,12 @@ const Header = () => {
             <div className={styles.routes}>
               {currentUser?.email ? (
                 <div className={styles.btnLogin}>
-                  <a onClick={() => navigate('client/')}>Go to profile</a>
+                  <AccountCircle className={styles.userIcon} />
+                  <a className={styles.userName} onClick={() => navigate('client/')}>
+                    {currentRole === UserRole.ADMIN
+                      ? currentUser.firstName + ' ' + currentUser.lastName
+                      : currentUser.businessName}
+                  </a>
                 </div>
               ) : (
                 <div className={styles.btnLogin}>

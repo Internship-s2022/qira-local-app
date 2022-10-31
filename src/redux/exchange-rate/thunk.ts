@@ -8,7 +8,6 @@ export const getExchangeRate = () => {
     try {
       dispatch(getExchangeRateActions.request());
       const response = await API.getExchangeRate();
-      console.log(response);
       return dispatch(getExchangeRateActions.success(response.data));
     } catch (error) {
       dispatch(getExchangeRateActions.failure(error));

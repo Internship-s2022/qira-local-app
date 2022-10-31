@@ -64,6 +64,7 @@
 
 .optionsContainer {
   position: absolute;
+  top: 102px;
   display: flex;
   flex-direction: column;
   width: 164px;
@@ -98,14 +99,23 @@
 }
 
 .btnLogin {
+  display: flex;
+  align-items: center;
   width: 200px;
   padding: 8px 10px;
-  border: white solid 1px;
-  border-radius: 5px;
 }
 
 .btnLogin :hover {
   cursor: pointer;
+}
+
+.userIcon {
+  width: 40px;
+}
+
+.userName {
+  font-size: 15px;
+  color: white;
 }
 
 .shoppingCart {
