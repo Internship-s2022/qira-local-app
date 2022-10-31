@@ -45,7 +45,9 @@
 .searchBar {
   display: flex;
   align-items: center;
-  padding: 10px;
+  justify-content: space-around;
+  width: 300px;
+  padding: 6px;
   background-color: white;
   border-radius: 5px;
 }
@@ -57,7 +59,11 @@
   outline: none;
 }
 
-.searchIcon :hover {
+.searchIconContainer {
+  margin: 2px;
+}
+
+.searchIconContainer :hover {
   cursor: pointer;
 }
 

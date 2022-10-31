@@ -76,13 +76,15 @@ const Header = () => {
                     }
                   }}
                 />
-                <Search
-                  className={styles.searchIcon}
-                  color="secondary"
-                  onClick={() => {
-                    navigate(`/search-results/${searchInput}`);
-                  }}
-                />
+                <div className={styles.searchIconContainer}>
+                  <Search
+                    className={styles.searchIcon}
+                    color="secondary"
+                    onClick={() => {
+                      navigate(`/search-results/${searchInput}`);
+                    }}
+                  />
+                </div>
               </div>
             </div>
           </div>
