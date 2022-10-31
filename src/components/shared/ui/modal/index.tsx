@@ -50,9 +50,6 @@ export const SharedModal = (): JSX.Element => {
     case ModalTypes.REGISTER_FORM:
       modalComponent = <SignUpForm />;
       break;
-    case ModalTypes.INFO:
-      modalComponent = <Info />;
-      break;
     default:
   }
 
