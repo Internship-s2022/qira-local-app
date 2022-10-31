@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AccountCircle, KeyboardArrowDown, Search, ShoppingCart } from '@mui/icons-material';
-import { TextField } from '@mui/material';
 
 import * as thunksCategories from 'src/redux/category/thunk';
 import { openModal } from 'src/redux/modal/actions';
