@@ -9,6 +9,12 @@ export const getCategoriesActions = createAsyncAction(
   Actions.GET_CATEGORIES_ERROR,
 )<void, Category[], ApiResponse<unknown>>();
 
+export const getPublicCategoriesActions = createAsyncAction(
+  Actions.GET_PUBLIC_CATEGORIES_PENDING,
+  Actions.GET_PUBLIC_CATEGORIES_SUCCESS,
+  Actions.GET_PUBLIC_CATEGORIES_ERROR,
+)<void, Category[], ApiResponse<unknown>>();
+
 export const getCategoryActions = createAsyncAction(
   Actions.GET_CATEGORY_PENDING,
   Actions.GET_CATEGORY_SUCCESS,

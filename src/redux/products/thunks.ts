@@ -1,16 +1,16 @@
 import { Dispatch } from 'redux';
 
-import { getProductsActions } from './actions';
+import { getPublicProductsActions } from './actions';
 import * as API from './api';
 
-export const getProducts = () => {
+export const getPublicProducts = () => {
   return async (dispatch: Dispatch) => {
     try {
-      dispatch(getProductsActions.request());
-      const response = await API.getProducts();
-      return dispatch(getProductsActions.success(response.data));
+      dispatch(getPublicProductsActions.request());
+      const response = await API.getPublicProducts();
+      return dispatch(getPublicProductsActions.success(response.data));
     } catch (error) {
-      return dispatch(getProductsActions.failure(error));
+      return dispatch(getPublicProductsActions.failure(error));
     }
   };
 };

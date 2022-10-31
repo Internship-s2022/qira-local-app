@@ -7,6 +7,7 @@ import {
   deleteCategoryActions,
   getCategoriesActions,
   getCategoryActions,
+  getPublicCategoriesActions,
   inactivateCategoryActions,
   updateCategoryActions,
 } from './actions';
@@ -24,14 +25,14 @@ export const getCategory = () => {
   };
 };
 
-export const publicGetCategory = () => {
+export const getPublicCategory = () => {
   return async (dispatch: Dispatch) => {
     try {
-      dispatch(getCategoriesActions.request());
-      const response = await API.publicGetCategories();
-      return dispatch(getCategoriesActions.success(response.data));
+      dispatch(getPublicCategoriesActions.request());
+      const response = await API.getPublicCategories();
+      return dispatch(getPublicCategoriesActions.success(response.data));
     } catch (error) {
-      return dispatch(getCategoriesActions.failure(error));
+      return dispatch(getPublicCategoriesActions.failure(error));
     }
   };
 };

@@ -9,19 +9,19 @@ const initialState: ProductsState = {
 
 export const productsReducer = (state = initialState, action: ActionsType): ProductsState => {
   switch (action.type) {
-    case Actions.GET_PRODUCTS_PENDING:
+    case Actions.GET_PUBLIC_PRODUCTS_PENDING:
       return {
         ...state,
         isFetching: true,
       };
-    case Actions.GET_PRODUCTS_SUCCESS:
+    case Actions.GET_PUBLIC_PRODUCTS_SUCCESS:
       return {
         ...state,
         products: action.payload,
         isFetching: false,
         error: false,
       };
-    case Actions.GET_PRODUCTS_ERROR:
+    case Actions.GET_PUBLIC_PRODUCTS_ERROR:
       return {
         ...state,
         isFetching: false,

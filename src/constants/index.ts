@@ -1,6 +1,6 @@
 export enum MainRoutes {
   STORYBOOK = '/storybook',
-  CATEGORY = '/category',
+  CATEGORY = '/category/:url',
 }
 
 export enum AdminRoutes {

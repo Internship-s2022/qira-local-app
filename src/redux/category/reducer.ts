@@ -11,6 +11,7 @@ const initialState: CategoryState = {
 export const categoryReducer = (state = initialState, action: ActionsType): CategoryState => {
   switch (action.type) {
     case Actions.GET_CATEGORIES_PENDING:
+    case Actions.GET_PUBLIC_CATEGORIES_PENDING:
     case Actions.GET_CATEGORY_PENDING:
     case Actions.ACTIVATE_CATEGORY_PENDING:
     case Actions.INACTIVATE_CATEGORY_PENDING:
@@ -20,6 +21,7 @@ export const categoryReducer = (state = initialState, action: ActionsType): Cate
         isFetching: true,
       };
     case Actions.GET_CATEGORIES_ERROR:
+    case Actions.GET_PUBLIC_CATEGORIES_ERROR:
     case Actions.GET_CATEGORY_ERROR:
     case Actions.ACTIVATE_CATEGORY_ERROR:
     case Actions.INACTIVATE_CATEGORY_ERROR:
@@ -31,6 +33,7 @@ export const categoryReducer = (state = initialState, action: ActionsType): Cate
         message: action.payload.message,
       };
     case Actions.GET_CATEGORIES_SUCCESS:
+    case Actions.GET_PUBLIC_CATEGORIES_SUCCESS:
       return {
         ...state,
         categories: action.payload,
