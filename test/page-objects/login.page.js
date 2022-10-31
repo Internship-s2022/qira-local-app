@@ -1,21 +1,35 @@
 class LoginPage {
   // Getters
     get loginButton () {
-      return $('#login-button');
+      return $('[data-testid=login-button]');
     }
     get inputEmail () {
-      return $('#login-email');
+      return $('[data-testid=email-field] input');
     }
     get inputPassword () {
-      return $('#login-password');
+      return $('[data-testid=password-field] input');
     }
     get btnSubmit () {
-      return $('#login-submit');
+      return $('[data-testid=login-submit]');
     }
     get crossModal () {
-      return $('#cross-modal');
+      return $('[data-testid=cross-modal]');
     }
-
+    get emailError () {
+      return $('[data-testid=email-field] p');
+    }
+    get passwordError () {
+      return $('[data-testid=password-field] p');
+    }
+    get errorModal () {
+      return $('[data-testid=error-modal]');
+    }
+    get errorModalBtn () {
+      return $('[data-testid=error-modal-btn]');
+    }
+    get modalContainer () {
+      return $('[data-testid=modal-container]')
+    }
   // Methods
     async login (email, password) {
       await this.inputEmail.setValue(email);
@@ -24,7 +38,7 @@ class LoginPage {
     }
 
     async openBrowser () {
-      browser.url('https://test.qira-local.server.radiumrocket.com/');
+      browser.url('http://localhost:3000');
     }
 }
 

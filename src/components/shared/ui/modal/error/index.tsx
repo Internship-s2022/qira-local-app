@@ -14,11 +14,11 @@ export const Error = () => {
   const handleConfirm = options?.onConfirmCallback || (() => dispatch(closeModal()));
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="error-modal">
       <h2>Ha ocurrido un error</h2>
       <p>{options?.message}</p>
       <div className={styles.button}>
-        <Button onClick={handleConfirm} variant="contained">
+        <Button onClick={handleConfirm} variant="contained" data-testid="error-modal-btn">
           Aceptar
         </Button>
       </div>

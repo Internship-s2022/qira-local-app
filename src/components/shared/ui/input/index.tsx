@@ -19,7 +19,9 @@ export const InputText = <TValuesForm extends FieldValues>({
   return (
     <div className={className}>
       <div>
-        <label htmlFor={optionalLabel}>{optionalLabel}</label>
+        <label htmlFor={optionalLabel} data-testid={`${name}-label`}>
+          {optionalLabel}
+        </label>
       </div>
       <div>
         <TextField
@@ -28,6 +30,7 @@ export const InputText = <TValuesForm extends FieldValues>({
           fullWidth
           helperText={error?.message != undefined ? error.message : ' '}
           error={error?.message != undefined}
+          data-testid={`${name}-field`}
         />
       </div>
     </div>
