@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AccountCircle, KeyboardArrowDown, Search, ShoppingCart } from '@mui/icons-material';
 
 import * as thunksCategories from 'src/redux/category/thunk';
@@ -31,13 +31,13 @@ const Header = () => {
       <nav className={styles.mainHeaderContainer}>
         <div className={styles.mainHeader}>
           <div>
-            <a href="/">
+            <Link to="/">
               <img
                 className={styles.logoQira}
                 src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.svg`}
                 alt=""
               />
-            </a>
+            </Link>
           </div>
           <div className={styles.searchContainer}>
             <div
@@ -56,9 +56,9 @@ const Header = () => {
               >
                 {categories.map((category, index) => (
                   <span className={styles.categoryOption} key={index}>
-                    <a href={`/category/${category.url}`} className={styles.categoryLinks}>
+                    <Link to={`/category/${category.url}`} className={styles.categoryLinks}>
                       {category.name}
-                    </a>
+                    </Link>
                   </span>
                 ))}
               </div>
@@ -92,16 +92,16 @@ const Header = () => {
               {currentUser?.email ? (
                 <div className={styles.btnLogin}>
                   <AccountCircle className={styles.userIcon} />
-                  <a className={styles.userName} onClick={() => navigate('client/')}>
+                  <Link className={styles.userName} to="client/">
                     {currentRole === UserRole.ADMIN
                       ? currentUser.firstName + ' ' + currentUser.lastName
                       : currentUser.businessName}
-                  </a>
+                  </Link>
                 </div>
               ) : (
                 <div className={styles.btnLogin}>
                   <AccountCircle className={styles.userIcon} />
-                  <a onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Iniciar Sesion</a>
+                  <p onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Iniciar Sesion</p>
                 </div>
               )}
             </div>
