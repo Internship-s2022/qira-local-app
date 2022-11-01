@@ -48,10 +48,10 @@ const Clients = (): JSX.Element => {
   };
 
   const headers: Headers[] = [
-    { header: 'Cuit', key: 'cuit' },
+    { header: 'CUIT', key: 'cuit' },
     { header: 'Razón Social', key: 'businessName' },
     { header: 'Email', key: 'email' },
-    { header: 'Telefono', key: 'phoneNumber' },
+    { header: 'Teléfono', key: 'phoneNumber' },
     { header: 'Estado', key: 'state' },
   ];
 
