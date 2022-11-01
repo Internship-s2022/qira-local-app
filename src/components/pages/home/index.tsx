@@ -20,6 +20,9 @@ const Home = (): JSX.Element => {
     dispatch(getPublicCategories());
   }, []);
 
+  // console.log(newProducts);
+  console.log(categories);
+
   return (
     <section className={styles.container}>
       <section>

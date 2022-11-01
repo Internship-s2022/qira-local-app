@@ -108,3 +108,15 @@ export const deleteCategory = (id) => {
     }
   };
 };
+
+export const getPublicCategories = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(getPublicCategoriesActions.request());
+      const response = await API.getPublicCategories();
+      return dispatch(getPublicCategoriesActions.success(response.data));
+    } catch (error) {
+      return dispatch(getPublicCategoriesActions.failure(error));
+    }
+  };
+};
