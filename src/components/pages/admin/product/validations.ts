@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import { Currency } from './types';
+import { Currency } from 'src/types';
 
 export const ProductValidation = Joi.object({
   name: Joi.string()
@@ -19,9 +19,8 @@ export const ProductValidation = Joi.object({
     .min(3)
     .regex(/^[a-zA-Z0-9 ]*$/)
     .trim()
-    .required()
     .messages({
-      'string.min': 'Mínimo 3 carateres.',
+      'string.min': 'Mínimo 3 caracteres.',
       'string.pattern.base': 'Solo letras y números.',
       'string.empty': 'Campo requerido.',
     }),
@@ -42,7 +41,7 @@ export const ProductValidation = Joi.object({
     .required()
     .trim()
     .messages({
-      'string.min': 'Mínimo 2 carateres.',
+      'string.min': 'Mínimo 2 caracteres.',
       'string.pattern.base': 'Solo letras y números.',
       'string.empty': 'Campo requerido.',
     }),
@@ -58,5 +57,4 @@ export const ProductValidation = Joi.object({
     'any.required': 'Campo requerido',
   }),
   isNew: Joi.boolean(),
-  isActive: Joi.boolean(),
 });

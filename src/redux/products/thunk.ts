@@ -13,20 +13,18 @@ export const getProducts = () => {
     try {
       dispatch(getProductsActions.request());
       const response = await API.getProducts();
-      if (response.data?.length) {
-        return dispatch(getProductsActions.success(response.data));
-      }
+      return dispatch(getProductsActions.success(response.data));
     } catch (error) {
       dispatch(getProductsActions.failure(error));
     }
   };
 };
 
-export const getProductById = (_id) => {
+export const getProductById = (id) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getProductActions.request());
-      const response = await API.getProductById(_id);
+      const response = await API.getProductById(id);
       return dispatch(getProductActions.success(response.data));
     } catch (error) {
       dispatch(getProductActions.failure(error));
@@ -46,11 +44,11 @@ export const createProduct = (product) => {
   };
 };
 
-export const updateProduct = (_id, product) => {
+export const updateProduct = (id, product) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(updateProductActions.request());
-      const response = await API.updateProduct(_id, product);
+      const response = await API.updateProduct(id, product);
       return dispatch(updateProductActions.success(response.data));
     } catch (error) {
       dispatch(updateProductActions.failure(error));

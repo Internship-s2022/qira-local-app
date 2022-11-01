@@ -20,3 +20,10 @@ export interface S3File {
   key: string;
   url: string;
 }
+
+export interface FileToSend {
+  base64: string;
+  name: string;
+  type: string;
+  isNew: boolean;
+}

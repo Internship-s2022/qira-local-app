@@ -11,26 +11,27 @@ import { InputText } from 'src/components/shared/ui/input';
 import { PdfInput } from 'src/components/shared/ui/pdf-input';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options as SelectOptions } from 'src/components/shared/ui/select/types';
-import { formatCategoriesSelect } from 'src/helper/category';
 import { toBase64 } from 'src/helper/form';
+import { getCategoryOptions } from 'src/redux/category/selectors/getCategoryOptions';
 import { getCategory } from 'src/redux/category/thunk';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes, Options } from 'src/redux/modal/types';
 import { createProduct, getProductById, updateProduct } from 'src/redux/products/thunk';
 import { Actions } from 'src/redux/products/types';
 import { AppDispatch, RootState } from 'src/redux/store';
+import { Currency, FileToSend } from 'src/types';
 
 import styles from './product.module.css';
-import { Currency, FileToSend, ProductFormValues } from './types';
+import { ProductFormValues } from './types';
 import { ProductValidation } from './validations';
 
-const Product = (): JSX.Element => {
+const ProductForm = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const params = useParams();
   const navigate = useNavigate();
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
   const product = useSelector((state: RootState) => state.products.selectedProduct);
-  const categories = useSelector((state: RootState) => state.categories.categories);
+  const categoryOptions = useSelector(getCategoryOptions);
 
   const { handleSubmit, control, reset, setValue } = useForm<ProductFormValues>({
     defaultValues: {
@@ -121,7 +122,6 @@ const Product = (): JSX.Element => {
       stock: data.stock,
       isNew: data.isNew,
     };
-    console.log('Data', data);
 
     const modalOptions: Options = {};
     if (params.id) {
@@ -171,7 +171,7 @@ const Product = (): JSX.Element => {
                 <div className={styles.categories}>
                   <SharedSelect
                     optionalLabel="Categoría"
-                    options={formatCategoriesSelect(categories)}
+                    options={categoryOptions}
                     name="category"
                     control={control}
                     fullWidth
@@ -260,4 +260,4 @@ const Product = (): JSX.Element => {
   );
 };
 
-export default Product;
+export default ProductForm;
