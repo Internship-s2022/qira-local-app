@@ -18,3 +18,5 @@ export const activateCategory = (id) => api.patch<Category>(`/admin/category/act
 export const inactivateCategory = (id) => api.patch<Category>(`/admin/category/inactivate/${id}`);
 
 export const deleteCategory = (id) => api.patch<Category>(`/admin/category/delete/${id}`);
+
+export const getPublicCategories = () => api.get<Category[]>('/public/categories');

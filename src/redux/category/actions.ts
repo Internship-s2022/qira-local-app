@@ -51,4 +51,10 @@ export const deleteCategoryActions = createAsyncAction(
   Actions.DELETE_CATEGORY_ERROR,
 )<void, Category, ApiResponse<unknown>>();
 
+export const getPublicCategoriesActions = createAsyncAction(
+  Actions.GET_PUBLIC_CATEGORIES_PENDING,
+  Actions.GET_PUBLIC_CATEGORIES_SUCCESS,
+  Actions.GET_PUBLIC_CATEGORIES_ERROR,
+)<void, Category[], ApiResponse<unknown>>();
+
 export const resetCategory = () => action(Actions.RESET_CATEGORY);
