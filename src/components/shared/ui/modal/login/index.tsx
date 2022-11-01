@@ -33,7 +33,7 @@ const loginValidation = Joi.object({
     .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.min': 'Debe contener al menos 8 carateres.',
+      'string.min': 'Debe contener al menos 8 caracteres.',
       'string.pattern.base': 'Debe contener números y letras.',
     }),
 });
