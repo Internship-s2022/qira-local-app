@@ -1,62 +1,155 @@
-.container {
+.headerContainer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 50px;
-  padding: 0 5%;
+  flex-direction: column;
+}
+
+.navBarContainer {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  height: 30px;
+  margin: auto;
+  background-color: white;
+}
+
+.logoQira {
+  height: 45px;
+  margin: 12px 20px 12px 100px;
+}
+
+.currency {
+  align-self: center;
+  margin-left: 100px;
+  font-size: 16px;
+  color: #f05523;
+}
+
+.mainHeaderContainer {
   background-color: #f05523;
 }
 
-.brand {
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
-}
-
-.socialIcon {
-  margin-left: 15px;
-  color: white;
-}
-
-.navbar {
+.mainHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 100px;
-  padding: 0 5%;
-  background-color: #f0f4f9;
+  max-width: 1200px;
+  height: 100px;
+  margin: auto;
 }
 
-.appName {
-  font-size: 2rem;
-  font-weight: bold;
+.searchContainer {
+  display: flex;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 300px;
+  padding: 6px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.searchBar input {
+  align-self: center;
+  margin: 3px 0 0;
+  margin: none;
+  border: none;
+  outline: none;
+}
+
+.searchBar input::placeholder {
+  font-size: 16px;
+}
+
+.searchIconContainer {
+  display: flex;
+  align-items: center;
+  margin: 2px;
+}
+
+.searchIconContainer :hover {
+  cursor: pointer;
+}
+
+.buttonCategories {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 150px;
+  min-height: 27px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  font-size: 16px;
+  color: white;
+  background-color: #f05523;
+  border: solid 2px white;
+  border-radius: 5px;
+}
+
+.optionsContainer {
+  position: absolute;
+  top: 102px;
+  display: flex;
+  flex-direction: column;
+  width: 164px;
+  padding: 5px;
+  color: white;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.categoryOption {
+  margin: 5px;
+}
+
+.categoryLinks {
+  margin: 20px;
   color: black;
   text-decoration: none;
+}
+
+.categoriesArrow {
+  color: white;
 }
 
 .routes {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  list-style-type: none;
+  color: white;
 }
 
-.routes > li > a {
-  margin-left: 15px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: black;
-  text-decoration: none;
-  text-transform: capitalize;
+.profileContainer {
+  display: flex;
+  align-items: center;
+}
+
+.btnLogin {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  padding: 8px 10px;
+}
+
+.btnLogin :hover {
   cursor: pointer;
 }
 
-@media screen and (min-width: 750px) {
-  .container {
-    padding: 0 20%;
-  }
+.userIcon {
+  width: 40px;
+}
 
-  .navbar {
-    padding: 0 20%;
-  }
+.userName {
+  font-size: 16px;
+  color: white;
+  text-decoration: none;
+}
+
+.shoppingCart {
+  margin: 0 100px 0 0;
+  color: white;
+}
+
+.shoppingCart :hover {
+  cursor: pointer;
 }

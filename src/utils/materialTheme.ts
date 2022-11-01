@@ -17,6 +17,10 @@ const themeOptions: ThemeOptions = {
     error: {
       main: '#AE2D04',
     },
+    text: {
+      primary: '#000',
+      secondary: '#fff',
+    },
   },
 };
 

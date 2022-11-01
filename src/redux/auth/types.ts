@@ -30,6 +30,8 @@ export interface User {
   email: string;
   isActive: boolean;
   logicDelete: boolean;
+  firstName?: string;
+  lastName?: string;
 }
 
 export interface UserCredentials {

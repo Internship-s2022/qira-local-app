@@ -14,3 +14,7 @@ export enum AdminRoutes {
   CATEGORY_CREATE = '/category',
   CATEGORY_EDIT = '/category/:id',
 }
+
+export enum ClientRoutes {
+  CLIENT_PROFILE = '/client',
+}

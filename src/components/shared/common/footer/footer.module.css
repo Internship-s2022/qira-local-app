@@ -1,9 +1,14 @@
 .container {
+  background-color: #000000;
+}
+
+.footerContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: #000000;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .license {
