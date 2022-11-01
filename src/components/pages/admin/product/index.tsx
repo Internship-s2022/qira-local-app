@@ -42,7 +42,7 @@ const ProductForm = (): JSX.Element => {
       technicalFile: undefined,
       brand: '',
       category: '',
-      currency: Currency.PESO,
+      currency: Currency.peso,
       stock: undefined,
       isNew: true,
     },
@@ -152,8 +152,8 @@ const ProductForm = (): JSX.Element => {
   };
 
   const currencyOptions: SelectOptions[] = [
-    { label: 'USD', value: Currency.DOLLAR },
-    { label: 'ARS', value: Currency.PESO },
+    { label: 'USD', value: Currency.dollar },
+    { label: 'ARS', value: Currency.peso },
   ];
 
   return (
