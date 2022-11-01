@@ -79,7 +79,7 @@ const ProductForm = (): JSX.Element => {
           isNew: false,
         },
         brand: product.brand,
-        category: product.category,
+        category: product.category._id,
         currency: product.currency,
         stock: product.stock,
         isNew: product.isNew,
