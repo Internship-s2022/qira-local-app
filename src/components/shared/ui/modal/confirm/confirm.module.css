@@ -2,18 +2,43 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 200px;
+  min-height: 150px;
   padding: 15px;
 }
 
 .messageContainer {
   display: flex;
   justify-content: center;
-  margin-top: 10%;
-  font-size: 20px;
+  min-width: 350px;
+  max-width: fit-content;
+  margin: 8% 0;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .buttonContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.buttonCancel {
+  align-self: center;
+  min-width: 120px;
+  font-weight: 700;
+  color: #f05523;
+  background-color: white;
+  border: solid 1px #f05523;
+}
+
+.buttonCancel:hover {
+  color: white;
+  background-color: rgb(168 59 24);
+  border: solid 1px #ed764e;
+}
+
+.buttonAccept {
+  min-width: 120px;
+  font-weight: 700;
 }
