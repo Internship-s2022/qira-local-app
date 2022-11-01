@@ -25,7 +25,7 @@ export const getCategory = () => {
   };
 };
 
-export const getPublicCategory = () => {
+export const getPublicCategories = () => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getPublicCategoriesActions.request());

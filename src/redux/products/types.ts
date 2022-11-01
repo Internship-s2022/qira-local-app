@@ -19,7 +19,7 @@ export interface Product {
   description?: string;
   price: number;
   category: Category;
-  image?: S3File;
+  image: S3File;
   technicalFile?: S3File;
   currency: Currency;
   stock: number;

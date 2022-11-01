@@ -12,8 +12,8 @@ export enum UserRole {
 }
 
 export enum Currency {
-  dollar = 'DOLLAR',
-  peso = 'PESO',
+  DOLLAR = 'DOLLAR',
+  PESO = 'PESO',
 }
 
 export interface S3File {
