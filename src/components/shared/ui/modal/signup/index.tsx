@@ -1,8 +1,13 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { LockOutlined, MailOutlineOutlined, PhoneOutlined } from '@mui/icons-material';
+import {
+  AccountCircleOutlined,
+  LockOutlined,
+  MailOutlineOutlined,
+  PhoneOutlined,
+} from '@mui/icons-material';
 import { Button } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -10,16 +15,20 @@ import { InputText } from 'src/components/shared/ui/input';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options } from 'src/components/shared/ui/select/types';
 import { register } from 'src/redux/auth/thunks';
-import { closeModal } from 'src/redux/modal/actions';
-import { AppDispatch } from 'src/redux/store';
+import { Actions } from 'src/redux/auth/types';
+import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes, Options as ModalOptions } from 'src/redux/modal/types';
+import { AppDispatch, RootState } from 'src/redux/store';
 import { IvaCondition } from 'src/types';
 
+import { Loader } from '../../loader';
 import styles from './signup.module.css';
 import { SignUpFormValues } from './types';
 import { signUpValidations } from './validations';
 
 const SignUpForm = () => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const isFetching = useSelector((state: RootState) => state.auth.isFetching);
   const { handleSubmit, control, reset } = useForm<SignUpFormValues>({
     defaultValues: {
       email: '',
@@ -65,11 +74,19 @@ const SignUpForm = () => {
     return formattedUser;
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const formattedUser = formatSubmitData(data);
-    dispatch(register(formattedUser));
-    dispatch(closeModal());
-    reset();
+    const modalOptions: ModalOptions = {};
+    const response = await dispatch(register(formattedUser));
+    if (response?.type !== Actions.REGISTER_ERROR) {
+      modalOptions.message = 'Cuenta creada exitosamente.';
+      modalOptions.onCloseCallback = () => dispatch(closeModal());
+      reset();
+    }
+    if (!modalOptions.message) {
+      modalOptions.message = 'Ha ocurrido un error';
+    }
+    dispatch(openModal(ModalTypes.INFO, modalOptions));
   };
 
   return (
@@ -239,14 +256,24 @@ const SignUpForm = () => {
           </div>
         </div>
       </div>
-      <Button
-        color="primary"
-        variant="contained"
-        className={styles.signUpBtn}
-        onClick={handleSubmit(onSubmit)}
-      >
-        Crear cuenta
-      </Button>
+      {isFetching ? (
+        <Loader />
+      ) : (
+        <Button
+          color="primary"
+          variant="contained"
+          className={styles.signUpBtn}
+          onClick={handleSubmit(onSubmit)}
+        >
+          Crear cuenta
+        </Button>
+      )}
+      <div className={styles.loginContainer}>
+        <AccountCircleOutlined color="primary" />
+        <p className={styles.loginText} onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>
+          ¿Ya estás registrado? Inicia sesión.
+        </p>
+      </div>
     </form>
   );
 };
