@@ -29,9 +29,9 @@ export const SearchProductsList = (): JSX.Element => {
         })
       ) : (
         <div className={styles.messageContainer}>
-          <h3 className={styles.message}>
+          <h2 className={styles.message}>
             Lo sentimos, no se encontraron productos que coincidan con su búsqueda.
-          </h3>
+          </h2>
         </div>
       )}
     </section>
