@@ -14,7 +14,7 @@ export const SearchProductsList = (): JSX.Element => {
   const params = useParams();
 
   const filteredProducts = useSelector((state: RootState) =>
-    getProductsFilteredBySearch(state, params?.searchInput),
+    getProductsFilteredBySearch(state, params.searchInput),
   );
 
   useEffect(() => {
@@ -22,15 +22,17 @@ export const SearchProductsList = (): JSX.Element => {
   }, []);
 
   return (
-    <section className={styles.container}>
+    <section className={styles.productsContainer}>
       {filteredProducts.length > 0 ? (
         filteredProducts.map((product) => {
           return <ProductCard key={product._id} product={product} />;
         })
       ) : (
-        <h3 className={styles.message}>
-          Lo sentimos, no se encontraron productos que coincidan con su búsqueda.
-        </h3>
+        <div className={styles.messageContainer}>
+          <h3 className={styles.message}>
+            Lo sentimos, no se encontraron productos que coincidan con su búsqueda.
+          </h3>
+        </div>
       )}
     </section>
   );
