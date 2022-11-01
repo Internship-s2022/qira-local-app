@@ -16,12 +16,8 @@ const ClientRouter = (): JSX.Element => {
       <Route element={<PublicLayout />}>
         <Route index element={<Home />} />
         <Route path={MainRoutes.STORYBOOK} element={<Storybook />} />
-<<<<<<< HEAD
         <Route path={MainRoutes.CATEGORY} element={<ProductsList />} />
         <Route path={MainRoutes.SEARCH_RESULTS} element={<SearchProductsList />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-=======
->>>>>>> QL-171: pr corrections
         <Route path={ClientRoutes.CLIENT_PROFILE} element={<ClientProfile />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
