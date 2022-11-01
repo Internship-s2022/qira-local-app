@@ -17,7 +17,7 @@ export const Info = () => {
     <div className={styles.container}>
       <p>{options?.message}</p>
       <div className={styles.button}>
-        <Button onClick={handleConfirm} variant="contained">
+        <Button onClick={handleConfirm} variant="contained" color="info">
           Aceptar
         </Button>
       </div>

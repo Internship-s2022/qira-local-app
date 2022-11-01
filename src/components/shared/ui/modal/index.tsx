@@ -20,6 +20,7 @@ export const SharedModal = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const modalType = useSelector((state: RootState) => state.modal.type);
   const open = useSelector((state: RootState) => state.modal.isOpen);
+  const options = useSelector((state: RootState) => state.modal.options);
 
   let modalComponent;
   switch (modalType) {
@@ -52,6 +53,7 @@ export const SharedModal = (): JSX.Element => {
       break;
     default:
   }
+  const handleConfirm = options?.onCloseCallback || (() => dispatch(closeModal()));
 
   return (
     <Modal
@@ -62,12 +64,7 @@ export const SharedModal = (): JSX.Element => {
       }}
     >
       <Box className={style.container}>
-        <div
-          onClick={() => {
-            dispatch(closeModal());
-          }}
-          className={style.closeModal}
-        >
+        <div onClick={handleConfirm} className={style.closeModal}>
           x
         </div>
         {modalComponent}
