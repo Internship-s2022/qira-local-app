@@ -40,9 +40,9 @@ export const ProductsList = (): JSX.Element => {
           })
         ) : (
           <div className={styles.messageContainer}>
-            <h3 className={styles.message}>
+            <h2 className={styles.message}>
               Lo sentimos, no se encontraron productos con esa categoría.
-            </h3>
+            </h2>
           </div>
         )}
       </section>
