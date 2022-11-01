@@ -16,6 +16,7 @@ import { getCategoryOptions } from 'src/redux/category/selectors/getCategoryOpti
 import { getCategory } from 'src/redux/category/thunk';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes, Options } from 'src/redux/modal/types';
+import { resetProduct } from 'src/redux/products/actions';
 import { createProduct, getProductById, updateProduct } from 'src/redux/products/thunk';
 import { Actions } from 'src/redux/products/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -52,6 +53,9 @@ const ProductForm = (): JSX.Element => {
 
   useEffect(() => {
     params.id && dispatch(getProductById(params.id));
+    return () => {
+      dispatch(resetProduct());
+    };
   }, []);
 
   useEffect(() => {
@@ -60,6 +64,8 @@ const ProductForm = (): JSX.Element => {
 
   useEffect(() => {
     if (product?._id) {
+      console.log(product);
+      console.log(product.category);
       reset({
         name: product.name,
         description: product.description,
@@ -73,7 +79,7 @@ const ProductForm = (): JSX.Element => {
           isNew: false,
         },
         brand: product.brand,
-        category: product.category._id,
+        category: product.category,
         currency: product.currency,
         stock: product.stock,
         isNew: product.isNew,

@@ -1,5 +1,6 @@
 import { NewImageFile } from 'src/components/shared/ui/image-input/types';
 import { NewPdfFile } from 'src/components/shared/ui/pdf-input/types';
+import { Category } from 'src/redux/category/types';
 
 export interface ProductFormValues {
   name: string;
@@ -8,7 +9,7 @@ export interface ProductFormValues {
   image: NewImageFile;
   technicalFile?: NewPdfFile;
   brand: string;
-  category: string;
+  category: any;
   currency: string;
   stock: number;
   isNew?: boolean;

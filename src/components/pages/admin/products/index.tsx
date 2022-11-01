@@ -29,7 +29,7 @@ const Products = (): JSX.Element => {
     const listData = data.map((product) => {
       return {
         id: product._id,
-        category: product.category,
+        category: product.category.name,
         name: product.name,
         currency: product.currency === Currency.peso ? 'ARS' : 'USD',
         price: product.price,
