@@ -78,10 +78,15 @@ export const signUpValidations = Joi.object({
       'string.empty': 'Campo requerido.',
       'string.pattern.base': 'Debe contener solo letras.',
     }),
-  city: Joi.string().min(3).required().messages({
-    'string.min': 'Debe contener al menos 3 caracteres.',
-    'string.empty': 'Campo requerido.',
-  }),
+  city: Joi.string()
+    .regex(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)
+    .min(3)
+    .required()
+    .messages({
+      'string.min': 'Debe contener al menos 3 caracteres.',
+      'string.empty': 'Campo requerido.',
+      'string.pattern.base': 'Debe contener letras o números.',
+    }),
   zipCode: Joi.string()
     .regex(/^[0-9\-+]{4}$/)
     .required()
@@ -95,7 +100,7 @@ export const signUpValidations = Joi.object({
     .required()
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
-      'string.pattern.base': 'Debe contener letras y números.',
+      'string.pattern.base': 'Debe contener letras y números separados por un espacio.',
       'string.empty': 'Campo requerido.',
     }),
 });

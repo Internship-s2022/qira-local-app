@@ -81,7 +81,7 @@ const SignUpForm = () => {
             className={styles.input}
             control={control}
             name="email"
-            optionalLabel="Email"
+            optionalLabel="Email *"
             variant="outlined"
             margin="dense"
             size="small"
@@ -98,7 +98,7 @@ const SignUpForm = () => {
             control={control}
             name="password"
             type="password"
-            optionalLabel="Contraseña"
+            optionalLabel="Contraseña *"
             variant="outlined"
             margin="dense"
             size="small"
@@ -115,7 +115,7 @@ const SignUpForm = () => {
             control={control}
             name="repeatPassword"
             type="password"
-            optionalLabel="Repetir contraseña"
+            optionalLabel="Repetir contraseña *"
             variant="outlined"
             margin="dense"
             size="small"
@@ -133,7 +133,7 @@ const SignUpForm = () => {
               control={control}
               name="codeArea"
               type="text"
-              optionalLabel="Cod. área"
+              optionalLabel="Cod. área *"
               variant="outlined"
               margin="dense"
               size="small"
@@ -143,7 +143,7 @@ const SignUpForm = () => {
               control={control}
               name="phoneNumber"
               type="text"
-              optionalLabel="Teléfono"
+              optionalLabel="Teléfono *"
               variant="outlined"
               margin="dense"
               size="small"
@@ -163,7 +163,7 @@ const SignUpForm = () => {
             control={control}
             name="businessName"
             type="text"
-            optionalLabel="Razón Social"
+            optionalLabel="Razón Social *"
             variant="outlined"
             margin="dense"
             size="small"
@@ -172,7 +172,7 @@ const SignUpForm = () => {
             <SharedSelect
               control={control}
               name="ivaCondition"
-              optionalLabel="Condición de IVA"
+              optionalLabel="Condición de IVA *"
               margin="dense"
               size="small"
               options={IvaConditionOptions}
@@ -184,7 +184,7 @@ const SignUpForm = () => {
             control={control}
             name="cuit"
             type="text"
-            optionalLabel="CUIT"
+            optionalLabel="CUIT *"
             variant="outlined"
             margin="dense"
             size="small"
@@ -195,7 +195,7 @@ const SignUpForm = () => {
                 control={control}
                 name="street"
                 type="text"
-                optionalLabel="Dirección"
+                optionalLabel="Dirección *"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -206,7 +206,7 @@ const SignUpForm = () => {
                 control={control}
                 name="zipCode"
                 type="text"
-                optionalLabel="Código postal"
+                optionalLabel="Código postal *"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -219,7 +219,7 @@ const SignUpForm = () => {
                 control={control}
                 name="city"
                 type="text"
-                optionalLabel="Localidad"
+                optionalLabel="Localidad *"
                 variant="outlined"
                 margin="dense"
                 size="small"
@@ -230,7 +230,7 @@ const SignUpForm = () => {
                 control={control}
                 name="province"
                 type="text"
-                optionalLabel="Provincia"
+                optionalLabel="Provincia *"
                 variant="outlined"
                 margin="dense"
                 size="small"
