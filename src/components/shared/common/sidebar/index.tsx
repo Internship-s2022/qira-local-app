@@ -1,10 +1,16 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Button } from '@mui/material';
+
+import { logoutUser } from 'src/redux/auth/actions';
+import { AppDispatch } from 'src/redux/store';
 
 import styles from './sidebar.module.css';
 import { SidebarProps } from './types';
 
 const Sidebar = (props: SidebarProps): JSX.Element => {
+  const dispatch: AppDispatch<null> = useDispatch();
   return (
     <aside className={styles.aside}>
       <div className={styles.container}>
@@ -24,7 +30,9 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
         </nav>
       </div>
       <div className={styles.sidebarFooter}>
-        <p>{props.bottomText}</p>
+        <Button variant="outlined" color="secondary" onClick={() => dispatch(logoutUser())}>
+          Cerrar sesión
+        </Button>
       </div>
     </aside>
   );
