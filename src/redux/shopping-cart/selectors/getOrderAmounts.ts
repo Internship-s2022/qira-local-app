@@ -18,7 +18,7 @@ export const getOrderAmounts = createSelector(
     };
     productsList.forEach((cartProduct) => {
       let productPrice = cartProduct.product.price * cartProduct.quantity;
-      if (cartProduct.product.currency === Currency.dollar) {
+      if (cartProduct.product.currency === Currency.DOLLAR) {
         productPrice = productPrice * exchangeRate;
       }
       amounts.products = amounts.products + productPrice;

@@ -6,6 +6,7 @@ import { MainRoutes } from 'src/constants';
 
 import Home from '../home';
 import Storybook from '../storybook';
+import { ProductsList } from './products';
 
 const ClientRouter = (): JSX.Element => {
   return (
@@ -13,6 +14,7 @@ const ClientRouter = (): JSX.Element => {
       <Route element={<PublicLayout />}>
         <Route index element={<Home />} />
         <Route path={MainRoutes.STORYBOOK} element={<Storybook />} />
+        <Route path={MainRoutes.CATEGORY} element={<ProductsList />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
