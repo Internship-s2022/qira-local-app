@@ -264,6 +264,7 @@ const SignUpForm = () => {
           variant="contained"
           className={styles.signUpBtn}
           onClick={handleSubmit(onSubmit)}
+          data-testid="signup-btn"
         >
           Crear cuenta
         </Button>
