@@ -101,7 +101,7 @@ const Header = () => {
               ) : (
                 <div className={styles.btnLogin}>
                   <AccountCircle className={styles.userIcon} />
-                  <p onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Iniciar Sesion</p>
+                  <p onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>Iniciar Sesión</p>
                 </div>
               )}
             </div>
