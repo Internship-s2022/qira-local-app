@@ -17,6 +17,7 @@ export const Confirm = () => {
           variant="contained"
           component="label"
           color="error"
+          size="large"
           className={styles.buttonCancel}
           onClick={options.onCloseCallback}
         >
@@ -24,7 +25,7 @@ export const Confirm = () => {
         </Button>
         <Button
           onClick={options.onConfirmCallback}
-          color="success"
+          size="large"
           variant="contained"
           className={styles.buttonAccept}
           component="label"
