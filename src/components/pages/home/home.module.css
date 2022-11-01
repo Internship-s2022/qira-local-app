@@ -23,6 +23,7 @@
 .productsCardsContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
   height: 436px;
   overflow-y: hidden;
 }
