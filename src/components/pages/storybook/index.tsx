@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ProductBox from 'src/components/shared/ui/product-box';
 import ProductCard from 'src/components/shared/ui/product-card';
 import { Category } from 'src/redux/category/types';
 import { Product } from 'src/redux/products/types';
@@ -56,6 +57,8 @@ const Storybook = (): JSX.Element => {
       <ProductCard product={exampleProduct2} />
       <ProductCard product={exampleProduct} />
       <ProductCard product={exampleProduct2} />
+      <ProductBox product={exampleProduct} />
+      <ProductBox product={exampleProduct2} />
     </div>
   );
 };
