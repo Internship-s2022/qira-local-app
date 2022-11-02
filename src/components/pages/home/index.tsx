@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import ProductCard from 'src/components/shared/ui/product-card';
 import { getPublicCategories } from 'src/redux/category/thunk';
@@ -18,7 +19,6 @@ const Home = (): JSX.Element => {
     dispatch(getPublicProducts());
     dispatch(getPublicCategories());
   }, []);
-  console.log(categories);
 
   return (
     <section className={styles.container}>
@@ -43,10 +43,14 @@ const Home = (): JSX.Element => {
           {categories.map((category, index) => {
             return (
               <>
-                <div className={styles.categoryCard}>
-                  <img className={styles.imgCategory} src={category.image.url} alt="" />
-                  <div key={index}>{category.name}</div>
-                </div>
+                <Link className={styles.nameCategory} to={`/category/${category.url}`}>
+                  <div className={styles.categoryCard}>
+                    <img className={styles.imgCategory} src={category.image.url} alt="" />
+                    <div className={styles.nameCategory} key={index}>
+                      {category.name}
+                    </div>
+                  </div>
+                </Link>
               </>
             );
           })}
