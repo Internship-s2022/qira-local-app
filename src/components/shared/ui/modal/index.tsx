@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Close } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
@@ -61,10 +62,12 @@ export const SharedModal = (): JSX.Element => {
         dispatch(closeModal());
       }}
     >
-      <Box className={style.container}>
-        <div onClick={handleConfirm} className={style.closeModal}>
+      <Box
+        className={modalType === ModalTypes.SHOPPING_CART ? style.shoppingCart : style.container}
+      >
+        <Close onClick={handleConfirm} className={style.closeModal}>
           x
-        </div>
+        </Close>
         {modalComponent}
       </Box>
     </Modal>
