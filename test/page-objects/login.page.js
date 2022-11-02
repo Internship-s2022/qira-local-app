@@ -37,6 +37,11 @@ class LoginPage {
       await this.btnSubmit.click();
     }
 
+    async clearForm () {
+      await this.inputEmail.clearValue();
+      await this.inputPassword.clearValue();
+    }
+
     async openBrowser () {
       browser.url('http://localhost:3000');
     }

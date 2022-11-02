@@ -5,8 +5,8 @@ describe('Login page testing', () => {
     LoginPage.openBrowser();
   });
   beforeEach('Refresh the page', () => {
-    browser.refresh();
     LoginPage.loginButton.click();
+    browser.refresh();
   });
   it('Try to login with no data should display inputs error messages', async () => {
     await LoginPage.login('', '');
@@ -83,7 +83,7 @@ describe('Login page testing', () => {
     await LoginPage.errorModalBtn.click();
     await expect(LoginPage.errorModal).not.toBeDisplayed();
   });
-  it('Try to login with valid and regitered data', async () => {
+  it('Try to login with valid and registered data', async () => {
     await LoginPage.login('admin@qira.com', 'test1234');
     await expect(LoginPage.modalContainer).not.toBeDisplayed();
   });

@@ -6,6 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "wdio-test": "npx wdio run ./wdio.conf.js",
     "type-check": "tsc --noEmit",
     "lint": "eslint \"./**/*.{ts,tsx,test.ts,test.tsx}\" && stylelint \"./src/**/*.css\"",
     "format": "prettier --write './**/*.{ts,tsx,test.ts,test.tsx}' --config ./.prettierrc",

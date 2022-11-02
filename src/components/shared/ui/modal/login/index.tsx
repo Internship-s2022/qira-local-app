@@ -78,7 +78,6 @@ export const LoginModal = () => {
               variant="outlined"
               margin="dense"
               size="small"
-              data-testid="login-email"
               fullWidth={true}
               InputProps={{
                 startAdornment: (
@@ -98,7 +97,6 @@ export const LoginModal = () => {
               variant="outlined"
               margin="dense"
               size="small"
-              data-testid="login-password"
               fullWidth={true}
               InputProps={{
                 startAdornment: (
