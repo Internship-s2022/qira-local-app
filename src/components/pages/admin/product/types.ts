@@ -11,5 +11,5 @@ export interface ProductFormValues {
   category: string;
   currency: string;
   stock: number;
-  isNew: boolean;
+  isNew?: boolean;
 }

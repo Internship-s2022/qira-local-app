@@ -10,6 +10,7 @@ export const SharedCheckbox = <TValuesCheckbox extends FieldValues>({
   control,
   name,
   label,
+  className,
   ...props
 }: SharedCheckboxProps<TValuesCheckbox>): JSX.Element => {
   const { field } = useController({ control, name });
@@ -17,7 +18,7 @@ export const SharedCheckbox = <TValuesCheckbox extends FieldValues>({
   return (
     <Box>
       <FormLabel className={styles.label}>{label}</FormLabel>
-      <Checkbox checked={field.value} {...field} {...props} />
+      <Checkbox className={className} checked={field.value} {...field} {...props} />
     </Box>
   );
 };

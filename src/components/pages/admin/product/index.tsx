@@ -69,7 +69,7 @@ const ProductForm = (): JSX.Element => {
           isNew: false,
         },
         technicalFile: {
-          name: product.technicalFile.key,
+          name: product.technicalFile?.key?.split('/').at(-1),
           isNew: false,
         },
         brand: product.brand,
@@ -82,6 +82,7 @@ const ProductForm = (): JSX.Element => {
   }, [product]);
 
   const onSubmit = async (data: ProductFormValues) => {
+    console.log(data);
     const image = data.image;
     let imageToSend: FileToSend;
     if (image?.isNew) {
@@ -170,7 +171,7 @@ const ProductForm = (): JSX.Element => {
               <div className={styles.column}>
                 <div className={styles.categories}>
                   <SharedSelect
-                    optionalLabel="Categoría"
+                    optionalLabel="Categoría *"
                     options={categoryOptions}
                     name="category"
                     control={control}
@@ -182,7 +183,7 @@ const ProductForm = (): JSX.Element => {
                   control={control}
                   name="name"
                   type="text"
-                  optionalLabel="Nombre del producto"
+                  optionalLabel="Nombre del producto *"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -191,14 +192,15 @@ const ProductForm = (): JSX.Element => {
                   control={control}
                   name="brand"
                   type="text"
-                  optionalLabel="Marca"
+                  optionalLabel="Marca *"
                   variant="outlined"
                   margin="dense"
                   size="small"
+                  className={styles.brand}
                 />
                 <div className={styles.priceInputs}>
                   <SharedSelect
-                    optionalLabel="Moneda"
+                    optionalLabel="Moneda *"
                     options={currencyOptions}
                     name="currency"
                     control={control}
@@ -210,7 +212,7 @@ const ProductForm = (): JSX.Element => {
                     control={control}
                     name="price"
                     type="text"
-                    optionalLabel="Precio"
+                    optionalLabel="Precio *"
                     variant="outlined"
                     margin="dense"
                     size="small"
@@ -231,18 +233,31 @@ const ProductForm = (): JSX.Element => {
                 />
               </div>
               <div className={styles.column}>
-                <ImageInput control={control} name="image" label="Imagen" setValue={setValue} />
-                <PdfInput control={control} name="technicalFile" label="PDF" setValue={setValue} />
-                <InputText
+                <ImageInput control={control} name="image" label="Imagen *" setValue={setValue} />
+                <PdfInput
                   control={control}
-                  name="stock"
-                  type="text"
-                  optionalLabel="Stock"
-                  variant="outlined"
-                  margin="dense"
-                  size="small"
+                  name="technicalFile"
+                  label="Technical file"
+                  setValue={setValue}
                 />
-                <SharedCheckbox label="Nuevo" name="isNew" control={control} />
+                <div className={styles.stock}>
+                  <InputText
+                    control={control}
+                    name="stock"
+                    type="text"
+                    optionalLabel="Stock *"
+                    variant="outlined"
+                    margin="dense"
+                    size="small"
+                    className={styles.stock}
+                  />
+                </div>
+                <SharedCheckbox
+                  label="Nuevo"
+                  name="isNew"
+                  control={control}
+                  className={styles.checkbox}
+                />
               </div>
             </div>
             <Button
