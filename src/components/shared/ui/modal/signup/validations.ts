@@ -5,7 +5,7 @@ import { IvaCondition } from 'src/types';
 export const signUpValidations = Joi.object({
   email: Joi.string()
     .email({ tlds: { allow: false } })
-    .regex(/^[a-z0-9]+[_a-z0-9.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z-]+)*(\.[a-z]{2,4})$/gi)
+    .regex(/^[a-z0-9]+[_a-z0-9.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z-]+)*(\.[a-z]{2,4})$/i)
     .min(7)
     .required()
     .messages({
