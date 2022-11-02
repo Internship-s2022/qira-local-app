@@ -105,7 +105,10 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <ShoppingCart className={styles.shoppingCart} />
+            <ShoppingCart
+              className={styles.shoppingCart}
+              onClick={() => dispatch(openModal(ModalTypes.SHOPPING_CART))}
+            />
           </div>
         </div>
       </nav>

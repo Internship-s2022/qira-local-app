@@ -30,4 +30,5 @@ export enum ModalTypes {
   ERROR = 'ERROR',
   INFO = 'INFO',
   REGISTER_FORM = 'REGISTER_FORM',
+  SHOPPING_CART = 'SHOPPING_CART',
 }

@@ -12,6 +12,7 @@ import { Error } from './error';
 import { Info } from './info';
 import { LoginModal } from './login';
 import style from './modal.module.css';
+import ShoppingCart from './shopping-cart';
 import SignUpForm from './signup';
 import { UploadImage } from './upload-image/index';
 import { UploadPdf } from './upload-pdf';
@@ -44,6 +45,9 @@ export const SharedModal = (): JSX.Element => {
       break;
     case ModalTypes.REGISTER_FORM:
       modalComponent = <SignUpForm />;
+      break;
+    case ModalTypes.SHOPPING_CART:
+      modalComponent = <ShoppingCart />;
       break;
     default:
   }
