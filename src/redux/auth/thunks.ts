@@ -3,7 +3,7 @@ import { Dispatch } from 'redux';
 
 import { auth } from 'src/helper/firebase';
 
-import { AppThunk, RootAction } from '../store';
+import { RootAction } from '../store';
 import { getAuthUserActions, loginActions, registerActions } from './actions';
 import { getAuthUser, registerUser } from './api';
 
@@ -45,7 +45,7 @@ export const getAuthUserThunk = () => {
   };
 };
 
-export const register: AppThunk = (user) => {
+export const register = (user) => {
   return async (dispatch: Dispatch<RootAction>) => {
     try {
       dispatch(registerActions.request());

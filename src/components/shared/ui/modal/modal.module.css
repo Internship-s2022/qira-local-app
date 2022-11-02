@@ -1,7 +1,9 @@
 .container {
   position: relative;
   width: max-content;
+  max-height: 90vh;
   padding: 10px;
+  overflow-y: auto;
   background-color: white;
   border: '2px solid #000';
   border-radius: 5px;
