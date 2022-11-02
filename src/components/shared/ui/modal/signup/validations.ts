@@ -74,6 +74,7 @@ export const signUpValidations = Joi.object({
   province: Joi.string()
     .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
     .min(3)
+    .trim()
     .required()
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
@@ -81,8 +82,9 @@ export const signUpValidations = Joi.object({
       'string.pattern.base': 'Debe contener solo letras.',
     }),
   city: Joi.string()
-    .regex(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)
+    .regex(/^([a-zA-Z0-9]+\s)?([a-zA-Z]+\s*)*$/)
     .min(3)
+    .trim()
     .required()
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
