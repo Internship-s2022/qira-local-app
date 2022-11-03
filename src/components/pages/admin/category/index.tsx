@@ -113,7 +113,6 @@ const CategoryForm = (): JSX.Element => {
               control={control}
               name="name"
               type="text"
-              color="info"
               optionalLabel="Nombre *"
               variant="outlined"
               margin="dense"
@@ -123,7 +122,6 @@ const CategoryForm = (): JSX.Element => {
               control={control}
               name="url"
               type="text"
-              color="info"
               optionalLabel="URL *"
               variant="outlined"
               margin="dense"
@@ -134,12 +132,7 @@ const CategoryForm = (): JSX.Element => {
             <ImageInput control={control} name="image" label="Imagen *" setValue={setValue} />
           </div>
         </div>
-        <Button
-          className={styles.button}
-          variant="contained"
-          color="info"
-          onClick={handleSubmit(onSubmit)}
-        >
+        <Button className={styles.button} variant="contained" onClick={handleSubmit(onSubmit)}>
           {params.id ? 'Editar' : 'Agregar'}
         </Button>
       </form>

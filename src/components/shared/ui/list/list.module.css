@@ -13,7 +13,7 @@
 }
 
 .tableHeader {
-  background-color: #3a9fcf;
+  background-color: var(--color-primary);
 }
 
 .columnHeader {

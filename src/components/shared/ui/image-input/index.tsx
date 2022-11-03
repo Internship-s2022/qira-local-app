@@ -57,7 +57,7 @@ export const ImageInput = <TValuesForm extends FieldValues>({
                   )
                 }
               >
-                <Edit color="info" />
+                <Edit color="primary" />
               </IconButton>
             </Tooltip>
           </div>
@@ -75,7 +75,7 @@ export const ImageInput = <TValuesForm extends FieldValues>({
                 )
               }
             >
-              <AddCircle color="info"></AddCircle>
+              <AddCircle color="primary" />
             </Button>
             <div className={error ? styles.showError : styles.hideError}>
               <p>{error?.message}</p>

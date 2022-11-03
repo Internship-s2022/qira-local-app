@@ -260,12 +260,7 @@ const ProductForm = (): JSX.Element => {
                 />
               </div>
             </div>
-            <Button
-              className={styles.sendBtn}
-              variant="contained"
-              color="info"
-              onClick={handleSubmit(onSubmit)}
-            >
+            <Button className={styles.sendBtn} variant="contained" onClick={handleSubmit(onSubmit)}>
               {params.id ? 'Editar' : 'Agregar'}
             </Button>
           </form>
