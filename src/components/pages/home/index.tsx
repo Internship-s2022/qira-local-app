@@ -12,7 +12,7 @@ import styles from './home.module.css';
 
 const Home = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
-  const newProducts = useSelector((state: RootState) => getNewProducts(state));
+  const newProducts = useSelector(getNewProducts);
   const categories = useSelector((state: RootState) => state.categories.categories);
 
   useEffect(() => {
