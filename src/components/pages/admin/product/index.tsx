@@ -16,6 +16,7 @@ import { getCategoryOptions } from 'src/redux/category/selectors/getCategoryOpti
 import { getCategory } from 'src/redux/category/thunk';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes, Options } from 'src/redux/modal/types';
+import { resetProduct } from 'src/redux/products/actions';
 import { createProduct, getProductById, updateProduct } from 'src/redux/products/thunk';
 import { Actions } from 'src/redux/products/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -52,6 +53,9 @@ const ProductForm = (): JSX.Element => {
 
   useEffect(() => {
     params.id && dispatch(getProductById(params.id));
+    return () => {
+      dispatch(resetProduct());
+    };
   }, []);
 
   useEffect(() => {
@@ -82,7 +86,6 @@ const ProductForm = (): JSX.Element => {
   }, [product]);
 
   const onSubmit = async (data: ProductFormValues) => {
-    console.log(data);
     const image = data.image;
     let imageToSend: FileToSend;
     if (image?.isNew) {
@@ -133,7 +136,6 @@ const ProductForm = (): JSX.Element => {
           dispatch(closeModal());
           navigate('/admin/products');
         };
-        reset();
       }
     } else {
       const response = await dispatch(createProduct(submitData));
@@ -143,7 +145,6 @@ const ProductForm = (): JSX.Element => {
           dispatch(closeModal());
           navigate('/admin/products');
         };
-        reset();
       }
     }
     if (!modalOptions.message) {

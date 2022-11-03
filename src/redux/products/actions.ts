@@ -33,4 +33,22 @@ export const updateProductActions = createAsyncAction(
   Actions.UPDATE_PRODUCT_ERROR,
 )<void, Product, ApiResponse<unknown>>();
 
+export const activateProductActions = createAsyncAction(
+  Actions.ACTIVATE_PRODUCT_PENDING,
+  Actions.ACTIVATE_PRODUCT_SUCCESS,
+  Actions.ACTIVATE_PRODUCT_ERROR,
+)<void, Product, ApiResponse<unknown>>();
+
+export const inactivateProductActions = createAsyncAction(
+  Actions.INACTIVATE_PRODUCT_PENDING,
+  Actions.INACTIVATE_PRODUCT_SUCCESS,
+  Actions.INACTIVATE_PRODUCT_ERROR,
+)<void, Product, ApiResponse<unknown>>();
+
+export const deleteProductActions = createAsyncAction(
+  Actions.DELETE_PRODUCT_PENDING,
+  Actions.DELETE_PRODUCT_SUCCESS,
+  Actions.DELETE_PRODUCT_ERROR,
+)<void, Product, ApiResponse<unknown>>();
+
 export const resetProduct = () => action(Actions.RESET_PRODUCT);
