@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { Add, PaidOutlined, Remove, StoreOutlined } from '@mui/icons-material';
+import { Add, FileCopyOutlined, PaidOutlined, Remove, StoreOutlined } from '@mui/icons-material';
 import { Button, IconButton } from '@mui/material';
 
 import { formatPriceText } from 'src/helper/products';
@@ -20,14 +20,16 @@ import styles from './product-detail.module.css';
 export const ProductDetail = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const params = useParams();
-  const productQuantity = useSelector((state: RootState) => getProductQuantity(state, params.id));
-
   const selectedProduct = useSelector((state: RootState) => getProductById(state, params.id));
+  const productQuantity = useSelector((state: RootState) =>
+    getProductQuantity(state, selectedProduct?._id),
+  );
 
+  const [count, setCount] = useState<number>(0);
   const addToCart = () => {
     const shoppingCartProduct = {
       product: selectedProduct,
-      quantity: 1,
+      quantity: count,
     };
     dispatch(addProduct(shoppingCartProduct));
   };
@@ -56,70 +58,84 @@ export const ProductDetail = (): JSX.Element => {
               <img className={styles.image} src={selectedProduct?.image.url} />
             </div>
             <div className={styles.priceContainer}>
-              <div className={styles.infoPayAndDelivery}>
-                <div className={styles.payInfo}>
-                  <p>Formas de pago aceptadas</p>
-                  <p className={styles.iconInfo}>
-                    <PaidOutlined />
-                    Transferencia bancaria
-                  </p>
+              <div>
+                <div className={styles.infoPayAndDelivery}>
+                  <div className={styles.payInfo}>
+                    <p className={styles.subtitle}>Formas de pago aceptadas</p>
+                    <div className={styles.iconInfo}>
+                      <PaidOutlined className={styles.payInfoIcon} />
+                      <p>Transferencia bancaria</p>
+                    </div>
+                  </div>
+                  <div className={styles.payInfo}>
+                    <p className={styles.subtitle}>Tipos de entrega disponibles</p>
+                    <div className={styles.iconInfo}>
+                      <StoreOutlined className={styles.payInfoIcon} />
+                      <p> Retira en QiraPoint</p>
+                    </div>
+                  </div>
                 </div>
-                <div className={styles.payInfo}>
-                  <p>Tipos de entrega disponibles</p>
-                  <p className={styles.iconInfo}>
-                    <StoreOutlined />
-                    Retira en QiraPoint
-                  </p>
-                </div>
-              </div>
-              <div className={styles.priceContainerAmount}>
-                <p>TOTAL</p>
-                <p className={styles.priceText}>
-                  {selectedProduct && formatPriceText(selectedProduct, productQuantity)}
-                </p>
-                <p className={styles.ivaText}> + IVA</p>
-              </div>
-              {productQuantity > 0 ? (
                 <div className={styles.quantity}>
-                  <IconButton
-                    className={styles.iconButton}
-                    onClick={() => dispatch(decreaseProductQuantity(selectedProduct?._id))}
-                  >
-                    <Remove />
-                  </IconButton>
-                  <p>{productQuantity}</p>
-                  <IconButton
-                    className={styles.iconButton}
-                    onClick={() => dispatch(increaseProductQuantity(selectedProduct?._id))}
-                  >
-                    <Add />
-                  </IconButton>
+                  <p>Seleccionar cantidad</p>
+                  <div className={styles.quantityIcons}>
+                    <IconButton
+                      className={styles.iconButton}
+                      onClick={() =>
+                        productQuantity < 1
+                          ? setCount(count - 1)
+                          : dispatch(decreaseProductQuantity(selectedProduct?._id))
+                      }
+                    >
+                      <Remove />
+                    </IconButton>
+                    <p>{count}</p>
+                    <IconButton
+                      className={styles.iconButton}
+                      onClick={() =>
+                        productQuantity < 1
+                          ? setCount(count + 1)
+                          : dispatch(increaseProductQuantity(selectedProduct?._id))
+                      }
+                    >
+                      <Add />
+                    </IconButton>
+                  </div>
                 </div>
-              ) : (
+              </div>
+              <div>
+                <div className={styles.priceContainerAmount}>
+                  <p>TOTAL</p>
+                  <p className={styles.priceText}>
+                    {selectedProduct && formatPriceText(selectedProduct, count)}
+                  </p>
+                  <p className={styles.ivaText}> + IVA</p>
+                </div>
                 <Button
                   className={styles.button}
                   variant="contained"
-                  color={selectedProduct?.stock > 0 ? 'primary' : 'secondary'}
-                  disabled={selectedProduct?.stock > 0 ? false : true}
+                  color="primary"
+                  disabled={selectedProduct?.stock > 0 || productQuantity < 1 ? false : true}
                   onClick={() => addToCart()}
                 >
                   {selectedProduct?.stock > 0 ? 'Agregar al carrito' : 'Producto agotado'}
                 </Button>
-              )}
+              </div>
             </div>
           </div>
         </div>
-        {/* <div>
-          <p className={styles.nameText}>{selectedProduct?.brand + ' ' + selectedProduct?.name}</p>
-        </div> */}
         <section className={styles.informationContainer}>
-          <div>
-            <h2>información</h2>
-            <div>
-              <p>descripción</p>
+          <div className={styles.information}>
+            <h2 className={styles.informationTitle}>Información Técnica</h2>
+            <div className={styles.description}>
+              <p className={styles.informationSubtitle}>Descripción</p>
+              <p>{selectedProduct?.description}</p>
             </div>
-            <div>
-              <p>ficha tecnica</p>
+            <div className={styles.description}>
+              <p className={styles.informationSubtitle}>Información Técnica</p>
+              <a className={styles.pdf} href={selectedProduct?.technicalFile?.url}>
+                <FileCopyOutlined />
+                Ficha técnica
+              </a>
             </div>
           </div>
         </section>
