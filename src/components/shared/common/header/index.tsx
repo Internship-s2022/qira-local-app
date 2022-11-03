@@ -6,6 +6,7 @@ import { AccountCircle, KeyboardArrowDown, Search, ShoppingCart } from '@mui/ico
 import * as thunksCategories from 'src/redux/category/thunk';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
+import { openCart } from 'src/redux/shopping-cart/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
 
@@ -109,7 +110,7 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <ShoppingCart className={styles.shoppingCart} />
+            <ShoppingCart className={styles.shoppingCart} onClick={() => dispatch(openCart())} />
           </div>
         </div>
       </nav>
