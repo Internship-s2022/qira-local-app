@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import ProductCard from 'src/components/shared/ui/product-card';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { getPublicCategories } from 'src/redux/category/thunk';
 import { getProductsFilteredByCategory } from 'src/redux/products/selectors/getProductsByCategory';
 import { getPublicProducts } from 'src/redux/products/thunks';
@@ -17,6 +18,9 @@ export const ProductsList = (): JSX.Element => {
 
   const filteredProducts = useSelector((state: RootState) =>
     getProductsFilteredByCategory(state, params.url),
+  );
+  const isFetching = useSelector(
+    (state: RootState) => state.categories.isFetching || state.products.isFetching,
   );
 
   useEffect(() => {
@@ -34,7 +38,9 @@ export const ProductsList = (): JSX.Element => {
         <p className={styles.navLink}>{capitalizeFirstLetter(params.url)}</p>
       </div>
       <section className={styles.productsContainer}>
-        {filteredProducts.length > 0 ? (
+        {isFetching ? (
+          <QiraLoader />
+        ) : filteredProducts.length > 0 ? (
           filteredProducts.map((product) => {
             return <ProductCard key={product._id} product={product} />;
           })
