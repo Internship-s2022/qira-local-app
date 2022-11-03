@@ -85,6 +85,9 @@ describe('Login page testing', () => {
   });
   it('Try to login with valid and registered data', async () => {
     await LoginPage.login('admin@qira.com', 'test1234');
-    await expect(LoginPage.modalContainer).not.toBeDisplayed();
+    await expect(LoginPage.errorModal).not.toBeDisplayed();
+    await expect(LoginPage.infoModalMessage).toBeDisplayed();
+    await expect(LoginPage.infoModalMessage).toHaveText('Sesión iniciada exitosamente.');
+    await LoginPage.infoModalBtn.click();
   });
 });

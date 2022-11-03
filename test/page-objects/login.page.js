@@ -1,7 +1,7 @@
 class LoginPage {
   // Getters
     get loginButton () {
-      return $('[data-testid=login-button]');
+      return $('[data-testid=login-btn]');
     }
     get inputEmail () {
       return $('[data-testid=email-field] input');
@@ -29,6 +29,12 @@ class LoginPage {
     }
     get modalContainer () {
       return $('[data-testid=modal-container]')
+    }
+    get infoModalBtn () {
+      return $('[data-testid=info-modal-btn]')
+    }
+    get infoModalMessage () {
+      return $('[data-testid="info-message"]')
     }
   // Methods
     async login (email, password) {
