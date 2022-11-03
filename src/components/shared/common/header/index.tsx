@@ -92,11 +92,15 @@ const Header = () => {
               {currentUser?.email ? (
                 <div className={styles.btnLogin}>
                   <AccountCircle className={styles.userIcon} />
-                  <Link className={styles.userName} to="client/">
-                    {currentRole === UserRole.ADMIN
-                      ? currentUser.firstName + ' ' + currentUser.lastName
-                      : currentUser.businessName}
-                  </Link>
+                  {currentRole === UserRole.ADMIN ? (
+                    <Link className={styles.userName} to="/admin">
+                      {currentUser.firstName + ' ' + currentUser.lastName}
+                    </Link>
+                  ) : (
+                    <Link className={styles.userName} to="/client">
+                      {currentUser.businessName}
+                    </Link>
+                  )}
                 </div>
               ) : (
                 <div className={styles.btnLogin}>
