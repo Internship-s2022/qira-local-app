@@ -72,20 +72,21 @@ describe('Login page testing', () => {
   });
   it('Try to login with valid but not registered data and click on the cross.', async () => {
     await LoginPage.login('qira@local.com', 'test1234');
-    await expect(LoginPage.errorModal).toBeDisplayed();
+    await expect(LoginPage.infoModalMessage).toBeDisplayed();
+    await expect(LoginPage.infoModalMessage).toHaveTextContaining('Usuario o contraseña incorrecta.')
     await LoginPage.crossModal.click();
-    await expect(LoginPage.errorModal).not.toBeDisplayed();
+    await expect(LoginPage.infoModalMessage).not.toBeDisplayed();
   });
   it('Try to login with valid data but not registered and click con "ACEPTAR" button.', async () => {
     await LoginPage.login('qira@local.com', 'test1234');
-    await expect(LoginPage.errorModal).toBeDisplayed();
-    await expect(LoginPage.errorModal).toHaveTextContaining('Ha ocurrido un error', 'Usuario o contraseña incorrecta.');
-    await LoginPage.errorModalBtn.click();
-    await expect(LoginPage.errorModal).not.toBeDisplayed();
+    await expect(LoginPage.infoModalMessage).toBeDisplayed();
+    await expect(LoginPage.infoModalMessage).toHaveTextContaining('Usuario o contraseña incorrecta.');
+    await LoginPage.infoModalBtn.click();
+    await expect(LoginPage.infoModalMessage).not.toBeDisplayed();
   });
   it('Try to login with valid and registered data', async () => {
     await LoginPage.login('admin@qira.com', 'test1234');
-    await expect(LoginPage.errorModal).not.toBeDisplayed();
+    await expect(LoginPage.infoModalMessage).not.toBeDisplayed();
     await expect(LoginPage.infoModalMessage).toBeDisplayed();
     await expect(LoginPage.infoModalMessage).toHaveText('Sesión iniciada exitosamente.');
     await LoginPage.infoModalBtn.click();
