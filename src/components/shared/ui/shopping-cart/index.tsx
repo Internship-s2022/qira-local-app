@@ -40,7 +40,7 @@ const ShoppingCart = (): JSX.Element => {
                 <div className={styles.totalPrice}>
                   <p className={styles.totalText}>TOTAL</p>
                   <div className={styles.priceTextContainer}>
-                    <p className={styles.priceText}>{'AR$ ' + orderAmounts.total}</p>
+                    <p className={styles.priceText}>{'AR$ ' + orderAmounts.total.toFixed(2)}</p>
                     <p className={styles.ivaText}> + IVA</p>
                   </div>
                 </div>
