@@ -82,7 +82,6 @@ const CategoryForm = (): JSX.Element => {
           dispatch(closeModal());
           navigate('/admin/categories');
         };
-        reset();
       }
     } else {
       const response = await dispatch(createCategory(submitData));
@@ -92,7 +91,6 @@ const CategoryForm = (): JSX.Element => {
           dispatch(closeModal());
           navigate('/admin/categories');
         };
-        reset();
       }
     }
     if (!modalOptions.message) {

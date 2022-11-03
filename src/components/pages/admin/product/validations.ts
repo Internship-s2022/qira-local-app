@@ -50,7 +50,7 @@ export const ProductValidation = Joi.object({
     'string.empty': 'Campo requerido.',
   }),
 
-  currency: Joi.string().valid(Currency.dollar, Currency.peso).required().messages({
+  currency: Joi.string().valid(Currency.DOLLAR, Currency.PESO).required().messages({
     'string.empty': 'Campo requerido.',
   }),
   stock: Joi.number().positive().integer().allow(0).required().messages({

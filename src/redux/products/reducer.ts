@@ -63,16 +63,22 @@ export const productsReducer = (state = initialState, action: ActionsType): Prod
         isFetching: false,
         error: undefined,
         message: 'Product created successfully',
-        selectedProduct: action.payload,
+        products: [...state.products, action.payload],
       };
-    case Actions.UPDATE_PRODUCT_SUCCESS:
+    case Actions.UPDATE_PRODUCT_SUCCESS: {
+      const productNewList = state.products.map((product) => {
+        if (product._id === action.payload._id) {
+          return action.payload;
+        }
+        return product;
+      });
       return {
         ...state,
         isFetching: false,
         error: undefined,
-        message: 'Product updated successfully',
-        selectedProduct: action.payload,
+        products: productNewList,
       };
+    }
     case Actions.ACTIVATE_PRODUCT_SUCCESS: {
       const productNewList = state.products.map((product) => {
         if (product._id === action.payload._id) {
@@ -97,9 +103,6 @@ export const productsReducer = (state = initialState, action: ActionsType): Prod
         ...state,
         products: productNewList,
         isFetching: false,
-        error: undefined,
-        message: 'Product updated successfully',
-        selectedProduct: action.payload,
       };
     }
     case Actions.DELETE_PRODUCT_SUCCESS: {

@@ -43,7 +43,7 @@ const ProductForm = (): JSX.Element => {
       technicalFile: undefined,
       brand: '',
       category: '',
-      currency: Currency.peso,
+      currency: Currency.PESO,
       stock: undefined,
       isNew: true,
     },
@@ -64,8 +64,6 @@ const ProductForm = (): JSX.Element => {
 
   useEffect(() => {
     if (product?._id) {
-      console.log(product);
-      console.log(product.category);
       reset({
         name: product.name,
         description: product.description,
@@ -138,7 +136,6 @@ const ProductForm = (): JSX.Element => {
           dispatch(closeModal());
           navigate('/admin/products');
         };
-        reset();
       }
     } else {
       const response = await dispatch(createProduct(submitData));
@@ -148,7 +145,6 @@ const ProductForm = (): JSX.Element => {
           dispatch(closeModal());
           navigate('/admin/products');
         };
-        reset();
       }
     }
     if (!modalOptions.message) {
@@ -158,8 +154,8 @@ const ProductForm = (): JSX.Element => {
   };
 
   const currencyOptions: SelectOptions[] = [
-    { label: 'USD', value: Currency.dollar },
-    { label: 'ARS', value: Currency.peso },
+    { label: 'USD', value: Currency.DOLLAR },
+    { label: 'ARS', value: Currency.PESO },
   ];
 
   return (
