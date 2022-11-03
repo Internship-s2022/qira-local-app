@@ -13,7 +13,6 @@ import { Error } from './error';
 import { Info } from './info';
 import { LoginModal } from './login';
 import style from './modal.module.css';
-import ShoppingCart from './shopping-cart';
 import SignUpForm from './signup';
 import { UploadImage } from './upload-image/index';
 import { UploadPdf } from './upload-pdf';
@@ -47,9 +46,6 @@ export const SharedModal = (): JSX.Element => {
     case ModalTypes.REGISTER_FORM:
       modalComponent = <SignUpForm />;
       break;
-    case ModalTypes.SHOPPING_CART:
-      modalComponent = <ShoppingCart />;
-      break;
     default:
   }
   const handleConfirm = options?.onCloseCallback || (() => dispatch(closeModal()));
@@ -62,9 +58,7 @@ export const SharedModal = (): JSX.Element => {
         dispatch(closeModal());
       }}
     >
-      <Box
-        className={modalType === ModalTypes.SHOPPING_CART ? style.shoppingCart : style.container}
-      >
+      <Box className={style.container}>
         <Close onClick={handleConfirm} className={style.closeModal}>
           x
         </Close>

@@ -2,6 +2,7 @@ import { Actions, ActionsType, ShoppingCartState } from './types';
 
 const initialState: ShoppingCartState = {
   products: [],
+  isOpen: false,
 };
 
 export const shoppingCartReducer = (
@@ -46,6 +47,18 @@ export const shoppingCartReducer = (
       return {
         ...state,
         products: newList,
+      };
+    }
+    case Actions.OPEN_CART: {
+      return {
+        ...state,
+        isOpen: true,
+      };
+    }
+    case Actions.CLOSE_CART: {
+      return {
+        ...state,
+        isOpen: false,
       };
     }
     default:

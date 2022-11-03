@@ -7,6 +7,7 @@ export type ActionsType = ActionType<typeof actions>;
 
 export interface ShoppingCartState {
   products: ShoppingCartProduct[];
+  isOpen: boolean;
 }
 
 export interface ShoppingCartProduct {
@@ -25,4 +26,6 @@ export enum Actions {
   DELETE_PRODUCT = 'DELETE_PRODUCT',
   INCREASE_PRODUCT_QUANTITY = 'INCREASE_PRODUCT_QUANTITY',
   DECREASE_PRODUCT_QUANTITY = 'DECREASE_PRODUCT_QUANTITY',
+  OPEN_CART = 'OPEN_CART',
+  CLOSE_CART = 'CLOSE_CART',
 }
