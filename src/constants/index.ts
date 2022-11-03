@@ -19,4 +19,5 @@ export enum AdminRoutes {
 
 export enum ClientRoutes {
   CLIENT_PROFILE = '/client',
+  PRODUCT_DETAIL = '/product/:id',
 }
