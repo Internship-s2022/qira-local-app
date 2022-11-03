@@ -28,13 +28,7 @@ export const SharedModal = (): JSX.Element => {
       modalComponent = <UploadImage />;
       break;
     case ModalTypes.UPLOAD_PDF:
-      modalComponent = (
-        <UploadPdf
-          onConfirm={() => {
-            dispatch(closeModal());
-          }}
-        />
-      );
+      modalComponent = <UploadPdf />;
       break;
     case ModalTypes.CONFIRM:
       modalComponent = <Confirm />;
