@@ -7,12 +7,7 @@ import { Button, IconButton } from '@mui/material';
 import { formatPriceText } from 'src/helper/products';
 import { getProductById } from 'src/redux/products/selectors/getProductById';
 import { getPublicProducts } from 'src/redux/products/thunks';
-import {
-  addProduct,
-  decreaseProductQuantity,
-  increaseProductQuantity,
-} from 'src/redux/shopping-cart/actions';
-import { getProductQuantity } from 'src/redux/shopping-cart/selectors/getProductQuantity';
+import { addProduct } from 'src/redux/shopping-cart/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './product-detail.module.css';
@@ -21,17 +16,18 @@ export const ProductDetail = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const params = useParams();
   const selectedProduct = useSelector((state: RootState) => getProductById(state, params.id));
-  const productQuantity = useSelector((state: RootState) =>
-    getProductQuantity(state, selectedProduct?._id),
-  );
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const [count, setCount] = useState<number>(0);
   const addToCart = () => {
-    const shoppingCartProduct = {
-      product: selectedProduct,
-      quantity: count,
-    };
-    dispatch(addProduct(shoppingCartProduct));
+    if (count >= 1) {
+      const shoppingCartProduct = {
+        product: selectedProduct,
+        quantity: count,
+      };
+      dispatch(addProduct(shoppingCartProduct));
+      setDisabled(true);
+    }
   };
 
   useEffect(() => {
@@ -80,22 +76,20 @@ export const ProductDetail = (): JSX.Element => {
                   <div className={styles.quantityIcons}>
                     <IconButton
                       className={styles.iconButton}
-                      onClick={() =>
-                        productQuantity < 1
-                          ? setCount(count - 1)
-                          : dispatch(decreaseProductQuantity(selectedProduct?._id))
-                      }
+                      onClick={() => {
+                        setCount(count - 1);
+                        setDisabled(false);
+                      }}
                     >
                       <Remove />
                     </IconButton>
                     <p>{count}</p>
                     <IconButton
                       className={styles.iconButton}
-                      onClick={() =>
-                        productQuantity < 1
-                          ? setCount(count + 1)
-                          : dispatch(increaseProductQuantity(selectedProduct?._id))
-                      }
+                      onClick={() => {
+                        setCount(count + 1);
+                        setDisabled(false);
+                      }}
                     >
                       <Add />
                     </IconButton>
@@ -114,7 +108,7 @@ export const ProductDetail = (): JSX.Element => {
                   className={styles.button}
                   variant="contained"
                   color="primary"
-                  disabled={selectedProduct?.stock > 0 || productQuantity < 1 ? false : true}
+                  disabled={disabled}
                   onClick={() => addToCart()}
                 >
                   {selectedProduct?.stock > 0 ? 'Agregar al carrito' : 'Producto agotado'}

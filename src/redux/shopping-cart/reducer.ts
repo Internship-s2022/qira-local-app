@@ -10,14 +10,23 @@ export const shoppingCartReducer = (
   action: ActionsType,
 ): ShoppingCartState => {
   switch (action.type) {
-    case Actions.ADD_PRODUCT:
+    case Actions.ADD_PRODUCT: {
+      let newList;
       if (state.products.some((product) => product.product._id === action.payload.product._id)) {
-        return state;
+        newList = state.products.map((product) => {
+          if (product.product._id === action.payload.product._id) {
+            return { product: action.payload.product, quantity: action.payload.quantity };
+          }
+          return product;
+        });
+      } else {
+        newList = [...state.products, action.payload];
       }
       return {
         ...state,
-        products: [...state.products, action.payload],
+        products: newList,
       };
+    }
     case Actions.DELETE_PRODUCT:
       return {
         ...state,
