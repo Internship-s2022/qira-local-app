@@ -21,7 +21,10 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
           <ul>
             {props.links.map((link, index) => {
               return (
-                <NavLink to={props.baseUrl + link.link} key={index}>
+                <NavLink
+                  to={link.title === 'Volver a QIRA' ? link.link : props.baseUrl + link.link}
+                  key={index}
+                >
                   <li>{link.title}</li>
                 </NavLink>
               );

@@ -9,7 +9,7 @@ import styles from './admin.module.css';
 const AdminLayout = (): JSX.Element => {
   const baseUrl = '/admin';
   const adminLinks: SidebarLinks[] = [
-    { link: '/', title: 'Inicio' },
+    { link: '/', title: 'Volver a QIRA' },
     { link: '/orders', title: 'Ordenes de compra' },
     { link: '/clients', title: 'Clientes' },
     { link: '/products', title: 'Productos' },
