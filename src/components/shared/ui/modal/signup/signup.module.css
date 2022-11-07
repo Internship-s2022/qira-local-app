@@ -30,7 +30,8 @@
 }
 
 .shortInput {
-  width: 75px;
+  width: 110px;
+  margin-right: 10px;
 }
 
 .loginContainer {
