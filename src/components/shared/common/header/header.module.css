@@ -97,6 +97,7 @@
   width: auto;
   padding: 5px;
   overflow: hidden;
+  line-height: 25px;
   color: white;
   white-space: nowrap;
   background-color: white;
