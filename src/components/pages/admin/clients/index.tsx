@@ -10,6 +10,7 @@ import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import { Headers, TableButton } from '../../../shared/ui/list/types';
+import styles from './clients.module.css';
 
 interface Client {
   id: string;
@@ -103,7 +104,10 @@ const Clients = (): JSX.Element => {
   ];
 
   return (
-    <div>
+    <div className={styles.container}>
+      <div className={styles.titleContainer}>
+        <h1>Clientes</h1>
+      </div>
       {isFetching ? (
         <></>
       ) : (
