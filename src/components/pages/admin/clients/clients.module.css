@@ -11,18 +11,3 @@
   margin: 0.5% 0 0 5%;
   border-bottom: solid 2px;
 }
-
-.addNewCategory {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.addNewCategory h3 {
-  margin: 0 10px;
-}
-
-.addButton {
-  color: white;
-  background-color: var(--color-primary);
-}
