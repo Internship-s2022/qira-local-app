@@ -29,7 +29,7 @@ const Home = (): JSX.Element => {
         />
       </section>
       <section className={styles.productsSection}>
-        <h2>Ofertas destacados</h2>
+        <h2>Productos destacados</h2>
         <div className={styles.productsCardsContainer}>
           {newProducts.map((product) => {
             return <ProductCard key={product._id} product={product} />;
