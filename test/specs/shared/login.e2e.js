@@ -1,4 +1,4 @@
-import LoginPage from  '../../page-objects/login.page';
+import LoginPage from '../../page-objects/login.page';
 import Header from '../../page-objects/header.page';
 
 describe('Login page testing', () => {
@@ -74,14 +74,18 @@ describe('Login page testing', () => {
   it('Try to login with valid but not registered data and click on the cross.', async () => {
     await LoginPage.login('qira@local.com', 'test1234');
     await expect(LoginPage.infoModalMessage).toBeDisplayed();
-    await expect(LoginPage.infoModalMessage).toHaveTextContaining('Usuario o contraseña incorrecta.')
+    await expect(LoginPage.infoModalMessage).toHaveTextContaining(
+      'Usuario o contraseña incorrecta.',
+    );
     await LoginPage.crossModal.click();
     await expect(LoginPage.infoModalMessage).not.toBeDisplayed();
   });
   it('Try to login with valid data but not registered and click con "ACEPTAR" button.', async () => {
     await LoginPage.login('qira@local.com', 'test1234');
     await expect(LoginPage.infoModalMessage).toBeDisplayed();
-    await expect(LoginPage.infoModalMessage).toHaveTextContaining('Usuario o contraseña incorrecta.');
+    await expect(LoginPage.infoModalMessage).toHaveTextContaining(
+      'Usuario o contraseña incorrecta.',
+    );
     await LoginPage.infoModalBtn.click();
     await expect(LoginPage.infoModalMessage).not.toBeDisplayed();
   });
