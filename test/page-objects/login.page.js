@@ -36,6 +36,9 @@ class LoginPage {
     get infoModalMessage () {
       return $('[data-testid="info-message"]')
     }
+    get signUpBtn () {
+      return $('[data-testid=sign-up-btn]');
+    }
   // Methods
     async login (email, password) {
       await this.inputEmail.setValue(email);
@@ -49,8 +52,7 @@ class LoginPage {
     }
 
     async openBrowser () {
-      browser.url('http://localhost:3000');
+      await browser.url('http://localhost:3000');
     }
-}
-
+  }
 export default new LoginPage();

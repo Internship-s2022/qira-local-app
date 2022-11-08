@@ -1,5 +1,5 @@
-import LoginPage from  '../page-objects/login.page';
-import Header from '../page-objects/header.page';
+import LoginPage from  '../../page-objects/login.page';
+import Header from '../../page-objects/header.page';
 
 describe('Login page testing', () => {
   beforeAll('Open browser', () => {
