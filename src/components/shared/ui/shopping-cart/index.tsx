@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Close, ShoppingCartOutlined } from '@mui/icons-material';
 import { Box, Button, Modal } from '@mui/material';
 
@@ -13,6 +14,7 @@ import styles from './shopping-cart.module.css';
 const ShoppingCart = (): JSX.Element => {
   const dollarRate = 160;
   const dispatch: AppDispatch<null> = useDispatch();
+  const navigate = useNavigate();
   const open = useSelector((state: RootState) => state.shoppingCart.isOpen);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state, dollarRate));
@@ -44,7 +46,11 @@ const ShoppingCart = (): JSX.Element => {
                     <p className={styles.ivaText}> + IVA</p>
                   </div>
                 </div>
-                <Button size="large" className={styles.button}>
+                <Button
+                  size="large"
+                  className={styles.button}
+                  onClick={() => navigate('/order/summary')}
+                >
                   Finalizar compra
                 </Button>
               </div>

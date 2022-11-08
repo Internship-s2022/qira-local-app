@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from 'src/redux/store';
 
 import AdminRouter from './components/pages/admin';
 import ClientRouter from './components/pages/client';
+import OrderRouter from './components/pages/order';
 import { SharedModal } from './components/shared/ui/modal';
 import PrivateRoute from './helper/routes/private-routes';
 import { setAuthentication } from './redux/auth/actions';
@@ -34,6 +35,9 @@ const App = (): JSX.Element => {
         <Route path="*" element={<ClientRouter />} />
         <Route element={<PrivateRoute role={UserRole.ADMIN} />}>
           <Route path="/admin/*" element={<AdminRouter />} />
+        </Route>
+        <Route element={<PrivateRoute role={UserRole.CLIENT} />}>
+          <Route path="/order/*" element={<OrderRouter />} />
         </Route>
       </Routes>
     </BrowserRouter>

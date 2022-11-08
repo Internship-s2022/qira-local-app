@@ -20,3 +20,10 @@ export enum AdminRoutes {
 export enum ClientRoutes {
   CLIENT_PROFILE = '/client',
 }
+
+export enum OrderRoutes {
+  SUMMARY = '/summary',
+  AUTHORIZED = '/authorized',
+  FINISH_ORDER = '/finish',
+  PAYMENT_METHOD = '/payment',
+}
