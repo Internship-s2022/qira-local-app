@@ -40,7 +40,8 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea cerrar sesión?',
                 onConfirmCallback: () => {
-                  dispatch(logoutUser()), dispatch(closeModal());
+                  dispatch(logoutUser());
+                  dispatch(closeModal());
                 },
                 onCloseCallback: () => dispatch(closeModal()),
               }),
