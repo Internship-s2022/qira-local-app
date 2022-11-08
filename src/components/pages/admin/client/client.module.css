@@ -39,7 +39,7 @@
 }
 
 .shortInput {
-  width: 75px;
+  width: 100px;
   margin-right: 5px;
 }
 
@@ -50,6 +50,6 @@
 }
 
 .sendBtn {
-  width: 55%;
+  width: 50%;
   font-weight: bold;
 }

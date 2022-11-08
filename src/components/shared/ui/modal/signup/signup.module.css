@@ -30,7 +30,8 @@
 }
 
 .shortInput {
-  width: 75px;
+  width: 110px;
+  margin-right: 10px;
 }
 
 .loginContainer {
@@ -53,6 +54,6 @@
 }
 
 .signUpBtn {
-  width: 55%;
+  width: 50%;
   font-weight: bold;
 }
