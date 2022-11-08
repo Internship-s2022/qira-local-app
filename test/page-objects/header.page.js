@@ -1,38 +1,36 @@
 class Header {
-
   //Getters
-  get exchangeInfo () {
+  get exchangeInfo() {
     return $('[data-testid=exchange-info]');
-  };
-  get logoQira () {
+  }
+  get logoQira() {
     return $('[data-testid=logo-qira]');
-  };
-  get btnCategories () {
+  }
+  get btnCategories() {
     return $('[data-testid=btn-categories]');
-  };
-  get categoryOpt () {
+  }
+  get categoryOpt() {
     return $('[data-testid=category-1]');
-  };
-  get searchInput () {
+  }
+  get searchInput() {
     return $('[data-testid=search-input]');
-  };
-  get searchIcon () {
+  }
+  get searchIcon() {
     return $('[data-testid=search-icon]');
-  };
-  get loginButton () {
+  }
+  get loginButton() {
     return $('[data-testid=login-btn]');
-  };
-  get shoppingCart () {
+  }
+  get shoppingCart() {
     return $('[data-testid=shopping-cart]');
-  };
+  }
 
   //Methods
 
-  async search (product) {
+  async search(product) {
     await this.searchInput.setValue(product);
     await this.searchIcon.click();
-  };
-
-};
+  }
+}
 
 export default new Header();
