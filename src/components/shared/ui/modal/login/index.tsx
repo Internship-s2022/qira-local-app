@@ -126,6 +126,7 @@ export const LoginModal = () => {
           <div className={styles.registerContainer}>
             <AccountCircleOutlined color="primary" />
             <p
+              data-testid="sign-up-btn"
               className={styles.registerText}
               onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}
             >

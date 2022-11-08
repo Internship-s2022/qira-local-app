@@ -37,10 +37,10 @@ class SignUpPage {
     return $('[data-testid=businessName-field] p');
   }
   get ivaConditionInput () {
-    return $('[data-testid=ivaCondition-field] input');
+    return $('[data-testid=ivaCondition-select] input');
   }
   get ivaConditionError () {
-    return $('[data-testid=ivaCondition-field] p');
+    return $('[data-testid=ivaCondition-select] p');
   }
   get cuitInput () {
     return $('[data-testid=cuit-field] input');
