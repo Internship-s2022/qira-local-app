@@ -69,6 +69,7 @@ const Header = () => {
                 className={styles.logoQira}
                 src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.svg`}
                 alt=""
+                data-testid="logo-qira"
               />
             </Link>
           </div>
@@ -77,6 +78,7 @@ const Header = () => {
               className={styles.buttonCategories}
               onMouseEnter={() => setOpenSelect(true)}
               onMouseLeave={() => setOpenSelect(false)}
+              data-testid="btn-categories"
             >
               Categorías
               <KeyboardArrowDown className={styles.categoriesArrow} />
@@ -89,7 +91,11 @@ const Header = () => {
               >
                 {categories.map((category, index) => (
                   <span className={styles.categoryOption} key={index}>
-                    <Link to={`/category/${category.url}`} className={styles.categoryLinks}>
+                    <Link
+                      to={`/category/${category.url}`}
+                      className={styles.categoryLinks}
+                      data-testid={`category-${index}`}
+                    >
                       {category.name}
                     </Link>
                   </span>
@@ -99,6 +105,7 @@ const Header = () => {
             <div>
               <div className={styles.searchBar}>
                 <input
+                  data-testid="search-input"
                   type="text"
                   placeholder="Buscar..."
                   onChange={(e) => setSearchInput(e.target.value)}
@@ -110,6 +117,7 @@ const Header = () => {
                 />
                 <div className={styles.searchIconContainer}>
                   <Search
+                    data-testid="search-icon"
                     className={styles.searchIcon}
                     color="secondary"
                     onClick={() => {
@@ -150,7 +158,7 @@ const Header = () => {
               color="info"
               className={styles.shoppingCartContainer}
             >
-              <ShoppingCart className={styles.shoppingCart} onClick={() => dispatch(openCart())} />
+              <ShoppingCart data-testid="shopping-cart" className={styles.shoppingCart} onClick={() => dispatch(openCart())} />
             </StyledBadge>
           </div>
         </div>
