@@ -67,14 +67,14 @@ const Products = (): JSX.Element => {
         rowData.isActive
           ? dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro que desea desactivar el producto?',
+                message: '¿Está seguro de que desea desactivar el producto?',
                 onConfirmCallback: () => dispatch(thunks.inactivateProduct(rowData.id)),
                 onCloseCallback: () => dispatch(closeModal()),
               }),
             )
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro que desea activar el producto?',
+                message: '¿Está seguro de que desea activar el producto?',
                 onConfirmCallback: () => dispatch(thunks.activateProduct(rowData.id)),
                 onCloseCallback: () => dispatch(closeModal()),
               }),
@@ -89,7 +89,7 @@ const Products = (): JSX.Element => {
         rowData.logicDelete;
         dispatch(
           openModal(ModalTypes.CONFIRM, {
-            message: '¿Está seguro que desea eliminar el producto?',
+            message: '¿Está seguro de que desea eliminar el producto?',
             onConfirmCallback: () => dispatch(thunks.deleteProduct(rowData.id)),
             onCloseCallback: () => dispatch(closeModal()),
           }),
