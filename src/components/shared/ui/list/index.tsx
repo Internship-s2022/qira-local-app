@@ -24,7 +24,7 @@ const List = <T extends RowData>(props: ListProps<T>) => {
                 {row.header}
               </TableCell>
             ))}
-            {props.showButtons && <TableCell className={styles.columnHeader}>Actions</TableCell>}
+            {props.showButtons && <TableCell className={styles.columnHeader}>Acciones</TableCell>}
           </TableRow>
         </TableHead>
         <TableBody>

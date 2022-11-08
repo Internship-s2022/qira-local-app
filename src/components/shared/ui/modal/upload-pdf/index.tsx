@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 
+import { RootState } from 'src/redux/store';
+
 import { CustomFile } from '../types';
-import { UploadPdfProps } from './types';
 import styles from './upload-pdf.module.css';
 
-export const UploadPdf = (props: UploadPdfProps) => {
+export const UploadPdf = () => {
   const [selectedFile, setSelectedFile] = useState<CustomFile>();
   const [preview, setPreview] = useState<string>();
+  const options = useSelector((state: RootState) => state.modal.options);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -35,7 +38,7 @@ export const UploadPdf = (props: UploadPdfProps) => {
         </Button>
         {preview && (
           <Button
-            onClick={props.onConfirm}
+            onClick={() => options.onConfirmCallback(selectedFile)}
             className={styles.buttonSend}
             variant="contained"
             component="label"

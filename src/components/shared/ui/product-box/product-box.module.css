@@ -1,0 +1,94 @@
+.container {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 350px;
+  height: 180px;
+  padding: 15px;
+  margin: 8px 0;
+  background-color: white;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+
+.delete {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.firstRowContainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.secondRowContainer,
+.thirdRowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #bcbcbc;
+}
+
+.productName {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.quantityText {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 30%;
+  height: 35px;
+  border: 1px solid #bcbcbc;
+  border-radius: 8px;
+}
+
+.quantity p {
+  padding: 10px;
+  margin: 0;
+}
+
+.iconButton {
+  width: 40px;
+  height: 40px;
+}
+
+.totalText,
+.ivaText {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.priceText {
+  margin: 5px 5px 5px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+}

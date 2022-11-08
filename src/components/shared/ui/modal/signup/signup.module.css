@@ -8,6 +8,7 @@
 
 .title {
   align-self: flex-start;
+  margin: 2.25%;
   color: #f05523;
 }
 
@@ -30,6 +31,18 @@
 
 .shortInput {
   width: 75px;
+}
+
+.loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.loginText:hover {
+  color: #f05523;
+  cursor: pointer;
 }
 
 .phoneInputs,

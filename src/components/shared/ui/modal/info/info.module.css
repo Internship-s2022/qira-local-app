@@ -1,0 +1,14 @@
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 25vw;
+  height: 15vh;
+  padding: 2%;
+}
+
+.button {
+  padding: 10px 10px 5px;
+}

@@ -2,13 +2,14 @@ import React from 'react';
 import { FieldValues, useController } from 'react-hook-form';
 import { TextField } from '@mui/material';
 
-import styles from './input.module.css';
 import { InputProps } from './types';
+
 export const InputText = <TValuesForm extends FieldValues>({
   name,
   control,
   defaultValue,
   optionalLabel,
+  className,
   ...props
 }: InputProps<TValuesForm>): JSX.Element => {
   const {
@@ -16,7 +17,7 @@ export const InputText = <TValuesForm extends FieldValues>({
     fieldState: { error },
   } = useController({ name, control, defaultValue });
   return (
-    <div>
+    <div className={className}>
       <div>
         <label htmlFor={optionalLabel}>{optionalLabel}</label>
       </div>
@@ -24,6 +25,7 @@ export const InputText = <TValuesForm extends FieldValues>({
         <TextField
           {...field}
           {...props}
+          fullWidth
           helperText={error?.message != undefined ? error.message : ' '}
           error={error?.message != undefined}
         />

@@ -5,12 +5,14 @@ import { IvaCondition } from 'src/types';
 export const signUpValidations = Joi.object({
   email: Joi.string()
     .email({ tlds: { allow: false } })
+    .regex(/^[a-z0-9]+[_a-z0-9.-]*[a-z0-9]+@[a-z0-9-]+(\.[a-z-]+)*(\.[a-z]{2,4})$/i)
     .min(7)
     .required()
     .messages({
       'string.min': 'Debe contener al menos 7 caracteres.',
       'string.empty': 'Campo requerido.',
-      'string.email': 'Debe tener formato válido de email',
+      'string.email': 'Debe tener formato válido de email.',
+      'string.pattern.base': 'Debe tener formato válido de email.',
     }),
   password: Joi.string()
     .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
@@ -23,14 +25,14 @@ export const signUpValidations = Joi.object({
     }),
   repeatPassword: Joi.string().valid(Joi.ref('password')).required().messages({
     'string.empty': 'Campo requerido.',
-    'any.only': 'Las contraseñas no coinciden',
+    'any.only': 'Las contraseñas no coinciden.',
   }),
   codeArea: Joi.string()
     .regex(/^[0-9\-+]{2,4}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 2-4 caracteres numéricos',
+      'string.pattern.base': 'Debe contener 2-4 caracteres numéricos.',
     }),
   phoneNumber: Joi.string()
     .regex(/^[0-9\-+]{6,7}$/)
@@ -72,16 +74,23 @@ export const signUpValidations = Joi.object({
   province: Joi.string()
     .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
     .min(3)
+    .trim()
     .required()
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
       'string.empty': 'Campo requerido.',
       'string.pattern.base': 'Debe contener solo letras.',
     }),
-  city: Joi.string().min(3).required().messages({
-    'string.min': 'Debe contener al menos 3 caracteres.',
-    'string.empty': 'Campo requerido.',
-  }),
+  city: Joi.string()
+    .regex(/^([a-zA-Z0-9]+\s)?([a-zA-Z]+\s*)*$/)
+    .min(3)
+    .trim()
+    .required()
+    .messages({
+      'string.min': 'Debe contener al menos 3 caracteres.',
+      'string.empty': 'Campo requerido.',
+      'string.pattern.base': 'Puede contener letras y números.',
+    }),
   zipCode: Joi.string()
     .regex(/^[0-9\-+]{4}$/)
     .required()
@@ -95,7 +104,7 @@ export const signUpValidations = Joi.object({
     .required()
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
-      'string.pattern.base': 'Debe contener letras y números.',
+      'string.pattern.base': 'Debe contener letras y números separados por un espacio.',
       'string.empty': 'Campo requerido.',
     }),
 });

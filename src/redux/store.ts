@@ -7,13 +7,19 @@ import { ActionsType as AuthActionsType } from './auth/types';
 import { categoryReducer } from './category/reducer';
 import { ActionsType as CategoryActionsType } from './category/types';
 import { clientReducer } from './clients/reducer';
+import { exchangeRateReducer } from './exchange-rate/reducer';
 import { modalReducer } from './modal/reducer';
+import { productsReducer } from './products/reducer';
+import { shoppingCartReducer } from './shopping-cart/reducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   categories: categoryReducer,
   modal: modalReducer,
   clients: clientReducer,
+  shoppingCart: shoppingCartReducer,
+  products: productsReducer,
+  exchangeRate: exchangeRateReducer,
 });
 
 const configureStore = () => {

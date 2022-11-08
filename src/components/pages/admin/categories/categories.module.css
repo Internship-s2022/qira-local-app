@@ -1,4 +1,28 @@
 .container {
   display: flex;
-  margin: auto;
+  flex-direction: column;
+}
+
+.titleContainer {
+  display: flex;
+  align-self: flex-start;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0.2rem 3.5rem;
+  border-bottom: solid 2px;
+}
+
+.addNewCategory {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addNewCategory h3 {
+  margin: 0 10px;
+}
+
+.addButton {
+  color: white;
+  background-color: var(--color-primary);
 }

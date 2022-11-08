@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Check, Close, LockPerson } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { Check, Close, Edit, LockPerson } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
 import * as thunks from 'src/redux/clients/thunk';
@@ -21,6 +22,7 @@ interface Client {
 
 const Clients = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const navigate = useNavigate();
   const clients = useSelector((state: RootState) => state.clients.clients);
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
 
@@ -46,10 +48,10 @@ const Clients = (): JSX.Element => {
   };
 
   const headers: Headers[] = [
-    { header: 'Cuit', key: 'cuit' },
+    { header: 'CUIT', key: 'cuit' },
     { header: 'Razón Social', key: 'businessName' },
     { header: 'Email', key: 'email' },
-    { header: 'Telefono', key: 'phoneNumber' },
+    { header: 'Teléfono', key: 'phoneNumber' },
     { header: 'Estado', key: 'state' },
   ];
 
@@ -88,6 +90,14 @@ const Clients = (): JSX.Element => {
             onCloseCallback: () => dispatch(closeModal()),
           }),
         );
+      },
+    }),
+    (rowData) => ({
+      active: true,
+      icon: <Edit />,
+      title: 'Editar Cliente',
+      onClick: () => {
+        navigate(`/admin/client/${rowData.id}`);
       },
     }),
   ];

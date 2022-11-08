@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Check, Close, DeleteForever } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { Add, Check, Close, DeleteForever, Edit } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
@@ -25,6 +27,7 @@ interface Category {
 
 const Categories = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const navigate = useNavigate();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const isFetching = useSelector((state: RootState) => state.categories.isFetching);
   const [categoriesList, setCategoriesList] = useState([]);
@@ -50,6 +53,14 @@ const Categories = (): JSX.Element => {
   }, [categories]);
 
   const buttons: ((rowData?: Category) => TableButton)[] = [
+    (rowData) => ({
+      active: true,
+      icon: <Edit />,
+      title: 'Editar',
+      onClick: () => {
+        navigate(`/admin/category/${rowData.id}`);
+      },
+    }),
     (rowData) => ({
       active: true,
       icon: rowData.isActive ? <Close /> : <Check />,
@@ -90,12 +101,26 @@ const Categories = (): JSX.Element => {
   ];
 
   const headers: Headers[] = [
-    { header: 'Categories', key: 'name' },
+    { header: 'Categoría', key: 'name' },
     { header: 'Estado', key: 'status' },
   ];
 
   return (
     <div className={styles.container}>
+      <div className={styles.titleContainer}>
+        <h1>Categorías</h1>
+        <div className={styles.addNewCategory}>
+          <h3>Agregar nueva categoría</h3>
+          <IconButton
+            className={styles.addButton}
+            disableRipple={true}
+            size="large"
+            onClick={() => navigate('/admin/category')}
+          >
+            <Add />
+          </IconButton>
+        </div>
+      </div>
       {isFetching ? (
         <></>
       ) : (

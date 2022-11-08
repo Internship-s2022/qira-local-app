@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 
+import { RootState } from 'src/redux/store';
+
 import { CustomFile } from '../types';
-import { UploadImageModalProps } from './types';
 import styles from './upload-image.module.css';
 
-export const UploadImage = (props: UploadImageModalProps) => {
+export const UploadImage = () => {
   const [selectedFile, setSelectedFile] = useState<CustomFile>();
   const [preview, setPreview] = useState<string>();
+  const options = useSelector((state: RootState) => state.modal.options);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -39,7 +42,7 @@ export const UploadImage = (props: UploadImageModalProps) => {
         </Button>
         {preview && (
           <Button
-            onClick={props.onConfirm}
+            onClick={() => options.onConfirmCallback(selectedFile)}
             className={styles.buttonSend}
             variant="contained"
             component="label"
