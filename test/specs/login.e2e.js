@@ -1,11 +1,12 @@
 import LoginPage from  '../page-objects/login.page';
+import Header from '../page-objects/header.page';
 
 describe('Login page testing', () => {
   beforeAll('Open browser', () => {
     LoginPage.openBrowser();
   });
   beforeEach('Refresh the page', () => {
-    LoginPage.loginButton.click();
+    Header.loginButton.click();
     browser.refresh();
     LoginPage.loginButton.click();
   });

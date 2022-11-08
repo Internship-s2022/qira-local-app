@@ -1,6 +1,5 @@
 class SignUpPage {
 //Getters
-
   get emailInput () {
     return $('[data-testid=email-field] input');
   }
