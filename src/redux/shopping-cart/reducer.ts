@@ -11,14 +11,13 @@ export const shoppingCartReducer = (
 ): ShoppingCartState => {
   switch (action.type) {
     case Actions.ADD_PRODUCT: {
-      let newList;
-      if (state.products.some((product) => product.product._id === action.payload.product._id)) {
-        newList = state.products.map((product) => {
-          if (product.product._id === action.payload.product._id) {
-            return { product: action.payload.product, quantity: action.payload.quantity };
-          }
-          return product;
-        });
+      let newList = [...state.products];
+      const result = state.products.findIndex(
+        (product) => product.product._id === action.payload.product._id,
+      );
+      if (result !== -1) {
+        newList[result] = action.payload;
+        console.log('new list', newList);
       } else {
         newList = [...state.products, action.payload];
       }

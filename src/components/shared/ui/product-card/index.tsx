@@ -39,9 +39,11 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
         />
         {product.isNew && <p className={styles.isNewLabel}>NUEVO</p>}
       </div>
-      <div onClick={() => navigate(`/product/${product._id}`)} className={styles.infoContainer}>
+      <div className={styles.infoContainer}>
         <p className={styles.categoryText}>{product.category.name}</p>
-        <p className={styles.nameText}>{product.brand + ' ' + product.name}</p>
+        <p onClick={() => navigate(`/product/${product._id}`)} className={styles.nameText}>
+          {product.brand + ' ' + product.name}
+        </p>
         <div className={styles.priceContainer}>
           <p className={styles.priceText}>{formatPriceText(product, productQuantity)}</p>
           <p className={styles.ivaText}> + IVA</p>

@@ -124,13 +124,15 @@ export const ProductDetail = (): JSX.Element => {
               <p className={styles.informationSubtitle}>Descripción</p>
               <p>{selectedProduct?.description}</p>
             </div>
-            <div className={styles.description}>
-              <p className={styles.informationSubtitle}>Información Técnica</p>
-              <a className={styles.pdf} href={selectedProduct?.technicalFile?.url}>
-                <FileCopyOutlined />
-                Ficha técnica
-              </a>
-            </div>
+            {selectedProduct?.technicalFile && (
+              <div className={styles.description}>
+                <p className={styles.informationSubtitle}>Información Técnica</p>
+                <a className={styles.pdf} href={selectedProduct?.technicalFile?.url}>
+                  <FileCopyOutlined />
+                  Ficha técnica
+                </a>
+              </div>
+            )}
           </div>
         </section>
       </section>
