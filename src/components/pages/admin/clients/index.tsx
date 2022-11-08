@@ -65,14 +65,14 @@ const Clients = (): JSX.Element => {
         rowData.isActive
           ? dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro que desea desactivar el cliente?',
+                message: '¿Está seguro de que desea desactivar el cliente?',
                 onConfirmCallback: () => dispatch(thunks.inactivateClient(rowData.id)),
                 onCloseCallback: () => dispatch(closeModal()),
               }),
             )
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro que desea activar el cliente?',
+                message: '¿Está seguro de que desea activar el cliente?',
                 onConfirmCallback: () => dispatch(thunks.activateClient(rowData.id)),
                 onCloseCallback: () => dispatch(closeModal()),
               }),

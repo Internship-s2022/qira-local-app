@@ -69,14 +69,14 @@ const Categories = (): JSX.Element => {
         rowData.isActive
           ? dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro que desea desactivar la categoría?',
+                message: '¿Está seguro de que desea desactivar la categoría?',
                 onConfirmCallback: () => dispatch(inactivateCategory(rowData.id)),
                 onCloseCallback: () => dispatch(closeModal()),
               }),
             )
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro que desea activar la categoría?',
+                message: '¿Está seguro de que desea activar la categoría?',
                 onConfirmCallback: () => dispatch(activateCategory(rowData.id)),
                 onCloseCallback: () => dispatch(closeModal()),
               }),
@@ -91,7 +91,7 @@ const Categories = (): JSX.Element => {
         rowData.logicDelete;
         dispatch(
           openModal(ModalTypes.CONFIRM, {
-            message: '¿Está seguro que desea eliminar la categoría?',
+            message: '¿Está seguro de que desea eliminar la categoría?',
             onConfirmCallback: () => dispatch(deleteCategory(rowData.id)),
             onCloseCallback: () => dispatch(closeModal()),
           }),
