@@ -1,0 +1,23 @@
+.orderContainer {
+  margin-left: 10%;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #f05523;
+}
+
+.productQuantity {
+  font-weight: bold;
+}
+
+.productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin: 10px;
+}
+
+.productBox {
+  margin-right: 10px;
+}
