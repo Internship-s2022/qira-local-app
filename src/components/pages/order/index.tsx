@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import OrderLayout from 'src/components/layout/order';
 import { OrderRoutes } from 'src/constants';
