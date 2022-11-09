@@ -8,6 +8,7 @@ import { formatPriceText } from 'src/helper/products';
 import { getProductById } from 'src/redux/products/selectors/getProductById';
 import { getPublicProducts } from 'src/redux/products/thunks';
 import { addProduct } from 'src/redux/shopping-cart/actions';
+import { getProductQuantity } from 'src/redux/shopping-cart/selectors/getProductQuantity';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './product-detail.module.css';
@@ -16,9 +17,11 @@ export const ProductDetail = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const params = useParams();
   const selectedProduct = useSelector((state: RootState) => getProductById(state, params.id));
+  const productQuantity = useSelector((state: RootState) => getProductQuantity(state, params.id));
   const [disabled, setDisabled] = useState<boolean>(false);
 
   const [count, setCount] = useState<number>(0);
+  const [divInfo, setDivInfo] = useState<boolean>(false);
   const addToCart = () => {
     if (count >= 1) {
       const shoppingCartProduct = {
@@ -77,7 +80,7 @@ export const ProductDetail = (): JSX.Element => {
                     <IconButton
                       className={styles.iconButton}
                       onClick={() => {
-                        setCount(count - 1);
+                        count >= 1 && setCount(count - 1);
                         setDisabled(false);
                       }}
                     >
@@ -89,12 +92,18 @@ export const ProductDetail = (): JSX.Element => {
                       onClick={() => {
                         setCount(count + 1);
                         setDisabled(false);
+                        productQuantity >= 1 && setDivInfo(true);
                       }}
                     >
                       <Add />
                     </IconButton>
                   </div>
                 </div>
+                {divInfo && (
+                  <div className={styles.divInfoQuantity}>
+                    Usted está modificando la cantidad previamente elegida
+                  </div>
+                )}
               </div>
               <div>
                 <div className={styles.priceContainerAmount}>
@@ -109,7 +118,10 @@ export const ProductDetail = (): JSX.Element => {
                   variant="contained"
                   color="primary"
                   disabled={disabled}
-                  onClick={() => addToCart()}
+                  onClick={() => {
+                    addToCart();
+                    setDivInfo(false);
+                  }}
                 >
                   {selectedProduct?.stock > 0 ? 'Agregar al carrito' : 'Producto agotado'}
                 </Button>

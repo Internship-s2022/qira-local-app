@@ -189,6 +189,11 @@
   margin: 0;
 }
 
+.divInfoQuantity {
+  font-size: 11px;
+  color: #f05523;
+}
+
 .button {
   width: 100%;
 }
