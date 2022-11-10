@@ -21,7 +21,6 @@ export const ProductDetail = (): JSX.Element => {
   const [disabled, setDisabled] = useState<boolean>(false);
 
   const [count, setCount] = useState<number>(0);
-  const [divInfo, setDivInfo] = useState<boolean>(false);
   const addToCart = () => {
     if (count >= 1) {
       const shoppingCartProduct = {
@@ -92,18 +91,12 @@ export const ProductDetail = (): JSX.Element => {
                       onClick={() => {
                         setCount(count + 1);
                         setDisabled(false);
-                        productQuantity >= 1 && setDivInfo(true);
                       }}
                     >
                       <Add />
                     </IconButton>
                   </div>
                 </div>
-                {divInfo && (
-                  <div className={styles.divInfoQuantity}>
-                    Usted está modificando la cantidad previamente elegida
-                  </div>
-                )}
               </div>
               <div>
                 <div className={styles.priceContainerAmount}>
@@ -120,10 +113,13 @@ export const ProductDetail = (): JSX.Element => {
                   disabled={disabled}
                   onClick={() => {
                     addToCart();
-                    setDivInfo(false);
                   }}
                 >
-                  {selectedProduct?.stock > 0 ? 'Agregar al carrito' : 'Producto agotado'}
+                  {selectedProduct?.stock > 0
+                    ? productQuantity >= 1
+                      ? 'Modificar Cantidad'
+                      : 'Agregar al carrito'
+                    : 'Producto agotado'}
                 </Button>
               </div>
             </div>
