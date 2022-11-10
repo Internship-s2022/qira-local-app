@@ -69,24 +69,26 @@ const OrderLayout = (): JSX.Element => {
           <Outlet />
         </div>
         <div className={styles.pricesSidebar}>
-          <h1 className={styles.title}>Resumen</h1>
-          <div className={styles.priceDetails}>
-            <div className={styles.productsPrice}>
-              <p>{'Productos (AR$)'}</p>
-              <p>{'AR$ ' + orderAmounts.products.toFixed(2)}</p>
+          <div className={styles.sidebarContent}>
+            <h1 className={styles.title}>Resumen</h1>
+            <div className={styles.priceDetails}>
+              <div className={styles.productsPrice}>
+                <p>{'Productos (AR$)'}</p>
+                <p>{'AR$ ' + orderAmounts.products.toFixed(2)}</p>
+              </div>
+              <div className={styles.taxesPrice}>
+                <p>IVA</p>
+                <p>{'AR$ ' + orderAmounts.taxes.toFixed(2)}</p>
+              </div>
             </div>
-            <div className={styles.taxesPrice}>
-              <p>IVA</p>
-              <p>{'AR$ ' + orderAmounts.taxes.toFixed(2)}</p>
+            <div className={styles.totalPrice}>
+              <p>TOTAL</p>
+              <p>{'AR$ ' + orderAmounts.total.toFixed(2)}</p>
             </div>
+            <Button size="large" className={styles.button} onClick={btnOptions.onClick}>
+              {btnOptions.text}
+            </Button>
           </div>
-          <div className={styles.totalPrice}>
-            <p>TOTAL</p>
-            <p>{'AR$ ' + orderAmounts.total.toFixed(2)}</p>
-          </div>
-          <Button size="large" className={styles.button} onClick={btnOptions.onClick}>
-            {btnOptions.text}
-          </Button>
         </div>
       </div>
       <div className={styles.footer}>
