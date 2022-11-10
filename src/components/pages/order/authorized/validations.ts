@@ -1,0 +1,36 @@
+import Joi from 'joi';
+
+export const AuthorizedValidations = Joi.object({
+  firstName: Joi.string()
+    .min(3)
+    .required()
+    .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+    .messages({
+      'string.min': 'Debe contener al menos 3 caracteres.',
+      'string.pattern.base': 'Debe contener solo letras.',
+      'string.empty': 'Campo requerido.',
+    }),
+  lastName: Joi.string()
+    .min(3)
+    .required()
+    .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+    .messages({
+      'string.min': 'Debe contener al menos 3 caracteres.',
+      'string.pattern.base': 'Debe contener solo letras.',
+      'string.empty': 'Campo requerido.',
+    }),
+  phoneNumber: Joi.string()
+    .regex(/^[0-9\-+]{8,11}$/)
+    .required()
+    .messages({
+      'string.empty': 'Campo requerido.',
+      'string.pattern.base': 'Debe contener 8-11 caracteres númericos.',
+    }),
+  dni: Joi.string()
+    .regex(/^[0-9\-+]{7,8}$/)
+    .required()
+    .messages({
+      'string.empty': 'Campo requerido.',
+      'string.pattern.base': 'Debe contener 7-8 caracteres númericos.',
+    }),
+});
