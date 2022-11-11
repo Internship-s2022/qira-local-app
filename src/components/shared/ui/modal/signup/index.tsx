@@ -269,7 +269,7 @@ const SignUpForm = () => {
           Crear cuenta
         </Button>
       )}
-      <div className={styles.loginContainer}>
+      <div className={styles.loginContainer} data-testid="back-login">
         <AccountCircleOutlined color="primary" />
         <p className={styles.loginText} onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>
           ¿Ya estás registrado? Inicia sesión.

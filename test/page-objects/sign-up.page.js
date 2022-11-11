@@ -90,6 +90,9 @@ class SignUpPage {
   get crossModal () {
     return $('[data-testid=cross-modal]');
   }
+  get backLogin () {
+    return $('[data-testid=back-login] p')
+  }
 
   //Methods
 
