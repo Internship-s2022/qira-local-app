@@ -2595,7 +2595,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.provinceError).toBeDisplayed();
     await expect(SignUpPage.provinceError).toHaveText('');
   });
-  it('Sign up successfully', async () => {
+  it('Sign up error - We try to register the same account', async () => {
     await SignUpPage.signUpComplete(
       randomEmail,
       'test1234',
