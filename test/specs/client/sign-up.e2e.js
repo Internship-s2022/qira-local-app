@@ -1294,7 +1294,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.ivaConditionError).toBeDisplayed();
     await expect(SignUpPage.ivaConditionError).toHaveText('');
     await expect(SignUpPage.cuitError).toBeDisplayed();
-    await expect(SignUpPage.cuitError).toHaveText('Debe contener sólo 11 caracteres numéricos.');
+    await expect(SignUpPage.cuitError).toHaveText('Debe contener solo 11 caracteres numéricos.');
     await expect(SignUpPage.streetError).toBeDisplayed();
     await expect(SignUpPage.streetError).toHaveText('');
     await expect(SignUpPage.zipCodeError).toBeDisplayed();
@@ -1333,7 +1333,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.ivaConditionError).toBeDisplayed();
     await expect(SignUpPage.ivaConditionError).toHaveText('');
     await expect(SignUpPage.cuitError).toBeDisplayed();
-    await expect(SignUpPage.cuitError).toHaveText('Debe contener sólo 11 caracteres numéricos.');
+    await expect(SignUpPage.cuitError).toHaveText('Debe contener solo 11 caracteres numéricos.');
     await expect(SignUpPage.streetError).toBeDisplayed();
     await expect(SignUpPage.streetError).toHaveText('');
     await expect(SignUpPage.zipCodeError).toBeDisplayed();
@@ -1372,7 +1372,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.ivaConditionError).toBeDisplayed();
     await expect(SignUpPage.ivaConditionError).toHaveText('');
     await expect(SignUpPage.cuitError).toBeDisplayed();
-    await expect(SignUpPage.cuitError).toHaveText('Debe contener sólo 11 caracteres numéricos.');
+    await expect(SignUpPage.cuitError).toHaveText('Debe contener solo 11 caracteres numéricos.');
     await expect(SignUpPage.streetError).toBeDisplayed();
     await expect(SignUpPage.streetError).toHaveText('');
     await expect(SignUpPage.zipCodeError).toBeDisplayed();
@@ -1411,7 +1411,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.ivaConditionError).toBeDisplayed();
     await expect(SignUpPage.ivaConditionError).toHaveText('');
     await expect(SignUpPage.cuitError).toBeDisplayed();
-    await expect(SignUpPage.cuitError).toHaveText('Debe contener sólo 11 caracteres numéricos.');
+    await expect(SignUpPage.cuitError).toHaveText('Debe contener solo 11 caracteres numéricos.');
     await expect(SignUpPage.streetError).toBeDisplayed();
     await expect(SignUpPage.streetError).toHaveText('');
     await expect(SignUpPage.zipCodeError).toBeDisplayed();
@@ -1450,7 +1450,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.ivaConditionError).toBeDisplayed();
     await expect(SignUpPage.ivaConditionError).toHaveText('');
     await expect(SignUpPage.cuitError).toBeDisplayed();
-    await expect(SignUpPage.cuitError).toHaveText('Debe contener sólo 11 caracteres numéricos.');
+    await expect(SignUpPage.cuitError).toHaveText('Debe contener solo 11 caracteres numéricos.');
     await expect(SignUpPage.streetError).toBeDisplayed();
     await expect(SignUpPage.streetError).toHaveText('');
     await expect(SignUpPage.zipCodeError).toBeDisplayed();
@@ -1489,7 +1489,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.ivaConditionError).toBeDisplayed();
     await expect(SignUpPage.ivaConditionError).toHaveText('');
     await expect(SignUpPage.cuitError).toBeDisplayed();
-    await expect(SignUpPage.cuitError).toHaveText('Debe contener sólo 11 caracteres numéricos.');
+    await expect(SignUpPage.cuitError).toHaveText('Debe contener solo 11 caracteres numéricos.');
     await expect(SignUpPage.streetError).toBeDisplayed();
     await expect(SignUpPage.streetError).toHaveText('');
     await expect(SignUpPage.zipCodeError).toBeDisplayed();
@@ -1528,7 +1528,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.ivaConditionError).toBeDisplayed();
     await expect(SignUpPage.ivaConditionError).toHaveText('');
     await expect(SignUpPage.cuitError).toBeDisplayed();
-    await expect(SignUpPage.cuitError).toHaveText('Debe contener sólo 11 caracteres numéricos.');
+    await expect(SignUpPage.cuitError).toHaveText('Debe contener solo 11 caracteres numéricos.');
     await expect(SignUpPage.streetError).toBeDisplayed();
     await expect(SignUpPage.streetError).toHaveText('');
     await expect(SignUpPage.zipCodeError).toBeDisplayed();
@@ -2557,61 +2557,68 @@ describe('Sign up page testing', () => {
   const randomEmail = `${randomWord}@qira.com`
 
   it('Sign up successfully', async () => {
-      await SignUpPage.signUpComplete(
-        randomEmail,
-        'test1234',
-        'test1234',
-        '11',
-        '3693000',
-        'Radium Rocket',
-        '27407809519',
-        'Cordoba 3000',
-        '2000',
-        '9 de julio',
-        'Santa Fe'
-      );
-      await expect(SignUpPage.emailError).toBeDisplayed();
-      await expect(SignUpPage.emailError).toHaveText('');
-      await expect(SignUpPage.passwordError).toBeDisplayed();
-      await expect(SignUpPage.passwordError).toHaveText('');
-      await expect(SignUpPage.repeatPwError).toBeDisplayed();
-      await expect(SignUpPage.repeatPwError).toHaveText('');
-      await expect(SignUpPage.codeAreaError).toBeDisplayed();
-      await expect(SignUpPage.codeAreaError).toHaveText('');
-      await expect(SignUpPage.phoneNumberError).toBeDisplayed();
-      await expect(SignUpPage.phoneNumberError).toHaveText('');
-      await expect(SignUpPage.businessNameError).toBeDisplayed();
-      await expect(SignUpPage.businessNameError).toHaveText('');
-      await expect(SignUpPage.ivaConditionError).toBeDisplayed();
-      await expect(SignUpPage.ivaConditionError).toHaveText('');
-      await expect(SignUpPage.cuitError).toBeDisplayed();
-      await expect(SignUpPage.cuitError).toHaveText('');
-      await expect(SignUpPage.streetError).toBeDisplayed();
-      await expect(SignUpPage.streetError).toHaveText('');
-      await expect(SignUpPage.zipCodeError).toBeDisplayed();
-      await expect(SignUpPage.zipCodeError).toHaveText('');
-      await expect(SignUpPage.cityError).toBeDisplayed();
-      await expect(SignUpPage.cityError).toHaveText('');
-      await expect(SignUpPage.provinceError).toBeDisplayed();
-      await expect(SignUpPage.provinceError).toHaveText('');
-    });
-    it('Sign up successfully', async () => {
-      await SignUpPage.signUpComplete(
-        randomEmail,
-        'test1234',
-        'test1234',
-        '11',
-        '3693000',
-        'Radium Rocket',
-        '27407809519',
-        'Cordoba 3000',
-        '2000',
-        '9 de julio',
-        'Santa Fe'
-      );
-      await expect(LoginPage.infoModal).toBeDisplayed();
-      await expect(LoginPage.infoModalMessage).toHaveText('Ha ocurrido un error');
-      await LoginPage.infoModalBtn.click();
-      await expect(LoginPage.infoModal).not.toBeDisplayed();
-    });
+    await SignUpPage.signUpComplete(
+      randomEmail,
+      'test1234',
+      'test1234',
+      '11',
+      '3693000',
+      'Radium Rocket',
+      '27407809519',
+      'Cordoba 3000',
+      '2000',
+      '9 de julio',
+      'Santa Fe'
+    );
+    await expect(SignUpPage.emailError).toBeDisplayed();
+    await expect(SignUpPage.emailError).toHaveText('');
+    await expect(SignUpPage.passwordError).toBeDisplayed();
+    await expect(SignUpPage.passwordError).toHaveText('');
+    await expect(SignUpPage.repeatPwError).toBeDisplayed();
+    await expect(SignUpPage.repeatPwError).toHaveText('');
+    await expect(SignUpPage.codeAreaError).toBeDisplayed();
+    await expect(SignUpPage.codeAreaError).toHaveText('');
+    await expect(SignUpPage.phoneNumberError).toBeDisplayed();
+    await expect(SignUpPage.phoneNumberError).toHaveText('');
+    await expect(SignUpPage.businessNameError).toBeDisplayed();
+    await expect(SignUpPage.businessNameError).toHaveText('');
+    await expect(SignUpPage.ivaConditionError).toBeDisplayed();
+    await expect(SignUpPage.ivaConditionError).toHaveText('');
+    await expect(SignUpPage.cuitError).toBeDisplayed();
+    await expect(SignUpPage.cuitError).toHaveText('');
+    await expect(SignUpPage.streetError).toBeDisplayed();
+    await expect(SignUpPage.streetError).toHaveText('');
+    await expect(SignUpPage.zipCodeError).toBeDisplayed();
+    await expect(SignUpPage.zipCodeError).toHaveText('');
+    await expect(SignUpPage.cityError).toBeDisplayed();
+    await expect(SignUpPage.cityError).toHaveText('');
+    await expect(SignUpPage.provinceError).toBeDisplayed();
+    await expect(SignUpPage.provinceError).toHaveText('');
   });
+  it('Sign up successfully', async () => {
+    await SignUpPage.signUpComplete(
+      randomEmail,
+      'test1234',
+      'test1234',
+      '11',
+      '3693000',
+      'Radium Rocket',
+      '27407809519',
+      'Cordoba 3000',
+      '2000',
+      '9 de julio',
+      'Santa Fe'
+    );
+    await expect(LoginPage.infoModal).toBeDisplayed();
+    await expect(LoginPage.infoModalMessage).toHaveText('Ha ocurrido un error');
+    await LoginPage.infoModalBtn.click();
+    await expect(LoginPage.infoModal).not.toBeDisplayed();
+  });
+  it('Login with the created account', async () => {
+    await SignUpPage.backLogin.click();
+    await LoginPage.login(randomEmail, 'test1234');
+    await expect(LoginPage.infoModal).toBeDisplayed();
+    await expect(LoginPage.infoModal).toHaveTextContaining('Sesión iniciada exitosamente.');
+    await LoginPage.infoModalBtn.click();
+  });
+});
