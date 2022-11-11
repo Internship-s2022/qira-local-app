@@ -33,7 +33,7 @@ export const SharedSelect = <TValuesSelect extends FieldValues>({
         data-testid={`${name}-select`}
       >
         {props.options.map((option, index) => (
-          <MenuItem key={index} value={option.value}>
+          <MenuItem key={index} value={option.value} data-testid={`${index}-item`}>
             {option.label}
           </MenuItem>
         ))}

@@ -14,7 +14,7 @@ export const Info = () => {
   const handleConfirm = options?.onCloseCallback || (() => dispatch(closeModal()));
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="info-modal">
       <p data-testid="info-message">{options?.message}</p>
       <div className={styles.button}>
         <Button

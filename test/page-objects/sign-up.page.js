@@ -37,7 +37,10 @@ class SignUpPage {
     return $('[data-testid=businessName-field] p');
   }
   get ivaConditionInput () {
-    return $('[data-testid=ivaCondition-select] input');
+    return $('[data-testid=ivaCondition-select]');
+  }
+  get ivaConditionOpt () {
+    return $('[data-testid="3-item"]')
   }
   get ivaConditionError () {
     return $('[data-testid=ivaCondition-select] p');
@@ -103,19 +106,57 @@ class SignUpPage {
     city,
     province
   ) {
-  await this.emailInput.setValue(email);
-  await this.passwordInput.setValue(password);
-  await this.repeatPwInput.setValue(repeatPassword);
-  await this.codeAreaInput.setValue(codeArea);
-  await this.phoneNumberInput.setValue(phoneNumber);
-  await this.businessNameInput.setValue(businessName);
-  await this.cuitInput.setValue(cuit);
-  await this.streetInput.setValue(street);
-  await this.zipCodeInput.setValue(zipCode);
-  await this.cityInput.setValue(city);
-  await this.provinceInput.setValue(province);
-  await this.signUpBtn.click();
+    await this.emailInput.setValue(email);
+    await this.passwordInput.setValue(password);
+    await this.repeatPwInput.setValue(repeatPassword);
+    await this.codeAreaInput.setValue(codeArea);
+    await this.phoneNumberInput.setValue(phoneNumber);
+    await this.businessNameInput.setValue(businessName);
+    await this.cuitInput.setValue(cuit);
+    await this.streetInput.setValue(street);
+    await this.zipCodeInput.setValue(zipCode);
+    await this.cityInput.setValue(city);
+    await this.provinceInput.setValue(province);
+    await this.signUpBtn.click();
   };
-}
+
+  async signUpComplete(
+    email,
+    password,
+    repeatPassword,
+    codeArea,
+    phoneNumber,
+    businessName,
+    cuit,
+    street,
+    zipCode,
+    city,
+    province
+  ) {
+    await this.emailInput.setValue(email);
+    await this.passwordInput.setValue(password);
+    await this.repeatPwInput.setValue(repeatPassword);
+    await this.codeAreaInput.setValue(codeArea);
+    await this.phoneNumberInput.setValue(phoneNumber);
+    await this.businessNameInput.setValue(businessName);
+    await this.ivaConditionInput.click();
+    await this.ivaConditionOpt.click();
+    await this.cuitInput.setValue(cuit);
+    await this.streetInput.setValue(street);
+    await this.zipCodeInput.setValue(zipCode);
+    await this.cityInput.setValue(city);
+    await this.provinceInput.setValue(province);
+    await this.signUpBtn.click();
+  };
+
+  generateRandomWord(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.random() * length);
+    };
+    return result;
+  };
+};
 
 export default new SignUpPage();

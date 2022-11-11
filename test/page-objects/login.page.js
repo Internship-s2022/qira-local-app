@@ -30,6 +30,9 @@ class LoginPage {
     get modalContainer () {
       return $('[data-testid=modal-container]')
     }
+    get infoModal () {
+      return $('[data-testid=info-modal]')
+    }
     get infoModalBtn () {
       return $('[data-testid=info-modal-btn]')
     }
