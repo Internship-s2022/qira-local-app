@@ -13,3 +13,7 @@ export const decreaseProductQuantity = (id) => action(Actions.DECREASE_PRODUCT_Q
 export const openCart = () => action(Actions.OPEN_CART);
 
 export const closeCart = () => action(Actions.CLOSE_CART);
+
+export const addTransferReceipt = (receipt) => action(Actions.ADD_TRANSFER_RECEIPT, receipt);
+
+export const removeTransferReceipt = () => action(Actions.REMOVE_TRANSFER_RECEIPT);

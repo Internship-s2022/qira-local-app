@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-left: 30px;
+}
+
+.cardsContainer {
+  display: flex;
+  margin-left: 30px;
+}
+
+.methodPaymentBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.titlePaymentMethod {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.transferWithIcon {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  padding: 8px;
+  background-color: white;
+  border: solid #bcbcbc 0.5px;
+}
+
+.transferWithIcon p {
+  margin-left: 5px;
+}
+
+.dataContainer {
+  padding: 15px 30px;
+  margin: 20px;
+  background-color: white;
+  border: solid #bcbcbc 0.5px;
+}
+
+.dataContainerTitle {
+  font-weight: bold;
+  color: #f05523;
+}
+
+.dataContent {
+  padding: 10px;
+  font-size: 15px;
+  background-color: white;
+  border: solid #bcbcbc 0.5px;
+}
+
+.dataTitle {
+  margin: 5px;
+  font-weight: bold;
+}
+
+.dataInfo {
+  margin: 5px;
+}
+
+.copyData {
+  margin-left: 5px;
+  color: #30c0f0;
+  text-decoration: none;
+}
+
+.info {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.btnUpload {
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+}
