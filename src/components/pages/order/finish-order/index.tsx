@@ -59,7 +59,7 @@ export const FinishOrder = (): JSX.Element => {
             <p className={styles.sectionTitle}>Autorizados a retirar</p>
             <div className={styles.clickableDataCard} onClick={() => navigate('/order/authorized')}>
               <p className={styles.cardTitle}>First Name Last Name</p>
-              <p className={styles.cardText}>Dni - Teléfono</p>
+              <p className={styles.cardText}>DNI - Teléfono</p>
             </div>
           </div>
           <div className={styles.dataContainer}>
@@ -75,8 +75,10 @@ export const FinishOrder = (): JSX.Element => {
           <div className={styles.productsCard} onClick={() => navigate('/order/summary')}>
             {shoppingCartProducts.map((cartProduct, index) => (
               <div className={styles.productRow} key={index}>
-                <img className={styles.image} src={cartProduct.product.image.url} />
-                <p>{cartProduct.product.brand + ' ' + cartProduct.product.name}</p>
+                <div className={styles.imageContainer}>
+                  <img className={styles.image} src={cartProduct.product.image.url} />
+                  <p>{cartProduct.product.brand + ' ' + cartProduct.product.name}</p>
+                </div>
                 <div className={styles.quantity}>{cartProduct.quantity}</div>
               </div>
             ))}
