@@ -12,6 +12,7 @@ export const FinishOrder = (): JSX.Element => {
   const navigate = useNavigate();
   const client = useSelector((state: RootState) => state.auth.user);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
+  const authorized = useSelector((state: RootState) => state.shoppingCart.authorized);
 
   const formatIvaConditionsText = () => {
     let ivaCondition: string;
@@ -56,11 +57,24 @@ export const FinishOrder = (): JSX.Element => {
             </div>
           </div>
           <div className={styles.dataContainer}>
-            <p className={styles.sectionTitle}>Autorizados a retirar</p>
-            <div className={styles.clickableDataCard} onClick={() => navigate('/order/authorized')}>
-              <p className={styles.cardTitle}>First Name Last Name</p>
-              <p className={styles.cardText}>DNI - Teléfono</p>
-            </div>
+            <>
+              <p className={styles.sectionTitle}>Autorizados a retirar</p>
+              {authorized?.map((authorized, index) => (
+                <div
+                  key={index}
+                  className={styles.clickableDataCard}
+                  onClick={() => navigate('/order/authorized')}
+                >
+                  <p className={styles.cardTitle}>
+                    {capitalizeFirstLetter(authorized.firstName) +
+                      ' ' +
+                      capitalizeFirstLetter(authorized.lastName)}
+                  </p>
+                  <p className={styles.cardText}>DNI: {authorized.dni}</p>
+                  <p className={styles.cardText}>Teléfono: {authorized.phoneNumber}</p>
+                </div>
+              ))}
+            </>
           </div>
           <div className={styles.dataContainer}>
             <p className={styles.sectionTitle}>Dirección de retiro</p>
