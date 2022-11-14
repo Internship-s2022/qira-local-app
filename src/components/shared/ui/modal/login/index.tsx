@@ -65,7 +65,7 @@ export const LoginModal = () => {
 
   return (
     <div className={styles.container}>
-      <form>
+      <form data-testid="form-container">
         <div className={styles.formContainer}>
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>Iniciar sesión</h2>

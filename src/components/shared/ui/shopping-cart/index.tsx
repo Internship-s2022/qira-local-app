@@ -35,6 +35,7 @@ const ShoppingCart = (): JSX.Element => {
 
   return (
     <Modal
+      data-testid="cart-modal"
       className={styles.modal}
       open={open}
       onClose={() => {

@@ -27,6 +27,9 @@ class LoginPage {
     get modalContainer () {
       return $('[data-testid=modal-container]')
     }
+    get formContainer () {
+      return $('[data-testid=form-container]');
+    }
     get infoModal () {
       return $('[data-testid=info-modal]')
     }
