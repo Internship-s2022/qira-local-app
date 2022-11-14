@@ -1,6 +1,6 @@
 import { ActionType } from 'typesafe-actions';
 
-import { CustomFile } from 'src/components/shared/ui/modal/types';
+import { FileToSend } from 'src/types';
 
 import { Product } from '../products/types';
 import * as actions from './actions';
@@ -9,7 +9,7 @@ export type ActionsType = ActionType<typeof actions>;
 export interface ShoppingCartState {
   products: ShoppingCartProduct[];
   isOpen: boolean;
-  receipt: CustomFile;
+  receipt: FileToSend;
 }
 
 export interface ShoppingCartProduct {

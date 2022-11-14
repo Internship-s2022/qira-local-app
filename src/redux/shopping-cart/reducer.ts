@@ -1,5 +1,3 @@
-import { CustomFile } from 'src/components/shared/ui/modal/types';
-
 import { Actions, ActionsType, ShoppingCartState } from './types';
 
 const initialState: ShoppingCartState = {

@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AccountBalanceOutlined } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
+import { CustomFile } from 'src/components/shared/ui/modal/types';
+import { toBase64 } from 'src/helper/form';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { addTransferReceipt, removeTransferReceipt } from 'src/redux/shopping-cart/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 
+import { FileToSend } from '../../admin/product/types';
 import styles from './payment-method.module.css';
 
 const PaymentMethod = (): JSX.Element => {
@@ -20,7 +23,20 @@ const PaymentMethod = (): JSX.Element => {
     };
   }, []);
 
-  console.log(receipt);
+  const onUpload = async (selectedFile: CustomFile) => {
+    const fileBase64: any = await toBase64(selectedFile);
+    let fileToSend: FileToSend;
+    if (fileBase64) {
+      fileToSend = {
+        base64: fileBase64,
+        name: selectedFile.name,
+        type: selectedFile.type,
+        isNew: true,
+      };
+    }
+    dispatch(addTransferReceipt(fileToSend));
+    dispatch(closeModal());
+  };
   return (
     <section className={styles.container}>
       <h1 className={styles.title}>Método de pago</h1>
@@ -77,8 +93,7 @@ const PaymentMethod = (): JSX.Element => {
                 dispatch(
                   openModal(ModalTypes.UPLOAD_PDF, {
                     onConfirmCallback: (selectedFile) => {
-                      dispatch(addTransferReceipt(selectedFile));
-                      dispatch(closeModal());
+                      onUpload(selectedFile);
                     },
                     onCloseCallback: () => dispatch(closeModal),
                   }),
