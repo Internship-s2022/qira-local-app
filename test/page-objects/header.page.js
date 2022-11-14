@@ -1,6 +1,9 @@
 class Header {
 
   //Getters
+  get exchangeInfo () {
+    return $('[data-testid=exchange-info]');
+  }
   get logoQira () {
     return $('[data-testid=logo-qira]');
   }
@@ -8,7 +11,7 @@ class Header {
     return $('[data-testid=btn-categories]');
   }
   get categoryOpt () {
-    return $('[data-testid=category-0]');
+    return $('[data-testid=category-1]');
   }
   get searchInput () {
     return $('[data-testid=search-input]');
@@ -28,6 +31,10 @@ class Header {
   async search (product) {
     await this.searchInput.setValue(product);
     await this.searchIcon.click();
+  }
+
+  async openBrowser() {
+    browser.url('http://localhost:3000');
   }
 }
 
