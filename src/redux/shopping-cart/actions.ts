@@ -17,3 +17,7 @@ export const closeCart = () => action(Actions.CLOSE_CART);
 export const addTransferReceipt = (receipt) => action(Actions.ADD_TRANSFER_RECEIPT, receipt);
 
 export const removeTransferReceipt = () => action(Actions.REMOVE_TRANSFER_RECEIPT);
+
+export const setAuthorized = (authorizedList) => action(Actions.SET_AUTHORIZED, authorizedList);
+
+export const removeAuthorized = () => action(Actions.REMOVE_AUTHORIZED);
