@@ -31,6 +31,10 @@ class Header {
     await this.searchInput.setValue(product);
     await this.searchIcon.click();
   }
+
+  async openBrowser() {
+    browser.url('http://localhost:3000');
+  }
 }
 
 export default new Header();

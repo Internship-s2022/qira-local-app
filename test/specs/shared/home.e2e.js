@@ -60,8 +60,8 @@ describe('Testing Home', () => {
       await expect(ShoppingCart.cartModal).toBeDisplayed();
       await expect(ShoppingCart.cartModal).toHaveTextContaining(
         'Su carrito se encuentra vacío.',
-        'Por favor, seleccione un artículo para empezar.'
-        );
+        'Por favor, seleccione un artículo para empezar.',
+      );
       await ShoppingCart.closeModal.click();
       await expect(ShoppingCart.cartModal).not.toBeDisplayed();
     });

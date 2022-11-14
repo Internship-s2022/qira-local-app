@@ -56,7 +56,7 @@ const Header = () => {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.navBarContainer}>
-        <div className={styles.currency}>
+        <div className={styles.currency} data-testid="exchange-info">
           <p>Tipo de cambio</p>
           {exchangeRate && (
             <>
