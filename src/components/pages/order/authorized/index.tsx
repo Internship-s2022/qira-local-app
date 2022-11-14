@@ -97,8 +97,6 @@ const Authorized = () => {
     watchFieldArray.length > 1 ||
     (!authorizedState.length && updatingIndex !== null);
 
-  console.log('fields are ', fields);
-
   return (
     <section className={styles.container}>
       <h2>¿Quién retira o recibe la compra?</h2>
