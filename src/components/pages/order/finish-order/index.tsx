@@ -21,10 +21,10 @@ export const FinishOrder = (): JSX.Element => {
         ivaCondition = 'Exento';
         break;
       case IvaCondition.finalConsumer:
-        ivaCondition = 'Consumidor final';
+        ivaCondition = 'Consumidor Final';
         break;
       case IvaCondition.registeredResponsible:
-        ivaCondition = 'Responsable inscripto';
+        ivaCondition = 'Responsable Inscripto';
         break;
       case IvaCondition.selfEmployment:
         ivaCondition = 'Monotributista';
@@ -48,12 +48,18 @@ export const FinishOrder = (): JSX.Element => {
             <div className={styles.dataCard}>
               <p className={styles.cardText}>RAZÓN SOCIAL</p>
               <p className={styles.cardTitle}>{client.businessName}</p>
-              <p className={styles.cardText}>
-                {client.cuit} - {formatIvaConditionsText()} -{' '}
-                {capitalizeFirstLetter(client.address.street)} - {client.address.zipCode} -{' '}
-                {capitalizeFirstLetter(client.address.city)} -{' '}
-                {capitalizeFirstLetter(client.address.province)}
-              </p>
+              <div>
+                <p className={styles.cardText}>
+                  CUIT: {client.cuit} - {formatIvaConditionsText()}
+                </p>
+                <p className={styles.cardText}>
+                  {capitalizeFirstLetter(client.address.street)} - CP: {client.address.zipCode}
+                </p>
+                <p className={styles.cardText}>
+                  {capitalizeFirstLetter(client.address.city)} -{' '}
+                  {capitalizeFirstLetter(client.address.province)}
+                </p>
+              </div>
             </div>
           </div>
           <div className={styles.dataContainer}>
@@ -70,8 +76,10 @@ export const FinishOrder = (): JSX.Element => {
                       ' ' +
                       capitalizeFirstLetter(authorized.lastName)}
                   </p>
-                  <p className={styles.cardText}>DNI: {authorized.dni}</p>
-                  <p className={styles.cardText}>Teléfono: {authorized.phoneNumber}</p>
+                  <div>
+                    <p className={styles.cardText}>DNI: {authorized.dni}</p>
+                    <p className={styles.cardText}>Teléfono: {authorized.phoneNumber}</p>
+                  </div>
                 </div>
               ))}
             </>
@@ -80,7 +88,10 @@ export const FinishOrder = (): JSX.Element => {
             <p className={styles.sectionTitle}>Dirección de retiro</p>
             <div className={styles.dataCard}>
               <p className={styles.cardTitle}>Qira Central Storage</p>
-              <p className={styles.cardText}>Córdoba 1764 - CP 2000 - Rosario - Santa Fe</p>
+              <div>
+                <p className={styles.cardText}>Córdoba 1764 - CP: 2000</p>
+                <p className={styles.cardText}>Rosario - Santa Fe</p>
+              </div>
             </div>
           </div>
         </div>
