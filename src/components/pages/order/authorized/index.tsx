@@ -99,7 +99,7 @@ const Authorized = () => {
 
   return (
     <section className={styles.container}>
-      <h2>¿Quién retira o recibe la compra?</h2>
+      <h2>¿Quién retira la compra?</h2>
       <p className={styles.subTitle}>Puede elegir uno o dos autorizados</p>
       <form>
         {fields.map((item, index) => {
@@ -205,14 +205,14 @@ const Authorized = () => {
 
                 {showDeleteBtn && (
                   <Button
-                    color="primary"
+                    color="error"
                     variant="contained"
                     fullWidth
                     disabled={disableDeleteBtn}
                     className={styles.button}
                     onClick={() => handleDeleteAuthorized(index)}
                   >
-                    Delete
+                    Eliminar
                   </Button>
                 )}
               </div>
