@@ -30,14 +30,14 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
   };
 
   return (
-    <div className={styles.cardContainer}>
+    <div className={styles.cardContainer} data-testid="product-card">
       <div className={styles.imageContainer}>
-        <img
-          onClick={() => navigate(`/product/${product._id}`)}
-          className={styles.image}
-          src={product.image.url}
-        />
-        {product.isNew && <p className={styles.isNewLabel}>NUEVO</p>}
+        <img className={styles.image} src={product.image.url} />
+        {product.isNew && (
+          <p className={styles.isNewLabel} data-testid="new-label">
+            NUEVO
+          </p>
+        )}
       </div>
       <div onClick={() => navigate(`/product/${product._id}`)} className={styles.infoContainer}>
         <p className={styles.categoryText}>{product.category.name}</p>
@@ -53,6 +53,7 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
         <div className={styles.quantity}>
           <Tooltip title={'Quitar'}>
             <IconButton
+              data-testid="decrease-btn"
               className={styles.iconButton}
               onClick={() => dispatch(decreaseProductQuantity(product._id))}
             >
@@ -65,6 +66,7 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
           >
             <span>
               <IconButton
+                data-testid="increase-btn"
                 className={styles.iconButton}
                 disabled={productQuantity >= product.stock}
                 onClick={() => dispatch(increaseProductQuantity(product._id))}
@@ -81,6 +83,7 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
           color={product.stock > 0 ? 'primary' : 'secondary'}
           disabled={product.stock > 0 ? false : true}
           onClick={() => addToCart()}
+          data-testid="productCard-btn"
         >
           {product.stock > 0 ? 'Agregar al carrito' : 'Producto agotado'}
         </Button>

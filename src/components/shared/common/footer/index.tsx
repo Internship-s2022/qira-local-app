@@ -14,9 +14,9 @@ const Footer = () => {
       >
         <WhatsApp className={styles.wspIcon} />
       </a>
-      <footer className={styles.container} data-testid="test">
+      <footer className={styles.container} data-testid="footer-container">
         <div className={styles.footerContainer}>
-          <div className={styles.logoContainer}>
+          <div className={styles.logoContainer} data-testid="footer-info">
             <img
               className={styles.logo}
               src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.png`}

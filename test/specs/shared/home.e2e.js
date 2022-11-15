@@ -1,6 +1,8 @@
 import Header from '../../page-objects/header.page';
 import LoginPage from '../../page-objects/login.page';
 import ShoppingCart from '../../page-objects/shopping-cart.page';
+import HomeContent from '../../page-objects/home-content.page';
+import Footer from '../../page-objects/footer.page';
 
 describe('Testing Home', () => {
   beforeAll('Open browser', async () => {
@@ -8,6 +10,7 @@ describe('Testing Home', () => {
   });
   describe('Testing Header', () => {
     it('Qira logo redirection', async () => {
+      await expect(HomeContent.featuredCategories).toHaveTitle('Qira Local');
       await expect(Header.logoQira).toExist();
       await expect(Header.logoQira).toBeClickable();
       await Header.logoQira.click();
@@ -58,6 +61,82 @@ describe('Testing Home', () => {
         );
       await ShoppingCart.closeModal.click();
       await expect(ShoppingCart.cartModal).not.toBeDisplayed();
+    });
+  });
+  describe('Testing Home Content', () => {
+    it('Cover image', async () => {
+      await expect(HomeContent.homeCover).toExist();
+      await expect(HomeContent.homeCover).toHaveAttribute('alt');
+      const img = await HomeContent.homeCover.getProperty('alt');
+      await expect(img).toEqual('photo-cover');
+    });
+    it('Featured Products elements', async () => {
+      await HomeContent.featuredProducts.scrollIntoView();
+      await expect(HomeContent.featuredProducts).toExist();
+      await expect(HomeContent.featuredProducts).toHaveTextContaining('Productos destacados');
+      await expect(HomeContent.productCardContainer).toExist();
+      await expect(HomeContent.productCardContainer).toBeDisplayed();
+      await expect(HomeContent.newLabel).toExist();
+      await expect(HomeContent.newLabel).toBeDisplayed();
+    });
+    it('Product card data is correct - Info', async () => {
+      await expect(HomeContent.productCardImg).toHaveAttr('alt');
+      await expect(HomeContent.productCardInfo).toExist();
+      await expect(HomeContent.productCardInfo).toBeDisplayed();
+      const productInfo = await HomeContent.productCardInfo.getText();
+      await expect(HomeContent.productCardInfo).toHaveText(productInfo);
+    });
+    it('Product card data is correct - Button', async () => {
+      await expect(HomeContent.productQuantifier).not.toBeDisplayed();
+      await expect(HomeContent.productCardBtn).toExist();
+      await expect(HomeContent.productCardBtn).toBeClickable();
+      await expect(HomeContent.productCardBtn).toHaveTextContaining('AGREGAR AL CARRITO');
+      await HomeContent.productCardBtn.click();
+      await expect(HomeContent.productQuantifier).toBeDisplayed();
+    });
+    it('Featured Categories', async () => {
+      await HomeContent.featuredCategories.scrollIntoView();
+      await expect(HomeContent.featuredCategoriesTitle).toHaveText('Categorías destacadas');
+      await expect(HomeContent.category).toHaveText('Insecticidas');
+      const hRef = await HomeContent.category.getProperty('href');
+      await expect(HomeContent.category).toHaveHrefContaining('/category/insecticidas');
+    });
+  });
+  describe('Testing footer', () => {
+    it('Testing text elements', async () => {
+      await Footer.footerInfo.scrollIntoView();
+      await expect(Footer.footerInfo).toHaveText('© 2022 QIRA. Todos los derechos reservados.');
+    });
+    it('Testing social media icons - Facebook', async () => {
+      await expect(Footer.socialMedia).toHaveTextContaining('Seguinos en nuestras redes');
+      await Footer.socialIconFb.click();
+      await browser.switchWindow('Facebook');
+      await expect(browser).toHaveUrl('https://www.facebook.com/qira-local');
+      await browser.switchWindow('React App');
+    });
+    it('Testing social media icons - Instagram', async () => {
+      await Footer.socialIconIg.click();
+      await browser.switchWindow('Instagram');
+      await expect(browser).toHaveUrl('https://www.instagram.com/qira-local/');
+      await browser.switchWindow('React App');
+    });
+    it('Testing social media icons - Twitter', async () => {
+      await Footer.socialIconTw.click();
+      await browser.switchWindow('Twitter');
+      await expect(browser).toHaveUrl('https://twitter.com/radiumrocket');
+      await browser.switchWindow('React App');
+    });
+    it('Testing social media icons - Linkedin', async () => {
+      await Footer.socialIconIn.click();
+      await browser.switchWindow('LinkedIn');
+      await expect(browser).toHaveUrl('https://www.linkedin.com/qira-local?_l=en_US');
+      await browser.switchWindow('React App');
+    });
+    it('Testing social media icons - WhatsApp', async () => {
+      await Footer.socialIconWpp.click();
+      await browser.switchWindow('WhastApp');
+      await expect(browser).toHaveUrl('https://api.whatsapp.com/send/');
+      await browser.closeWindow();
     });
   });
 });
