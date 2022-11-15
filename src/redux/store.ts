@@ -9,6 +9,7 @@ import { ActionsType as CategoryActionsType } from './category/types';
 import { clientReducer } from './clients/reducer';
 import { exchangeRateReducer } from './exchange-rate/reducer';
 import { modalReducer } from './modal/reducer';
+import { ordersReducer } from './orders/reducer';
 import { productsReducer } from './products/reducer';
 import { shoppingCartReducer } from './shopping-cart/reducer';
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   shoppingCart: shoppingCartReducer,
   products: productsReducer,
   exchangeRate: exchangeRateReducer,
+  orders: ordersReducer,
 });
 
 const configureStore = () => {
