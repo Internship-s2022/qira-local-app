@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
+import { OrderRoutes } from 'src/constants';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { RootState } from 'src/redux/store';
 
@@ -14,39 +15,33 @@ const OrderLayout = (): JSX.Element => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  enum Routes {
-    SUMMARY = '/order/summary',
-    AUTHORIZED = '/order/authorized',
-    FINISH_ORDER = '/order/finish',
-    PAYMENT_METHOD = '/order/payment',
-  }
   let btnOptions: {
     text: string;
     onClick: () => void;
   };
   switch (location.pathname) {
-    case Routes.SUMMARY:
+    case `/order${OrderRoutes.SUMMARY}`:
       btnOptions = {
         text: 'Continuar compra',
-        onClick: () => navigate(Routes.AUTHORIZED),
+        onClick: () => navigate(`/order${OrderRoutes.AUTHORIZED}`),
       };
       break;
-    case Routes.AUTHORIZED:
+    case `/order${OrderRoutes.AUTHORIZED}`:
       btnOptions = {
         text: 'Continuar compra',
-        onClick: () => navigate(Routes.FINISH_ORDER),
+        onClick: () => navigate(`/order${OrderRoutes.FINISH_ORDER}`),
       };
       break;
-    case Routes.FINISH_ORDER:
+    case `/order${OrderRoutes.FINISH_ORDER}`:
       btnOptions = {
         text: 'Continuar compra',
-        onClick: () => navigate(Routes.PAYMENT_METHOD),
+        onClick: () => navigate(`/order${OrderRoutes.PAYMENT_METHOD}`),
       };
       break;
-    case Routes.PAYMENT_METHOD:
+    case `/order${OrderRoutes.PAYMENT_METHOD}`:
       btnOptions = {
         text: 'Finalizar compra',
-        onClick: () => navigate(Routes.PAYMENT_METHOD),
+        onClick: () => navigate(`/order${OrderRoutes.PAYMENT_METHOD}`),
       };
       break;
     default:

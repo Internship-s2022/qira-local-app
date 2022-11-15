@@ -4,20 +4,34 @@ import { useNavigate } from 'react-router-dom';
 import { Close, ShoppingCartOutlined } from '@mui/icons-material';
 import { Box, Button, Modal } from '@mui/material';
 
+import { openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
 import { closeCart } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { AppDispatch, RootState } from 'src/redux/store';
+import { UserRole } from 'src/types';
 
 import ProductBox from '../product-box';
 import styles from './shopping-cart.module.css';
 
 const ShoppingCart = (): JSX.Element => {
+  const token = sessionStorage.getItem('token');
+  const userRole = sessionStorage.getItem('role');
   const dollarRate = 160;
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
   const open = useSelector((state: RootState) => state.shoppingCart.isOpen);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state, dollarRate));
+
+  const checkLoggedUser = () => {
+    dispatch(closeCart());
+    if (token && userRole === UserRole.CLIENT) {
+      navigate('/order/summary');
+    } else {
+      dispatch(openModal(ModalTypes.LOGIN));
+    }
+  };
 
   return (
     <Modal
@@ -46,11 +60,7 @@ const ShoppingCart = (): JSX.Element => {
                     <p className={styles.ivaText}> + IVA</p>
                   </div>
                 </div>
-                <Button
-                  size="large"
-                  className={styles.button}
-                  onClick={() => navigate('/order/summary')}
-                >
+                <Button size="large" className={styles.button} onClick={() => checkLoggedUser()}>
                   Finalizar compra
                 </Button>
               </div>
