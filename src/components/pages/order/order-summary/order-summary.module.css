@@ -1,5 +1,6 @@
 .orderContainer {
-  margin-left: 10%;
+  margin-bottom: 50px;
+  margin-left: 30px;
 }
 
 .subtitle {
@@ -14,8 +15,7 @@
 .productsContainer {
   display: flex;
   flex-wrap: wrap;
-  padding: 10px;
-  margin: 10px;
+  width: 100%;
 }
 
 .productBox {
