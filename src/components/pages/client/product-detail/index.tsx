@@ -34,7 +34,10 @@ export const ProductDetail = (): JSX.Element => {
 
   useEffect(() => {
     params.id && dispatch(getPublicProducts());
-  }, []);
+    if (productQuantity >= 1) {
+      setCount(productQuantity);
+    }
+  }, [productQuantity]);
 
   return (
     <div className={styles.mainContainer}>
@@ -48,7 +51,7 @@ export const ProductDetail = (): JSX.Element => {
       <section className={styles.productContainer}>
         <div className={styles.cardProduct}>
           <div className={styles.headerProduct}>
-            {selectedProduct?.isNew && <p className={styles.isNewLabel}>Nuevo</p>}
+            {selectedProduct?.isNew && <p className={styles.isNewLabel}>NUEVO</p>}
             <p className={styles.productName}>{selectedProduct?.name}</p>
           </div>
           <div className={styles.imageAndPriceContainer}>
@@ -135,7 +138,12 @@ export const ProductDetail = (): JSX.Element => {
             {selectedProduct?.technicalFile && (
               <div className={styles.description}>
                 <p className={styles.informationSubtitle}>Información Técnica</p>
-                <a className={styles.pdf} href={selectedProduct?.technicalFile?.url}>
+                <a
+                  className={styles.pdf}
+                  href={selectedProduct?.technicalFile?.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <FileCopyOutlined />
                   Ficha técnica
                 </a>
