@@ -13,6 +13,7 @@ describe('Testing Home', () => {
       await expect(HomeContent.featuredCategories).toHaveTitle('Qira Local');
     });
     it('Qira logo redirection', async () => {
+      await expect(HomeContent.featuredCategories).toHaveTitle('Qira Local');
       await expect(Header.logoQira).toExist();
       await expect(Header.logoQira).toBeClickable();
       await Header.logoQira.click();

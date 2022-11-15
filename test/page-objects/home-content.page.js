@@ -1,50 +1,50 @@
 class HomeContent {
-  get homeCover () {
+  get homeCover() {
     return $('[data-testid=home-cover] img');
   }
 
   // Featured Products
 
-  get featuredProducts () {
+  get featuredProducts() {
     return $('[data-testid=featuredProducts]');
   }
-  get productCardContainer () {
+  get productCardContainer() {
     return $('[data-testid=featuredProducts] div');
   }
-  get productCard () {
+  get productCard() {
     return $('[data-testid=product-card]');
   }
-  get productCardImgContainer () {
+  get productCardImgContainer() {
     return $('[data-testid=product-card] div:nth-child(1)');
   }
-  get productCardImg () {
+  get productCardImg() {
     return $('[data-testid=product-card] div:nth-child(1) img');
   }
-  get productCardInfo () {
+  get productCardInfo() {
     return $('[data-testid=product-card] div:nth-child(2)');
   }
-  get newLabel () {
+  get newLabel() {
     return $('[data-testid=new-label]');
   }
-  get productCardBtn () {
+  get productCardBtn() {
     return $('[data-testid=productCard-btn]');
   }
-  get increaseBtn () {
+  get increaseBtn() {
     return $('[data-testid=increase-btn]');
   }
-  get decreaseBtn () {
+  get decreaseBtn() {
     return $('[data-testid=decrease-btn]');
   }
 
   // Featured Categories
 
-  get featuredCategories () {
+  get featuredCategories() {
     return $('[data-testid=featuredCategories]');
   }
-  get featuredCategoriesTitle () {
+  get featuredCategoriesTitle() {
     return $('[data-testid=featuredCategories] h2');
   }
-  get category () {
+  get category() {
     return $('[data-testid="0-category"]');
   }
 }
