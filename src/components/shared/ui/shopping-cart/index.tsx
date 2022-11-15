@@ -15,11 +15,11 @@ import ProductBox from '../product-box';
 import styles from './shopping-cart.module.css';
 
 const ShoppingCart = (): JSX.Element => {
-  const token = sessionStorage.getItem('token');
-  const userRole = sessionStorage.getItem('role');
   const dollarRate = 160;
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
+  const token = useSelector((state: RootState) => state.auth.token);
+  const userRole = useSelector((state: RootState) => state.auth.role);
   const open = useSelector((state: RootState) => state.shoppingCart.isOpen);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state, dollarRate));
