@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { ArrowBack } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 import { logoutUser } from 'src/redux/auth/actions';
@@ -23,8 +24,18 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
           <ul>
             {props.links.map((link, index) => {
               return (
-                <NavLink to={props.baseUrl + link.link} key={index}>
-                  <li>{link.title}</li>
+                <NavLink
+                  to={link.title === 'Volver a QIRA' ? link.link : props.baseUrl + link.link}
+                  key={index}
+                >
+                  {link.title === 'Volver a QIRA' ? (
+                    <li className={styles.arrowTab}>
+                      <ArrowBack className={styles.iconArrow} />
+                      {link.title}
+                    </li>
+                  ) : (
+                    <li>{link.title}</li>
+                  )}
                 </NavLink>
               );
             })}
