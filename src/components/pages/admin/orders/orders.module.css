@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleContainer {
+  display: flex;
+  align-self: flex-start;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0.5% 0 0 5%;
+  border-bottom: solid 2px;
+}
+
+.btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn {
+  max-width: 150px;
+  height: 60px;
+  margin-left: 1%;
+}
