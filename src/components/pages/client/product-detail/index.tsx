@@ -65,14 +65,14 @@ export const ProductDetail = (): JSX.Element => {
                     <p className={styles.subtitle}>Formas de pago aceptadas</p>
                     <div className={styles.iconInfo}>
                       <PaidOutlined className={styles.payInfoIcon} />
-                      <p>Transferencia bancaria</p>
+                      <p className={styles.infoText}>Transferencia bancaria</p>
                     </div>
                   </div>
                   <div className={styles.payInfo}>
                     <p className={styles.subtitle}>Tipos de entrega disponibles</p>
                     <div className={styles.iconInfo}>
                       <StoreOutlined className={styles.payInfoIcon} />
-                      <p> Retira en QiraPoint</p>
+                      <p className={styles.infoText}> Retira en QiraPoint</p>
                     </div>
                   </div>
                 </div>
