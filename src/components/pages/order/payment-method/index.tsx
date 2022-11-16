@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AccountBalanceOutlined } from '@mui/icons-material';
+import { AccountBalanceOutlined, ContentCopyOutlined } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 import { CustomFile } from 'src/components/shared/ui/modal/types';
@@ -78,11 +78,10 @@ const PaymentMethod = (): JSX.Element => {
               <p className={styles.dataInfo}>info@alz-agro.com</p>
             </div>
             <div>
-              <p>
-                <a className={styles.copyData} href="">
-                  Copiar datos
-                </a>
-              </p>
+              <a className={styles.copyData} href="">
+                <ContentCopyOutlined className={styles.copyIcon} />
+                Copiar datos
+              </a>
             </div>
           </div>
           <div>

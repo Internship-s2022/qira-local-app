@@ -72,9 +72,15 @@
 }
 
 .copyData {
-  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  align-self: center;
   color: #30c0f0;
   text-decoration: none;
+}
+
+.copyIcon {
+  color: #30c0f0;
 }
 
 .info {
