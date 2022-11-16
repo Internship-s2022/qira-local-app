@@ -86,7 +86,7 @@ const PaymentMethod = (): JSX.Element => {
             </div>
           </div>
           <div>
-            <p className={styles.info}>Por favor, adjunte su comprobante de transferencia</p>
+            <p className={styles.info}>Por favor, adjunte su comprobante de transferencia.</p>
             {receipt && <p>{receipt.name}</p>}
             <Button
               onClick={() =>
