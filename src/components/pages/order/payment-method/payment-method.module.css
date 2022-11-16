@@ -15,9 +15,11 @@
 .methodPaymentBox {
   display: flex;
   flex-direction: column;
+  height: 100px;
 }
 
 .titlePaymentMethod {
+  margin: 2px 2px 2px 30px;
   font-size: 15px;
   font-weight: bold;
 }
@@ -26,7 +28,9 @@
   display: flex;
   align-items: center;
   width: 300px;
+  height: 50px;
   padding: 8px;
+  margin-top: 20px;
   background-color: white;
   border: solid #bcbcbc 0.5px;
 }
@@ -61,6 +65,10 @@
 
 .dataInfo {
   margin: 5px;
+}
+
+.dataItems {
+  margin-bottom: 15px;
 }
 
 .copyData {
