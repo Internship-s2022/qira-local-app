@@ -4,7 +4,8 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { OrderRoutes } from 'src/constants';
-import { removeAuthorized } from 'src/redux/shopping-cart/actions';
+import { createOrder } from 'src/redux/order/thunks';
+import { removeAuthorized, resetState } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { AppDispatch, RootState } from 'src/redux/store';
 
@@ -13,6 +14,11 @@ import styles from './order.module.css';
 const OrderLayout = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const dollarRate = 160;
+  const clientId = useSelector((state: RootState) => state.auth.user._id);
+  const token = useSelector((state: RootState) => state.auth.token);
+  const cartProducts = useSelector((state: RootState) => state.shoppingCart.products);
+  const authorized = useSelector((state: RootState) => state.shoppingCart.authorized);
+  const payReceipt = useSelector((state: RootState) => state.shoppingCart.receipt);
   const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state, dollarRate));
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,6 +27,22 @@ const OrderLayout = (): JSX.Element => {
     text: string;
     onClick: () => void;
   };
+
+  const handleCreateOrder = () => {
+    const order = {
+      products: cartProducts,
+      client: clientId,
+      authorized: authorized,
+      amounts: orderAmounts,
+      payment: payReceipt,
+      exchangeRate: dollarRate,
+      orderDate: Date.now(),
+    };
+    dispatch(createOrder(order, token));
+    navigate(`/order${OrderRoutes.FINAL_SCREEN}`);
+    dispatch(resetState());
+  };
+
   switch (location.pathname) {
     case `/order${OrderRoutes.SUMMARY}`:
       btnOptions = {
@@ -43,7 +65,7 @@ const OrderLayout = (): JSX.Element => {
     case `/order${OrderRoutes.PAYMENT_METHOD}`:
       btnOptions = {
         text: 'Finalizar compra',
-        onClick: () => navigate(`/order${OrderRoutes.PAYMENT_METHOD}`),
+        onClick: () => handleCreateOrder(),
       };
       break;
     default:

@@ -4,10 +4,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { AppDispatch, RootState } from 'src/redux/store';
 
+import OrderLayout from './components/layout/order';
 import AdminRouter from './components/pages/admin';
 import ClientRouter from './components/pages/client';
 import OrderRouter from './components/pages/order';
+import { FinalScreen } from './components/pages/order/final-screen';
 import { SharedModal } from './components/shared/ui/modal';
+import { OrderRoutes } from './constants';
 import PrivateRoute from './helper/routes/private-routes';
 import { setAuthentication } from './redux/auth/actions';
 import { UserRole } from './types';

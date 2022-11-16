@@ -92,6 +92,8 @@ export const shoppingCartReducer = (
         ...state,
         authorized: [],
       };
+    case Actions.RESET_STATE:
+      return initialState;
     default:
       return state;
   }

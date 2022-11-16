@@ -7,7 +7,7 @@ const initialState: OrderState = {
   error: undefined,
 };
 
-export const OrderReducer = (state = initialState, action: ActionsType): OrderState => {
+export const orderReducer = (state = initialState, action: ActionsType): OrderState => {
   switch (action.type) {
     case Actions.CREATE_ORDER_PENDING:
       return {
@@ -25,8 +25,10 @@ export const OrderReducer = (state = initialState, action: ActionsType): OrderSt
       return {
         ...state,
         isFetching: false,
-        error: action.payload.error,
+        error: true,
         message: action.payload.message,
       };
+    default:
+      return state;
   }
 };

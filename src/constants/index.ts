@@ -26,4 +26,5 @@ export enum OrderRoutes {
   AUTHORIZED = '/authorized',
   FINISH_ORDER = '/finish',
   PAYMENT_METHOD = '/payment',
+  FINAL_SCREEN = '/final',
 }
