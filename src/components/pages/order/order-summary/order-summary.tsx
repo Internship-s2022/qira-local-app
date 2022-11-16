@@ -12,7 +12,7 @@ const OrderSummary = (): JSX.Element => {
   return (
     <section className={styles.orderContainer}>
       <h1 className={styles.title}>Carrito de compras</h1>
-      <p className={styles.subtitle}>Revisá tu compra antes de continuar </p>
+      <p className={styles.subtitle}>Revise tu compra antes de continuar </p>
       <div>
         <div>
           <p className={styles.productQuantity}>Productos ({shoppingCartProducts.length})</p>
