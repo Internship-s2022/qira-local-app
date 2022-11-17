@@ -74,7 +74,6 @@ const Authorized = () => {
       setUpdatingIndex(null);
       const updatedAuthorized = [...watchFieldArray];
 
-      updatedAuthorized[index] = watchFieldArray[index];
       dispatch(setAuthorized(updatedAuthorized));
     }
   };
@@ -92,10 +91,7 @@ const Authorized = () => {
     setUpdatingIndex(null);
   }, [append]);
 
-  const disableAddOther =
-    authorizedState.length === 0 ||
-    watchFieldArray.length > 1 ||
-    (!authorizedState.length && updatingIndex !== null);
+  const disableAddOther = authorizedState.length === 0 || watchFieldArray.length > 1;
 
   return (
     <section className={styles.container}>
