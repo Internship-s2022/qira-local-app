@@ -16,6 +16,13 @@ export enum Currency {
   PESO = 'PESO',
 }
 
+export enum OrderState {
+  APPROVE_PENDING = 'APPROVE_PENDING',
+  DELIVERY_PENDING = 'DELIVERY_PENDING',
+  DELIVERED = 'DELIVERED',
+  REJECTED = 'REJECTED',
+}
+
 export interface S3File {
   key: string;
   url: string;
