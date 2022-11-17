@@ -1,8 +1,5 @@
 class LoginPage {
   // Getters
-    get loginButton () {
-      return $('[data-testid=login-btn]');
-    }
     get inputEmail () {
       return $('[data-testid=email-field] input');
     }
