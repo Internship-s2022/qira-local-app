@@ -215,7 +215,7 @@ const Authorized = () => {
           );
         })}
         <Button
-          color="primary"
+          color="secondary"
           variant="contained"
           disabled={disableAddOther}
           onClick={handleAddOther}
