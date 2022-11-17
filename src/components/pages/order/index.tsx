@@ -5,7 +5,7 @@ import OrderLayout from 'src/components/layout/order';
 import { OrderRoutes } from 'src/constants';
 
 import Authorized from './authorized';
-import OrderSummary from './order-summary/order-summary';
+import OrderSummary from './order-summary';
 import PaymentMethod from './payment-method';
 
 const OrderRouter = (): JSX.Element => {
