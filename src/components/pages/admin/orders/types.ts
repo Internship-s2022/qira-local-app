@@ -1,16 +1,10 @@
-// export interface Order {
-//   _id: string;
-//   products: array;
-//   client: Client;
-//   state: OrderState;
-//   authorized: Authorized[];
-//   invoice?: Invoice;
-//   amounts: Amounts;
-//   payment?: Payment;
-//   exchangeRate: number;
-//   orderDate: Date;
-//   payAuthDate?: Date;
-//   deliverDate?: Date;
-// }
+import { Client } from 'src/redux/clients/types';
+import { Amounts } from 'src/redux/orders/types';
 
-export {};
+export interface FormattedOrder {
+  id: string;
+  client: Client['businessName'];
+  orderDate: string;
+  amounts: Amounts['total'];
+  state: string;
+}

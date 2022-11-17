@@ -6,6 +6,7 @@ const initialState: OrdersState = {
   message: '',
   error: undefined,
   selectedOrder: undefined,
+  filterState: undefined,
 };
 
 export const ordersReducer = (state = initialState, action: ActionsType): OrdersState => {
@@ -37,6 +38,11 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
         isFetching: false,
         error: undefined,
         selectedOrder: action.payload,
+      };
+    case Actions.SET_FILTER_STATE:
+      return {
+        ...state,
+        filterState: action.payload,
       };
     default:
       return state;

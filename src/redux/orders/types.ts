@@ -12,6 +12,7 @@ export interface OrdersState {
   message: string;
   error: unknown;
   selectedOrder: Order;
+  filterState: FilterInput;
 }
 
 export interface Products {
@@ -59,6 +60,8 @@ export interface Order {
 
 export type ActionsType = ActionType<typeof actions>;
 
+export type FilterInput = OrderState | undefined;
+
 export enum Actions {
   GET_ORDERS_SUCCESS = 'GET_ORDERS_SUCCESS',
   GET_ORDERS_PENDING = 'GET_ORDERS_PENDING',
@@ -67,4 +70,6 @@ export enum Actions {
   GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS',
   GET_ORDER_PENDING = 'GET_ORDER_PENDING',
   GET_ORDER_ERROR = 'GET_ORDER_ERROR',
+
+  SET_FILTER_STATE = 'SET_FILTER_STATE',
 }
