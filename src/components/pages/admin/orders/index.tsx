@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers } from 'src/components/shared/ui/list/types';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { setFilterStateAction } from 'src/redux/orders/actions';
 import { getOrdersFilteredByState } from 'src/redux/orders/selectors/getOrdersByState';
 import { getOrders } from 'src/redux/orders/thunks';
@@ -77,7 +78,7 @@ const Ordenes = (): JSX.Element => {
         </div>
       </div>
       {isFetching ? (
-        <></>
+        <QiraLoader />
       ) : (
         <List<FormattedOrder> headers={headers} data={filteredOrderList}></List>
       )}

@@ -1,7 +1,5 @@
 import { createAction, createAsyncAction } from 'typesafe-actions';
 
-import { OrderState } from 'src/types';
-
 import { ApiResponse } from '../store';
 import { Actions, FilterInput, Order } from './types';
 

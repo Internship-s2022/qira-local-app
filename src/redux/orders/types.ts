@@ -1,6 +1,6 @@
 import { ActionType } from 'typesafe-actions';
 
-import { OrderState } from 'src/types';
+import { OrderState, S3File } from 'src/types';
 
 import { Client } from '../clients/types';
 import { Product } from '../products/types';
@@ -27,20 +27,10 @@ export interface Authorized {
   phoneNumber: string;
 }
 
-export interface Invoice {
-  key: string;
-  url: string;
-}
-
 export interface Amounts {
   products: number;
   taxes: number;
   total: number;
-}
-
-export interface Payment {
-  key: string;
-  url: string;
 }
 
 export interface Order {
@@ -49,9 +39,9 @@ export interface Order {
   client: Client;
   state: OrderState;
   authorized: Authorized[];
-  invoice?: Invoice;
+  invoice?: S3File;
   amounts: Amounts;
-  payment?: Payment;
+  payment: S3File;
   exchangeRate: number;
   orderDate: Date;
   payAuthDate?: Date;
