@@ -3,6 +3,7 @@ import { Actions, ActionsType, ShoppingCartState } from './types';
 const initialState: ShoppingCartState = {
   products: [],
   isOpen: false,
+  receipt: undefined,
 };
 
 export const shoppingCartReducer = (
@@ -59,6 +60,18 @@ export const shoppingCartReducer = (
       return {
         ...state,
         isOpen: false,
+      };
+    }
+    case Actions.ADD_TRANSFER_RECEIPT: {
+      return {
+        ...state,
+        receipt: action.payload,
+      };
+    }
+    case Actions.REMOVE_TRANSFER_RECEIPT: {
+      return {
+        ...state,
+        receipt: undefined,
       };
     }
     default:
