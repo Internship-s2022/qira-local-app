@@ -9,8 +9,8 @@ import { RootState } from 'src/redux/store';
 import styles from './final-screen.module.css';
 
 export const FinalScreen = (): JSX.Element => {
-  const isFetching = useSelector((state: RootState) => state.order.isFetching);
-  const error = useSelector((state: RootState) => state.order.error);
+  const isFetching = useSelector((state: RootState) => state.orders.isFetching);
+  const error = useSelector((state: RootState) => state.orders.error);
 
   return (
     <div className={styles.mainContainer}>

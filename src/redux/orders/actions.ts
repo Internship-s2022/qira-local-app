@@ -15,4 +15,10 @@ export const getOrderActions = createAsyncAction(
   Actions.GET_ORDER_ERROR,
 )<void, Order, ApiResponse<unknown>>();
 
+export const createOrderActions = createAsyncAction(
+  Actions.CREATE_ORDER_PENDING,
+  Actions.CREATE_ORDER_SUCCESS,
+  Actions.CREATE_ORDER_ERROR,
+)<void, Order, ApiResponse<unknown>>();
+
 export const setFilterStateAction = createAction(Actions.SET_FILTER_STATE)<FilterInput>();

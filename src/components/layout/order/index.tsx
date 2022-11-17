@@ -4,7 +4,7 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { OrderRoutes } from 'src/constants';
-import { createOrder } from 'src/redux/order/thunks';
+import { createOrder } from 'src/redux/orders/thunks';
 import { removeAuthorized, resetState } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { AppDispatch, RootState } from 'src/redux/store';
