@@ -6,6 +6,7 @@ import { ClientRoutes, MainRoutes } from 'src/constants';
 
 import Home from '../home';
 import ClientProfile from './client-profile';
+import { ProductDetail } from './product-detail';
 import { ProductsList } from './products';
 import { SearchProductsList } from './search-results';
 
@@ -17,6 +18,7 @@ const ClientRouter = (): JSX.Element => {
         <Route path={MainRoutes.CATEGORY} element={<ProductsList />} />
         <Route path={MainRoutes.SEARCH_RESULTS} element={<SearchProductsList />} />
         <Route path={ClientRoutes.CLIENT_PROFILE} element={<ClientProfile />} />
+        <Route path={ClientRoutes.PRODUCT_DETAIL} element={<ProductDetail />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
