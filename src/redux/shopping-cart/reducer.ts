@@ -4,6 +4,7 @@ const initialState: ShoppingCartState = {
   products: [],
   isOpen: false,
   receipt: undefined,
+  authorized: [],
 };
 
 export const shoppingCartReducer = (
@@ -74,6 +75,16 @@ export const shoppingCartReducer = (
         receipt: undefined,
       };
     }
+    case Actions.SET_AUTHORIZED:
+      return {
+        ...state,
+        authorized: action.payload,
+      };
+    case Actions.REMOVE_AUTHORIZED:
+      return {
+        ...state,
+        authorized: [],
+      };
     default:
       return state;
   }

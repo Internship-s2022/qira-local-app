@@ -10,6 +10,14 @@ export interface ShoppingCartState {
   products: ShoppingCartProduct[];
   isOpen: boolean;
   receipt: FileToSend;
+  authorized: Authorized[];
+}
+
+export interface Authorized {
+  firstName: string;
+  lastName: string;
+  dni: string;
+  phoneNumber: string;
 }
 
 export interface ShoppingCartProduct {
@@ -32,4 +40,6 @@ export enum Actions {
   CLOSE_CART = 'CLOSE_CART',
   ADD_TRANSFER_RECEIPT = 'ADD_TRANSFER_RECEIPT',
   REMOVE_TRANSFER_RECEIPT = 'REMOVE_TRANSFER_RECEIPT',
+  SET_AUTHORIZED = 'SET_AUTHORIZED',
+  REMOVE_AUTHORIZED = 'REMOVE_AUTHORIZED',
 }

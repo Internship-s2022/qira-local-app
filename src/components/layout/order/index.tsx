@@ -1,15 +1,17 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { OrderRoutes } from 'src/constants';
+import { removeAuthorized } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
-import { RootState } from 'src/redux/store';
+import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './order.module.css';
 
 const OrderLayout = (): JSX.Element => {
+  const dispatch: AppDispatch<null> = useDispatch();
   const dollarRate = 160;
   const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state, dollarRate));
   const location = useLocation();
@@ -47,6 +49,12 @@ const OrderLayout = (): JSX.Element => {
     default:
       break;
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(removeAuthorized());
+    };
+  }, []);
 
   return (
     <div className={styles.mainContainer}>
