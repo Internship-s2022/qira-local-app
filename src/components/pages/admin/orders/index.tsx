@@ -14,7 +14,7 @@ import { OrderState } from 'src/types';
 import styles from './orders.module.css';
 import { FormattedOrder } from './types';
 
-const Ordenes = (): JSX.Element => {
+const Orders = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
   const filteredOrderList = useSelector((state: RootState) => getOrdersFilteredByState(state));
@@ -86,4 +86,4 @@ const Ordenes = (): JSX.Element => {
   );
 };
 
-export default Ordenes;
+export default Orders;
