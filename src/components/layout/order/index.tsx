@@ -26,6 +26,7 @@ const OrderLayout = (): JSX.Element => {
   let btnOptions: {
     text: string;
     onClick: () => void;
+    disabled: boolean;
   };
 
   const handleCreateOrder = () => {
@@ -48,24 +49,28 @@ const OrderLayout = (): JSX.Element => {
       btnOptions = {
         text: 'Continuar compra',
         onClick: () => navigate(`/order${OrderRoutes.AUTHORIZED}`),
+        disabled: false,
       };
       break;
     case `/order${OrderRoutes.AUTHORIZED}`:
       btnOptions = {
         text: 'Continuar compra',
         onClick: () => navigate(`/order${OrderRoutes.FINISH_ORDER}`),
+        disabled: authorized.length > 0 ? false : true,
       };
       break;
     case `/order${OrderRoutes.FINISH_ORDER}`:
       btnOptions = {
         text: 'Continuar compra',
         onClick: () => navigate(`/order${OrderRoutes.PAYMENT_METHOD}`),
+        disabled: authorized.length > 0 ? false : true,
       };
       break;
     case `/order${OrderRoutes.PAYMENT_METHOD}`:
       btnOptions = {
         text: 'Finalizar compra',
         onClick: () => handleCreateOrder(),
+        disabled: payReceipt ? false : true,
       };
       break;
     default:
@@ -110,7 +115,12 @@ const OrderLayout = (): JSX.Element => {
               <p>TOTAL</p>
               <p>{'AR$ ' + orderAmounts.total.toFixed(2)}</p>
             </div>
-            <Button size="large" className={styles.button} onClick={btnOptions.onClick}>
+            <Button
+              size="large"
+              className={styles.button}
+              onClick={btnOptions.onClick}
+              disabled={btnOptions.disabled}
+            >
               {btnOptions.text}
             </Button>
           </div>
