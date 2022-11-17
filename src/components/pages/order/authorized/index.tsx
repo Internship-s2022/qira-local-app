@@ -205,11 +205,10 @@ const Authorized = () => {
 
                 {showDeleteBtn && (
                   <Button
-                    color="error"
                     variant="contained"
                     fullWidth
                     disabled={disableDeleteBtn}
-                    className={styles.button}
+                    className={styles.deleteBtn}
                     onClick={() => handleDeleteAuthorized(index)}
                   >
                     Eliminar
@@ -220,7 +219,7 @@ const Authorized = () => {
           );
         })}
         <Button
-          color="secondary"
+          color="primary"
           variant="contained"
           disabled={disableAddOther}
           onClick={handleAddOther}
