@@ -1,5 +1,4 @@
 export enum MainRoutes {
-  STORYBOOK = '/storybook',
   CATEGORY = '/category/:url',
   SEARCH_RESULTS = '/search-results/:searchInput',
 }

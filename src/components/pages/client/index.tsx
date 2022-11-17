@@ -5,7 +5,6 @@ import PublicLayout from 'src/components/layout/public';
 import { ClientRoutes, MainRoutes } from 'src/constants';
 
 import Home from '../home';
-import Storybook from '../storybook';
 import ClientProfile from './client-profile';
 import { ProductsList } from './products';
 import { SearchProductsList } from './search-results';
@@ -15,7 +14,6 @@ const ClientRouter = (): JSX.Element => {
     <Routes>
       <Route element={<PublicLayout />}>
         <Route index element={<Home />} />
-        <Route path={MainRoutes.STORYBOOK} element={<Storybook />} />
         <Route path={MainRoutes.CATEGORY} element={<ProductsList />} />
         <Route path={MainRoutes.SEARCH_RESULTS} element={<SearchProductsList />} />
         <Route path={ClientRoutes.CLIENT_PROFILE} element={<ClientProfile />} />
