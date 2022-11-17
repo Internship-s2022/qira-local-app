@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 
-import { getOrderActions, getOrdersActions } from './actions';
+import { createOrderActions, getOrderActions, getOrdersActions } from './actions';
 import * as API from './api';
 
 export const getOrders = () => {
@@ -23,6 +23,18 @@ export const getOrderById = (id) => {
       return dispatch(getOrderActions.success(response.data));
     } catch (error) {
       return dispatch(getOrderActions.failure(error));
+    }
+  };
+};
+
+export const createOrder = (order, token) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(createOrderActions.request());
+      const response = await API.createOrder(order, token);
+      dispatch(createOrderActions.success(response.data));
+    } catch (error) {
+      dispatch(createOrderActions.failure(error));
     }
   };
 };

@@ -21,3 +21,5 @@ export const removeTransferReceipt = () => action(Actions.REMOVE_TRANSFER_RECEIP
 export const setAuthorized = (authorizedList) => action(Actions.SET_AUTHORIZED, authorizedList);
 
 export const removeAuthorized = () => action(Actions.REMOVE_AUTHORIZED);
+
+export const resetState = () => action(Actions.RESET_STATE);

@@ -21,6 +21,7 @@ export interface Address {
 }
 
 export interface User {
+  _id: string;
   firebaseUid: string;
   businessName: string;
   cuit: string;
