@@ -17,7 +17,6 @@ export const shoppingCartReducer = (
       );
       if (result !== -1) {
         newList[result] = action.payload;
-        console.log('new list', newList);
       } else {
         newList = [...state.products, action.payload];
       }

@@ -36,6 +36,10 @@ export const ProductDetail = (): JSX.Element => {
     params.id && dispatch(getPublicProducts());
     if (productQuantity >= 1) {
       setCount(productQuantity);
+      setDisabled(true);
+    }
+    if (selectedProduct?.stock < 1) {
+      setDisabled(true);
     }
   }, [productQuantity]);
 
@@ -83,7 +87,7 @@ export const ProductDetail = (): JSX.Element => {
                       className={styles.iconButton}
                       onClick={() => {
                         count >= 1 && setCount(count - 1);
-                        setDisabled(false);
+                        selectedProduct?.stock < 1 ? setDisabled(true) : setDisabled(false);
                       }}
                     >
                       <Remove />
@@ -93,7 +97,7 @@ export const ProductDetail = (): JSX.Element => {
                       className={styles.iconButton}
                       onClick={() => {
                         setCount(count + 1);
-                        setDisabled(false);
+                        selectedProduct?.stock < 1 ? setDisabled(true) : setDisabled(false);
                       }}
                     >
                       <Add />
@@ -113,7 +117,7 @@ export const ProductDetail = (): JSX.Element => {
                   className={styles.button}
                   variant="contained"
                   color="primary"
-                  disabled={disabled}
+                  disabled={productQuantity === count ? true : disabled}
                   onClick={() => {
                     addToCart();
                   }}
