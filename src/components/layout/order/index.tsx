@@ -77,12 +77,6 @@ const OrderLayout = (): JSX.Element => {
       break;
   }
 
-  useEffect(() => {
-    return () => {
-      dispatch(removeAuthorized());
-    };
-  }, []);
-
   return (
     <div className={styles.mainContainer}>
       <div className={styles.header}>
