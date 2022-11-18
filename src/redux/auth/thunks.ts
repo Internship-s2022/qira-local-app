@@ -21,9 +21,6 @@ export const login = (credentials) => {
         claims: { role },
       } = await response.user.getIdTokenResult();
       const userData = await getAuthUser(token);
-      sessionStorage.setItem('user', JSON.stringify(userData.data));
-      sessionStorage.setItem('token', token);
-      sessionStorage.setItem('role', role);
       return dispatch(loginActions.success({ user: userData.data, token: token, role: role }));
     } catch (error) {
       return dispatch(loginActions.failure(error));

@@ -6,6 +6,7 @@ import ProductCard from 'src/components/shared/ui/product-card';
 import { getPublicCategories } from 'src/redux/category/thunk';
 import { getNewProducts } from 'src/redux/products/selectors/new-products';
 import { getPublicProducts } from 'src/redux/products/thunks';
+import { removeAuthorized } from 'src/redux/shopping-cart/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './home.module.css';
@@ -18,6 +19,7 @@ const Home = (): JSX.Element => {
   useEffect(() => {
     dispatch(getPublicProducts());
     dispatch(getPublicCategories());
+    dispatch(removeAuthorized());
   }, []);
   return (
     <section className={styles.container}>

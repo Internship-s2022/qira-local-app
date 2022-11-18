@@ -112,6 +112,7 @@ export const LoginModal = () => {
           ) : (
             <Button
               onClick={handleSubmit(onSubmit)}
+              type="submit"
               variant="contained"
               className={styles.button}
               data-testid="login-submit"

@@ -45,7 +45,6 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
         message: action.payload.message,
       };
     case Actions.LOGOUT_USER:
-      sessionStorage.clear();
       return initialState;
     case Actions.GET_AUTH_SUCCESS:
       return {
