@@ -1,5 +1,4 @@
 export enum MainRoutes {
-  STORYBOOK = '/storybook',
   CATEGORY = '/category/:url',
   SEARCH_RESULTS = '/search-results/:searchInput',
 }
@@ -19,4 +18,13 @@ export enum AdminRoutes {
 
 export enum ClientRoutes {
   CLIENT_PROFILE = '/client',
+  PRODUCT_DETAIL = '/product/:id',
+}
+
+export enum OrderRoutes {
+  SUMMARY = '/summary',
+  AUTHORIZED = '/authorized',
+  FINISH_ORDER = '/finish',
+  PAYMENT_METHOD = '/payment',
+  FINAL_SCREEN = '/final',
 }

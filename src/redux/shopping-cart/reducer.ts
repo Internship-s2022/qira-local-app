@@ -3,6 +3,8 @@ import { Actions, ActionsType, ShoppingCartState } from './types';
 const initialState: ShoppingCartState = {
   products: [],
   isOpen: false,
+  receipt: undefined,
+  authorized: [],
 };
 
 export const shoppingCartReducer = (
@@ -10,14 +12,21 @@ export const shoppingCartReducer = (
   action: ActionsType,
 ): ShoppingCartState => {
   switch (action.type) {
-    case Actions.ADD_PRODUCT:
-      if (state.products.some((product) => product.product._id === action.payload.product._id)) {
-        return state;
+    case Actions.ADD_PRODUCT: {
+      let newList = [...state.products];
+      const result = state.products.findIndex(
+        (product) => product.product._id === action.payload.product._id,
+      );
+      if (result !== -1) {
+        newList[result] = action.payload;
+      } else {
+        newList = [...state.products, action.payload];
       }
       return {
         ...state,
-        products: [...state.products, action.payload],
+        products: newList,
       };
+    }
     case Actions.DELETE_PRODUCT:
       return {
         ...state,
@@ -61,6 +70,30 @@ export const shoppingCartReducer = (
         isOpen: false,
       };
     }
+    case Actions.ADD_TRANSFER_RECEIPT: {
+      return {
+        ...state,
+        receipt: action.payload,
+      };
+    }
+    case Actions.REMOVE_TRANSFER_RECEIPT: {
+      return {
+        ...state,
+        receipt: undefined,
+      };
+    }
+    case Actions.SET_AUTHORIZED:
+      return {
+        ...state,
+        authorized: action.payload,
+      };
+    case Actions.REMOVE_AUTHORIZED:
+      return {
+        ...state,
+        authorized: [],
+      };
+    case Actions.RESET_STATE:
+      return initialState;
     default:
       return state;
   }

@@ -1,0 +1,213 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.navHistory {
+  display: flex;
+  padding-left: 120px;
+}
+
+.navHistory :last-child {
+  font-weight: bold;
+  border: none;
+}
+
+.navLink {
+  padding: 1px 10px;
+  margin: 7.5px 0;
+  color: #000000;
+  text-decoration: none;
+  border-right: solid 1px #000000;
+}
+
+.cardProduct {
+  display: flex;
+  flex-direction: column;
+}
+
+.headerProduct {
+  display: flex;
+  align-self: flex-start;
+  margin: 0 0 5px;
+}
+
+.isNewLabel {
+  padding: 5px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: bolder;
+  color: white;
+  background: #30c0f0;
+  border-radius: 4px;
+}
+
+.productName {
+  align-self: center;
+  margin: 0;
+  margin-left: 10px;
+  color: rgb(153 153 153);
+}
+
+.productContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  background-color: rgb(231 231 231);
+}
+
+.imageAndPriceContainer {
+  display: flex;
+}
+
+.image {
+  width: 300px;
+  height: auto;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 500px;
+  background-color: white;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  margin-left: 10px;
+  background-color: white;
+}
+
+.payInfo {
+  align-self: flex-start;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  border: solid grey 1px;
+  border-radius: 5px;
+}
+
+.payInfo p {
+  margin: 0;
+}
+
+.iconInfo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 5px;
+  font-size: 12;
+  color: rgb(68 68 68);
+}
+
+.iconInfo p {
+  margin-left: 6px;
+}
+
+.payInfoIcon {
+  margin: 1px, 2px;
+}
+
+.priceContainerAmount {
+  display: flex;
+  justify-content: space-between;
+  color: #f05523;
+}
+
+.priceText {
+  margin-left: 50px;
+  font-weight: bold;
+}
+
+.ivaText {
+  margin-left: 10px;
+}
+
+.informationContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+  background-color: white;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 619px;
+}
+
+.informationTitle {
+  margin: 10px;
+  font-weight: lighter;
+  color: grey;
+}
+
+.informationSubtitle {
+  padding-bottom: 5px;
+  margin-right: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border-bottom: solid 1.5px rgb(204 204 204);
+}
+
+.description {
+  width: 100%;
+  margin: 10px;
+  font-size: 14px;
+}
+
+.pdf {
+  display: flex;
+  align-items: center;
+  color: grey;
+  text-decoration: none;
+}
+
+.quantity {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+}
+
+.quantity p {
+  margin-right: 20px;
+  font-size: 11;
+  font-weight: bold;
+}
+
+.quantityIcons {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 45px;
+  border: 1px solid #bcbcbc;
+  border-radius: 8px;
+}
+
+.quantityIcons p {
+  margin: 0;
+}
+
+.divInfoQuantity {
+  font-size: 11px;
+  color: #f05523;
+}
+
+.button {
+  width: 100%;
+}
+
+.subtitle {
+  font-size: 12;
+  font-weight: bold;
+}

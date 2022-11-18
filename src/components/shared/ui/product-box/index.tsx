@@ -11,12 +11,14 @@ import {
 } from 'src/redux/shopping-cart/actions';
 import { getProductQuantity } from 'src/redux/shopping-cart/selectors/getProductQuantity';
 import { AppDispatch, RootState } from 'src/redux/store';
+import { Currency } from 'src/types';
 
 import styles from './product-box.module.css';
 import { ProductBoxProps } from './types';
 
 const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const dollarRate = 160;
   const productQuantity = useSelector((state: RootState) => getProductQuantity(state, product._id));
 
   return (
@@ -45,9 +47,19 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
         </div>
       </div>
       <div className={styles.thirdRowContainer}>
+        <p className={styles.totalText}>Precio Unitario</p>
+        <div className={styles.priceContainer}>
+          <p className={styles.unitPriceText}>{formatPriceText(product) + ' + IVA'}</p>
+        </div>
+      </div>
+      <div className={styles.thirdRowContainer}>
         <p className={styles.totalText}>TOTAL</p>
         <div className={styles.priceContainer}>
-          <p className={styles.priceText}>{formatPriceText(product, productQuantity)}</p>
+          <p className={styles.priceText}>
+            {product.currency === Currency.DOLLAR
+              ? 'AR$ ' + (product.price * productQuantity * dollarRate).toFixed(2)
+              : formatPriceText(product, productQuantity)}
+          </p>
           <p className={styles.ivaText}> + IVA</p>
         </div>
       </div>

@@ -59,7 +59,7 @@ export const SharedModal = (): JSX.Element => {
       }}
     >
       <Box className={style.container}>
-        <Close onClick={handleConfirm} className={style.closeModal}>
+        <Close onClick={handleConfirm} className={style.closeModal} data-testid="cross-modal">
           x
         </Close>
         {modalComponent}

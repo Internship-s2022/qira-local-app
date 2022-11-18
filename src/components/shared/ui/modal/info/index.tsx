@@ -15,9 +15,14 @@ export const Info = () => {
 
   return (
     <div className={styles.container}>
-      <p>{options?.message}</p>
+      <p data-testid="info-message">{options?.message}</p>
       <div className={styles.button}>
-        <Button onClick={handleConfirm} variant="contained" color="primary">
+        <Button
+          onClick={handleConfirm}
+          variant="contained"
+          color="primary"
+          data-testid="info-modal-btn"
+        >
           Aceptar
         </Button>
       </div>

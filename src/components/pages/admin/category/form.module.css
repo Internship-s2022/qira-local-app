@@ -38,6 +38,7 @@
 }
 
 .button {
+  width: 50%;
   font-weight: bold;
   color: white;
 }

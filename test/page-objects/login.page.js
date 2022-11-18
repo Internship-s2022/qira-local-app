@@ -1,41 +1,55 @@
-
-
-import Page from './page';
-
-/**
- * sub page containing specific selectors and methods for a specific page
- */
-class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    get inputUsername () {
-        return $('#username');
+class LoginPage {
+  // Getters
+    get loginButton () {
+      return $('[data-testid=login-btn]');
     }
-
+    get inputEmail () {
+      return $('[data-testid=email-field] input');
+    }
     get inputPassword () {
-        return $('#password');
+      return $('[data-testid=password-field] input');
     }
-
     get btnSubmit () {
-        return $('button[type="submit"]');
+      return $('[data-testid=login-submit]');
+    }
+    get crossModal () {
+      return $('[data-testid=cross-modal]');
+    }
+    get emailError () {
+      return $('[data-testid=email-field] p');
+    }
+    get passwordError () {
+      return $('[data-testid=password-field] p');
+    }
+    get errorModal () {
+      return $('[data-testid=error-modal]');
+    }
+    get errorModalBtn () {
+      return $('[data-testid=error-modal-btn]');
+    }
+    get modalContainer () {
+      return $('[data-testid=modal-container]')
+    }
+    get infoModalBtn () {
+      return $('[data-testid=info-modal-btn]')
+    }
+    get infoModalMessage () {
+      return $('[data-testid="info-message"]')
+    }
+  // Methods
+    async login (email, password) {
+      await this.inputEmail.setValue(email);
+      await this.inputPassword.setValue(password);
+      await this.btnSubmit.click();
     }
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
-    async login (username, password) {
-        await this.inputUsername.setValue(username);
-        await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
+    async clearForm () {
+      await this.inputEmail.clearValue();
+      await this.inputPassword.clearValue();
     }
 
-    /**
-     * overwrite specific options to adapt it to page object
-     */
-    open () {
-        return super.open('login');
+    async openBrowser () {
+      browser.url('http://localhost:3000');
     }
 }
 

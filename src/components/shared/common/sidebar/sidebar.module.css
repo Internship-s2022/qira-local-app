@@ -67,3 +67,14 @@
 .navList li:active {
   background-color: var(--color-primary-dark);
 }
+
+.arrowTab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconArrow {
+  margin-right: 5px;
+  font-size: 20px;
+}

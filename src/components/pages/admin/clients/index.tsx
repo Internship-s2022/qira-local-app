@@ -10,6 +10,7 @@ import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import { Headers, TableButton } from '../../../shared/ui/list/types';
+import styles from './clients.module.css';
 
 interface Client {
   id: string;
@@ -64,14 +65,14 @@ const Clients = (): JSX.Element => {
         rowData.isActive
           ? dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro que desea desactivar el cliente?',
+                message: '¿Está seguro de que desea desactivar el cliente?',
                 onConfirmCallback: () => dispatch(thunks.inactivateClient(rowData.id)),
                 onCloseCallback: () => dispatch(closeModal()),
               }),
             )
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro que desea activar el cliente?',
+                message: '¿Está seguro de que desea activar el cliente?',
                 onConfirmCallback: () => dispatch(thunks.activateClient(rowData.id)),
                 onCloseCallback: () => dispatch(closeModal()),
               }),
@@ -103,7 +104,10 @@ const Clients = (): JSX.Element => {
   ];
 
   return (
-    <div>
+    <div className={styles.container}>
+      <div className={styles.titleContainer}>
+        <h1>Clientes</h1>
+      </div>
       {isFetching ? (
         <></>
       ) : (

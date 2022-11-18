@@ -1,0 +1,95 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-left: 30px;
+}
+
+.cardsContainer {
+  display: flex;
+  margin-left: 30px;
+}
+
+.methodPaymentBox {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+}
+
+.titlePaymentMethod {
+  margin: 0 0 0 30px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.transferWithIcon {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 40px;
+  padding: 8px;
+  margin-top: 20px;
+  background-color: white;
+  border: solid #bcbcbc 0.5px;
+}
+
+.transferWithIcon p {
+  margin-left: 5px;
+}
+
+.dataContainer {
+  padding: 15px 30px;
+  margin: 20px;
+  background-color: white;
+  border: solid #bcbcbc 0.5px;
+}
+
+.dataContainerTitle {
+  font-weight: bold;
+  color: #f05523;
+}
+
+.dataContent {
+  padding: 10px;
+  font-size: 15px;
+  background-color: white;
+  border: solid #bcbcbc 0.5px;
+}
+
+.dataTitle {
+  margin: 5px;
+  font-weight: bold;
+}
+
+.dataInfo {
+  margin: 5px;
+}
+
+.dataItems {
+  margin-bottom: 15px;
+}
+
+.copyData {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  color: #30c0f0;
+  text-decoration: none;
+}
+
+.copyIcon {
+  color: #30c0f0;
+}
+
+.info {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.btnUpload {
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+}

@@ -8,6 +8,7 @@ import ClientForm from '../admin/client/';
 import Categories from './categories';
 import CategoryForm from './category';
 import Clients from './clients';
+import Orders from './orders';
 import ProductForm from './product';
 import Products from './products';
 
@@ -15,7 +16,7 @@ const AdminRouter = (): JSX.Element => {
   return (
     <Routes>
       <Route element={<AdminLayout />}>
-        <Route path={AdminRoutes.ORDERS} element={<h1>Ordenes de compra</h1>} />
+        <Route path={AdminRoutes.ORDERS} element={<Orders />} />
         <Route path={AdminRoutes.CLIENTS} element={<Clients />} />
         <Route path={AdminRoutes.CLIENT} element={<ClientForm />} />
         <Route path={AdminRoutes.PRODUCT_CREATE} element={<ProductForm />} />
