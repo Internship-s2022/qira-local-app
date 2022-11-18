@@ -93,62 +93,56 @@ class SignUpPage {
   get backLogin () {
     return $('[data-testid=back-login] p')
   }
+  get infoModal () {
+    return $('[data-testid=info-modal]')
+  }
+  get infoModalMessage () {
+    return $('[data-testid="info-message"]')
+  }
+  get infoModalBtn () {
+    return $('[data-testid=info-modal-btn]')
+  }
 
   //Methods
 
-  async signUp(
-    email,
-    password,
-    repeatPassword,
-    codeArea,
-    phoneNumber,
-    businessName,
-    cuit,
-    street,
-    zipCode,
-    city,
-    province
-  ) {
-    await this.emailInput.setValue(email);
-    await this.passwordInput.setValue(password);
-    await this.repeatPwInput.setValue(repeatPassword);
-    await this.codeAreaInput.setValue(codeArea);
-    await this.phoneNumberInput.setValue(phoneNumber);
-    await this.businessNameInput.setValue(businessName);
-    await this.cuitInput.setValue(cuit);
-    await this.streetInput.setValue(street);
-    await this.zipCodeInput.setValue(zipCode);
-    await this.cityInput.setValue(city);
-    await this.provinceInput.setValue(province);
-    await this.signUpBtn.click();
-  };
-
-  async signUpComplete(
-    email,
-    password,
-    repeatPassword,
-    codeArea,
-    phoneNumber,
-    businessName,
-    cuit,
-    street,
-    zipCode,
-    city,
-    province
-  ) {
-    await this.emailInput.setValue(email);
-    await this.passwordInput.setValue(password);
-    await this.repeatPwInput.setValue(repeatPassword);
-    await this.codeAreaInput.setValue(codeArea);
-    await this.phoneNumberInput.setValue(phoneNumber);
-    await this.businessNameInput.setValue(businessName);
-    await this.ivaConditionInput.click();
-    await this.ivaConditionOpt.click();
-    await this.cuitInput.setValue(cuit);
-    await this.streetInput.setValue(street);
-    await this.zipCodeInput.setValue(zipCode);
-    await this.cityInput.setValue(city);
-    await this.provinceInput.setValue(province);
+  async signUp(values) {
+    if (values.email) {
+      await this.emailInput.setValue(values.email);
+    }
+    if (values.password) {
+      await this.passwordInput.setValue(values.password);
+    }
+    if (values.repeatPassword) {
+      await this.repeatPwInput.setValue(values.repeatPassword);
+    }
+    if (values.codeArea) {
+      await this.codeAreaInput.setValue(values.codeArea);
+    }
+    if (values.phoneNumber) {
+      await this.phoneNumberInput.setValue(values.phoneNumber);
+    }
+    if (values.businessName) {
+      await this.businessNameInput.setValue(values.businessName);
+    }
+    if (values.ivaCondition) {
+      await this.ivaConditionInput.click();
+      await this.ivaConditionOpt.click();
+    }
+    if (values.cuit) {
+      await this.cuitInput.setValue(values.cuit);
+    }
+    if (values.street) {
+      await this.streetInput.setValue(values.street);
+    }
+    if (values.zipCode) {
+      await this.zipCodeInput.setValue(values.zipCode);
+    }
+    if (values.city) {
+      await this.cityInput.setValue(values.city);
+    }
+    if (values.province) {
+      await this.provinceInput.setValue(values.province);
+    }
     await this.signUpBtn.click();
   };
 
