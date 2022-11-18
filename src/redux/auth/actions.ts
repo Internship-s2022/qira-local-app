@@ -28,7 +28,10 @@ export const updateClientInformationActions = createAsyncAction(
 )<void, User, ApiResponse<unknown>>();
 
 export const logoutUser = () => action(Actions.LOGOUT_USER);
+
 export const setAuthentication = (user: UserCredentials) =>
   action(Actions.SET_AUTHENTICATION, user);
+
+export const setToken = (role, token) => action(Actions.SET_TOKEN, role, token);
 
 export const resetMessage = () => action(Actions.RESET_MESSAGE);

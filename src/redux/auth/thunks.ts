@@ -21,7 +21,11 @@ export const login = (credentials) => {
         credentials.email,
         credentials.password,
       );
+      console.log(response);
+
       const token = await response.user.getIdToken();
+      console.log(token);
+      console.log(response);
       const {
         claims: { role },
       } = await response.user.getIdTokenResult();
