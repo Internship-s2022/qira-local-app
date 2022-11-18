@@ -21,12 +21,12 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './test/specs/**/*.js',
+        // './test/specs/**/*.js',
+        './test/specs/client/sign-up.e2e.js',
       ],
       // Patterns to exclude.
       exclude: [
         // 'path/to/excluded/files'
-        './test/specs/client/sign-up.e2e.js'
     ],
     //
     // ============
