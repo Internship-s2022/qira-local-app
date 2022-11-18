@@ -9,8 +9,10 @@ describe('Testing Home', () => {
     await Header.openBrowser();
   });
   describe('Testing Header', () => {
-    it('Qira logo redirection', async () => {
+    it('Window tab', async () => {
       await expect(HomeContent.featuredCategories).toHaveTitle('Qira Local');
+    });
+    it('Qira logo redirection', async () => {
       await expect(Header.logoQira).toExist();
       await expect(Header.logoQira).toBeClickable();
       await Header.logoQira.click();
@@ -40,6 +42,7 @@ describe('Testing Home', () => {
       await Header.search('daconil');
       const searchResult = await Header.searchInput.getValue();
       await expect(browser).toHaveUrl(`http://localhost:3000/search-results/${searchResult}`);
+      await Header.logoQira.click();
     });
     it('Login button functionality', async () => {
       await expect(Header.loginButton).toExist();
