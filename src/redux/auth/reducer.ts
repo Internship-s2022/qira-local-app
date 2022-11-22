@@ -12,6 +12,7 @@ const initialState: AuthState = {
 export const authReducer = (state: AuthState = initialState, action: ActionsType): AuthState => {
   switch (action.type) {
     case Actions.LOGIN_PENDING:
+    case Actions.LOGOUT_PENDING:
     case Actions.GET_AUTH_PENDING:
     case Actions.REGISTER_PENDING:
     case Actions.UPDATE_CLIENT_INFORMATION_PENDING:
@@ -37,6 +38,7 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
         message: 'Register successfully',
       };
     case Actions.LOGIN_ERROR:
+    case Actions.LOGOUT_ERROR:
     case Actions.GET_AUTH_ERROR:
     case Actions.REGISTER_ERROR:
     case Actions.UPDATE_CLIENT_INFORMATION_ERROR:
@@ -46,7 +48,7 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
         error: true,
         message: action.payload.message,
       };
-    case Actions.LOGOUT_USER:
+    case Actions.LOGOUT_SUCCESS:
       return initialState;
     case Actions.GET_AUTH_SUCCESS:
       return {

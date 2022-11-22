@@ -21,14 +21,20 @@ export const firebaseApp = initializeApp(firebaseConfig);
 export const auth = () => getAuth(firebaseApp);
 
 export const tokenListener = () => {
+  console.log('---- 1 ----');
   auth().onIdTokenChanged(async (user) => {
-    console.log(user);
+    console.log('---- 2 ----');
+    console.log('---- 3 - user ----', user);
     if (user) {
+      console.log('---- 4 - if (user) ----');
       const token = await user.getIdToken();
+      console.log('---- 5 - token ----', token);
       const {
         claims: { role },
       } = await user.getIdTokenResult();
+      console.log('---- 6 - getIdTokenResult ----', role);
       store.dispatch(setToken(role, token));
+      console.log('---- 7 - setToken ----');
     }
   });
 };

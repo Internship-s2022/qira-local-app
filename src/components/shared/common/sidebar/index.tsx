@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
-import { logoutUser } from 'src/redux/auth/actions';
+import { logout } from 'src/redux/auth/thunks';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch } from 'src/redux/store';
@@ -51,7 +51,7 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea cerrar sesión?',
                 onConfirmCallback: () => {
-                  dispatch(logoutUser());
+                  dispatch(logout());
                   dispatch(closeModal());
                 },
                 onCloseCallback: () => dispatch(closeModal()),

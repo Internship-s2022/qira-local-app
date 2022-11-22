@@ -7,6 +7,7 @@ import { RootAction } from '../store';
 import {
   getAuthUserActions,
   loginActions,
+  logoutActions,
   registerActions,
   updateClientInformationActions,
 } from './actions';
@@ -73,6 +74,19 @@ export const updateClientInformation = (data) => {
       return dispatch(updateClientInformationActions.success(response.data));
     } catch (error) {
       dispatch(updateClientInformationActions.failure(error));
+    }
+  };
+};
+
+export const logout = () => {
+  return async (dispatch: Dispatch<RootAction>) => {
+    try {
+      dispatch(logoutActions.request());
+      const response = await auth().signOut();
+      console.log(response);
+      dispatch(logoutActions.success());
+    } catch (error) {
+      return dispatch(logoutActions.failure(error));
     }
   };
 };
