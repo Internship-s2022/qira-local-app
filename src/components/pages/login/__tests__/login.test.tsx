@@ -6,6 +6,6 @@ import Login from '..';
 
 describe('Login - Unit test', () => {
   it('should render the component correctly', () => {
-    const component = customRender(<Login />);
+    customRender(<Login />);
   });
 });
