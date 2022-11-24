@@ -22,11 +22,8 @@ export const login = (credentials) => {
         credentials.email,
         credentials.password,
       );
-      console.log(response);
 
       const token = await response.user.getIdToken();
-      console.log(token);
-      console.log(response);
       const {
         claims: { role },
       } = await response.user.getIdTokenResult();
@@ -83,7 +80,6 @@ export const logout = () => {
     try {
       dispatch(logoutActions.request());
       const response = await auth().signOut();
-      console.log(response);
       dispatch(logoutActions.success());
     } catch (error) {
       return dispatch(logoutActions.failure(error));
