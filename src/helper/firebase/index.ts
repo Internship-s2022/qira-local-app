@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
-import { setAuthentication, setToken } from 'src/redux/auth/actions';
+import { setToken } from 'src/redux/auth/actions';
 import getStore from 'src/redux/store';
 
 const { store } = getStore();
@@ -21,20 +21,13 @@ export const firebaseApp = initializeApp(firebaseConfig);
 export const auth = () => getAuth(firebaseApp);
 
 export const tokenListener = () => {
-  console.log('---- 1 ----');
   auth().onIdTokenChanged(async (user) => {
-    console.log('---- 2 ----');
-    console.log('---- 3 - user ----', user);
     if (user) {
-      console.log('---- 4 - if (user) ----');
       const token = await user.getIdToken();
-      console.log('---- 5 - token ----', token);
       const {
         claims: { role },
       } = await user.getIdTokenResult();
-      console.log('---- 6 - getIdTokenResult ----', role);
       store.dispatch(setToken(role, token));
-      console.log('---- 7 - setToken ----');
     }
   });
 };

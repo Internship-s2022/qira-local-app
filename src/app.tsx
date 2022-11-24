@@ -12,7 +12,6 @@ import { UserRole } from './types';
 
 const App = (): JSX.Element => {
   useEffect(() => {
-    console.log('entro');
     tokenListener();
   }, []);
 
