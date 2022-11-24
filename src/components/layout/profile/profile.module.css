@@ -1,0 +1,27 @@
+.mainContainer {
+  display: flex;
+}
+
+.contentContainer {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 230px);
+  overflow-y: auto;
+}
+
+.profileNavBar {
+  display: flex;
+  flex-direction: column;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.outletContainer {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+}

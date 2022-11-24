@@ -98,7 +98,7 @@ const Header = () => {
                       {currentUser.firstName + ' ' + currentUser.lastName}
                     </Link>
                   ) : (
-                    <Link className={styles.userName} to="/client">
+                    <Link className={styles.userName} to="/profile/my-orders">
                       {currentUser.businessName}
                     </Link>
                   )}

@@ -20,7 +20,11 @@ export enum ClientRoutes {
   CLIENT_PROFILE = '/client',
   PRODUCT_DETAIL = '/product/:id',
 }
-
+export enum ProfileClientRoutes {
+  BILL_INFORMATION = '/bill-information',
+  MY_ORDERS = '/my-orders',
+  USER_DATA = '/user-data',
+}
 export enum OrderRoutes {
   SUMMARY = '/summary',
   AUTHORIZED = '/authorized',

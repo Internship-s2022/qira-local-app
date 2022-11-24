@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AdminRouter from './components/pages/admin';
 import ClientRouter from './components/pages/client';
+import ProfileRouter from './components/pages/client/profile';
 import OrderRouter from './components/pages/order';
 import { SharedModal } from './components/shared/ui/modal';
 import PrivateRoute from './helper/routes/private-routes';
@@ -19,6 +20,7 @@ const App = (): JSX.Element => {
         </Route>
         <Route element={<PrivateRoute role={UserRole.CLIENT} />}>
           <Route path="/order/*" element={<OrderRouter />} />
+          <Route path="/profile/*" element={<ProfileRouter />} />
         </Route>
       </Routes>
     </BrowserRouter>
