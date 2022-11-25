@@ -2,8 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { formatIvaConditionsText } from 'src/helper/clients/clients';
 import { RootState } from 'src/redux/store';
-import { IvaCondition } from 'src/types';
 import { capitalizeFirstLetter } from 'src/utils/formatters';
 
 import styles from './finish-order.module.css';
@@ -13,27 +13,6 @@ export const FinishOrder = (): JSX.Element => {
   const client = useSelector((state: RootState) => state.auth.user);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const authorized = useSelector((state: RootState) => state.shoppingCart.authorized);
-
-  const formatIvaConditionsText = () => {
-    let ivaCondition: string;
-    switch (client.ivaCondition) {
-      case IvaCondition.exempt:
-        ivaCondition = 'Exento';
-        break;
-      case IvaCondition.finalConsumer:
-        ivaCondition = 'Consumidor Final';
-        break;
-      case IvaCondition.registeredResponsible:
-        ivaCondition = 'Responsable Inscripto';
-        break;
-      case IvaCondition.selfEmployment:
-        ivaCondition = 'Monotributista';
-        break;
-      default:
-        break;
-    }
-    return ivaCondition;
-  };
 
   return (
     <div className={styles.mainContainer}>
@@ -50,7 +29,7 @@ export const FinishOrder = (): JSX.Element => {
               <p className={styles.cardTitle}>{client.businessName}</p>
               <div>
                 <p className={styles.cardText}>
-                  CUIT: {client.cuit} - {formatIvaConditionsText()}
+                  CUIT: {client.cuit} - {formatIvaConditionsText(client.ivaCondition)}
                 </p>
                 <p className={styles.cardText}>
                   {capitalizeFirstLetter(client.address.street)} - CP: {client.address.zipCode}

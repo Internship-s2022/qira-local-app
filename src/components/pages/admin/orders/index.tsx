@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { MoreVert } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
-import { Headers } from 'src/components/shared/ui/list/types';
+import { Headers, TableButton } from 'src/components/shared/ui/list/types';
 import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { setFilterStateAction } from 'src/redux/orders/actions';
 import { getOrdersFilteredByState } from 'src/redux/orders/selectors/getOrdersByState';
@@ -16,7 +18,8 @@ import { FormattedOrder } from './types';
 
 const Orders = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
-  const isFetching = useSelector((state: RootState) => state.clients.isFetching);
+  const navigate = useNavigate();
+  const isFetching = useSelector((state: RootState) => state.orders.isFetching);
   const filteredOrderList = useSelector((state: RootState) => getOrdersFilteredByState(state));
 
   const clickHandler = (param) => {
@@ -32,6 +35,17 @@ const Orders = (): JSX.Element => {
     { header: 'Cliente', key: 'client' },
     { header: 'Total', key: 'amounts' },
     { header: 'Estado', key: 'state' },
+  ];
+
+  const buttons: ((rowData: FormattedOrder) => TableButton)[] = [
+    (rowData) => ({
+      active: true,
+      icon: <MoreVert />,
+      title: 'Detalles',
+      onClick: () => {
+        navigate(`/admin/order/${rowData.id}`);
+      },
+    }),
   ];
 
   return (
@@ -78,9 +92,16 @@ const Orders = (): JSX.Element => {
         </div>
       </div>
       {isFetching ? (
-        <QiraLoader />
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
-        <List<FormattedOrder> headers={headers} data={filteredOrderList}></List>
+        <List<FormattedOrder>
+          headers={headers}
+          data={filteredOrderList}
+          showButtons={true}
+          buttons={buttons}
+        />
       )}
     </div>
   );

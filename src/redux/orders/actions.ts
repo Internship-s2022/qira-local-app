@@ -1,4 +1,4 @@
-import { createAction, createAsyncAction } from 'typesafe-actions';
+import { action, createAction, createAsyncAction } from 'typesafe-actions';
 
 import { ApiResponse } from '../store';
 import { Actions, FilterInput, Order } from './types';
@@ -22,3 +22,5 @@ export const createOrderActions = createAsyncAction(
 )<void, Order, ApiResponse<unknown>>();
 
 export const setFilterStateAction = createAction(Actions.SET_FILTER_STATE)<FilterInput>();
+
+export const resetSelectedOrder = () => action(Actions.RESET_SELECTED_ORDER);
