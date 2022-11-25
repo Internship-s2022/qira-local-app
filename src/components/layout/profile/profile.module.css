@@ -12,11 +12,37 @@
 .profileNavBar {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 40%;
+  padding-top: 50px;
 }
 
 .links {
   display: flex;
   flex-direction: column;
+  margin-left: 40px;
+}
+
+.link {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #f05523;
+}
+
+.linkLogOut {
+  margin-top: 0;
+  font-size: 16px;
+  color: black;
+}
+
+.linkLogOut:hover {
+  color: #f05523;
+  cursor: pointer;
 }
 
 .outletContainer {
