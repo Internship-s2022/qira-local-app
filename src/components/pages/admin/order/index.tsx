@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { CustomFile } from 'src/components/shared/ui/modal/types';
@@ -153,29 +153,51 @@ const OrderDetails = (): JSX.Element => {
                 <></>
               ) : (
                 <div className={styles.dataContainer}>
-                  {invoice && (
-                    <div>
-                      <p className={styles.sectionTitle}>Factura:</p>
-                      <p>{invoice.name}</p>
-                    </div>
-                  )}
-                  <Button
-                    onClick={() =>
-                      dispatch(
-                        openModal(ModalTypes.UPLOAD_PDF, {
-                          onConfirmCallback: (selectedFile) => {
-                            onUpload(selectedFile);
-                          },
-                          onCloseCallback: () => dispatch(closeModal),
-                        }),
-                      )
-                    }
-                    color="primary"
-                    variant="contained"
-                    className={styles.btnUpload}
-                  >
-                    Cargar factura
-                  </Button>
+                  <div>
+                    <a href={selectedOrder?.payment.url} target="blank" className={styles.link}>
+                      Comprobante de pago
+                    </a>
+                  </div>
+                  <div className={styles.filesContainer}>
+                    {selectedOrder?.state === OrderState.DELIVERY_PENDING && (
+                      <div>
+                        <a
+                          href={selectedOrder?.invoice?.url}
+                          target="blank"
+                          className={styles.link}
+                        >
+                          Factura
+                        </a>
+                      </div>
+                    )}
+                    {invoice && (
+                      <div>
+                        <p className={styles.sectionTitle}>
+                          {selectedOrder?.state === OrderState.APPROVE_PENDING
+                            ? 'Factura:'
+                            : 'Factura firmada:'}
+                        </p>
+                        <p>{invoice.name}</p>
+                      </div>
+                    )}
+                    <Button
+                      onClick={() =>
+                        dispatch(
+                          openModal(ModalTypes.UPLOAD_PDF, {
+                            onConfirmCallback: (selectedFile) => {
+                              onUpload(selectedFile);
+                            },
+                            onCloseCallback: () => dispatch(closeModal),
+                          }),
+                        )
+                      }
+                      color="primary"
+                      variant="contained"
+                      className={styles.btnUpload}
+                    >
+                      {invoice ? 'Modificar factura' : 'Cargar factura'}
+                    </Button>
+                  </div>
                   {selectedOrder?.state === OrderState.APPROVE_PENDING ? (
                     <div className={styles.btnsContainer}>
                       <Button variant="contained" color="primary" disabled={invoice ? false : true}>
@@ -188,7 +210,11 @@ const OrderDetails = (): JSX.Element => {
                   ) : (
                     selectedOrder?.state === OrderState.DELIVERY_PENDING && (
                       <div className={styles.btnsContainer}>
-                        <Button variant="contained" color="primary">
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          disabled={invoice ? false : true}
+                        >
                           Entregar Pedido
                         </Button>
                       </div>

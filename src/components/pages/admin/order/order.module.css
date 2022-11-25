@@ -165,7 +165,7 @@
   flex-direction: column;
   align-self: center;
   width: 100%;
-  padding: 20px 0;
+  padding-top: 20px;
   margin: 20px 0;
 }
 
@@ -206,6 +206,16 @@
 .totalPrice p {
   font-size: 20px;
   font-weight: 900;
+}
+
+.link {
+  color: #f05523;
+}
+
+.filesContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 20px;
 }
 
 .btnsContainer {
