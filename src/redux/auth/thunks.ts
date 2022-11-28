@@ -4,8 +4,13 @@ import { Dispatch } from 'redux';
 import { auth } from 'src/helper/firebase';
 
 import { RootAction } from '../store';
-import { getAuthUserActions, loginActions, registerActions } from './actions';
-import { getAuthUser, registerUser } from './api';
+import {
+  getAuthUserActions,
+  loginActions,
+  registerActions,
+  updateClientInformationActions,
+} from './actions';
+import { getAuthUser, registerUser, updateClientInformationApi } from './api';
 
 export const login = (credentials) => {
   return async (dispatch: Dispatch<RootAction>) => {
@@ -52,6 +57,18 @@ export const register = (user) => {
       }
     } catch (error) {
       return dispatch(registerActions.failure(error));
+    }
+  };
+};
+
+export const updateClientInformation = (data) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(updateClientInformationActions.request());
+      const response = await updateClientInformationApi(data);
+      return dispatch(updateClientInformationActions.success(response.data));
+    } catch (error) {
+      dispatch(updateClientInformationActions.failure(error));
     }
   };
 };

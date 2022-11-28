@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.phoneContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.inputSmall {
+  width: 30%;
+  margin-right: 10px;
+}
