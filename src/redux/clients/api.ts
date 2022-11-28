@@ -11,5 +11,3 @@ export const inactivateClient = (id) => api.patch<Client>(`/admin/client/inactiv
 export const getClient = (id) => api.get<Client>(`/admin/client/${id}`);
 
 export const updateClient = (id, data) => api.patch<Client>(`/admin/client/${id}`, data);
-
-export const updateClientInformation = (data) => api.patch<Client>('/client/profile/update', data);
