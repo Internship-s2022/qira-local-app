@@ -11,6 +11,10 @@ export interface ShoppingCartState {
   isOpen: boolean;
   receipt: FileToSend;
   authorized: Authorized[];
+  estimatedDeliveryDate: string;
+  isFetching: boolean;
+  message: string;
+  error: unknown;
 }
 
 export interface Authorized {
@@ -41,6 +45,11 @@ export enum Actions {
   ADD_TRANSFER_RECEIPT = 'ADD_TRANSFER_RECEIPT',
   REMOVE_TRANSFER_RECEIPT = 'REMOVE_TRANSFER_RECEIPT',
   SET_AUTHORIZED = 'SET_AUTHORIZED',
-  REMOVE_AUTHORIZED = 'REMOVE_AUTHORIZED',
+  CLEAR_ORDER_DATA = 'CLEAR_ORDER_DATA',
   RESET_STATE = 'RESET_STATE',
+  SET_DELIVERY_DATE = 'SET_DELIVERY_DATE',
+
+  CREATE_ORDER_PENDING = 'CREATE_ORDER_PENDING',
+  CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS',
+  CREATE_ORDER_ERROR = 'CREATE_ORDER_ERROR',
 }

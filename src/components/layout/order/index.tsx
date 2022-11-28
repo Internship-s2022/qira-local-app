@@ -4,9 +4,9 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { OrderRoutes } from 'src/constants';
-import { createOrder } from 'src/redux/orders/thunks';
 import { resetState } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
+import { createOrder } from 'src/redux/shopping-cart/thunks';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './order.module.css';
@@ -18,6 +18,9 @@ const OrderLayout = (): JSX.Element => {
   const cartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const authorized = useSelector((state: RootState) => state.shoppingCart.authorized);
   const payReceipt = useSelector((state: RootState) => state.shoppingCart.receipt);
+  const estimatedDeliveryDate = useSelector(
+    (state: RootState) => state.shoppingCart.estimatedDeliveryDate,
+  );
   const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state, dollarRate));
   const location = useLocation();
   const navigate = useNavigate();
@@ -36,7 +39,7 @@ const OrderLayout = (): JSX.Element => {
       amounts: orderAmounts,
       payment: payReceipt,
       exchangeRate: dollarRate,
-      orderDate: Date.now(),
+      estimatedDeliveryDate: estimatedDeliveryDate,
     };
     dispatch(createOrder(order));
     navigate(`/order${OrderRoutes.FINAL_SCREEN}`);
@@ -54,8 +57,15 @@ const OrderLayout = (): JSX.Element => {
     case `/order${OrderRoutes.AUTHORIZED}`:
       btnOptions = {
         text: 'Continuar compra',
-        onClick: () => navigate(`/order${OrderRoutes.FINISH_ORDER}`),
+        onClick: () => navigate(`/order${OrderRoutes.DELIVERY_DATE}`),
         disabled: authorized.length > 0 ? false : true,
+      };
+      break;
+    case `/order${OrderRoutes.DELIVERY_DATE}`:
+      btnOptions = {
+        text: 'Continuar compra',
+        onClick: () => navigate(`/order${OrderRoutes.FINISH_ORDER}`),
+        disabled: estimatedDeliveryDate ? false : true,
       };
       break;
     case `/order${OrderRoutes.FINISH_ORDER}`:
