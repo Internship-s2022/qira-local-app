@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { InsertDriveFile } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
@@ -12,7 +12,6 @@ import { toBase64 } from 'src/helper/form';
 import { formatOrderStateText } from 'src/helper/orders';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes, Options } from 'src/redux/modal/types';
-import { resetSelectedOrder } from 'src/redux/orders/actions';
 import { approveOrder, deliverOrder, getOrderById, rejectOrder } from 'src/redux/orders/thunks';
 import { Actions } from 'src/redux/orders/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -31,14 +30,7 @@ const OrderDetails = (): JSX.Element => {
 
   useEffect(() => {
     params.id && dispatch(getOrderById(params.id));
-    // return () => {
-    //   dispatch(resetSelectedOrder());
-    // };
   }, []);
-
-  // useEffect(() => {
-  //   dispatch(getOrderById(params.id));
-  // }, [selectedOrder?.state]);
 
   const onUpload = async (selectedFile: CustomFile) => {
     const fileBase64: any = await toBase64(selectedFile);
