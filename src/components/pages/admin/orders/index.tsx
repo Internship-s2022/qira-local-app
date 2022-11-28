@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { MoreVert } from '@mui/icons-material';
+import { Article } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
@@ -40,7 +40,7 @@ const Orders = (): JSX.Element => {
   const buttons: ((rowData: FormattedOrder) => TableButton)[] = [
     (rowData) => ({
       active: true,
-      icon: <MoreVert />,
+      icon: <Article />,
       title: 'Detalles',
       onClick: () => {
         navigate(`/admin/order/${rowData.id}`);

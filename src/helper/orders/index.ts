@@ -1,4 +1,3 @@
-import { Order } from 'src/redux/orders/types';
 import { OrderState } from 'src/types';
 
 export const formatOrders = (data) => {

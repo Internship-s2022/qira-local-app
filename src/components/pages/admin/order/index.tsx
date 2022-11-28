@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { InsertDriveFile } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
+import { Loader } from 'src/components/shared/ui/loader';
 import { CustomFile } from 'src/components/shared/ui/modal/types';
 import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { formatIvaConditionsText } from 'src/helper/clients/clients';
 import { toBase64 } from 'src/helper/form';
 import { formatOrderStateText } from 'src/helper/orders';
 import { closeModal, openModal } from 'src/redux/modal/actions';
-import { ModalTypes } from 'src/redux/modal/types';
+import { ModalTypes, Options } from 'src/redux/modal/types';
 import { resetSelectedOrder } from 'src/redux/orders/actions';
-import { getOrderById } from 'src/redux/orders/thunks';
+import { approveOrder, deliverOrder, getOrderById, rejectOrder } from 'src/redux/orders/thunks';
+import { Actions } from 'src/redux/orders/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { FileToSend, OrderState } from 'src/types';
 import { capitalizeFirstLetter } from 'src/utils/formatters';
@@ -22,15 +25,20 @@ const OrderDetails = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const params = useParams();
   const isFetching = useSelector((state: RootState) => state.orders.isFetching);
+  const isFetchingOrder = useSelector((state: RootState) => state.orders.isFetchingOrder);
   const selectedOrder = useSelector((state: RootState) => state.orders.selectedOrder);
   const [invoice, setInvoice] = useState<FileToSend>(null);
 
   useEffect(() => {
-    dispatch(getOrderById(params.id));
-    return () => {
-      dispatch(resetSelectedOrder());
-    };
+    params.id && dispatch(getOrderById(params.id));
+    // return () => {
+    //   dispatch(resetSelectedOrder());
+    // };
   }, []);
+
+  // useEffect(() => {
+  //   dispatch(getOrderById(params.id));
+  // }, [selectedOrder?.state]);
 
   const onUpload = async (selectedFile: CustomFile) => {
     const fileBase64: any = await toBase64(selectedFile);
@@ -45,6 +53,54 @@ const OrderDetails = (): JSX.Element => {
     }
     setInvoice(fileToSend);
     dispatch(closeModal());
+  };
+
+  const handleApprove = async () => {
+    const submitData = {
+      invoice: invoice,
+    };
+    const modalOptions: Options = {};
+    if (params.id) {
+      const response = await dispatch(approveOrder(selectedOrder?._id, submitData));
+      if (response?.type === Actions.APPROVE_ORDER_ERROR) {
+        modalOptions.message = 'Ha ocurrido un error';
+        modalOptions.onCloseCallback = () => {
+          dispatch(closeModal());
+        };
+        dispatch(openModal(ModalTypes.INFO, modalOptions));
+      }
+    }
+  };
+
+  const handleDeliver = async () => {
+    const submitData = {
+      signedInvoice: invoice,
+    };
+    const modalOptions: Options = {};
+    if (params.id) {
+      const response = await dispatch(deliverOrder(selectedOrder?._id, submitData));
+      if (response?.type === Actions.DELIVER_ORDER_ERROR) {
+        modalOptions.message = 'Ha ocurrido un error';
+        modalOptions.onCloseCallback = () => {
+          dispatch(closeModal());
+        };
+        dispatch(openModal(ModalTypes.INFO, modalOptions));
+      }
+    }
+  };
+
+  const handleReject = async () => {
+    const modalOptions: Options = {};
+    if (params.id) {
+      const response = await dispatch(rejectOrder(selectedOrder?._id));
+      if (response?.type === Actions.REJECT_ORDER_ERROR) {
+        modalOptions.message = 'Ha ocurrido un error';
+        modalOptions.onCloseCallback = () => {
+          dispatch(closeModal());
+        };
+        dispatch(openModal(ModalTypes.INFO, modalOptions));
+      }
+    }
   };
 
   return (
@@ -148,75 +204,132 @@ const OrderDetails = (): JSX.Element => {
                   <p>{'AR$ ' + selectedOrder?.amounts.total.toFixed(2)}</p>
                 </div>
               </div>
-              {selectedOrder?.state === OrderState.REJECTED ||
-              selectedOrder?.state === OrderState.DELIVERED ? (
+              {selectedOrder?.state === OrderState.REJECTED ? (
                 <></>
               ) : (
                 <div className={styles.dataContainer}>
                   <div>
                     <a href={selectedOrder?.payment.url} target="blank" className={styles.link}>
+                      <InsertDriveFile />
                       Comprobante de pago
                     </a>
                   </div>
                   <div className={styles.filesContainer}>
-                    {selectedOrder?.state === OrderState.DELIVERY_PENDING && (
-                      <div>
-                        <a
-                          href={selectedOrder?.invoice?.url}
-                          target="blank"
-                          className={styles.link}
+                    {selectedOrder?.state === OrderState.DELIVERY_PENDING &&
+                      selectedOrder?.invoice?.url && (
+                        <div className={styles.invoiceContainer}>
+                          <a
+                            href={selectedOrder?.invoice?.url}
+                            target="blank"
+                            className={styles.link}
+                          >
+                            <InsertDriveFile />
+                            Factura
+                          </a>
+                        </div>
+                      )}
+                    {selectedOrder?.state === OrderState.DELIVERED &&
+                      selectedOrder?.signedInvoice?.url && (
+                        <>
+                          <div className={styles.invoiceContainer}>
+                            <a
+                              href={selectedOrder?.invoice?.url}
+                              target="blank"
+                              className={styles.link}
+                            >
+                              <InsertDriveFile />
+                              Factura
+                            </a>
+                          </div>
+                          <div className={styles.invoiceContainer}>
+                            <a
+                              href={selectedOrder?.invoice?.url}
+                              target="blank"
+                              className={styles.link}
+                            >
+                              <InsertDriveFile />
+                              Factura firmada
+                            </a>
+                          </div>
+                        </>
+                      )}
+                    {selectedOrder?.state === OrderState.DELIVERED ? (
+                      <></>
+                    ) : (
+                      <>
+                        {invoice && (
+                          <div>
+                            <p className={styles.sectionTitle}>
+                              {selectedOrder?.state === OrderState.APPROVE_PENDING
+                                ? 'Factura:'
+                                : 'Factura firmada:'}
+                            </p>
+                            <p>{invoice.name}</p>
+                          </div>
+                        )}
+                        <Button
+                          onClick={() =>
+                            dispatch(
+                              openModal(ModalTypes.UPLOAD_PDF, {
+                                onConfirmCallback: (selectedFile) => {
+                                  onUpload(selectedFile);
+                                },
+                                onCloseCallback: () => dispatch(closeModal),
+                              }),
+                            )
+                          }
+                          color="primary"
+                          variant="contained"
+                          className={styles.btnUpload}
                         >
-                          Factura
-                        </a>
-                      </div>
+                          {invoice
+                            ? 'Modificar factura'
+                            : selectedOrder?.state === OrderState.DELIVERY_PENDING
+                            ? 'Cargar factura firmada'
+                            : 'Cargar factura'}
+                        </Button>
+                      </>
                     )}
-                    {invoice && (
-                      <div>
-                        <p className={styles.sectionTitle}>
-                          {selectedOrder?.state === OrderState.APPROVE_PENDING
-                            ? 'Factura:'
-                            : 'Factura firmada:'}
-                        </p>
-                        <p>{invoice.name}</p>
-                      </div>
-                    )}
-                    <Button
-                      onClick={() =>
-                        dispatch(
-                          openModal(ModalTypes.UPLOAD_PDF, {
-                            onConfirmCallback: (selectedFile) => {
-                              onUpload(selectedFile);
-                            },
-                            onCloseCallback: () => dispatch(closeModal),
-                          }),
-                        )
-                      }
-                      color="primary"
-                      variant="contained"
-                      className={styles.btnUpload}
-                    >
-                      {invoice ? 'Modificar factura' : 'Cargar factura'}
-                    </Button>
                   </div>
                   {selectedOrder?.state === OrderState.APPROVE_PENDING ? (
                     <div className={styles.btnsContainer}>
-                      <Button variant="contained" color="primary" disabled={invoice ? false : true}>
-                        Aprobar Pago
-                      </Button>
-                      <Button variant="outlined" color="primary">
-                        Rechazar Pago
-                      </Button>
+                      {isFetchingOrder ? (
+                        <div className={styles.btnsLoaderContainer}>
+                          <Loader />
+                        </div>
+                      ) : (
+                        <>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            disabled={invoice ? false : true}
+                            onClick={handleApprove}
+                          >
+                            Aprobar Pago
+                          </Button>
+                          <Button variant="outlined" color="primary" onClick={handleReject}>
+                            Rechazar Pago
+                          </Button>
+                        </>
+                      )}
                     </div>
                   ) : (
                     selectedOrder?.state === OrderState.DELIVERY_PENDING && (
                       <div className={styles.btnsContainer}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          disabled={invoice ? false : true}
-                        >
-                          Entregar Pedido
-                        </Button>
+                        {isFetchingOrder ? (
+                          <div className={styles.btnsLoaderContainer}>
+                            <Loader />
+                          </div>
+                        ) : (
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            disabled={invoice ? false : true}
+                            onClick={handleDeliver}
+                          >
+                            Entregar Pedido
+                          </Button>
+                        )}
                       </div>
                     )
                   )}

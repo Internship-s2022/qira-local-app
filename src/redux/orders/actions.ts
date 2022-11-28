@@ -21,6 +21,24 @@ export const createOrderActions = createAsyncAction(
   Actions.CREATE_ORDER_ERROR,
 )<void, Order, ApiResponse<unknown>>();
 
+export const approveOrderActions = createAsyncAction(
+  Actions.APPROVE_ORDER_PENDING,
+  Actions.APPROVE_ORDER_SUCCESS,
+  Actions.APPROVE_ORDER_ERROR,
+)<void, Order, ApiResponse<unknown>>();
+
+export const deliverOrderActions = createAsyncAction(
+  Actions.DELIVER_ORDER_PENDING,
+  Actions.DELIVER_ORDER_SUCCESS,
+  Actions.DELIVER_ORDER_ERROR,
+)<void, Order, ApiResponse<unknown>>();
+
+export const rejectOrderActions = createAsyncAction(
+  Actions.REJECT_ORDER_PENDING,
+  Actions.REJECT_ORDER_SUCCESS,
+  Actions.REJECT_ORDER_ERROR,
+)<void, Order, ApiResponse<unknown>>();
+
 export const setFilterStateAction = createAction(Actions.SET_FILTER_STATE)<FilterInput>();
 
 export const resetSelectedOrder = () => action(Actions.RESET_SELECTED_ORDER);

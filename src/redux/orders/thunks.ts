@@ -1,6 +1,13 @@
 import { Dispatch } from 'redux';
 
-import { createOrderActions, getOrderActions, getOrdersActions } from './actions';
+import {
+  approveOrderActions,
+  createOrderActions,
+  deliverOrderActions,
+  getOrderActions,
+  getOrdersActions,
+  rejectOrderActions,
+} from './actions';
 import * as API from './api';
 
 export const getOrders = () => {
@@ -32,9 +39,45 @@ export const createOrder = (order, token) => {
     try {
       dispatch(createOrderActions.request());
       const response = await API.createOrder(order, token);
-      dispatch(createOrderActions.success(response.data));
+      return dispatch(createOrderActions.success(response.data));
     } catch (error) {
-      dispatch(createOrderActions.failure(error));
+      return dispatch(createOrderActions.failure(error));
+    }
+  };
+};
+
+export const approveOrder = (id, data) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(approveOrderActions.request());
+      const response = await API.approveOrder(id, data);
+      return dispatch(approveOrderActions.success(response.data));
+    } catch (error) {
+      return dispatch(approveOrderActions.failure(error));
+    }
+  };
+};
+
+export const deliverOrder = (id, data) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(deliverOrderActions.request());
+      const response = await API.deliverOrder(id, data);
+      return dispatch(deliverOrderActions.success(response.data));
+    } catch (error) {
+      return dispatch(deliverOrderActions.failure(error));
+    }
+  };
+};
+
+export const rejectOrder = (id) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(rejectOrderActions.request());
+      const response = await API.rejectOrder(id);
+      return dispatch(rejectOrderActions.success(response.data));
+    } catch (error) {
+      return dispatch(rejectOrderActions.failure(error));
     }
   };
 };
