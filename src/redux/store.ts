@@ -27,19 +27,21 @@ const rootReducer = combineReducers({
 });
 
 const persistConfig = {
-  key: 'root',
+  key: 'root-ql',
   storage,
   whitelist: ['auth', 'shoppingCart'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export default () => {
+const createPersistedStore = () => {
   const enhancer = composeWithDevTools(applyMiddleware(thunk));
   const store = createStore(persistedReducer, enhancer);
   const persistor = persistStore(store);
   return { store, persistor };
 };
+
+export const { store, persistor } = createPersistedStore();
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type RootAction = AuthActionsType | CategoryActionsType;

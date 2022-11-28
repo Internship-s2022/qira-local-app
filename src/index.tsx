@@ -7,12 +7,11 @@ import { ThemeProvider } from '@mui/material';
 import { StyledEngineProvider } from '@mui/material/styles';
 
 import App from './app';
-import getStore from './redux/store';
+import { persistor, store } from './redux/store';
 import reportWebVitals from './report-web-vitals';
 import { mainTheme } from './utils/materialTheme';
 
 const root = createRoot(document.getElementById('root'));
-const { store, persistor } = getStore();
 
 root.render(
   <React.StrictMode>

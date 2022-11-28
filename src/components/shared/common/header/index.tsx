@@ -21,7 +21,7 @@ const Header = () => {
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
   useEffect(() => {
-    dispatch(thunksCategories.getCategory());
+    dispatch(thunksCategories.getPublicCategories());
   }, []);
 
   return (
