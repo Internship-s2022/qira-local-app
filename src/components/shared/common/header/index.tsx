@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { AccountCircle, KeyboardArrowDown, Search, ShoppingCart } from '@mui/icons-material';
+import { Badge } from '@mui/material';
 
 import * as thunksCategories from 'src/redux/category/thunk';
 import { openModal } from 'src/redux/modal/actions';
@@ -16,6 +17,7 @@ const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
   const categories = useSelector((state: RootState) => state.categories.categories);
+  const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const currentRole = useSelector((state: RootState) => state.auth.role);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
@@ -112,7 +114,19 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <ShoppingCart className={styles.shoppingCart} onClick={() => dispatch(openCart())} />
+            <div className={styles.shoppingCartContainer}>
+              <Badge
+                badgeContent={shoppingCartProducts.length}
+                max={9}
+                color="info"
+                className={styles.shoppingCartBadge}
+              >
+                <ShoppingCart
+                  className={styles.shoppingCart}
+                  onClick={() => dispatch(openCart())}
+                />
+              </Badge>
+            </div>
           </div>
         </div>
       </nav>

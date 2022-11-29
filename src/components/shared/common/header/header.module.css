@@ -149,8 +149,13 @@
   text-decoration: none;
 }
 
-.shoppingCart {
+.shoppingCartContainer {
   margin: 0 100px 0 0;
+}
+
+.shoppingCart {
+  padding-right: 6px;
+  font-size: 30px;
   color: white;
 }
 
