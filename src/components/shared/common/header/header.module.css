@@ -154,8 +154,8 @@
 }
 
 .shoppingCart {
-  padding-right: 6px;
-  font-size: 30px;
+  padding: 0 4px;
+  font-size: 32px;
   color: white;
 }
 
