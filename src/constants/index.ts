@@ -24,6 +24,7 @@ export enum ClientRoutes {
 export enum ProfileClientRoutes {
   BILL_INFORMATION = '/bill-information',
   MY_ORDERS = '/my-orders',
+  ORDER_DETAILS = '/my-orders/:id',
   USER_DATA = '/user-data',
 }
 export enum OrderRoutes {

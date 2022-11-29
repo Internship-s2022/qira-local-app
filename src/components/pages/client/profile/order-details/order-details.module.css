@@ -1,0 +1,210 @@
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.loaderContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.columnsContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.firstColumn {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  padding-right: 10px;
+}
+
+.secondColumn {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  padding-left: 10px;
+  margin: 10px 0;
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 10px 0;
+}
+
+.sectionTitle {
+  font-weight: 600;
+}
+
+.dataCard,
+.authDataCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+
+.authDataCard:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: white;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+
+.cardTitle {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.cardText {
+  margin: 5px 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+}
+
+.orangeText {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #f05523;
+}
+
+.productsCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+  background-color: white;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+
+.productRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: 1px solid #bcbcbc88;
+}
+
+.productRow:last-child {
+  border-bottom: 0;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.imageContainer p {
+  padding-left: 10px;
+  margin: 0;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+
+.image {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #bcbcbc;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 50px;
+  color: #19191988;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+
+.pricesContainer {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 100%;
+  padding-top: 20px;
+  margin: 20px 0;
+}
+
+.priceDetails {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 0 20px;
+  border-bottom: 2px solid black;
+}
+
+.productsPrice,
+.taxesPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.productsPrice :first-child,
+.taxesPrice :first-child {
+  margin: 5px 0;
+  font-weight: 600;
+}
+
+.productsPrice p,
+.taxesPrice p {
+  margin: 5px 0;
+  font-weight: 400;
+}
+
+.totalPrice {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.totalPrice p {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  color: #f05523;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: rgb(168 59 24);
+}
+
+.filesContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 20px;
+}
+
+.invoiceContainer {
+  margin-bottom: 10px;
+}

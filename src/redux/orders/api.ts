@@ -16,3 +16,5 @@ export const getClientOrders = () => api.get<Order[]>('/client/orders');
 
 export const getOrderToDeliver = (data) =>
   api.get<Order>(`/admin/orders/deliver/${data.id}?dni=${data.dni}`);
+
+export const getClientOrderById = (id) => api.get<Order>(`/client/orders/${id}`);
