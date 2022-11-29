@@ -79,8 +79,8 @@ export const logout = () => {
   return async (dispatch: Dispatch<RootAction>) => {
     try {
       dispatch(logoutActions.request());
-      const response = await auth().signOut();
-      dispatch(logoutActions.success());
+      await auth().signOut();
+      return dispatch(logoutActions.success());
     } catch (error) {
       return dispatch(logoutActions.failure(error));
     }
