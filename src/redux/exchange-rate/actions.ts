@@ -7,4 +7,4 @@ export const getExchangeRateActions = createAsyncAction(
   Actions.GET_EXCHANGE_RATE_PENDING,
   Actions.GET_EXCHANGE_RATE_SUCCESS,
   Actions.GET_EXCHANGE_RATE_ERROR,
-)<void, ExchangeRate[], ApiResponse<unknown>>();
+)<void, ExchangeRate, ApiResponse<unknown>>();

@@ -14,17 +14,15 @@ import { mainTheme } from './utils/materialTheme';
 const root = createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={mainTheme}>
-            <App />
-          </ThemeProvider>
-        </StyledEngineProvider>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={mainTheme}>
+          <App />
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </PersistGate>
+  </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

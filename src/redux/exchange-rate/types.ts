@@ -3,12 +3,13 @@ import { ActionType } from 'typesafe-actions';
 import * as actions from './actions';
 
 export interface ExchangeRate {
-  d: string;
-  v: number;
+  value: string;
+  date: string;
+  _id: string;
 }
 
 export interface ExchangeRateState {
-  exchangeRate: ExchangeRate[];
+  exchangeRate: ExchangeRate;
   isFetching: boolean;
   error: boolean;
   message: string;

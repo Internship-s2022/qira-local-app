@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { AccountCircle, KeyboardArrowDown, Search, ShoppingCart } from '@mui/icons-material';
-import Badge, { BadgeProps } from '@mui/material/Badge';
-import { styled } from '@mui/material/styles';
+import {
+  AccountCircle,
+  InfoOutlined,
+  KeyboardArrowDown,
+  Search,
+  ShoppingCart,
+} from '@mui/icons-material';
+import { Badge, BadgeProps, styled } from '@mui/material';
 
 import * as thunksCategories from 'src/redux/category/thunk';
+import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { openCart } from 'src/redux/shopping-cart/actions';
@@ -21,10 +27,12 @@ const Header = () => {
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const currentRole = useSelector((state: RootState) => state.auth.role);
+  const exchangeRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
   useEffect(() => {
     dispatch(thunksCategories.getPublicCategories());
+    dispatch(getExchangeRate());
   }, []);
 
   const StyledBadge = styled(Badge)<BadgeProps>(() => ({
@@ -43,7 +51,15 @@ const Header = () => {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.navBarContainer}>
-        <div className={styles.currency}>Tipo de cambio</div>
+        <div className={styles.currency}>
+          <p>Tipo de cambio</p>
+          {exchangeRate && (
+            <>
+              <p className={styles.exchangeRate}>{`ARS ${exchangeRate?.value}`}</p>
+              <InfoOutlined className={styles.infoIcon} />
+            </>
+          )}
+        </div>
       </div>
       <nav className={styles.mainHeaderContainer}>
         <div className={styles.mainHeader}>

@@ -1,7 +1,7 @@
 import { Actions, ActionsType, ExchangeRateState } from './types';
 
 const initialState = {
-  exchangeRate: [],
+  exchangeRate: undefined,
   isFetching: false,
   error: undefined,
   message: '',
