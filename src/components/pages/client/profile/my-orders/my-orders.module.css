@@ -1,0 +1,19 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.title {
+  margin-left: 3.75rem;
+  color: #f05523;
+}
+
+.ordersContainer {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

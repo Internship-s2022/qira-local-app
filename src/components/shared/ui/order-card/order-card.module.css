@@ -1,0 +1,38 @@
+.orderCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-around;
+  width: 370px;
+  height: 150px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.dataText {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.orangeText {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #f05523;
+}
+
+.priceText {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}

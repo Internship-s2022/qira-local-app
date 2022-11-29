@@ -14,6 +14,7 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
   switch (action.type) {
     case Actions.GET_ORDERS_PENDING:
     case Actions.GET_ORDER_PENDING:
+    case Actions.GET_CLIENT_ORDERS_PENDING:
       return {
         ...state,
         isFetching: true,
@@ -28,6 +29,7 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
       };
     case Actions.GET_ORDERS_ERROR:
     case Actions.GET_ORDER_ERROR:
+    case Actions.GET_CLIENT_ORDERS_ERROR:
       return {
         ...state,
         isFetching: false,
@@ -44,6 +46,7 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
         message: action.payload.message,
       };
     case Actions.GET_ORDERS_SUCCESS:
+    case Actions.GET_CLIENT_ORDERS_SUCCESS:
       return {
         ...state,
         orders: action.payload,
