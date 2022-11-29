@@ -24,6 +24,12 @@ class LoginPage {
     get errorModalBtn () {
       return $('[data-testid=error-modal-btn]');
     }
+<<<<<<< Updated upstream
+=======
+    // get modalContainer () {
+    //   return $('[data-testid=modal-container]')
+    // }
+>>>>>>> Stashed changes
     get formContainer () {
       return $('[data-testid=form-container]');
     }
