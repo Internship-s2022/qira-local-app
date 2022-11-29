@@ -4,7 +4,7 @@ import styles from './footer.module.css';
 
 const Footer = () => {
   return (
-    <footer className={styles.container} data-testId="test">
+    <footer className={styles.container} data-testid="test">
       <div className={styles.footerContainer}>
         <div className={styles.logoContainer}>
           <img

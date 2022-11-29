@@ -41,18 +41,18 @@ const Home = (): JSX.Element => {
       <section className={styles.categorySection}>
         <h2>Categorias destacadas</h2>
         <div className={styles.categoriesContainer}>
-          {categories.map((category, index) => {
+          {categories.map((category) => {
             return (
-              <>
-                <Link className={styles.nameCategory} to={`/category/${category.url}`}>
-                  <div className={styles.categoryCard}>
-                    <img className={styles.imgCategory} src={category.image.url} alt="" />
-                    <div className={styles.nameCategory} key={index}>
-                      {category.name}
-                    </div>
-                  </div>
-                </Link>
-              </>
+              <Link
+                className={styles.nameCategory}
+                to={`/category/${category.url}`}
+                key={category._id}
+              >
+                <div className={styles.categoryCard}>
+                  <img className={styles.imgCategory} src={category.image.url} alt="" />
+                  <div className={styles.nameCategory}>{category.name}</div>
+                </div>
+              </Link>
             );
           })}
         </div>
