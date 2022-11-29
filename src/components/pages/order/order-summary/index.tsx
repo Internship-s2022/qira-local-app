@@ -10,10 +10,10 @@ const OrderSummary = (): JSX.Element => {
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
 
   return (
-    <section className={styles.orderContainer}>
+    <section className={styles.orderContainer} data-testid="summary-container">
       <h1 className={styles.title}>Carrito de compras</h1>
       <p className={styles.subtitle}>Revise su compra antes de continuar </p>
-      <div>
+      <div data-testid="products-container">
         <div>
           <p className={styles.productQuantity}>Productos ({shoppingCartProducts.length})</p>
         </div>
