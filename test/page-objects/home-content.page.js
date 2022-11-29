@@ -29,8 +29,11 @@ class HomeContent {
   get productCardBtn () {
     return $('[data-testid=productCard-btn]');
   }
-  get productQuantifier () {
-    return $$('[data-testid=icon-btn]');
+  get increaseBtn () {
+    return $('[data-testid=increase-btn]');
+  }
+  get decreaseBtn () {
+    return $('[data-testid=decrease-btn]');
   }
 
   // Featured Categories

@@ -481,7 +481,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.provinceError).toHaveText('Debe contener solo letras.');
   });
 
-  fit('Sign up successfully', async () => {
+  it('Sign up successfully', async () => {
     await SignUpPage.signUp({ ...values, email: randomEmail });
     await expect(SignUpPage.infoModal).toBeDisplayed();
     await expect(SignUpPage.infoModal).toHaveTextContaining('Cuenta creada exitosamente.');
@@ -489,7 +489,7 @@ describe('Sign up page testing', () => {
     await expect(SignUpPage.infoModal).not.toBeDisplayed();
   });
 
-  fit('Sign up error - We try to register the same account', async () => {
+  it('Sign up error - We try to register the same account', async () => {
     await SignUpPage.signUp({ ...values, email:randomEmail });
     await expect(SignUpPage.infoModal).toBeDisplayed();
     await expect(SignUpPage.infoModalMessage).toHaveText('Ha ocurrido un error');

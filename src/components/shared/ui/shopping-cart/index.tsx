@@ -61,7 +61,12 @@ const ShoppingCart = (): JSX.Element => {
                     <p className={styles.ivaText}> + IVA</p>
                   </div>
                 </div>
-                <Button size="large" className={styles.button} onClick={() => checkLoggedUser()}>
+                <Button
+                  data-testid="finish-btn"
+                  size="large"
+                  className={styles.button}
+                  onClick={() => checkLoggedUser()}
+                >
                   Finalizar compra
                 </Button>
               </div>

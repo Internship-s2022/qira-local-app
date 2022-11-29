@@ -22,9 +22,10 @@ exports.config = {
     //
     specs: [
         // './test/specs/**/*.js'
-        './test/specs/shared/login.e2e.js',
-        './test/specs/client/sign-up.e2e.js',
-        './test/specs/shared/home.e2e.js'
+        // './test/specs/shared/login.e2e.js',
+        // './test/specs/client/sign-up.e2e.js',
+        // './test/specs/shared/home.e2e.js'
+        './test/specs/client/orders.e2e.js'
     ],
     // Patterns to exclude.
     exclude: [

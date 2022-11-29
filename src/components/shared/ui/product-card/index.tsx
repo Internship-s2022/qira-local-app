@@ -52,7 +52,7 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
       {productQuantity > 0 ? (
         <div className={styles.quantity}>
           <IconButton
-            data-testid="icon-btn"
+            data-testid="decrease-btn"
             className={styles.iconButton}
             onClick={() => dispatch(decreaseProductQuantity(product._id))}
           >
@@ -60,7 +60,7 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
           </IconButton>
           <p>{productQuantity}</p>
           <IconButton
-            data-testid="icon-btn"
+            data-testid="increase-btn"
             className={styles.iconButton}
             onClick={() => dispatch(increaseProductQuantity(product._id))}
           >

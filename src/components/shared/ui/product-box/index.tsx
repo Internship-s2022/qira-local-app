@@ -12,6 +12,7 @@ import {
 import { getProductQuantity } from 'src/redux/shopping-cart/selectors/getProductQuantity';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { Currency } from 'src/types';
+import { removeSpaces } from 'src/utils/formatters';
 
 import styles from './product-box.module.css';
 import { ProductBoxProps } from './types';
@@ -22,17 +23,24 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
   const productQuantity = useSelector((state: RootState) => getProductQuantity(state, product._id));
 
   return (
-    <div className={styles.container}>
-      <Close className={styles.delete} onClick={() => dispatch(deleteProduct(product._id))} />
+    <div className={styles.container} data-testid="box">
+      <Close
+        data-testid="cross-prod-box"
+        className={styles.delete}
+        onClick={() => dispatch(deleteProduct(product._id))}
+      />
       <div className={styles.firstRowContainer}>
         <img className={styles.image} src={product.image.url}></img>
-        <p className={styles.productName}>{product.brand + ' ' + product.name}</p>
+        <p data-testid={`box-${removeSpaces(product.name)}`} className={styles.productName}>
+          {product.brand + ' ' + product.name}
+        </p>
       </div>
       <div className={styles.secondRowContainer}>
         <p className={styles.quantityText}>Seleccionar cantidad</p>
         <div className={styles.quantity}>
           <IconButton
             className={styles.iconButton}
+            data-testid="box-decrease"
             onClick={() => dispatch(decreaseProductQuantity(product._id))}
           >
             <Remove />
@@ -40,6 +48,7 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
           <p>{productQuantity}</p>
           <IconButton
             className={styles.iconButton}
+            data-testid="box-increase"
             onClick={() => dispatch(increaseProductQuantity(product._id))}
           >
             <Add />

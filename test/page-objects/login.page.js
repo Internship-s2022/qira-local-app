@@ -24,9 +24,6 @@ class LoginPage {
     get errorModalBtn () {
       return $('[data-testid=error-modal-btn]');
     }
-    get modalContainer () {
-      return $('[data-testid=modal-container]')
-    }
     get formContainer () {
       return $('[data-testid=form-container]');
     }
