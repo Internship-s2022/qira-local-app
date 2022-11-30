@@ -27,7 +27,6 @@ const Header = () => {
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const currentRole = useSelector((state: RootState) => state.auth.role);
-  const exchangeRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
   useEffect(() => {
