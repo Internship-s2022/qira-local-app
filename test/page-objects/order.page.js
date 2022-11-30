@@ -1,5 +1,4 @@
 class Order {
-<<<<<<< Updated upstream
   //Getters - Layout
   get sidebarContainer () {
     return $('[data-testid=sidebar-summary]');
@@ -40,15 +39,6 @@ class Order {
     return $('[data-testid=box]')
   }
 
-=======
-  //Getters - General
-
-  get title () {
-    return $('');
-  }
-
-  //
->>>>>>> Stashed changes
   //Methods
 }
 
