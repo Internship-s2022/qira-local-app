@@ -1,0 +1,66 @@
+.mainContainer {
+  display: flex;
+}
+
+.contentContainer {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 230px);
+  overflow-y: auto;
+}
+
+.tittle {
+  margin-left: 0;
+}
+
+.profileNavBar {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  padding-top: 50px;
+  background-color: #f3f3f3;
+}
+
+.linksAndTittle {
+  align-self: center;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+}
+
+.linkSelected {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #f05523;
+  text-decoration: none;
+}
+
+.link {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: black;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #f05523;
+}
+
+.linkLogOut {
+  margin-top: 0;
+  font-size: 16px;
+  color: black;
+}
+
+.linkLogOut:hover {
+  color: #f05523;
+  cursor: pointer;
+}
+
+.outletContainer {
+  display: flex;
+  width: 100%;
+}
