@@ -17,7 +17,7 @@ import { updateUserData } from './validations';
 const UserData = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const currentUser = useSelector((state: RootState) => state.auth.user);
-  const [previousData] = useState<User>(currentUser);
+  // const [previousData] = useState<User>(currentUser);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       email: currentUser?.email,
@@ -28,14 +28,13 @@ const UserData = (): JSX.Element => {
     mode: 'onBlur',
   });
   const codeAreaInput = watch('codeArea');
-  const phoneNumber = watch('phoneNumber');
+  const phoneNumberInput = watch('phoneNumber');
 
   const disabledBtn = useMemo(() => {
-    return previousData.phoneNumber === codeAreaInput + phoneNumber;
-  }, [previousData, codeAreaInput, phoneNumber]);
+    return currentUser.phoneNumber === codeAreaInput + phoneNumberInput;
+  }, [currentUser, codeAreaInput, phoneNumberInput]);
 
   const onSubmit = async (data) => {
-    console.log(data);
     const modalOptions: Options = {};
     const response = await dispatch(
       updateClientInformation({ phoneNumber: data.codeArea + data.phoneNumber }),
