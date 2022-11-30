@@ -73,7 +73,7 @@ const UserData = (): JSX.Element => {
               control={control}
               name={'codeArea'}
               type="text"
-              optionalLabel="Cod. Area"
+              optionalLabel="Cod. Área"
               variant="outlined"
               className={styles.inputSmall}
               margin="dense"
