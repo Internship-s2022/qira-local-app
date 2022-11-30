@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -17,8 +17,8 @@ import { updateUserData } from './validations';
 const UserData = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const currentUser = useSelector((state: RootState) => state.auth.user);
-  const previousData = useState<User>(currentUser);
-  const { control, handleSubmit } = useForm({
+  const [previousData, setProviousData] = useState<User>(currentUser);
+  const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       email: currentUser?.email,
       codeArea: currentUser?.phoneNumber.substring(0, 3),
@@ -27,7 +27,15 @@ const UserData = (): JSX.Element => {
     resolver: joiResolver(updateUserData),
     mode: 'onBlur',
   });
+  const codeAreaInput = watch('codeArea');
+  const phoneNumber = watch('phoneNumber');
+
+  const disabledBtn = useMemo(() => {
+    return previousData.phoneNumber === codeAreaInput + phoneNumber;
+  }, [previousData, codeAreaInput, phoneNumber]);
+
   const onSubmit = async (data) => {
+    console.log(data);
     const modalOptions: Options = {};
     if (previousData[0].phoneNumber != data.codeArea + data.phoneNumber) {
       const response = await dispatch(
@@ -94,8 +102,9 @@ const UserData = (): JSX.Element => {
             variant="contained"
             fullWidth
             className={styles.button}
+            disabled={disabledBtn}
           >
-            Editar
+            Guardar
           </Button>
         </form>
       </section>
