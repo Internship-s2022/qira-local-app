@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
 import { InputText } from 'src/components/shared/ui/input';
+import { formatIvaConditionsText } from 'src/helper/clients/clients';
 import { RootState } from 'src/redux/store';
 
 import styles from './bill-information.module.css';
@@ -12,7 +13,7 @@ const BillInformation = (): JSX.Element => {
   const { control } = useForm({
     defaultValues: {
       businessName: currentUser?.businessName,
-      ivaCondition: currentUser?.ivaCondition,
+      ivaCondition: formatIvaConditionsText(currentUser?.ivaCondition),
       cuit: currentUser?.cuit,
       province: currentUser?.address.province,
       city: currentUser?.address.city,
@@ -77,7 +78,7 @@ const BillInformation = (): JSX.Element => {
               control={control}
               name="zipCode"
               type="text"
-              optionalLabel="Código postal"
+              optionalLabel="Código Postal"
               variant="outlined"
               margin="dense"
               size="small"
