@@ -17,38 +17,40 @@ const ClientLayout = (): JSX.Element => {
       <div className={styles.mainContainer}>
         <div className={styles.contentContainer}>
           <section className={styles.profileNavBar}>
-            <h1>Mi Cuenta</h1>
-            <nav className={styles.links}>
-              <Link
-                className={
-                  location.pathname === '/profile/my-orders' ? styles.linkSelected : styles.link
-                }
-                to="/profile/my-orders"
-              >
-                Mis Pedidos
-              </Link>
-              <Link
-                className={
-                  location.pathname === '/profile/bill-information'
-                    ? styles.linkSelected
-                    : styles.link
-                }
-                to="/profile/bill-information"
-              >
-                Datos de Facturación
-              </Link>
-              <Link
-                className={
-                  location.pathname === '/profile/user-data' ? styles.linkSelected : styles.link
-                }
-                to="/profile/user-data"
-              >
-                Datos de Usuario
-              </Link>
-              <p onClick={() => dispatch(logoutUser())} className={styles.linkLogOut}>
-                Cerrar Sesión
-              </p>
-            </nav>
+            <div className={styles.linksAndTittle}>
+              <h1 className={styles.tittle}>Mi Cuenta</h1>
+              <nav className={styles.links}>
+                <Link
+                  className={
+                    location.pathname === '/profile/my-orders' ? styles.linkSelected : styles.link
+                  }
+                  to="/profile/my-orders"
+                >
+                  Mis Pedidos
+                </Link>
+                <Link
+                  className={
+                    location.pathname === '/profile/bill-information'
+                      ? styles.linkSelected
+                      : styles.link
+                  }
+                  to="/profile/bill-information"
+                >
+                  Datos de Facturación
+                </Link>
+                <Link
+                  className={
+                    location.pathname === '/profile/user-data' ? styles.linkSelected : styles.link
+                  }
+                  to="/profile/user-data"
+                >
+                  Datos de Usuario
+                </Link>
+                <p onClick={() => dispatch(logoutUser())} className={styles.linkLogOut}>
+                  Cerrar Sesión
+                </p>
+              </nav>
+            </div>
           </section>
           <div className={styles.outletContainer}>
             <Outlet />

@@ -9,19 +9,26 @@
   overflow-y: auto;
 }
 
+.tittle {
+  margin-left: 0;
+}
+
 .profileNavBar {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 40%;
   padding-top: 50px;
   background-color: #f3f3f3;
 }
 
+.linksAndTittle {
+  align-self: center;
+}
+
 .links {
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
+  margin-top: 40px;
 }
 
 .linkSelected {
