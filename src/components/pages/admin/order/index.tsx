@@ -240,7 +240,7 @@ const OrderDetails = (): JSX.Element => {
                               className={styles.link}
                             >
                               <InsertDriveFile />
-                              Factura firmada
+                              Comprobante de entrega
                             </a>
                           </div>
                         </>
@@ -254,7 +254,7 @@ const OrderDetails = (): JSX.Element => {
                             <p className={styles.sectionTitle}>
                               {selectedOrder?.state === OrderState.APPROVE_PENDING
                                 ? 'Factura:'
-                                : 'Factura firmada:'}
+                                : 'Comprobante de entrega:'}
                             </p>
                             <p>{invoice.name}</p>
                           </div>
@@ -275,9 +275,9 @@ const OrderDetails = (): JSX.Element => {
                           className={styles.btnUpload}
                         >
                           {invoice
-                            ? 'Modificar factura'
+                            ? 'Modificar archivo'
                             : selectedOrder?.state === OrderState.DELIVERY_PENDING
-                            ? 'Cargar factura firmada'
+                            ? 'Cargar comprobante'
                             : 'Cargar factura'}
                         </Button>
                       </>
