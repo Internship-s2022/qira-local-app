@@ -38,7 +38,7 @@ export const FinishOrder = (): JSX.Element => {
   return (
     <div className={styles.mainContainer}>
       <div>
-        <h1>Finalizar compra</h1>
+        <h1 className={styles.title}>Finalizar compra</h1>
         <p className={styles.subtitle}>Revise y confirme su compra</p>
       </div>
       <div className={styles.columnsContainer}>
