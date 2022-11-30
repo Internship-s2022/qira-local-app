@@ -17,7 +17,7 @@ import { updateUserData } from './validations';
 const UserData = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const currentUser = useSelector((state: RootState) => state.auth.user);
-  const [previousData, setProviousData] = useState<User>(currentUser);
+  const [previousData] = useState<User>(currentUser);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       email: currentUser?.email,
@@ -37,18 +37,14 @@ const UserData = (): JSX.Element => {
   const onSubmit = async (data) => {
     console.log(data);
     const modalOptions: Options = {};
-    if (previousData[0].phoneNumber != data.codeArea + data.phoneNumber) {
-      const response = await dispatch(
-        updateClientInformation({ phoneNumber: data.codeArea + data.phoneNumber }),
-      );
-      if (response) {
-        if (response.type === 'UPDATE_CLIENT_INFORMATION_SUCCESS') {
-          modalOptions.message = 'Datos editados exitosamente.';
-          modalOptions.onCloseCallback = () => dispatch(closeModal());
-        }
+    const response = await dispatch(
+      updateClientInformation({ phoneNumber: data.codeArea + data.phoneNumber }),
+    );
+    if (response) {
+      if (response.type === 'UPDATE_CLIENT_INFORMATION_SUCCESS') {
+        modalOptions.message = 'Datos editados exitosamente.';
+        modalOptions.onCloseCallback = () => dispatch(closeModal());
       }
-    } else {
-      modalOptions.message = 'No hubo cambios.';
     }
     if (!modalOptions.message) {
       modalOptions.message = 'Algo salió mal ';
