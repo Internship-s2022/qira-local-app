@@ -17,7 +17,7 @@ const ClientLayout = (): JSX.Element => {
       <div className={styles.mainContainer}>
         <div className={styles.contentContainer}>
           <section className={styles.profileNavBar}>
-            <h1>Mi cuenta</h1>
+            <h1>Mi Cuenta</h1>
             <nav className={styles.links}>
               <Link
                 className={
@@ -25,7 +25,7 @@ const ClientLayout = (): JSX.Element => {
                 }
                 to="/profile/my-orders"
               >
-                Mis pedidos
+                Mis Pedidos
               </Link>
               <Link
                 className={
@@ -35,7 +35,7 @@ const ClientLayout = (): JSX.Element => {
                 }
                 to="/profile/bill-information"
               >
-                Datos de facturación
+                Datos de Facturación
               </Link>
               <Link
                 className={
@@ -43,10 +43,10 @@ const ClientLayout = (): JSX.Element => {
                 }
                 to="/profile/user-data"
               >
-                Datos de usuario
+                Datos de Usuario
               </Link>
               <p onClick={() => dispatch(logoutUser())} className={styles.linkLogOut}>
-                Cerrar sesión
+                Cerrar Sesión
               </p>
             </nav>
           </section>
