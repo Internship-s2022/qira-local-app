@@ -1,4 +1,4 @@
-import { addBusinessDays, format, isValid } from 'date-fns';
+import { addBusinessDays, format, isValid, parse } from 'date-fns';
 import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,9 +20,15 @@ const DeliveryDate = () => {
     (state: RootState) => state.shoppingCart.estimatedDeliveryDate,
   );
 
+  let parsedDeliveryDate;
+
+  if (estimatedDeliveryDate) {
+    parsedDeliveryDate = parse(estimatedDeliveryDate, 'MM/dd/yyyy', new Date());
+  }
+
   const { handleSubmit, control, watch } = useForm<DeliveryDateFormValues>({
     defaultValues: {
-      estimatedDeliveryDate: futureDate,
+      estimatedDeliveryDate: parsedDeliveryDate ? parsedDeliveryDate : futureDate,
     },
     mode: 'onBlur',
     resolver: joiResolver(DeliveryDateValidations),

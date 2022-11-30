@@ -72,7 +72,10 @@ export const FinishOrder = (): JSX.Element => {
           </div>
           <div className={styles.dataContainer}>
             <p className={styles.sectionTitle}>Dirección y fecha de retiro</p>
-            <div className={styles.dataCard}>
+            <div
+              className={styles.clickableDataCard}
+              onClick={() => navigate('/order/delivery-date')}
+            >
               <p className={styles.cardTitle}>Qira Central Storage</p>
               <div>
                 <p className={styles.cardText}>Córdoba 1764 - CP: 2000</p>
