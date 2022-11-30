@@ -2,9 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 import { setToken } from 'src/redux/auth/actions';
-import getStore from 'src/redux/store';
-
-const { store } = getStore();
+import { store } from 'src/redux/store';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
