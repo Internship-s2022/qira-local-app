@@ -13,6 +13,7 @@ const themeOptions: ThemeOptions = {
     },
     info: {
       main: '#3A9FCF',
+      contrastText: '#fff',
     },
     error: {
       main: '#AE2D04',

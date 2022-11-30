@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { AccountCircle, KeyboardArrowDown, Search, ShoppingCart } from '@mui/icons-material';
+import Badge, { BadgeProps } from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
 
 import * as thunksCategories from 'src/redux/category/thunk';
 import { openModal } from 'src/redux/modal/actions';
@@ -16,6 +18,7 @@ const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
   const categories = useSelector((state: RootState) => state.categories.categories);
+  const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const currentRole = useSelector((state: RootState) => state.auth.role);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
@@ -23,6 +26,19 @@ const Header = () => {
   useEffect(() => {
     dispatch(thunksCategories.getPublicCategories());
   }, []);
+
+  const StyledBadge = styled(Badge)<BadgeProps>(() => ({
+    '& .MuiBadge-badge': {
+      right: 8,
+      top: 6,
+      textAlign: 'center',
+      fontSize: '11px',
+      minWidth: '15px',
+      minHeight: '15px',
+      width: '17px',
+      height: '17px',
+    },
+  }));
 
   return (
     <header className={styles.headerContainer}>
@@ -112,7 +128,14 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <ShoppingCart className={styles.shoppingCart} onClick={() => dispatch(openCart())} />
+            <StyledBadge
+              badgeContent={shoppingCartProducts.length}
+              max={9}
+              color="info"
+              className={styles.shoppingCartContainer}
+            >
+              <ShoppingCart className={styles.shoppingCart} onClick={() => dispatch(openCart())} />
+            </StyledBadge>
           </div>
         </div>
       </nav>
