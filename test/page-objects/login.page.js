@@ -50,9 +50,5 @@ class LoginPage {
       await this.inputEmail.clearValue();
       await this.inputPassword.clearValue();
     }
-
-    async openBrowser () {
-      await browser.url('http://localhost:3000');
-    }
   }
 export default new LoginPage();
