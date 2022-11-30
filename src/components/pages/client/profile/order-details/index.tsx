@@ -139,31 +139,6 @@ const OrderDetails = (): JSX.Element => {
                         </a>
                       </div>
                     )}
-                  {selectedOrder?.state === OrderState.DELIVERED &&
-                    selectedOrder?.signedInvoice?.url && (
-                      <>
-                        <div className={styles.invoiceContainer}>
-                          <a
-                            href={selectedOrder?.invoice?.url}
-                            target="blank"
-                            className={styles.link}
-                          >
-                            <InsertDriveFile />
-                            Factura
-                          </a>
-                        </div>
-                        <div className={styles.invoiceContainer}>
-                          <a
-                            href={selectedOrder?.invoice?.url}
-                            target="blank"
-                            className={styles.link}
-                          >
-                            <InsertDriveFile />
-                            Factura firmada
-                          </a>
-                        </div>
-                      </>
-                    )}
                 </div>
               </div>
             )}
