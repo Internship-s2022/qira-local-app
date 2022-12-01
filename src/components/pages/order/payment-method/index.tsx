@@ -94,7 +94,7 @@ const PaymentMethod = (): JSX.Element => {
                     onConfirmCallback: (selectedFile) => {
                       onUpload(selectedFile);
                     },
-                    onCloseCallback: () => dispatch(closeModal),
+                    onCloseCallback: () => dispatch(closeModal()),
                   }),
                 )
               }
@@ -102,7 +102,7 @@ const PaymentMethod = (): JSX.Element => {
               variant="contained"
               className={styles.btnUpload}
             >
-              Cargar comprobante
+              {receipt ? 'Modificar archivo' : 'Cargar comprobante'}
             </Button>
           </div>
         </div>
