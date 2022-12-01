@@ -1,0 +1,16 @@
+.container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 100px;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+}
