@@ -11,3 +11,5 @@ export const approveOrder = (id, data) => api.patch<Order>(`/admin/orders/approv
 export const deliverOrder = (id, data) => api.patch<Order>(`/admin/orders/deliver/${id}`, data);
 
 export const rejectOrder = (id) => api.patch<Order>(`/admin/orders/reject/${id}`);
+
+export const getClientOrders = () => api.get<Order[]>('/client/orders');
