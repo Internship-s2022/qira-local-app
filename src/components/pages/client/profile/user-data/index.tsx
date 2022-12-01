@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -6,7 +6,6 @@ import { Button } from '@mui/material';
 
 import { InputText } from 'src/components/shared/ui/input';
 import { updateClientInformation } from 'src/redux/auth/thunks';
-import { User } from 'src/redux/auth/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes, Options } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -17,7 +16,6 @@ import { updateUserData } from './validations';
 const UserData = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const currentUser = useSelector((state: RootState) => state.auth.user);
-  // const [previousData] = useState<User>(currentUser);
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       email: currentUser?.email,
@@ -58,7 +56,7 @@ const UserData = (): JSX.Element => {
         <form>
           <InputText
             control={control}
-            name={'email'}
+            name="email"
             type="text"
             optionalLabel="Email"
             variant="outlined"
@@ -70,7 +68,7 @@ const UserData = (): JSX.Element => {
           <div className={styles.phoneContainer}>
             <InputText
               control={control}
-              name={'codeArea'}
+              name="codeArea"
               type="text"
               optionalLabel="Cod. Área"
               variant="outlined"
@@ -81,7 +79,7 @@ const UserData = (): JSX.Element => {
             />
             <InputText
               control={control}
-              name={'phoneNumber'}
+              name="phoneNumber"
               type="text"
               optionalLabel="Teléfono"
               variant="outlined"
