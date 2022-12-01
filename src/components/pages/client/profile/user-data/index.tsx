@@ -52,7 +52,7 @@ const UserData = (): JSX.Element => {
   return (
     <>
       <section className={styles.container}>
-        <h2 className={styles.tittle}>Datos del Usuario</h2>
+        <h2 className={styles.tittle}>Datos del usuario</h2>
         <form>
           <InputText
             control={control}
@@ -70,7 +70,7 @@ const UserData = (): JSX.Element => {
               control={control}
               name="codeArea"
               type="text"
-              optionalLabel="Cod. Área"
+              optionalLabel="Cod. área"
               variant="outlined"
               className={styles.inputSmall}
               margin="dense"
