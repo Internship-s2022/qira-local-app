@@ -29,6 +29,7 @@ export enum ProfileClientRoutes {
 export enum OrderRoutes {
   SUMMARY = '/summary',
   AUTHORIZED = '/authorized',
+  DELIVERY_DATE = '/delivery-date',
   FINISH_ORDER = '/finish',
   PAYMENT_METHOD = '/payment',
   FINAL_SCREEN = '/final',

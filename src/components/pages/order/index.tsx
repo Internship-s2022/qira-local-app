@@ -5,6 +5,7 @@ import OrderLayout from 'src/components/layout/order';
 import { OrderRoutes } from 'src/constants';
 
 import Authorized from './authorized';
+import DeliveryDate from './delivery-date';
 import { FinalScreen } from './final-screen';
 import { FinishOrder } from './finish-order';
 import OrderSummary from './order-summary';
@@ -16,6 +17,7 @@ const OrderRouter = (): JSX.Element => {
       <Route element={<OrderLayout />}>
         <Route path={OrderRoutes.SUMMARY} element={<OrderSummary />} />
         <Route path={OrderRoutes.AUTHORIZED} element={<Authorized />} />
+        <Route path={OrderRoutes.DELIVERY_DATE} element={<DeliveryDate />} />
         <Route path={OrderRoutes.FINISH_ORDER} element={<FinishOrder />} />
         <Route path={OrderRoutes.PAYMENT_METHOD} element={<PaymentMethod />} />
       </Route>

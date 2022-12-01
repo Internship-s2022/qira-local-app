@@ -1,3 +1,4 @@
+import { format, parse } from 'date-fns';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +14,12 @@ export const FinishOrder = (): JSX.Element => {
   const client = useSelector((state: RootState) => state.auth.user);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const authorized = useSelector((state: RootState) => state.shoppingCart.authorized);
+  const estimatedDeliveryDate = useSelector(
+    (state: RootState) => state.shoppingCart.estimatedDeliveryDate,
+  );
+
+  const parsedDate = parse(estimatedDeliveryDate, 'MM/dd/yyyy', new Date());
+  const formattedDate = format(parsedDate, 'dd/MM/yyyy');
 
   return (
     <div className={styles.mainContainer}>
@@ -64,12 +71,16 @@ export const FinishOrder = (): JSX.Element => {
             </>
           </div>
           <div className={styles.dataContainer}>
-            <p className={styles.sectionTitle}>Dirección de retiro</p>
-            <div className={styles.dataCard}>
+            <p className={styles.sectionTitle}>Dirección y fecha de retiro</p>
+            <div
+              className={styles.clickableDataCard}
+              onClick={() => navigate('/order/delivery-date')}
+            >
               <p className={styles.cardTitle}>Qira Central Storage</p>
               <div>
                 <p className={styles.cardText}>Córdoba 1764 - CP: 2000</p>
                 <p className={styles.cardText}>Rosario - Santa Fe</p>
+                <p className={styles.cardText}>Fecha: {formattedDate}</p>
               </div>
             </div>
           </div>

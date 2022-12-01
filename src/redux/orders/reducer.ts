@@ -14,10 +14,10 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
   switch (action.type) {
     case Actions.GET_ORDERS_PENDING:
     case Actions.GET_ORDER_PENDING:
-    case Actions.CREATE_ORDER_PENDING:
       return {
         ...state,
         isFetching: true,
+        error: false,
       };
     case Actions.APPROVE_ORDER_PENDING:
     case Actions.DELIVER_ORDER_PENDING:
@@ -78,20 +78,6 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
       return {
         ...state,
         filterState: action.payload,
-      };
-    case Actions.CREATE_ORDER_SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
-        message: 'Orden creada exitósamente.',
-        orders: [...state.orders, action.payload],
-      };
-    case Actions.CREATE_ORDER_ERROR:
-      return {
-        ...state,
-        isFetching: false,
-        error: true,
-        message: action.payload.message,
       };
     default:
       return state;
