@@ -60,6 +60,7 @@ const OrderDetails = (): JSX.Element => {
       };
       dispatch(openModal(ModalTypes.INFO, modalOptions));
     }
+    setInvoice(null);
   };
 
   const handleDeliver = async () => {
@@ -75,6 +76,7 @@ const OrderDetails = (): JSX.Element => {
       };
       dispatch(openModal(ModalTypes.INFO, modalOptions));
     }
+    setInvoice(null);
   };
 
   const handleReject = async () => {
@@ -87,6 +89,7 @@ const OrderDetails = (): JSX.Element => {
       };
       dispatch(openModal(ModalTypes.INFO, modalOptions));
     }
+    setInvoice(null);
   };
 
   return (
@@ -242,7 +245,7 @@ const OrderDetails = (): JSX.Element => {
                                 onConfirmCallback: (selectedFile) => {
                                   onUpload(selectedFile);
                                 },
-                                onCloseCallback: () => dispatch(closeModal),
+                                onCloseCallback: () => dispatch(closeModal()),
                               }),
                             )
                           }
