@@ -54,7 +54,7 @@ const UserData = (): JSX.Element => {
   return (
     <>
       <section className={styles.container}>
-        <h2 className={styles.tittle}>Datos del usuario</h2>
+        <h2 className={styles.tittle}>Datos del Usuario</h2>
         <form>
           <InputText
             control={control}
