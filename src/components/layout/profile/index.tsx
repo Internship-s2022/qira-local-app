@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { Footer, Header } from 'src/components/shared/common';
-import { logoutUser } from 'src/redux/auth/actions';
+import { logout } from 'src/redux/auth/thunks';
 import { AppDispatch } from 'src/redux/store';
 
 import styles from './profile.module.css';
@@ -18,7 +18,7 @@ const ClientLayout = (): JSX.Element => {
         <div className={styles.contentContainer}>
           <section className={styles.profileNavBar}>
             <div className={styles.linksAndTittle}>
-              <h1 className={styles.tittle}>Mi Cuenta</h1>
+              <h1 className={styles.tittle}>Mi cuenta</h1>
               <nav className={styles.links}>
                 <Link
                   className={
@@ -26,7 +26,7 @@ const ClientLayout = (): JSX.Element => {
                   }
                   to="/profile/my-orders"
                 >
-                  Mis Pedidos
+                  Mis pedidos
                 </Link>
                 <Link
                   className={
@@ -36,7 +36,7 @@ const ClientLayout = (): JSX.Element => {
                   }
                   to="/profile/bill-information"
                 >
-                  Datos de Facturación
+                  Datos de facturación
                 </Link>
                 <Link
                   className={
@@ -44,10 +44,10 @@ const ClientLayout = (): JSX.Element => {
                   }
                   to="/profile/user-data"
                 >
-                  Datos de Usuario
+                  Datos de usuario
                 </Link>
-                <p onClick={() => dispatch(logoutUser())} className={styles.linkLogOut}>
-                  Cerrar Sesión
+                <p onClick={() => dispatch(logout())} className={styles.linkLogOut}>
+                  Cerrar sesión
                 </p>
               </nav>
             </div>

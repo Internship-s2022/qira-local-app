@@ -44,7 +44,6 @@ const Clients = (): JSX.Element => {
         firebaseUid: client.firebaseUid ? client.firebaseUid : '',
       };
     });
-    console.log(listData);
     return listData;
   };
 

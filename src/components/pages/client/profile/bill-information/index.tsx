@@ -26,7 +26,7 @@ const BillInformation = (): JSX.Element => {
   return (
     <>
       <section className={styles.container}>
-        <h2 className={styles.tittle}>Datos de Facturación</h2>
+        <h2 className={styles.tittle}>Datos de facturación</h2>
         <form className={styles.formContainer}>
           <div className={styles.columnContainer}>
             <InputText
@@ -34,7 +34,7 @@ const BillInformation = (): JSX.Element => {
               control={control}
               name="businessName"
               type="text"
-              optionalLabel="Razón Social"
+              optionalLabel="Razón social"
               variant="outlined"
               margin="dense"
               size="small"
@@ -78,7 +78,7 @@ const BillInformation = (): JSX.Element => {
               control={control}
               name="zipCode"
               type="text"
-              optionalLabel="Código Postal"
+              optionalLabel="Código postal"
               variant="outlined"
               margin="dense"
               size="small"

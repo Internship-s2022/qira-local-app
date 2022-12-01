@@ -7,6 +7,7 @@ import { RootAction } from '../store';
 import {
   getAuthUserActions,
   loginActions,
+  logoutActions,
   registerActions,
   updateClientInformationActions,
 } from './actions';
@@ -21,6 +22,7 @@ export const login = (credentials) => {
         credentials.email,
         credentials.password,
       );
+
       const token = await response.user.getIdToken();
       const {
         claims: { role },
@@ -69,6 +71,18 @@ export const updateClientInformation = (data) => {
       return dispatch(updateClientInformationActions.success(response.data));
     } catch (error) {
       dispatch(updateClientInformationActions.failure(error));
+    }
+  };
+};
+
+export const logout = () => {
+  return async (dispatch: Dispatch<RootAction>) => {
+    try {
+      dispatch(logoutActions.request());
+      await auth().signOut();
+      return dispatch(logoutActions.success());
+    } catch (error) {
+      return dispatch(logoutActions.failure(error));
     }
   };
 };

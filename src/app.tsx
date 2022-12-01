@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AdminRouter from './components/pages/admin';
@@ -6,10 +6,15 @@ import ClientRouter from './components/pages/client';
 import ProfileRouter from './components/pages/client/profile';
 import OrderRouter from './components/pages/order';
 import { SharedModal } from './components/shared/ui/modal';
+import { tokenListener } from './helper/firebase';
 import PrivateRoute from './helper/routes/private-routes';
 import { UserRole } from './types';
 
 const App = (): JSX.Element => {
+  useEffect(() => {
+    tokenListener();
+  }, []);
+
   return (
     <BrowserRouter>
       <SharedModal />
