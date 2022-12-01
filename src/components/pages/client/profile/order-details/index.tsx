@@ -18,10 +18,9 @@ const OrderDetails = (): JSX.Element => {
   const params = useParams();
   const isFetching = useSelector((state: RootState) => state.orders.isFetching);
   const selectedOrder = useSelector((state: RootState) => state.orders.selectedOrder);
-  const token = useSelector((state: RootState) => state.auth.token);
 
   useEffect(() => {
-    params.id && dispatch(getClientOrderById(params.id, token));
+    params.id && dispatch(getClientOrderById(params.id));
   }, []);
 
   return (
