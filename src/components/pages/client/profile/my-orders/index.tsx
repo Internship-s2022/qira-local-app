@@ -12,10 +12,9 @@ const MyOrders = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const isFetching = useSelector((state: RootState) => state.orders.isFetching);
   const clientOrders = useSelector((state: RootState) => state.orders.orders);
-  const token = useSelector((state: RootState) => state.auth.token);
 
   useEffect(() => {
-    dispatch(getClientOrders(token));
+    dispatch(getClientOrders());
   }, []);
 
   return (
