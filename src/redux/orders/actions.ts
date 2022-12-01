@@ -38,5 +38,10 @@ export const getClientOrdersActions = createAsyncAction(
   Actions.GET_CLIENT_ORDERS_SUCCESS,
   Actions.GET_CLIENT_ORDERS_ERROR,
 )<void, Order[], ApiResponse<unknown>>();
+export const getOrderToDeliverActions = createAsyncAction(
+  Actions.GET_ORDER_TO_DELIVER_PENDING,
+  Actions.GET_ORDER_TO_DELIVER_SUCCESS,
+  Actions.GET_ORDER_TO_DELIVER_ERROR,
+)<void, Order, ApiResponse<unknown>>();
 
 export const setFilterStateAction = createAction(Actions.SET_FILTER_STATE)<FilterInput>();

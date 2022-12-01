@@ -13,3 +13,6 @@ export const deliverOrder = (id, data) => api.patch<Order>(`/admin/orders/delive
 export const rejectOrder = (id) => api.patch<Order>(`/admin/orders/reject/${id}`);
 
 export const getClientOrders = () => api.get<Order[]>('/client/orders');
+
+export const getOrderToDeliver = (data) =>
+  api.get<Order>(`/admin/orders/deliver/${data.id}?dni=${data.dni}`);

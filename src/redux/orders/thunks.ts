@@ -6,6 +6,7 @@ import {
   getClientOrdersActions,
   getOrderActions,
   getOrdersActions,
+  getOrderToDeliverActions,
   rejectOrderActions,
 } from './actions';
 import * as API from './api';
@@ -30,6 +31,18 @@ export const getOrderById = (id) => {
       return dispatch(getOrderActions.success(response.data));
     } catch (error) {
       return dispatch(getOrderActions.failure(error));
+    }
+  };
+};
+
+export const getOrderToDeliver = (data) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(getOrderToDeliverActions.request());
+      const response = await API.getOrderToDeliver(data);
+      return dispatch(getOrderToDeliverActions.success(response.data));
+    } catch (error) {
+      return dispatch(getOrderToDeliverActions.failure(error));
     }
   };
 };
