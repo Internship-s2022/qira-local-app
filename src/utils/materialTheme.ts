@@ -22,6 +22,9 @@ const themeOptions: ThemeOptions = {
       secondary: '#fff',
     },
   },
+  typography: {
+    fontFamily: ['Work Sans'].join(','),
+  },
 };
 
 export const mainTheme = createTheme(themeOptions);
