@@ -20,11 +20,11 @@ const DeliveryDate = () => {
     (state: RootState) => state.shoppingCart.estimatedDeliveryDate,
   );
 
-  let parsedDeliveryDate;
-
-  if (estimatedDeliveryDate) {
-    parsedDeliveryDate = parse(estimatedDeliveryDate, 'MM/dd/yyyy', new Date());
-  }
+  const parsedDeliveryDate = useMemo(() => {
+    if (estimatedDeliveryDate) {
+      return parse(estimatedDeliveryDate, 'MM/dd/yyyy', new Date());
+    }
+  }, [estimatedDeliveryDate]);
 
   const { handleSubmit, control, watch } = useForm<DeliveryDateFormValues>({
     defaultValues: {
