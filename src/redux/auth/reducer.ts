@@ -14,6 +14,7 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
     case Actions.LOGIN_PENDING:
     case Actions.GET_AUTH_PENDING:
     case Actions.REGISTER_PENDING:
+    case Actions.UPDATE_CLIENT_INFORMATION_PENDING:
       return {
         ...state,
         isFetching: true,
@@ -38,6 +39,7 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
     case Actions.LOGIN_ERROR:
     case Actions.GET_AUTH_ERROR:
     case Actions.REGISTER_ERROR:
+    case Actions.UPDATE_CLIENT_INFORMATION_ERROR:
       return {
         ...state,
         isFetching: false,
@@ -66,6 +68,13 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
       return {
         ...state,
         message: '',
+      };
+    case Actions.UPDATE_CLIENT_INFORMATION_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: false,
+        user: action.payload,
       };
     default:
       return state;

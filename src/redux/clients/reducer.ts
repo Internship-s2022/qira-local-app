@@ -39,19 +39,8 @@ export const clientReducer = (state = initialState, action: ActionsType): Client
         error: undefined,
       };
     case Actions.ACTIVATE_CLIENT_SUCCESS:
-      newListClients = state.clients.map((client) => {
-        if (client._id === action.payload._id) {
-          return action.payload;
-        } else {
-          return client;
-        }
-      });
-      return {
-        ...state,
-        clients: newListClients,
-        isFetching: false,
-      };
     case Actions.INACTIVATE_CLIENT_SUCCESS:
+    case Actions.UPDATE_CLIENT_SUCCESS:
       newListClients = state.clients.map((client) => {
         if (client._id === action.payload._id) {
           return action.payload;
@@ -70,19 +59,6 @@ export const clientReducer = (state = initialState, action: ActionsType): Client
         selectedClient: action.payload,
         isFetching: false,
       };
-    case Actions.UPDATE_CLIENT_SUCCESS: {
-      const newList = state.clients.map((client) => {
-        if (client._id === action.payload._id) {
-          return action.payload;
-        }
-        return client;
-      });
-      return {
-        ...state,
-        isFetching: false,
-        clients: newList,
-      };
-    }
     default:
       return state;
   }

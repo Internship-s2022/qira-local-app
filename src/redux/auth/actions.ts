@@ -21,6 +21,12 @@ export const getAuthUserActions = createAsyncAction(
   Actions.GET_AUTH_ERROR,
 )<string, User, ApiResponse<unknown>>();
 
+export const updateClientInformationActions = createAsyncAction(
+  Actions.UPDATE_CLIENT_INFORMATION_PENDING,
+  Actions.UPDATE_CLIENT_INFORMATION_SUCCESS,
+  Actions.UPDATE_CLIENT_INFORMATION_ERROR,
+)<void, User, ApiResponse<unknown>>();
+
 export const logoutUser = () => action(Actions.LOGOUT_USER);
 export const setAuthentication = (user: UserCredentials) =>
   action(Actions.SET_AUTHENTICATION, user);
