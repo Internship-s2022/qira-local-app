@@ -6,8 +6,7 @@ export const getOrders = () => api.get<Order[]>('/admin/orders');
 
 export const getOrderById = (id) => api.get<Order>(`/admin/orders/${id}`);
 
-export const createOrder = (order, token?: string) =>
-  api.post<Order>('/client/orders', order, { headers: { token: token } });
+export const createOrder = (order) => api.post<Order>('/client/orders', order);
 
 export const approveOrder = (id, data) => api.patch<Order>(`/admin/orders/approve/${id}`, data);
 

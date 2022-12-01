@@ -93,11 +93,6 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
         error: true,
         message: action.payload.message,
       };
-    case Actions.RESET_SELECTED_ORDER:
-      return {
-        ...state,
-        selectedOrder: undefined,
-      };
     default:
       return state;
   }

@@ -49,18 +49,16 @@ const OrderDetails = (): JSX.Element => {
 
   const handleApprove = async () => {
     const submitData = {
-      invoice: invoice,
+      invoice,
     };
     const modalOptions: Options = {};
-    if (params.id) {
-      const response = await dispatch(approveOrder(selectedOrder?._id, submitData));
-      if (response?.type === Actions.APPROVE_ORDER_ERROR) {
-        modalOptions.message = 'Ha ocurrido un error';
-        modalOptions.onCloseCallback = () => {
-          dispatch(closeModal());
-        };
-        dispatch(openModal(ModalTypes.INFO, modalOptions));
-      }
+    const response = await dispatch(approveOrder(selectedOrder?._id, submitData));
+    if (response?.type === Actions.APPROVE_ORDER_ERROR) {
+      modalOptions.message = 'Ha ocurrido un error';
+      modalOptions.onCloseCallback = () => {
+        dispatch(closeModal());
+      };
+      dispatch(openModal(ModalTypes.INFO, modalOptions));
     }
   };
 
@@ -69,29 +67,25 @@ const OrderDetails = (): JSX.Element => {
       signedInvoice: invoice,
     };
     const modalOptions: Options = {};
-    if (params.id) {
-      const response = await dispatch(deliverOrder(selectedOrder?._id, submitData));
-      if (response?.type === Actions.DELIVER_ORDER_ERROR) {
-        modalOptions.message = 'Ha ocurrido un error';
-        modalOptions.onCloseCallback = () => {
-          dispatch(closeModal());
-        };
-        dispatch(openModal(ModalTypes.INFO, modalOptions));
-      }
+    const response = await dispatch(deliverOrder(selectedOrder?._id, submitData));
+    if (response?.type === Actions.DELIVER_ORDER_ERROR) {
+      modalOptions.message = 'Ha ocurrido un error';
+      modalOptions.onCloseCallback = () => {
+        dispatch(closeModal());
+      };
+      dispatch(openModal(ModalTypes.INFO, modalOptions));
     }
   };
 
   const handleReject = async () => {
     const modalOptions: Options = {};
-    if (params.id) {
-      const response = await dispatch(rejectOrder(selectedOrder?._id));
-      if (response?.type === Actions.REJECT_ORDER_ERROR) {
-        modalOptions.message = 'Ha ocurrido un error';
-        modalOptions.onCloseCallback = () => {
-          dispatch(closeModal());
-        };
-        dispatch(openModal(ModalTypes.INFO, modalOptions));
-      }
+    const response = await dispatch(rejectOrder(selectedOrder?._id));
+    if (response?.type === Actions.REJECT_ORDER_ERROR) {
+      modalOptions.message = 'Ha ocurrido un error';
+      modalOptions.onCloseCallback = () => {
+        dispatch(closeModal());
+      };
+      dispatch(openModal(ModalTypes.INFO, modalOptions));
     }
   };
 
@@ -196,9 +190,7 @@ const OrderDetails = (): JSX.Element => {
                   <p>{'AR$ ' + selectedOrder?.amounts.total.toFixed(2)}</p>
                 </div>
               </div>
-              {selectedOrder?.state === OrderState.REJECTED ? (
-                <></>
-              ) : (
+              {selectedOrder?.state !== OrderState.REJECTED && (
                 <div className={styles.dataContainer}>
                   <div>
                     <a href={selectedOrder?.payment.url} target="blank" className={styles.link}>
@@ -207,47 +199,31 @@ const OrderDetails = (): JSX.Element => {
                     </a>
                   </div>
                   <div className={styles.filesContainer}>
-                    {selectedOrder?.state === OrderState.DELIVERY_PENDING &&
-                      selectedOrder?.invoice?.url && (
-                        <div className={styles.invoiceContainer}>
-                          <a
-                            href={selectedOrder?.invoice?.url}
-                            target="blank"
-                            className={styles.link}
-                          >
-                            <InsertDriveFile />
-                            Factura
-                          </a>
-                        </div>
-                      )}
-                    {selectedOrder?.state === OrderState.DELIVERED &&
-                      selectedOrder?.signedInvoice?.url && (
-                        <>
-                          <div className={styles.invoiceContainer}>
-                            <a
-                              href={selectedOrder?.invoice?.url}
-                              target="blank"
-                              className={styles.link}
-                            >
-                              <InsertDriveFile />
-                              Factura
-                            </a>
-                          </div>
-                          <div className={styles.invoiceContainer}>
-                            <a
-                              href={selectedOrder?.invoice?.url}
-                              target="blank"
-                              className={styles.link}
-                            >
-                              <InsertDriveFile />
-                              Comprobante de entrega
-                            </a>
-                          </div>
-                        </>
-                      )}
-                    {selectedOrder?.state === OrderState.DELIVERED ? (
-                      <></>
-                    ) : (
+                    {selectedOrder?.invoice?.url && (
+                      <div className={styles.invoiceContainer}>
+                        <a
+                          href={selectedOrder?.invoice?.url}
+                          target="blank"
+                          className={styles.link}
+                        >
+                          <InsertDriveFile />
+                          Factura
+                        </a>
+                      </div>
+                    )}
+                    {selectedOrder?.signedInvoice?.url && (
+                      <div className={styles.invoiceContainer}>
+                        <a
+                          href={selectedOrder?.invoice?.url}
+                          target="blank"
+                          className={styles.link}
+                        >
+                          <InsertDriveFile />
+                          Comprobante de entrega
+                        </a>
+                      </div>
+                    )}
+                    {selectedOrder?.state !== OrderState.DELIVERED && (
                       <>
                         {invoice && (
                           <div>

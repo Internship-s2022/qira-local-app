@@ -34,11 +34,11 @@ export const getOrderById = (id) => {
   };
 };
 
-export const createOrder = (order, token) => {
+export const createOrder = (order) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(createOrderActions.request());
-      const response = await API.createOrder(order, token);
+      const response = await API.createOrder(order);
       return dispatch(createOrderActions.success(response.data));
     } catch (error) {
       return dispatch(createOrderActions.failure(error));

@@ -15,7 +15,6 @@ const OrderLayout = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const dollarRate = 160;
   const clientId = useSelector((state: RootState) => state.auth.user._id);
-  const token = useSelector((state: RootState) => state.auth.token);
   const cartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const authorized = useSelector((state: RootState) => state.shoppingCart.authorized);
   const payReceipt = useSelector((state: RootState) => state.shoppingCart.receipt);
@@ -39,7 +38,7 @@ const OrderLayout = (): JSX.Element => {
       exchangeRate: dollarRate,
       orderDate: Date.now(),
     };
-    dispatch(createOrder(order, token));
+    dispatch(createOrder(order));
     navigate(`/order${OrderRoutes.FINAL_SCREEN}`);
     dispatch(resetState());
   };
