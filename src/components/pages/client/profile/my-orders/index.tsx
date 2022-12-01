@@ -20,7 +20,9 @@ const MyOrders = (): JSX.Element => {
   return (
     <section className={styles.mainContainer}>
       {isFetching ? (
-        <QiraLoader />
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
         <>
           <h1 className={styles.title}>Pedidos realizados</h1>

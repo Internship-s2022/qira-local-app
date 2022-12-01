@@ -6,7 +6,6 @@
 
 .title {
   margin-left: 3.75rem;
-  color: black;
 }
 
 .ordersContainer {
@@ -16,4 +15,10 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.loaderContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
