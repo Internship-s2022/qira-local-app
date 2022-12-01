@@ -121,24 +121,17 @@ const OrderDetails = (): JSX.Element => {
                 <p>{'AR$ ' + selectedOrder?.amounts.total.toFixed(2)}</p>
               </div>
             </div>
-            {selectedOrder?.state === OrderState.REJECTED ? (
-              <></>
-            ) : (
+            {selectedOrder?.state !== OrderState.REJECTED && (
               <div className={styles.dataContainer}>
                 <div className={styles.filesContainer}>
-                  {selectedOrder?.state === OrderState.DELIVERY_PENDING &&
-                    selectedOrder?.invoice?.url && (
-                      <div className={styles.invoiceContainer}>
-                        <a
-                          href={selectedOrder?.invoice?.url}
-                          target="blank"
-                          className={styles.link}
-                        >
-                          <InsertDriveFile />
-                          Factura
-                        </a>
-                      </div>
-                    )}
+                  {selectedOrder?.invoice?.url && (
+                    <div className={styles.invoiceContainer}>
+                      <a href={selectedOrder?.invoice?.url} target="blank" className={styles.link}>
+                        <InsertDriveFile />
+                        Factura
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
