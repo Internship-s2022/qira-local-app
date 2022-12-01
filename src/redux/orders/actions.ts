@@ -15,12 +15,6 @@ export const getOrderActions = createAsyncAction(
   Actions.GET_ORDER_ERROR,
 )<void, Order, ApiResponse<unknown>>();
 
-export const createOrderActions = createAsyncAction(
-  Actions.CREATE_ORDER_PENDING,
-  Actions.CREATE_ORDER_SUCCESS,
-  Actions.CREATE_ORDER_ERROR,
-)<void, Order, ApiResponse<unknown>>();
-
 export const approveOrderActions = createAsyncAction(
   Actions.APPROVE_ORDER_PENDING,
   Actions.APPROVE_ORDER_SUCCESS,
