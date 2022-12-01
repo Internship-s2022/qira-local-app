@@ -95,7 +95,7 @@ const Authorized = () => {
 
   return (
     <section className={styles.container}>
-      <h2>¿Quién retira la compra?</h2>
+      <h1 className={styles.title}>¿Quién retira la compra?</h1>
       <p className={styles.subTitle}>Puede elegir uno o dos autorizados</p>
       <form>
         {fields.map((item, index) => {
