@@ -69,7 +69,7 @@ const ShoppingCart = (): JSX.Element => {
             <div className={styles.emptyContainer}>
               <ShoppingCartOutlined className={styles.icon} />
               <p className={styles.firstText}>Su carrito se encuentra vacío.</p>
-              <p className={styles.secondText}>Por favor seleccione un articulo para empezar</p>
+              <p className={styles.secondText}>Por favor, seleccione un artículo para comenzar.</p>
             </div>
           )}
         </div>
