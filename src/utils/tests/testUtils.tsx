@@ -3,9 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
-import getStore from 'src/redux/store';
-
-const { store } = getStore();
+import { store } from 'src/redux/store';
 
 const customRender = (children) => {
   return render(
