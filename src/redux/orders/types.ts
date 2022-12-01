@@ -13,6 +13,7 @@ export interface OrdersState {
   error: unknown;
   selectedOrder: Order;
   filterState: FilterInput;
+  isFetchingOrder: boolean;
 }
 
 export interface Products {
@@ -40,6 +41,7 @@ export interface Order {
   state: OrderState;
   authorized: Authorized[];
   invoice?: S3File;
+  signedInvoice?: S3File;
   amounts: Amounts;
   payment: S3File;
   exchangeRate: number;
@@ -64,6 +66,18 @@ export enum Actions {
   CREATE_ORDER_PENDING = 'CREATE_ORDER_PENDING',
   CREATE_ORDER_SUCCESS = 'CREATE_ORDER_SUCCESS',
   CREATE_ORDER_ERROR = 'CREATE_ORDER_ERROR',
+
+  APPROVE_ORDER_PENDING = 'APPROVE_ORDER_PENDING',
+  APPROVE_ORDER_SUCCESS = 'APPROVE_ORDER_SUCCESS',
+  APPROVE_ORDER_ERROR = 'APPROVE_ORDER_ERROR',
+
+  DELIVER_ORDER_PENDING = 'DELIVER_ORDER_PENDING',
+  DELIVER_ORDER_SUCCESS = 'DELIVER_ORDER_SUCCESS',
+  DELIVER_ORDER_ERROR = 'DELIVER_ORDER_ERROR',
+
+  REJECT_ORDER_PENDING = 'REJECT_ORDER_PENDING',
+  REJECT_ORDER_SUCCESS = 'REJECT_ORDER_SUCCESS',
+  REJECT_ORDER_ERROR = 'REJECT_ORDER_ERROR',
 
   SET_FILTER_STATE = 'SET_FILTER_STATE',
 }

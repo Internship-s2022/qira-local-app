@@ -5,6 +5,7 @@ export enum MainRoutes {
 
 export enum AdminRoutes {
   ORDERS = '/orders',
+  ORDER = '/order/:id',
   CLIENTS = '/clients',
   CLIENT = '/client/:id',
   PRODUCT_CREATE = '/product',

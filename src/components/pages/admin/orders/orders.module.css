@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .titleContainer {
@@ -22,4 +23,10 @@
   max-width: 150px;
   height: 60px;
   margin-left: 1%;
+}
+
+.loaderContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
