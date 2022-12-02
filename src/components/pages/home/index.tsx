@@ -23,14 +23,14 @@ const Home = (): JSX.Element => {
   }, []);
   return (
     <section className={styles.container}>
-      <section>
+      <section data-testid="home-cover">
         <img
           className={styles.coverPhoto}
           src={process.env.REACT_APP_URL_IMAGE_HOME}
           alt="photo-cover"
         />
       </section>
-      <section className={styles.productsSection}>
+      <section className={styles.productsSection} data-testid="featuredProducts">
         <h2>Productos destacados</h2>
         <div className={styles.productsCardsContainer}>
           {newProducts.map((product) => {
@@ -38,15 +38,16 @@ const Home = (): JSX.Element => {
           })}
         </div>
       </section>
-      <section className={styles.categorySection}>
+      <section className={styles.categorySection} data-testid="featuredCategories">
         <h2>Categorias destacadas</h2>
         <div className={styles.categoriesContainer}>
-          {categories.map((category) => {
+          {categories.map((category, index) => {
             return (
               <Link
                 className={styles.nameCategory}
                 to={`/category/${category.url}`}
                 key={category._id}
+                data-testid={`${index}-category`}
               >
                 <div className={styles.categoryCard}>
                   <img className={styles.imgCategory} src={category.image.url} alt="" />

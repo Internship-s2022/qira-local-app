@@ -21,11 +21,15 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './test/specs/**/*.js'
+        // './test/specs/**/*.js'
+        // './test/specs/shared/login.e2e.js',
+        // './test/specs/client/sign-up.e2e.js',
+        // './test/specs/shared/home.e2e.js'
+        './test/specs/client/orders.e2e.js'
     ],
     // Patterns to exclude.
     exclude: [
-        // 'path/to/excluded/files'
+
     ],
     //
     // ============
@@ -53,7 +57,7 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 5,
+        maxInstances: 1,
         //
         browserName: 'chrome',
         acceptInsecureCerts: true

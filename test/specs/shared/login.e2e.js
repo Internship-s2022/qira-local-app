@@ -1,15 +1,17 @@
-import LoginPage from  '../page-objects/login.page';
+import LoginPage from  '../../page-objects/login.page';
+import Index from '../../helpers/index.page';
+import Header from '../../page-objects/header.page';
 
 describe('Login page testing', () => {
   beforeAll('Open browser', () => {
-    LoginPage.openBrowser();
+    Index.openBrowser();
   });
   beforeEach('Refresh the page', () => {
-    LoginPage.loginButton.click();
     browser.refresh();
+    Header.loginButton.click();
   });
   it('Try to login with no data should display inputs error messages', async () => {
-    await LoginPage.login('', '');
+    await LoginPage.login();
     await expect(LoginPage.emailError).toBeDisplayed();
     await expect(LoginPage.emailError).toHaveText('Campo requerido.');
     await expect(LoginPage.passwordError).toBeDisplayed();
@@ -36,59 +38,64 @@ describe('Login page testing', () => {
     await expect(LoginPage.emailError).toHaveText('Debe contener al menos 7 caracteres.');
   });
   it('Try to login with valid email but pw with less than 8 characters', async () => {
-    await LoginPage.login('qira@local.com', 't2');
+    await LoginPage.login(EMAIL_CLIENT, 't2');
     await expect(LoginPage.passwordError).toBeDisplayed();
     await expect(LoginPage.passwordError).toHaveText('Debe contener al menos 8 caracteres.');
   });
   it('Try to login with valid email but pw with only letters', async () => {
-    await LoginPage.login('qira@local.com', 'testingg');
+    await LoginPage.login(EMAIL_CLIENT, 'testingg');
     await expect(LoginPage.passwordError).toBeDisplayed();
     await expect(LoginPage.passwordError).toHaveText('Debe contener números y letras.');
   });
   it('Try to login with valid email but pw with only numbers', async () => {
-    await LoginPage.login('qira@local.com', '12345678');
+    await LoginPage.login(EMAIL_CLIENT, '12345678');
     await expect(LoginPage.passwordError).toBeDisplayed();
     await expect(LoginPage.passwordError).toHaveText('Debe contener números y letras.');
   });
   it('Try to login with valid email but pw with only symbols ', async () => {
-    await LoginPage.login('qira@local.com', '??##!!??');
+    await LoginPage.login(EMAIL_CLIENT, '??##!!??');
     await expect(LoginPage.passwordError).toBeDisplayed();
     await expect(LoginPage.passwordError).toHaveText('Debe contener números y letras.');
   });
   it('Try to login with valid email but pw with numbers and symbols ', async () => {
-    await LoginPage.login('qira@local.com', '1234????');
+    await LoginPage.login(EMAIL_CLIENT, '1234????');
     await expect(LoginPage.passwordError).toBeDisplayed();
     await expect(LoginPage.passwordError).toHaveText('Debe contener números y letras.');
   });
   it('Try to login with valid email but pw with letters and symbols ', async () => {
-    await LoginPage.login('qira@local.com', 'test????');
+    await LoginPage.login(EMAIL_CLIENT, 'test????');
     await expect(LoginPage.passwordError).toBeDisplayed();
     await expect(LoginPage.passwordError).toHaveText('Debe contener números y letras.');
   });
   it('Try to login with valid email but pw with numbers, letters and symbols ', async () => {
-    await LoginPage.login('qira@local.com', 'test123?');
+    await LoginPage.login(EMAIL_CLIENT, 'test123?');
     await expect(LoginPage.passwordError).toBeDisplayed();
     await expect(LoginPage.passwordError).toHaveText('Debe contener números y letras.');
   });
   it('Try to login with valid but not registered data and click on the cross.', async () => {
-    await LoginPage.login('qira@local.com', 'test1234');
+    await LoginPage.login('notregistered@qira.com', PW_CLIENT);
     await expect(LoginPage.infoModalMessage).toBeDisplayed();
     await expect(LoginPage.infoModalMessage).toHaveTextContaining('Usuario o contraseña incorrecta.')
     await LoginPage.crossModal.click();
     await expect(LoginPage.infoModalMessage).not.toBeDisplayed();
   });
   it('Try to login with valid data but not registered and click con "ACEPTAR" button.', async () => {
-    await LoginPage.login('qira@local.com', 'test1234');
+    await LoginPage.login('notregistered@qira.com', PW_CLIENT);
     await expect(LoginPage.infoModalMessage).toBeDisplayed();
     await expect(LoginPage.infoModalMessage).toHaveTextContaining('Usuario o contraseña incorrecta.');
     await LoginPage.infoModalBtn.click();
     await expect(LoginPage.infoModalMessage).not.toBeDisplayed();
   });
-  it('Try to login with valid and registered data', async () => {
-    await LoginPage.login('admin@qira.com', 'test1234');
+  it('Try to login as a client with valid and registered data', async () => {
+    await LoginPage.login(EMAIL_CLIENT, PW_CLIENT);
     await expect(LoginPage.infoModalMessage).not.toBeDisplayed();
     await expect(LoginPage.infoModalMessage).toBeDisplayed();
     await expect(LoginPage.infoModalMessage).toHaveText('Sesión iniciada exitosamente.');
     await LoginPage.infoModalBtn.click();
   });
+  it('Try to login as an admin with valid and registered data', async () => {
+   await LoginPage.login(EMAIL_ADMIN, PW_ADMIN);
+   await Header.loginButton.click();
+   await expect(browser).toHaveUrl(`${BASE_URL}/admin`);
+ });
 });

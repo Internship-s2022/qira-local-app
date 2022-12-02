@@ -8,6 +8,7 @@ import { resetState } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { createOrder } from 'src/redux/shopping-cart/thunks';
 import { AppDispatch, RootState } from 'src/redux/store';
+import { removeSpaces } from 'src/utils/formatters';
 
 import styles from './order.module.css';
 
@@ -102,7 +103,7 @@ const OrderLayout = (): JSX.Element => {
           <Outlet />
         </div>
         <div className={styles.pricesSidebar}>
-          <div className={styles.sidebarContent}>
+          <div className={styles.sidebarContent} data-testid="sidebar-summary">
             <h1 className={styles.title}>Resumen</h1>
             <div className={styles.priceDetails}>
               <div className={styles.productsPrice}>
@@ -119,6 +120,7 @@ const OrderLayout = (): JSX.Element => {
               <p>{'AR$ ' + orderAmounts.total.toFixed(2)}</p>
             </div>
             <Button
+              data-testid={`layout-btn-${removeSpaces(btnOptions.text)}`}
               size="large"
               className={styles.button}
               onClick={btnOptions.onClick}

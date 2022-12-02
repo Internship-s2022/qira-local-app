@@ -4,3 +4,7 @@ export const capitalizeFirstLetter = (text: string) => {
   }
   return '';
 };
+
+export const removeSpaces = (text: string) => {
+  return text.replace(/\s/g, '-');
+};

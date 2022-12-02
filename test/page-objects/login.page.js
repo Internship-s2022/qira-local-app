@@ -1,8 +1,5 @@
 class LoginPage {
   // Getters
-    get loginButton () {
-      return $('[data-testid=login-btn]');
-    }
     get inputEmail () {
       return $('[data-testid=email-field] input');
     }
@@ -27,14 +24,20 @@ class LoginPage {
     get errorModalBtn () {
       return $('[data-testid=error-modal-btn]');
     }
-    get modalContainer () {
-      return $('[data-testid=modal-container]')
+    get formContainer () {
+      return $('[data-testid=form-container]');
+    }
+    get infoModal () {
+      return $('[data-testid=info-modal]')
     }
     get infoModalBtn () {
       return $('[data-testid=info-modal-btn]')
     }
     get infoModalMessage () {
       return $('[data-testid="info-message"]')
+    }
+    get signUpBtn () {
+      return $('[data-testid=sign-up-btn]');
     }
   // Methods
     async login (email, password) {
@@ -47,10 +50,5 @@ class LoginPage {
       await this.inputEmail.clearValue();
       await this.inputPassword.clearValue();
     }
-
-    async openBrowser () {
-      browser.url('http://localhost:3000');
-    }
-}
-
+  }
 export default new LoginPage();

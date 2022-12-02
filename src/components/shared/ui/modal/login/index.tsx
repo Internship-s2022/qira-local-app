@@ -65,7 +65,7 @@ export const LoginModal = () => {
 
   return (
     <div className={styles.container}>
-      <form>
+      <form data-testid="form-container">
         <div className={styles.formContainer}>
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>Iniciar sesión</h2>
@@ -78,6 +78,7 @@ export const LoginModal = () => {
               variant="outlined"
               margin="dense"
               size="small"
+              data-testid="login-email"
               fullWidth={true}
               InputProps={{
                 startAdornment: (
@@ -97,6 +98,7 @@ export const LoginModal = () => {
               variant="outlined"
               margin="dense"
               size="small"
+              data-testid="login-password"
               fullWidth={true}
               InputProps={{
                 startAdornment: (
@@ -124,6 +126,7 @@ export const LoginModal = () => {
           <div className={styles.registerContainer}>
             <AccountCircleOutlined color="primary" />
             <p
+              data-testid="sign-up-btn"
               className={styles.registerText}
               onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}
             >
