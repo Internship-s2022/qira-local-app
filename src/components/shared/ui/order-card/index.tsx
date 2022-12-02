@@ -10,7 +10,7 @@ const OrderCard = ({ order }: OrderCardProps): JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.orderCard}>
+    <div className={styles.orderCard} onClick={() => navigate(`/profile/my-orders/${order._id}`)}>
       <div className={styles.textContainer}>
         <p className={styles.dataText}>Pedido: </p>
         <p className={styles.orangeText}>{order._id}</p>

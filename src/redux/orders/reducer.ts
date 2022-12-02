@@ -16,6 +16,7 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
     case Actions.GET_ORDER_PENDING:
     case Actions.GET_CLIENT_ORDERS_PENDING:
     case Actions.GET_ORDER_TO_DELIVER_PENDING:
+    case Actions.GET_CLIENT_ORDER_BY_ID_PENDING:
       return {
         ...state,
         isFetching: true,
@@ -32,6 +33,7 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
     case Actions.GET_ORDER_ERROR:
     case Actions.GET_CLIENT_ORDERS_ERROR:
     case Actions.GET_ORDER_TO_DELIVER_ERROR:
+    case Actions.GET_CLIENT_ORDER_BY_ID_ERROR:
       return {
         ...state,
         isFetching: false,
@@ -56,6 +58,7 @@ export const ordersReducer = (state = initialState, action: ActionsType): Orders
         error: undefined,
       };
     case Actions.GET_ORDER_SUCCESS:
+    case Actions.GET_CLIENT_ORDER_BY_ID_SUCCESS:
       return {
         ...state,
         isFetching: false,

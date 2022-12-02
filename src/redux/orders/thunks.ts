@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import {
   approveOrderActions,
   deliverOrderActions,
+  getClientOrderActions,
   getClientOrdersActions,
   getOrderActions,
   getOrdersActions,
@@ -91,6 +92,18 @@ export const getClientOrders = () => {
       return dispatch(getClientOrdersActions.success(response.data));
     } catch (error) {
       return dispatch(getClientOrdersActions.failure(error));
+    }
+  };
+};
+
+export const getClientOrderById = (id) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(getClientOrderActions.request());
+      const response = await API.getClientOrderById(id);
+      return dispatch(getClientOrderActions.success(response.data));
+    } catch (error) {
+      return dispatch(getClientOrderActions.failure(error));
     }
   };
 };
