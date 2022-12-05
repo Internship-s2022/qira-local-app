@@ -1,11 +1,16 @@
+import { format } from 'date-fns';
+
 import { OrderState } from 'src/types';
 
 export const formatOrders = (data) => {
   const listData = data.map((order) => {
+    const orderDate = new Date(order.orderDate);
+    const formattedDate = format(orderDate, 'dd/MM/yyyy');
+
     return {
       id: order._id,
       client: order.client.businessName,
-      orderDate: order.orderDate.split('T').at(0),
+      orderDate: formattedDate,
       amounts: '$ ' + order.amounts.total.toFixed(2),
       state: formatOrderStateText(order.state),
     };
