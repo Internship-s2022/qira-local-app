@@ -34,22 +34,35 @@ const ProductForm = (): JSX.Element => {
   const product = useSelector((state: RootState) => state.products.selectedProduct);
   const categoryOptions = useSelector(getCategoryOptions);
 
-  const { handleSubmit, control, reset, setValue } = useForm<ProductFormValues>({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    setValue,
+    watch,
+    formState: { isDirty },
+  } = useForm<ProductFormValues>({
     defaultValues: {
       name: '',
       description: '',
-      price: undefined,
+      price: '',
       image: undefined,
       technicalFile: undefined,
       brand: '',
       category: '',
       currency: Currency.PESO,
-      stock: undefined,
+      stock: '',
       isNew: true,
     },
     mode: 'onBlur',
     resolver: joiResolver(ProductValidation),
   });
+  const imageInput = watch('image');
+  const pdfInput = watch('technicalFile');
+  const price = watch('price');
+
+  const fileInputs = imageInput?.isNew || pdfInput?.isNew;
+  console.log('price', price);
 
   useEffect(() => {
     params.id && dispatch(getProductById(params.id));
@@ -67,7 +80,7 @@ const ProductForm = (): JSX.Element => {
       reset({
         name: product.name,
         description: product.description,
-        price: product.price,
+        price: product.price.toString(),
         image: {
           url: product.image.url,
           isNew: false,
@@ -79,7 +92,7 @@ const ProductForm = (): JSX.Element => {
         brand: product.brand,
         category: product.category._id,
         currency: product.currency,
-        stock: product.stock,
+        stock: product.stock.toString(),
         isNew: product.isNew,
       });
     }
@@ -261,7 +274,12 @@ const ProductForm = (): JSX.Element => {
                 />
               </div>
             </div>
-            <Button className={styles.sendBtn} variant="contained" onClick={handleSubmit(onSubmit)}>
+            <Button
+              className={styles.sendBtn}
+              variant="contained"
+              onClick={handleSubmit(onSubmit)}
+              disabled={params.id ? !isDirty && !fileInputs : false}
+            >
               {params.id ? 'Editar' : 'Agregar'}
             </Button>
           </form>
