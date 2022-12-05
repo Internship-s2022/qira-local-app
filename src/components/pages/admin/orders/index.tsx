@@ -34,7 +34,7 @@ const Orders = (): JSX.Element => {
     dispatch(getOrders());
   }, []);
 
-  const headers: Headers[] = [
+  const headers: Headers<FormattedOrder>[] = [
     { header: 'Fecha de pago', key: 'orderDate' },
     { header: 'Fecha de aprobación', key: 'payAuthDate' },
     { header: 'Fecha de entrega', key: 'deliverDate' },

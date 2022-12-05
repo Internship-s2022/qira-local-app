@@ -51,7 +51,7 @@ const Clients = (): JSX.Element => {
     return listData;
   };
 
-  const headers: Headers[] = [
+  const headers: Headers<FormattedClient>[] = [
     { header: 'CUIT', key: 'cuit' },
     { header: 'Razón Social', key: 'businessName' },
     { header: 'Email', key: 'email' },

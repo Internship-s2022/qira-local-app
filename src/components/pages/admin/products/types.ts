@@ -7,4 +7,5 @@ export interface FormattedProduct {
   stock: number;
   isActive: boolean;
   logicDelete: boolean;
+  state: string;
 }

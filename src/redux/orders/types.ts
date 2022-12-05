@@ -54,6 +54,8 @@ export interface FormattedOrder {
   id: string;
   client: string;
   orderDate: string;
+  payAuthDate?: string;
+  deliverDate?: string;
   amounts: string;
   state: string;
 }

@@ -44,7 +44,7 @@ const Products = (): JSX.Element => {
     return listData;
   };
 
-  const headers: Headers[] = [
+  const headers: Headers<FormattedProduct>[] = [
     { header: 'Nombre', key: 'name' },
     { header: 'Categoría', key: 'category' },
     { header: 'Moneda', key: 'currency' },

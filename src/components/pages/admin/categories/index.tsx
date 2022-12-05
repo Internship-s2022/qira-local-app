@@ -22,6 +22,7 @@ import styles from './categories.module.css';
 interface FormattedCategory {
   id: string;
   name: string;
+  status: string;
   isActive: boolean;
   logicDelete: boolean;
 }
@@ -34,12 +35,13 @@ const Categories = (): JSX.Element => {
   const [categoriesList, setCategoriesList] = useState([]);
 
   const formatData = (data: Category[]) => {
-    const listData = data.map((category) => {
+    const listData = data.map<FormattedCategory>((category) => {
       return {
         id: category._id,
         name: category.name,
         status: category.isActive ? 'Activada' : 'Desactivada',
         isActive: category.isActive,
+        logicDelete: category.logicDelete,
       };
     });
     setCategoriesList(listData);
@@ -101,7 +103,7 @@ const Categories = (): JSX.Element => {
     }),
   ];
 
-  const headers: Headers[] = [
+  const headers: Headers<FormattedCategory>[] = [
     { header: 'Categoría', key: 'name' },
     { header: 'Estado', key: 'status' },
   ];
