@@ -14,6 +14,7 @@ import { modalReducer } from './modal/reducer';
 import { ordersReducer } from './orders/reducer';
 import { productsReducer } from './products/reducer';
 import { shoppingCartReducer } from './shopping-cart/reducer';
+import { sidebarReducer } from './sidebar/reducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   products: productsReducer,
   exchangeRate: exchangeRateReducer,
   orders: ordersReducer,
+  sidebar: sidebarReducer,
 });
 
 const persistConfig = {

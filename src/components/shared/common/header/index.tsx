@@ -16,6 +16,7 @@ import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { closeCart, openCart } from 'src/redux/shopping-cart/actions';
+import { openSidebar } from 'src/redux/sidebar/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
 
@@ -74,7 +75,7 @@ const Header = () => {
                 data-testid="logo-qira"
               />
             </Link>
-            <div className={styles.menuAndLogoContainer}>
+            <div className={styles.menuAndLogoContainer} onClick={() => dispatch(openSidebar())}>
               <MenuOutlined className={styles.menu} />
               <Link to="/">
                 <img
