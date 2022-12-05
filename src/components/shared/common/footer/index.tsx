@@ -1,4 +1,5 @@
 import React from 'react';
+import { WhatsApp } from '@mui/icons-material';
 
 import styles from './footer.module.css';
 
@@ -11,10 +12,7 @@ const Footer = () => {
         target="_blank"
         rel="noreferrer"
       >
-        <img
-          className={styles.wspIcon}
-          src={`${process.env.PUBLIC_URL}/assets/images/WspIcon.png`}
-        />
+        <WhatsApp className={styles.wspIcon} />
       </a>
       <footer className={styles.container} data-testid="test">
         <div className={styles.footerContainer}>

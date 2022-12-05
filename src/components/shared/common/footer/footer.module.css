@@ -48,7 +48,12 @@
 }
 
 .wspIcon {
-  width: 130px;
+  padding: 5px;
+  margin-right: 30px;
+  font-size: 60px;
+  color: white;
+  background-color: #25d366;
+  border-radius: 10px;
 }
 
 .wspIconContainer {
