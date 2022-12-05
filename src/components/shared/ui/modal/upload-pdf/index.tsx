@@ -19,7 +19,7 @@ export const UploadPdf = () => {
     setPreview(selectedFile.name);
   }, [selectedFile]);
 
-  const onSelectFile = (e) => {
+  const onSelectFile = (e: any) => {
     if (e.target.files.length) {
       setSelectedFile(e.target.files[0]);
     }

@@ -10,11 +10,12 @@ import { Headers, TableButton } from 'src/components/shared/ui/list/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import * as thunks from 'src/redux/products/thunk';
+import { Product } from 'src/redux/products/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { Currency } from 'src/types';
 
 import styles from './products.module.css';
-import { Product } from './types';
+import { FormattedProduct } from './types';
 
 const Products = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
@@ -26,8 +27,8 @@ const Products = (): JSX.Element => {
     dispatch(thunks.getProducts());
   }, []);
 
-  const formatData = (data) => {
-    const listData = data.map((product) => {
+  const formatData = (data: Product[]) => {
+    const listData: FormattedProduct[] = data.map((product) => {
       return {
         id: product._id,
         category: product.category.name,
@@ -37,6 +38,7 @@ const Products = (): JSX.Element => {
         stock: product.stock,
         isActive: product.isActive,
         state: product.isActive ? 'Activo' : 'Inactivo',
+        logicDelete: product.logicDelete,
       };
     });
     return listData;
@@ -51,7 +53,7 @@ const Products = (): JSX.Element => {
     { header: 'Estado', key: 'state' },
   ];
 
-  const buttons: ((rowData: Product) => TableButton)[] = [
+  const buttons: ((rowData: FormattedProduct) => TableButton)[] = [
     (rowData) => ({
       active: true,
       icon: <Edit />,
@@ -118,7 +120,7 @@ const Products = (): JSX.Element => {
       {isFetching ? (
         <></>
       ) : (
-        <List<Product>
+        <List<FormattedProduct>
           headers={headers}
           data={formatData(products)}
           showButtons={true}

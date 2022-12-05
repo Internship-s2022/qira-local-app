@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import { OrderRoutes } from 'src/constants';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { createOrder } from 'src/redux/shopping-cart/thunks';
+import { OrderToCreate } from 'src/redux/shopping-cart/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './order.module.css';
@@ -32,7 +33,7 @@ const OrderLayout = (): JSX.Element => {
   };
 
   const handleCreateOrder = () => {
-    const order = {
+    const order: OrderToCreate = {
       products: cartProducts,
       client: clientId,
       authorized: authorized,

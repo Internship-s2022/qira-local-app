@@ -19,6 +19,15 @@ export interface Client {
   firebaseUid: string;
 }
 
+export interface ClientToUpdate {
+  email: string;
+  phoneNumber: string;
+  businessName: string;
+  cuit: string;
+  ivaCondition: IvaCondition | string;
+  address: Address;
+}
+
 export interface ClientState {
   clients: Client[];
   selectedClient: Client;

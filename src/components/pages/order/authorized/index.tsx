@@ -14,7 +14,7 @@ import { AuthorizedValidations } from './validations';
 const authorizedInitial = { firstName: '', lastName: '', dni: '', phoneNumber: '' };
 
 function checkEquality<T>(prevObj: T, nextObj: T) {
-  const keys = Object.keys(nextObj);
+  const keys = Object.keys(nextObj) as (keyof T)[];
   const isEqual = prevObj && keys.every((key) => prevObj[key] == nextObj[key]);
 
   if (!nextObj[keys[0]]) {

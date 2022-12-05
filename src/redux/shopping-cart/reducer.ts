@@ -1,4 +1,4 @@
-import { Actions, ActionsType, ShoppingCartState } from './types';
+import { Actions, ActionsType, ShoppingCartProduct, ShoppingCartState } from './types';
 
 const initialState: ShoppingCartState = {
   products: [],
@@ -68,7 +68,7 @@ export const shoppingCartReducer = (
       };
     }
     case Actions.DECREASE_PRODUCT_QUANTITY: {
-      const newList = [];
+      const newList: ShoppingCartProduct[] = [];
       state.products.forEach((product) => {
         if (product.product._id !== action.payload) {
           newList.push(product);

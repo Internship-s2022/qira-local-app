@@ -2,8 +2,9 @@ import { Dispatch } from 'redux';
 
 import { createOrderActions } from './actions';
 import * as API from './api';
+import { OrderToCreate } from './types';
 
-export const createOrder = (order) => {
+export const createOrder = (order: OrderToCreate) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(createOrderActions.request());

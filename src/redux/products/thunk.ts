@@ -12,6 +12,7 @@ import {
   updateProductActions,
 } from './actions';
 import * as API from './api';
+import { ProductToSend } from './types';
 
 export const getProducts = () => {
   return async (dispatch: Dispatch) => {
@@ -25,7 +26,7 @@ export const getProducts = () => {
   };
 };
 
-export const getProductById = (id) => {
+export const getProductById = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getProductActions.request());
@@ -37,7 +38,7 @@ export const getProductById = (id) => {
   };
 };
 
-export const createProduct = (product) => {
+export const createProduct = (product: ProductToSend) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(createProductActions.request());
@@ -49,7 +50,7 @@ export const createProduct = (product) => {
   };
 };
 
-export const updateProduct = (id, product) => {
+export const updateProduct = (id: string, product: ProductToSend) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(updateProductActions.request());
@@ -61,7 +62,7 @@ export const updateProduct = (id, product) => {
   };
 };
 
-export const activateProduct = (id) => {
+export const activateProduct = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(activateProductActions.request());
@@ -73,7 +74,7 @@ export const activateProduct = (id) => {
   };
 };
 
-export const inactivateProduct = (id) => {
+export const inactivateProduct = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(inactivateProductActions.request());
@@ -85,7 +86,7 @@ export const inactivateProduct = (id) => {
   };
 };
 
-export const deleteProduct = (id) => {
+export const deleteProduct = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(deleteProductActions.request());

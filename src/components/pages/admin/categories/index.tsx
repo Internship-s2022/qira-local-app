@@ -12,13 +12,14 @@ import {
   getCategory,
   inactivateCategory,
 } from 'src/redux/category/thunk';
+import { Category } from 'src/redux/category/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './categories.module.css';
 
-interface Category {
+interface FormattedCategory {
   id: string;
   name: string;
   isActive: boolean;
@@ -32,7 +33,7 @@ const Categories = (): JSX.Element => {
   const isFetching = useSelector((state: RootState) => state.categories.isFetching);
   const [categoriesList, setCategoriesList] = useState([]);
 
-  const formatData = (data) => {
+  const formatData = (data: Category[]) => {
     const listData = data.map((category) => {
       return {
         id: category._id,
@@ -52,7 +53,7 @@ const Categories = (): JSX.Element => {
     formatData(categories);
   }, [categories]);
 
-  const buttons: ((rowData?: Category) => TableButton)[] = [
+  const buttons: ((rowData?: FormattedCategory) => TableButton)[] = [
     (rowData) => ({
       active: true,
       icon: <Edit />,
@@ -124,7 +125,7 @@ const Categories = (): JSX.Element => {
       {isFetching ? (
         <></>
       ) : (
-        <List<Category>
+        <List<FormattedCategory>
           headers={headers}
           showButtons={true}
           buttons={buttons}

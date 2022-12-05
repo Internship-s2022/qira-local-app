@@ -1,6 +1,6 @@
 import { ActionType } from 'typesafe-actions';
 
-import { Currency, S3File } from 'src/types';
+import { Currency, FileToSend, S3File } from 'src/types';
 
 import { Category } from '../category/types';
 import * as actions from './actions';
@@ -27,6 +27,19 @@ export interface Product {
   isNew?: boolean;
   isActive: boolean;
   logicDelete: boolean;
+}
+
+export interface ProductToSend {
+  name: string;
+  description: string;
+  price: number;
+  image: FileToSend;
+  technicalFile: FileToSend;
+  brand: string;
+  category: string;
+  currency: string;
+  stock: number;
+  isNew: boolean;
 }
 
 export interface ProductState {

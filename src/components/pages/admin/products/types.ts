@@ -1,4 +1,4 @@
-export interface Product {
+export interface FormattedProduct {
   id: string;
   category: string;
   name: string;

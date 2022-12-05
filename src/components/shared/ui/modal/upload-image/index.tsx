@@ -23,7 +23,7 @@ export const UploadImage = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
-  const onSelectFile = (e) => {
+  const onSelectFile = (e: any) => {
     if (e.target.files.length) {
       setSelectedFile(e.target.files[0]);
     }

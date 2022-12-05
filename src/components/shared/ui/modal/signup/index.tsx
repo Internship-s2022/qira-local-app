@@ -54,7 +54,7 @@ const SignUpForm = () => {
     { label: 'Monotributista', value: IvaCondition.selfEmployment },
   ];
 
-  const formatSubmitData = (data) => {
+  const formatSubmitData = (data: SignUpFormValues) => {
     const formattedUser = {
       businessName: data.businessName,
       cuit: data.cuit,
@@ -72,7 +72,7 @@ const SignUpForm = () => {
     return formattedUser;
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: SignUpFormValues) => {
     const formattedUser = formatSubmitData(data);
     const modalOptions: ModalOptions = {};
     const response = await dispatch(register(formattedUser));
