@@ -23,9 +23,9 @@ const Footer = () => {
             />
             <span className={styles.license}>© 2022 QIRA. Todos los derechos reservados.</span>
           </div>
-          <div className={styles.socialMediaContainer}>
+          <div className={styles.socialMediaContainer} data-testid="social-media">
             <span className={styles.titelSocialMedia}>Seguinos en nuestras redes</span>
-            <div className={styles.socialMedia}>
+            <div className={styles.socialMedia} data-testid="social-icons">
               <a href="https://www.facebook.com/qira-local" target="_blank" rel="noreferrer">
                 <img
                   className={styles.socialIcon}
