@@ -6,7 +6,6 @@
 .navBarContainer {
   display: flex;
   width: 100%;
-  max-width: 1200px;
   height: 30px;
   margin: auto;
   background-color: white;
@@ -42,15 +41,16 @@
 
 .mainHeader {
   display: flex;
+  gap: 20px;
   align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
+  justify-content: space-evenly;
   height: 100px;
   margin: auto;
 }
 
 .searchContainer {
   display: flex;
+  gap: 20px;
 }
 
 .searchBar {
@@ -65,7 +65,6 @@
 
 .searchBar input {
   align-self: center;
-  margin: 3px 0 0;
   margin: none;
   border: none;
   outline: none;
@@ -92,7 +91,6 @@
   width: 150px;
   min-height: 27px;
   padding: 5px 10px;
-  margin-right: 10px;
   font-size: 16px;
   color: white;
   background-color: #f05523;
@@ -162,7 +160,7 @@
 }
 
 .shoppingCartContainer {
-  margin: 0 100px 0 0;
+  margin: 0;
 }
 
 .shoppingCart {
@@ -173,4 +171,76 @@
 
 .shoppingCart :hover {
   cursor: pointer;
+}
+
+.menuAndLogoContainer {
+  display: none;
+}
+
+@media screen and (max-width: 678px) {
+  .buttonCategories {
+    display: none;
+  }
+
+  .logoQira {
+    display: none;
+  }
+
+  .menuAndLogoContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100px;
+  }
+
+  .logoQ {
+    width: 50px;
+    color: white;
+  }
+
+  .menu {
+    margin-left: 20px;
+    font-size: 50px;
+    color: white;
+  }
+
+  .searchBar {
+    display: flex;
+    width: fit-content;
+    padding: 0;
+    margin: 0 0 0 20px;
+  }
+
+  .searchBar input {
+    align-self: center;
+    width: 180px;
+    height: 40px;
+    margin: 0 0 0 10px;
+  }
+
+  .searchBar input::placeholder {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .btnLogin {
+    width: fit-content;
+  }
+
+  .pLogin {
+    display: none;
+  }
+
+  .navBarContainer {
+    justify-content: space-between;
+    height: 20px;
+  }
+
+  .userIcon {
+    font-size: 50px;
+  }
+
+  .shoppingCart {
+    font-size: 40px;
+  }
 }

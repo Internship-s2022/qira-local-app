@@ -5,6 +5,7 @@ import {
   AccountCircle,
   InfoOutlined,
   KeyboardArrowDown,
+  MenuOutlined,
   Search,
   ShoppingCart,
 } from '@mui/icons-material';
@@ -73,6 +74,16 @@ const Header = () => {
                 data-testid="logo-qira"
               />
             </Link>
+            <div className={styles.menuAndLogoContainer}>
+              <MenuOutlined className={styles.menu} />
+              <Link to="/">
+                <img
+                  className={styles.logoQ}
+                  src={`${process.env.PUBLIC_URL}/assets/images/logoQ.svg`}
+                  alt=""
+                />
+              </Link>
+            </div>
           </div>
           <div className={styles.searchContainer}>
             <div
@@ -146,10 +157,16 @@ const Header = () => {
                 </div>
               ) : (
                 <div className={styles.btnLogin}>
-                  <AccountCircle className={styles.userIcon} />
-                  <p onClick={() => dispatch(openModal(ModalTypes.LOGIN))} data-testid="login-btn">
-                    Iniciar Sesión
-                  </p>
+                  <>
+                    <AccountCircle className={styles.userIcon} />
+                    <p
+                      className={styles.pLogin}
+                      onClick={() => dispatch(openModal(ModalTypes.LOGIN))}
+                      data-testid="login-btn"
+                    >
+                      Iniciar Sesión
+                    </p>
+                  </>
                 </div>
               )}
             </div>
