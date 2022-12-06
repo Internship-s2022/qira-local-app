@@ -62,7 +62,6 @@ const ProductForm = (): JSX.Element => {
   const price = watch('price');
 
   const fileInputs = imageInput?.isNew || pdfInput?.isNew;
-  console.log('price', price);
 
   useEffect(() => {
     params.id && dispatch(getProductById(params.id));
