@@ -1,8 +1,25 @@
 .titleContainer {
+  display: flex;
   align-self: flex-start;
+  justify-content: space-between;
   width: 80%;
   margin: 1rem 7rem;
   border-bottom: solid 2px;
+}
+
+.goBack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goBack h3 {
+  margin: 0 10px;
+}
+
+.backButton {
+  color: white;
+  background-color: var(--color-primary);
 }
 
 .container {

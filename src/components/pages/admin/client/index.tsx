@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { MailOutlineOutlined, PhoneOutlined } from '@mui/icons-material';
-import { Button, InputAdornment } from '@mui/material';
+import { ArrowBack, MailOutlineOutlined, PhoneOutlined } from '@mui/icons-material';
+import { Button, IconButton, InputAdornment } from '@mui/material';
 
 import { InputText } from 'src/components/shared/ui/input';
 import { SharedSelect } from 'src/components/shared/ui/select';
@@ -113,6 +113,17 @@ const ClientForm = (): JSX.Element => {
         <section className={styles.sectionContainer}>
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>Datos del cliente</h2>
+            <div className={styles.goBack}>
+              <h3>Volver a la lista</h3>
+              <IconButton
+                className={styles.backButton}
+                disableRipple={true}
+                size="large"
+                onClick={() => navigate('/admin/clients')}
+              >
+                <ArrowBack />
+              </IconButton>
+            </div>
           </div>
           <form className={styles.formContainer}>
             <div className={styles.container}>
