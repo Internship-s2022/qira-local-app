@@ -16,7 +16,7 @@ import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { closeCart, openCart } from 'src/redux/shopping-cart/actions';
-import { openSidebar } from 'src/redux/sidebar/actions';
+import { closeSidebar, openSidebar } from 'src/redux/sidebar/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
 
@@ -30,6 +30,7 @@ const Header = () => {
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const currentRole = useSelector((state: RootState) => state.auth.role);
   const exchangeRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate);
+  const sidebarIsOpen = useSelector((state: RootState) => state.sidebar.isOpen);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
   useEffect(() => {
@@ -75,15 +76,19 @@ const Header = () => {
                 data-testid="logo-qira"
               />
             </Link>
-            <div className={styles.menuAndLogoContainer} onClick={() => dispatch(openSidebar())}>
-              <MenuOutlined className={styles.menu} />
-              <Link to="/">
-                <img
-                  className={styles.logoQ}
-                  src={`${process.env.PUBLIC_URL}/assets/images/logoQ.svg`}
-                  alt=""
-                />
-              </Link>
+            <div className={styles.menuAndLogoContainer}>
+              <div onClick={() => dispatch(sidebarIsOpen ? closeSidebar() : openSidebar())}>
+                <MenuOutlined className={styles.menu} />
+              </div>
+              <div onClick={() => dispatch(closeSidebar())}>
+                <Link to="/">
+                  <img
+                    className={styles.logoQ}
+                    src={`${process.env.PUBLIC_URL}/assets/images/logoQ.svg`}
+                    alt=""
+                  />
+                </Link>
+              </div>
             </div>
           </div>
           <div className={styles.searchContainer}>

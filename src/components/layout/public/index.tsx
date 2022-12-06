@@ -12,10 +12,10 @@ const PublicLayout = () => {
   const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
 
   return (
-    <div className={styles.container}>
-      <SidebarHome isOpen={isOpen} />
+    <div className={isOpen ? styles.containerWithSidebar : styles.container}>
       <ShoppingCart />
       <Header />
+      <SidebarHome isOpen={isOpen} />
       <Outlet />
       <Footer />
     </div>

@@ -4,3 +4,9 @@
   justify-content: space-between;
   min-height: 100vh;
 }
+
+.containerWithSidebar {
+  position: fixed;
+  height: auto;
+  overflow-y: hidden;
+}

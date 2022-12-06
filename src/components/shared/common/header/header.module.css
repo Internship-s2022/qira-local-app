@@ -178,6 +178,10 @@
 }
 
 @media screen and (max-width: 678px) {
+  .currency {
+    margin-left: 40px;
+  }
+
   .buttonCategories {
     display: none;
   }
