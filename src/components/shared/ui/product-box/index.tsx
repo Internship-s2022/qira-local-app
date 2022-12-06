@@ -57,8 +57,8 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
             <span>
               <IconButton
                 className={styles.iconButton}
-                data-testid="box-increase"
                 disabled={productQuantity >= product.stock}
+                data-testid="box-increase"
                 onClick={() => dispatch(increaseProductQuantity(product._id))}
               >
                 <Add />
