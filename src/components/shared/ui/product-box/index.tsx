@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Add, Close, Remove } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 
 import { formatPriceText } from 'src/helper/products';
 import {
@@ -31,19 +31,28 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
       <div className={styles.secondRowContainer}>
         <p className={styles.quantityText}>Seleccionar cantidad</p>
         <div className={styles.quantity}>
-          <IconButton
-            className={styles.iconButton}
-            onClick={() => dispatch(decreaseProductQuantity(product._id))}
-          >
-            <Remove />
-          </IconButton>
+          <Tooltip title={'Restar'}>
+            <IconButton
+              className={styles.iconButton}
+              onClick={() => dispatch(decreaseProductQuantity(product._id))}
+            >
+              <Remove />
+            </IconButton>
+          </Tooltip>
           <p>{productQuantity}</p>
-          <IconButton
-            className={styles.iconButton}
-            onClick={() => dispatch(increaseProductQuantity(product._id))}
+          <Tooltip
+            title={productQuantity >= product.stock ? 'No hay más stock disponible.' : 'Añadir'}
           >
-            <Add />
-          </IconButton>
+            <span>
+              <IconButton
+                className={styles.iconButton}
+                disabled={productQuantity >= product.stock}
+                onClick={() => dispatch(increaseProductQuantity(product._id))}
+              >
+                <Add />
+              </IconButton>
+            </span>
+          </Tooltip>
         </div>
       </div>
       <div className={styles.thirdRowContainer}>
