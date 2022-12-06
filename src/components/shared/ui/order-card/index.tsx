@@ -1,3 +1,4 @@
+import Dinero from 'dinero.js';
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +20,9 @@ const OrderCard = ({ order }: OrderCardProps): JSX.Element => {
         <p className={styles.dataText}>Pedido: </p>
         <p className={styles.orangeText}>{order._id}</p>
       </div>
-      <p className={styles.priceText}>{'AR$ ' + order.amounts.total.toFixed(2)}</p>
+      <p className={styles.priceText}>
+        {Dinero({ amount: order.amounts.total }).toFormat('$0,0.00')}
+      </p>
       <div className={styles.textContainer}>
         <p className={styles.dataText}>Estado: </p>
         <p className={styles.dataText}>{formatOrderStateText(order.state)}</p>

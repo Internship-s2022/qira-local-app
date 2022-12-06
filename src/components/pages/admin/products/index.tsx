@@ -1,3 +1,4 @@
+import Dinero from 'dinero.js';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -32,7 +33,7 @@ const Products = (): JSX.Element => {
         category: product.category.name,
         name: product.name,
         currency: product.currency === Currency.PESO ? 'ARS' : 'USD',
-        price: product.price,
+        price: Dinero({ amount: product.price }).toFormat('0,0.00'),
         stock: product.stock,
         isActive: product.isActive,
         state: product.isActive ? 'Activo' : 'Inactivo',

@@ -1,3 +1,4 @@
+import Dinero from 'dinero.js';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -208,16 +209,16 @@ const OrderDetails = (): JSX.Element => {
                 <div className={styles.priceDetails}>
                   <div className={styles.productsPrice}>
                     <p>{'Productos (AR$)'}</p>
-                    <p>{'AR$ ' + selectedOrder?.amounts.products.toFixed(2)}</p>
+                    <p>{Dinero({ amount: selectedOrder?.amounts.products }).toFormat('$0,0.00')}</p>
                   </div>
                   <div className={styles.taxesPrice}>
                     <p>IVA</p>
-                    <p>{'AR$ ' + selectedOrder?.amounts.taxes.toFixed(2)}</p>
+                    <p>{Dinero({ amount: selectedOrder?.amounts.taxes }).toFormat('$0,0.00')}</p>
                   </div>
                 </div>
                 <div className={styles.totalPrice}>
                   <p>TOTAL</p>
-                  <p>{'AR$ ' + selectedOrder?.amounts.total.toFixed(2)}</p>
+                  <p>{Dinero({ amount: selectedOrder?.amounts.total }).toFormat('$0,0.00')}</p>
                 </div>
               </div>
               {selectedOrder?.state !== OrderState.REJECTED && (

@@ -1,3 +1,4 @@
+import Dinero from 'dinero.js';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
@@ -13,7 +14,7 @@ import styles from './order.module.css';
 
 const OrderLayout = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
-  const dollarRate = 160;
+  const dollarRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate.value);
   const clientId = useSelector((state: RootState) => state.auth.user._id);
   const cartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const authorized = useSelector((state: RootState) => state.shoppingCart.authorized);
@@ -21,7 +22,7 @@ const OrderLayout = (): JSX.Element => {
   const estimatedDeliveryDate = useSelector(
     (state: RootState) => state.shoppingCart.estimatedDeliveryDate,
   );
-  const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state, dollarRate));
+  const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state));
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -38,7 +39,7 @@ const OrderLayout = (): JSX.Element => {
       authorized: authorized,
       amounts: orderAmounts,
       payment: payReceipt,
-      exchangeRate: dollarRate,
+      exchangeRate: parseFloat(dollarRate),
       estimatedDeliveryDate: estimatedDeliveryDate,
     };
     dispatch(createOrder(order));
@@ -107,16 +108,16 @@ const OrderLayout = (): JSX.Element => {
             <div className={styles.priceDetails}>
               <div className={styles.productsPrice}>
                 <p>{'Productos (AR$)'}</p>
-                <p>{'AR$ ' + orderAmounts.products.toFixed(2)}</p>
+                <p>{Dinero({ amount: orderAmounts.products }).toFormat('$0,0.00')}</p>
               </div>
               <div className={styles.taxesPrice}>
                 <p>IVA</p>
-                <p>{'AR$ ' + orderAmounts.taxes.toFixed(2)}</p>
+                <p>{Dinero({ amount: orderAmounts.taxes }).toFormat('$0,0.00')}</p>
               </div>
             </div>
             <div className={styles.totalPrice}>
               <p>TOTAL</p>
-              <p>{'AR$ ' + orderAmounts.total.toFixed(2)}</p>
+              <p>{Dinero({ amount: orderAmounts.total }).toFormat('$0,0.00')}</p>
             </div>
             <Button
               size="large"

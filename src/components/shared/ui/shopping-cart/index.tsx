@@ -1,3 +1,4 @@
+import Dinero from 'dinero.js';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -15,14 +16,13 @@ import ProductBox from '../product-box';
 import styles from './shopping-cart.module.css';
 
 const ShoppingCart = (): JSX.Element => {
-  const dollarRate = 160;
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state: RootState) => state.auth.token);
   const userRole = useSelector((state: RootState) => state.auth.role);
   const open = useSelector((state: RootState) => state.shoppingCart.isOpen);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
-  const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state, dollarRate));
+  const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state));
 
   const checkLoggedUser = () => {
     dispatch(closeCart());
@@ -70,7 +70,9 @@ const ShoppingCart = (): JSX.Element => {
                 <div className={styles.totalPrice}>
                   <p className={styles.totalText}>TOTAL</p>
                   <div className={styles.priceTextContainer}>
-                    <p className={styles.priceText}>{'AR$ ' + orderAmounts.total.toFixed(2)}</p>
+                    <p className={styles.priceText}>
+                      {'AR$ ' + Dinero({ amount: orderAmounts.products }).toFormat('0,0.00')}
+                    </p>
                     <p className={styles.ivaText}> + IVA</p>
                   </div>
                 </div>
