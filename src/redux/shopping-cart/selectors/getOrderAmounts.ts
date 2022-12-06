@@ -34,6 +34,7 @@ export const getOrderAmounts = createSelector(
     amounts.total = Dinero({ amount: amounts.products })
       .add(Dinero({ amount: amounts.taxes }))
       .getAmount();
+    console.log(amounts);
     return amounts;
   },
 );
