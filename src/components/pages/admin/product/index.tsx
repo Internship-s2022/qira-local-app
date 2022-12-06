@@ -59,7 +59,6 @@ const ProductForm = (): JSX.Element => {
   });
   const imageInput = watch('image');
   const pdfInput = watch('technicalFile');
-  const price = watch('price');
 
   const fileInputs = imageInput?.isNew || pdfInput?.isNew;
 
