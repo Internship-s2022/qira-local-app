@@ -23,7 +23,6 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
   const productQuantity = useSelector((state: RootState) => getProductQuantity(state, product._id));
 
   const dollarRate = exchangeRate ? parseFloat(exchangeRate) : 0;
-  console.log(dollarRate);
 
   return (
     <div className={styles.container}>

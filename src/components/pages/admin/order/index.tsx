@@ -209,16 +209,20 @@ const OrderDetails = (): JSX.Element => {
                 <div className={styles.priceDetails}>
                   <div className={styles.productsPrice}>
                     <p>{'Productos (AR$)'}</p>
-                    <p>{Dinero({ amount: selectedOrder?.amounts.products }).toFormat('$0,0.00')}</p>
+                    <p>
+                      {Dinero({ amount: selectedOrder?.amounts.products || 0 }).toFormat('$0,0.00')}
+                    </p>
                   </div>
                   <div className={styles.taxesPrice}>
                     <p>IVA</p>
-                    <p>{Dinero({ amount: selectedOrder?.amounts.taxes }).toFormat('$0,0.00')}</p>
+                    <p>
+                      {Dinero({ amount: selectedOrder?.amounts.taxes || 0 }).toFormat('$0,0.00')}
+                    </p>
                   </div>
                 </div>
                 <div className={styles.totalPrice}>
                   <p>TOTAL</p>
-                  <p>{Dinero({ amount: selectedOrder?.amounts.total }).toFormat('$0,0.00')}</p>
+                  <p>{Dinero({ amount: selectedOrder?.amounts.total || 0 }).toFormat('$0,0.00')}</p>
                 </div>
               </div>
               {selectedOrder?.state !== OrderState.REJECTED && (
