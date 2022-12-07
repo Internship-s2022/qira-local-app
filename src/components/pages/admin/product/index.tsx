@@ -99,13 +99,7 @@ const ProductForm = (): JSX.Element => {
   }, [product]);
 
   const duplicatedProduct = (data: ProductFormValues) => {
-    console.log(data);
-
-    const prueba = products.some(
-      (product) => product.name === data.name && product.brand === data.brand,
-    );
-    console.log(prueba);
-    return prueba;
+    return products.some((product) => product.name === data.name && product.brand === data.brand);
   };
 
   const onSubmit = async (data: ProductFormValues) => {
