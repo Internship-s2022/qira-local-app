@@ -6,7 +6,7 @@ import { Box, Button, Modal } from '@mui/material';
 
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { closeCart } from 'src/redux/shopping-cart/actions';
+import { closeCart, resetState } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
@@ -29,7 +29,12 @@ const ShoppingCart = (): JSX.Element => {
     if (token && userRole === UserRole.CLIENT) {
       navigate('/order/summary');
     } else {
-      dispatch(openModal(ModalTypes.LOGIN));
+      dispatch(
+        openModal(ModalTypes.INFO, {
+          message: 'Las compras pueden ser realizadas sólo por clientes.',
+        }),
+      );
+      dispatch(resetState());
     }
   };
 
