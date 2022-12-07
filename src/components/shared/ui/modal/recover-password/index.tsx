@@ -1,4 +1,5 @@
 import React from 'react';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { Button } from '@mui/material';
 
 import styles from './recover.module.css';
@@ -20,7 +21,7 @@ export const RecoverPassword = () => {
           data-testid="recover-modal-btn"
           className={styles.button}
         >
-          Ir a whatsapp
+          {<WhatsAppIcon className={styles.whatsAppIcon} />} Ir a whatsapp
         </Button>
       </div>
     </div>
