@@ -20,6 +20,7 @@ const ShoppingCart = (): JSX.Element => {
   const navigate = useNavigate();
   const token = useSelector((state: RootState) => state.auth.token);
   const userRole = useSelector((state: RootState) => state.auth.role);
+  const currentUser = useSelector((state: RootState) => state.auth.user);
   const open = useSelector((state: RootState) => state.shoppingCart.isOpen);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state, dollarRate));
@@ -29,12 +30,14 @@ const ShoppingCart = (): JSX.Element => {
     if (token && userRole === UserRole.CLIENT) {
       navigate('/order/summary');
     } else {
+      if (UserRole.ADMIN === userRole) {
+        dispatch(resetState());
+      }
       dispatch(
         openModal(ModalTypes.INFO, {
           message: 'Las compras pueden ser realizadas sólo por clientes.',
         }),
       );
-      dispatch(resetState());
     }
   };
 
