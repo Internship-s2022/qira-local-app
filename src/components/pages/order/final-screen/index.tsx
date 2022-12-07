@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CancelOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 
 import QiraLoader from 'src/components/shared/ui/qira-loader';
@@ -9,8 +9,13 @@ import { RootState } from 'src/redux/store';
 import styles from './final-screen.module.css';
 
 export const FinalScreen = (): JSX.Element => {
+  const navigate = useNavigate();
   const isFetching = useSelector((state: RootState) => state.orders.isFetching);
   const error = useSelector((state: RootState) => state.orders.error);
+
+  useEffect(() => {
+    setTimeout(() => navigate('/'), 10000);
+  }, []);
 
   return (
     <div className={styles.mainContainer}>
