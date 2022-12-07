@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   AccountCircle,
   InfoOutlined,
@@ -25,6 +25,7 @@ import styles from './header.module.css';
 const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const currentUser = useSelector((state: RootState) => state.auth.user);
@@ -51,7 +52,7 @@ const Header = () => {
       height: '17px',
     },
   }));
-
+  console.log(location.pathname);
   return (
     <header className={styles.headerContainer}>
       <div className={styles.navBarContainer}>
@@ -78,7 +79,11 @@ const Header = () => {
             </Link>
             <div className={styles.menuAndLogoContainer}>
               <div onClick={() => dispatch(sidebarIsOpen ? closeSidebar() : openSidebar())}>
-                <MenuOutlined className={styles.menu} />
+                <MenuOutlined
+                  className={
+                    location.pathname.includes('/profile') ? styles.menuOnProfile : styles.menu
+                  }
+                />
               </div>
               <div onClick={() => dispatch(closeSidebar())}>
                 <Link to="/">
@@ -170,7 +175,7 @@ const Header = () => {
                       onClick={() => dispatch(openModal(ModalTypes.LOGIN))}
                       data-testid="login-btn"
                     >
-                      Iniciar Sesión
+                      Iniciar sesión
                     </p>
                   </>
                 </div>

@@ -45,7 +45,7 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
                       onClick={() => dispatch(openModal(ModalTypes.LOGIN))}
                       data-testid="login-btn"
                     >
-                      Iniciar Sesión
+                      Iniciar sesión
                     </span>
                   </>
                 )}
@@ -84,7 +84,11 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
                     )
                   }
                 >
-                  <span className={styles.options}> Cerrar sesión</span>
+                  {currentUser?.businessName ? (
+                    <span className={styles.options}> Cerrar sesión</span>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </li>
             </ul>

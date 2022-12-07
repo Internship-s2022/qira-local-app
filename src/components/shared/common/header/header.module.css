@@ -13,7 +13,7 @@
 
 .logoQira {
   height: 45px;
-  margin: 12px 20px 12px 100px;
+  margin: 12px 20px;
 }
 
 .currency {
@@ -179,7 +179,8 @@
 
 @media screen and (max-width: 678px) {
   .currency {
-    margin-left: 40px;
+    margin-left: 30px;
+    font-size: 12px;
   }
 
   .buttonCategories {
@@ -193,7 +194,7 @@
   .menuAndLogoContainer {
     display: flex;
     gap: 10px;
-    align-items: center;
+    justify-content: center;
     width: 100px;
   }
 
@@ -206,6 +207,10 @@
     margin-left: 20px;
     font-size: 50px;
     color: white;
+  }
+
+  .menuOnProfile {
+    display: none;
   }
 
   .searchBar {
