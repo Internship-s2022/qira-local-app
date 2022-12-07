@@ -51,7 +51,7 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
       </div>
       {productQuantity > 0 ? (
         <div className={styles.quantity}>
-          <Tooltip title={'Restar'}>
+          <Tooltip title={'Quitar'}>
             <IconButton
               className={styles.iconButton}
               onClick={() => dispatch(decreaseProductQuantity(product._id))}

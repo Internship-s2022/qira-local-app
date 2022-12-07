@@ -31,7 +31,7 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
       <div className={styles.secondRowContainer}>
         <p className={styles.quantityText}>Seleccionar cantidad</p>
         <div className={styles.quantity}>
-          <Tooltip title={'Restar'}>
+          <Tooltip title={'Quitar'}>
             <IconButton
               className={styles.iconButton}
               onClick={() => dispatch(decreaseProductQuantity(product._id))}
