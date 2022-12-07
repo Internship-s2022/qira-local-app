@@ -36,7 +36,12 @@ const ShoppingCart = (): JSX.Element => {
         }),
       );
     } else {
-      dispatch(openModal(ModalTypes.LOGIN));
+      dispatch(
+        openModal(ModalTypes.INFO, {
+          message: 'Las compras pueden ser realizadas sólo por clientes.',
+        }),
+      );
+      dispatch(resetState());
     }
   };
 
