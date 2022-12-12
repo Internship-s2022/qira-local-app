@@ -4,6 +4,8 @@ import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { Footer, Header } from 'src/components/shared/common';
 import { logout } from 'src/redux/auth/thunks';
+import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch } from 'src/redux/store';
 
 import styles from './profile.module.css';
@@ -46,7 +48,21 @@ const ClientLayout = (): JSX.Element => {
                 >
                   Datos de usuario
                 </Link>
-                <p onClick={() => dispatch(logout())} className={styles.linkLogOut}>
+                <p
+                  onClick={() =>
+                    dispatch(
+                      openModal(ModalTypes.CONFIRM, {
+                        message: '¿Está seguro de que desea cerrar sesión?',
+                        onConfirmCallback: () => {
+                          dispatch(logout());
+                          dispatch(closeModal());
+                        },
+                        onCloseCallback: () => dispatch(closeModal()),
+                      }),
+                    )
+                  }
+                  className={styles.linkLogOut}
+                >
                   Cerrar sesión
                 </p>
               </nav>
