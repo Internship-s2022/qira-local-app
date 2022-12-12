@@ -20,10 +20,10 @@ export const updateUserData = Joi.object({
       'string.pattern.base': 'Debe contener 2-4 caracteres numéricos.',
     }),
   phoneNumber: Joi.string()
-    .regex(/^[0-9\-+]{6,7}$/)
+    .regex(/^[0-9\-+]{7,8}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 6-7 caracteres númericos.',
+      'string.pattern.base': 'Debe contener 7-8 caracteres númericos.',
     }),
 });
