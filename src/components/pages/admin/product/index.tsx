@@ -103,75 +103,76 @@ const ProductForm = (): JSX.Element => {
   };
 
   const onSubmit = async (data: ProductFormValues) => {
-    if (!duplicatedProduct(data)) {
-      const image = data.image;
-      let imageToSend: FileToSend;
-      if (image?.isNew) {
-        const imageFile: any = await toBase64(image.file);
-        if (imageFile) {
-          imageToSend = {
-            base64: imageFile,
-            name: image.file.name,
-            type: image.file.type,
-            isNew: true,
-          };
-        }
-      }
-
-      const technicalFile = data.technicalFile;
-      let pdfToSend: FileToSend;
-      if (technicalFile?.isNew) {
-        const pdfFile: any = await toBase64(technicalFile.file);
-        if (pdfFile) {
-          pdfToSend = {
-            base64: pdfFile,
-            name: technicalFile.file.name,
-            type: technicalFile.file.type,
-            isNew: true,
-          };
-        }
-      }
-
-      const submitData = {
-        name: data.name,
-        description: data.description,
-        price: data.price,
-        image: imageToSend,
-        technicalFile: pdfToSend,
-        brand: data.brand,
-        category: data.category,
-        currency: data.currency,
-        stock: data.stock,
-        isNew: data.isNew,
-      };
-
-      const modalOptions: Options = {};
-      if (params.id) {
-        const response = await dispatch(updateProduct(params.id, submitData));
-        if (response?.type === Actions.UPDATE_PRODUCT_SUCCESS) {
-          modalOptions.message = 'Producto editado exitosamente.';
-          modalOptions.onCloseCallback = () => {
-            dispatch(closeModal());
-            navigate('/admin/products');
-          };
-        }
-      } else {
-        const response = await dispatch(createProduct(submitData));
-        if (response?.type === Actions.CREATE_PRODUCT_SUCCESS) {
-          modalOptions.message = 'Producto creado exitosamente.';
-          modalOptions.onCloseCallback = () => {
-            dispatch(closeModal());
-            navigate('/admin/products');
-          };
-        }
-      }
-      if (!modalOptions.message) {
-        modalOptions.message = 'Ha ocurrido un error';
-      }
-      dispatch(openModal(ModalTypes.INFO, modalOptions));
-    } else {
-      dispatch(openModal(ModalTypes.INFO, { message: 'El producto que intenta crear ya existe.' }));
+    if (duplicatedProduct(data)) {
+      return dispatch(
+        openModal(ModalTypes.INFO, { message: 'El producto que intenta crear ya existe.' }),
+      );
     }
+    const image = data.image;
+    let imageToSend: FileToSend;
+    if (image?.isNew) {
+      const imageFile: any = await toBase64(image.file);
+      if (imageFile) {
+        imageToSend = {
+          base64: imageFile,
+          name: image.file.name,
+          type: image.file.type,
+          isNew: true,
+        };
+      }
+    }
+
+    const technicalFile = data.technicalFile;
+    let pdfToSend: FileToSend;
+    if (technicalFile?.isNew) {
+      const pdfFile: any = await toBase64(technicalFile.file);
+      if (pdfFile) {
+        pdfToSend = {
+          base64: pdfFile,
+          name: technicalFile.file.name,
+          type: technicalFile.file.type,
+          isNew: true,
+        };
+      }
+    }
+
+    const submitData = {
+      name: data.name,
+      description: data.description,
+      price: data.price,
+      image: imageToSend,
+      technicalFile: pdfToSend,
+      brand: data.brand,
+      category: data.category,
+      currency: data.currency,
+      stock: data.stock,
+      isNew: data.isNew,
+    };
+
+    const modalOptions: Options = {};
+    if (params.id) {
+      const response = await dispatch(updateProduct(params.id, submitData));
+      if (response?.type === Actions.UPDATE_PRODUCT_SUCCESS) {
+        modalOptions.message = 'Producto editado exitosamente.';
+        modalOptions.onCloseCallback = () => {
+          dispatch(closeModal());
+          navigate('/admin/products');
+        };
+      }
+    } else {
+      const response = await dispatch(createProduct(submitData));
+      if (response?.type === Actions.CREATE_PRODUCT_SUCCESS) {
+        modalOptions.message = 'Producto creado exitosamente.';
+        modalOptions.onCloseCallback = () => {
+          dispatch(closeModal());
+          navigate('/admin/products');
+        };
+      }
+    }
+    if (!modalOptions.message) {
+      modalOptions.message = 'Ha ocurrido un error';
+    }
+    dispatch(openModal(ModalTypes.INFO, modalOptions));
   };
 
   const currencyOptions: SelectOptions[] = [

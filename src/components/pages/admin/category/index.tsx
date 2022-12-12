@@ -69,54 +69,53 @@ const CategoryForm = (): JSX.Element => {
   };
 
   const onSubmit = async (data: CategoryFormValues) => {
-    if (!duplcatedCategory(data)) {
-      const image = data.image;
-      let imageToSend: ImageToSend;
-      if (image?.isNew) {
-        const imageFile: any = await toBase64(image.file);
-        if (imageFile) {
-          imageToSend = {
-            base64: imageFile,
-            name: image.file.name,
-            type: image.file.type,
-            isNew: true,
-          };
-        }
-      }
-      const submitData = {
-        name: data.name,
-        image: imageToSend,
-        url: data.url,
-      };
-      const modalOptions: Options = {};
-      if (params.id) {
-        const response = await dispatch(updateCategory(params.id, submitData));
-        if (response?.type === Actions.UPDATE_CATEGORY_SUCCESS) {
-          modalOptions.message = 'Categoría editada exitosamente.';
-          modalOptions.onCloseCallback = () => {
-            dispatch(closeModal());
-            navigate('/admin/categories');
-          };
-        }
-      } else {
-        const response = await dispatch(createCategory(submitData));
-        if (response?.type === Actions.CREATE_CATEGORY_SUCCESS) {
-          modalOptions.message = 'Categoría creada exitosamente.';
-          modalOptions.onCloseCallback = () => {
-            dispatch(closeModal());
-            navigate('/admin/categories');
-          };
-        }
-      }
-      if (!modalOptions.message) {
-        modalOptions.message = 'Ha ocurrido un error';
-      }
-      dispatch(openModal(ModalTypes.INFO, modalOptions));
-    } else {
-      dispatch(
+    if (duplcatedCategory(data)) {
+      return dispatch(
         openModal(ModalTypes.INFO, { message: 'La categoría que intenta crear ya existe.' }),
       );
     }
+    const image = data.image;
+    let imageToSend: ImageToSend;
+    if (image?.isNew) {
+      const imageFile: any = await toBase64(image.file);
+      if (imageFile) {
+        imageToSend = {
+          base64: imageFile,
+          name: image.file.name,
+          type: image.file.type,
+          isNew: true,
+        };
+      }
+    }
+    const submitData = {
+      name: data.name,
+      image: imageToSend,
+      url: data.url,
+    };
+    const modalOptions: Options = {};
+    if (params.id) {
+      const response = await dispatch(updateCategory(params.id, submitData));
+      if (response?.type === Actions.UPDATE_CATEGORY_SUCCESS) {
+        modalOptions.message = 'Categoría editada exitosamente.';
+        modalOptions.onCloseCallback = () => {
+          dispatch(closeModal());
+          navigate('/admin/categories');
+        };
+      }
+    } else {
+      const response = await dispatch(createCategory(submitData));
+      if (response?.type === Actions.CREATE_CATEGORY_SUCCESS) {
+        modalOptions.message = 'Categoría creada exitosamente.';
+        modalOptions.onCloseCallback = () => {
+          dispatch(closeModal());
+          navigate('/admin/categories');
+        };
+      }
+    }
+    if (!modalOptions.message) {
+      modalOptions.message = 'Ha ocurrido un error';
+    }
+    dispatch(openModal(ModalTypes.INFO, modalOptions));
   };
 
   return (
