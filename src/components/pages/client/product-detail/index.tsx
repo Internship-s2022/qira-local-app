@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { Add, FileCopyOutlined, PaidOutlined, Remove, StoreOutlined } from '@mui/icons-material';
-import { Button, IconButton } from '@mui/material';
+import { Button, IconButton, Tooltip } from '@mui/material';
 
 import { formatPriceText } from 'src/helper/products';
 import { getProductById } from 'src/redux/products/selectors/getProductById';
@@ -83,25 +83,37 @@ export const ProductDetail = (): JSX.Element => {
                 <div className={styles.quantity}>
                   <p>Seleccionar cantidad</p>
                   <div className={styles.quantityIcons}>
-                    <IconButton
-                      className={styles.iconButton}
-                      onClick={() => {
-                        count >= 1 && setCount(count - 1);
-                        selectedProduct?.stock < 1 ? setDisabled(true) : setDisabled(false);
-                      }}
-                    >
-                      <Remove />
-                    </IconButton>
+                    <Tooltip title={'Quitar'}>
+                      <IconButton
+                        className={styles.iconButton}
+                        disabled={count === 0}
+                        onClick={() => {
+                          count >= 1 && setCount(count - 1);
+                          selectedProduct?.stock < 1 ? setDisabled(true) : setDisabled(false);
+                        }}
+                      >
+                        <Remove />
+                      </IconButton>
+                    </Tooltip>
                     <p>{count}</p>
-                    <IconButton
-                      className={styles.iconButton}
-                      onClick={() => {
-                        setCount(count + 1);
-                        selectedProduct?.stock < 1 ? setDisabled(true) : setDisabled(false);
-                      }}
+                    <Tooltip
+                      title={
+                        count >= selectedProduct?.stock ? 'No hay más stock disponible.' : 'Añadir'
+                      }
                     >
-                      <Add />
-                    </IconButton>
+                      <span>
+                        <IconButton
+                          className={styles.iconButton}
+                          disabled={count >= selectedProduct?.stock}
+                          onClick={() => {
+                            setCount(count + 1);
+                            selectedProduct?.stock < 1 ? setDisabled(true) : setDisabled(false);
+                          }}
+                        >
+                          <Add />
+                        </IconButton>
+                      </span>
+                    </Tooltip>
                   </div>
                 </div>
               </div>
