@@ -34,7 +34,7 @@ export const formatOrderStateText = (state: OrderState) => {
   return orderState;
 };
 
-export const formatDate = (date: string) => {
+export const formatDate = (date: string | Date) => {
   if (date) {
     const newDate = new Date(date);
     return format(newDate, 'dd/MM/yyyy');

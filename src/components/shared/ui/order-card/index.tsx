@@ -1,8 +1,7 @@
-import { format } from 'date-fns';
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { formatOrderStateText } from 'src/helper/orders';
+import { formatDate, formatOrderStateText } from 'src/helper/orders';
 
 import styles from './order-card.module.css';
 import { OrderCardProps } from './types';
@@ -10,13 +9,9 @@ import { OrderCardProps } from './types';
 const OrderCard = ({ order }: OrderCardProps): JSX.Element => {
   const navigate = useNavigate();
 
-  const orderDate = new Date(order.orderDate);
-
   const formattedDate = useMemo(() => {
-    if (orderDate) {
-      return format(orderDate, 'dd/MM/yyyy');
-    }
-  }, [orderDate]);
+    return formatDate(order.orderDate);
+  }, [order.orderDate]);
 
   return (
     <div className={styles.orderCard} onClick={() => navigate(`/profile/my-orders/${order._id}`)}>
