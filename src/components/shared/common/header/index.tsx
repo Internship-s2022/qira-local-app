@@ -78,13 +78,15 @@ const Header = () => {
               />
             </Link>
             <div className={styles.menuAndLogoContainer}>
-              <div onClick={() => dispatch(sidebarIsOpen ? closeSidebar() : openSidebar())}>
-                <MenuOutlined
-                  className={
-                    location.pathname.includes('/profile') ? styles.menuOnProfile : styles.menu
-                  }
-                />
-              </div>
+              {currentRole != UserRole.ADMIN && (
+                <div onClick={() => dispatch(sidebarIsOpen ? closeSidebar() : openSidebar())}>
+                  <MenuOutlined
+                    className={
+                      location.pathname.includes('/profile') ? styles.menuOnProfile : styles.menu
+                    }
+                  />
+                </div>
+              )}
               <div onClick={() => dispatch(closeSidebar())}>
                 <Link to="/">
                   <img
@@ -155,7 +157,12 @@ const Header = () => {
             <div className={styles.routes}>
               {currentUser?.email ? (
                 <div className={styles.btnLogin}>
-                  <AccountCircle className={styles.userIcon} />
+                  <Link
+                    className={styles.userIconLink}
+                    to={currentRole === UserRole.ADMIN ? '/admin' : '/profile/my-orders'}
+                  >
+                    <AccountCircle className={styles.userIcon} />
+                  </Link>
                   {currentRole === UserRole.ADMIN ? (
                     <Link className={styles.userName} to="/admin">
                       {currentUser.firstName + ' ' + currentUser.lastName}
@@ -167,14 +174,13 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <div className={styles.btnLogin}>
+                <div
+                  onClick={() => dispatch(openModal(ModalTypes.LOGIN))}
+                  className={styles.btnLogin}
+                >
                   <>
                     <AccountCircle className={styles.userIcon} />
-                    <p
-                      className={styles.pLogin}
-                      onClick={() => dispatch(openModal(ModalTypes.LOGIN))}
-                      data-testid="login-btn"
-                    >
+                    <p className={styles.pLogin} data-testid="login-btn">
                       Iniciar sesión
                     </p>
                   </>

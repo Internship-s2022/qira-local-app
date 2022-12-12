@@ -149,8 +149,14 @@
   cursor: pointer;
 }
 
+.userIconLink {
+  display: flex;
+  color: white;
+  text-decoration: none;
+}
+
 .userIcon {
-  width: 40px;
+  margin-right: 5px;
 }
 
 .userName {
