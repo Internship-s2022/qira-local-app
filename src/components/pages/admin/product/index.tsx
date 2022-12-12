@@ -174,6 +174,7 @@ const ProductForm = (): JSX.Element => {
                   <SharedSelect
                     optionalLabel="Categoría *"
                     options={categoryOptions}
+                    margin="dense"
                     name="category"
                     control={control}
                     fullWidth
@@ -205,6 +206,7 @@ const ProductForm = (): JSX.Element => {
                     options={currencyOptions}
                     name="currency"
                     control={control}
+                    margin="dense"
                     fullWidth
                     size="small"
                     className={styles.currency}
