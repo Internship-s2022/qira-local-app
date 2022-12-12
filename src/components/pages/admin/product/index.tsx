@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { Button } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
+import { Button, IconButton } from '@mui/material';
 
 import { SharedCheckbox } from 'src/components/shared/ui/checkbox';
 import { ImageInput } from 'src/components/shared/ui/image-input';
@@ -177,6 +178,17 @@ const ProductForm = (): JSX.Element => {
         <>
           <div className={styles.titleContainer}>
             <h1>{params.id ? 'Editar producto' : 'Agregar nuevo producto'}</h1>
+            <div className={styles.goBack}>
+              <h3>Volver a la lista</h3>
+              <IconButton
+                className={styles.backButton}
+                disableRipple={true}
+                size="large"
+                onClick={() => navigate('/admin/products')}
+              >
+                <ArrowBack />
+              </IconButton>
+            </div>
           </div>
           <form className={styles.container}>
             <div className={styles.columnsContainer}>

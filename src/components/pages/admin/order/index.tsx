@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { InsertDriveFile } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ArrowBack, InsertDriveFile } from '@mui/icons-material';
+import { Button, IconButton } from '@mui/material';
 
 import { Loader } from 'src/components/shared/ui/loader';
 import { CustomFile } from 'src/components/shared/ui/modal/types';
@@ -23,6 +23,7 @@ import styles from './order.module.css';
 const OrderDetails = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const params = useParams();
+  const navigate = useNavigate();
   const isFetching = useSelector((state: RootState) => state.orders.isFetching);
   const isFetchingOrder = useSelector((state: RootState) => state.orders.isFetchingOrder);
   const selectedOrder = useSelector((state: RootState) => state.orders.selectedOrder);
@@ -96,6 +97,17 @@ const OrderDetails = (): JSX.Element => {
     <section className={styles.sectionContainer}>
       <div className={styles.titleContainer}>
         <h1>Detalle de la orden</h1>
+        <div className={styles.goBack}>
+          <h3>Volver a la lista</h3>
+          <IconButton
+            className={styles.backButton}
+            disableRipple={true}
+            size="large"
+            onClick={() => navigate('/admin/orders')}
+          >
+            <ArrowBack />
+          </IconButton>
+        </div>
       </div>
       {isFetching ? (
         <div className={styles.loaderContainer}>

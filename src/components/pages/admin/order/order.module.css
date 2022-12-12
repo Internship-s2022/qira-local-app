@@ -13,6 +13,21 @@
   border-bottom: solid 2px;
 }
 
+.goBack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goBack h3 {
+  margin: 0 10px;
+}
+
+.backButton {
+  color: white;
+  background-color: var(--color-primary);
+}
+
 .loaderContainer {
   position: absolute;
   top: 50%;
