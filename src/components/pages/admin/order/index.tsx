@@ -58,8 +58,13 @@ const OrderDetails = (): JSX.Element => {
       modalOptions.onCloseCallback = () => {
         dispatch(closeModal());
       };
-      dispatch(openModal(ModalTypes.INFO, modalOptions));
+    } else if (response?.type === Actions.APPROVE_ORDER_SUCCESS) {
+      modalOptions.message = 'Orden aprobada exitosamente.';
+      modalOptions.onCloseCallback = () => {
+        dispatch(closeModal());
+      };
     }
+    dispatch(openModal(ModalTypes.INFO, modalOptions));
     setInvoice(null);
   };
 
@@ -70,12 +75,17 @@ const OrderDetails = (): JSX.Element => {
     const modalOptions: Options = {};
     const response = await dispatch(deliverOrder(selectedOrder?._id, submitData));
     if (response?.type === Actions.DELIVER_ORDER_ERROR) {
-      modalOptions.message = 'Ha ocurrido un error';
+      modalOptions.message = 'Ha ocurrido un error.';
       modalOptions.onCloseCallback = () => {
         dispatch(closeModal());
       };
-      dispatch(openModal(ModalTypes.INFO, modalOptions));
+    } else if (response?.type === Actions.DELIVER_ORDER_SUCCESS) {
+      modalOptions.message = 'Orden entregada exitosamente.';
+      modalOptions.onCloseCallback = () => {
+        dispatch(closeModal());
+      };
     }
+    dispatch(openModal(ModalTypes.INFO, modalOptions));
     setInvoice(null);
   };
 
@@ -83,12 +93,17 @@ const OrderDetails = (): JSX.Element => {
     const modalOptions: Options = {};
     const response = await dispatch(rejectOrder(selectedOrder?._id));
     if (response?.type === Actions.REJECT_ORDER_ERROR) {
-      modalOptions.message = 'Ha ocurrido un error';
+      modalOptions.message = 'Ha ocurrido un error.';
       modalOptions.onCloseCallback = () => {
         dispatch(closeModal());
       };
-      dispatch(openModal(ModalTypes.INFO, modalOptions));
+    } else if (response?.type === Actions.REJECT_ORDER_SUCCESS) {
+      modalOptions.message = 'Orden rechazada exitosamente.';
+      modalOptions.onCloseCallback = () => {
+        dispatch(closeModal());
+      };
     }
+    dispatch(openModal(ModalTypes.INFO, modalOptions));
     setInvoice(null);
   };
 
@@ -274,11 +289,37 @@ const OrderDetails = (): JSX.Element => {
                             variant="contained"
                             color="primary"
                             disabled={invoice ? false : true}
-                            onClick={handleApprove}
+                            onClick={() =>
+                              dispatch(
+                                openModal(ModalTypes.CONFIRM, {
+                                  message: '¿Está seguro de que desea aprobar esta órden?',
+                                  onConfirmCallback: () => {
+                                    handleApprove();
+                                    dispatch(closeModal());
+                                  },
+                                  onCloseCallback: () => dispatch(closeModal()),
+                                }),
+                              )
+                            }
                           >
                             Aprobar Pago
                           </Button>
-                          <Button variant="outlined" color="primary" onClick={handleReject}>
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={() =>
+                              dispatch(
+                                openModal(ModalTypes.CONFIRM, {
+                                  message: '¿Está seguro de que desea rechazar esta órden?',
+                                  onConfirmCallback: () => {
+                                    handleReject();
+                                    dispatch(closeModal());
+                                  },
+                                  onCloseCallback: () => dispatch(closeModal()),
+                                }),
+                              )
+                            }
+                          >
                             Rechazar Pago
                           </Button>
                         </>
@@ -296,7 +337,18 @@ const OrderDetails = (): JSX.Element => {
                             variant="contained"
                             color="primary"
                             disabled={invoice ? false : true}
-                            onClick={handleDeliver}
+                            onClick={() =>
+                              dispatch(
+                                openModal(ModalTypes.CONFIRM, {
+                                  message: '¿Está seguro de que desea entregar esta órden?',
+                                  onConfirmCallback: () => {
+                                    handleDeliver();
+                                    dispatch(closeModal());
+                                  },
+                                  onCloseCallback: () => dispatch(closeModal()),
+                                }),
+                              )
+                            }
                           >
                             Entregar Pedido
                           </Button>
