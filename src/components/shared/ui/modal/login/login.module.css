@@ -45,6 +45,15 @@
   width: 100%;
 }
 
+.recoverText {
+  margin-bottom: 0;
+}
+
+.recoverText:hover {
+  color: #f05523;
+  cursor: pointer;
+}
+
 .registerText:hover {
   color: #f05523;
   cursor: pointer;

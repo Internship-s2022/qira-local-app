@@ -121,6 +121,12 @@ export const LoginModal = () => {
             </Button>
           )}
 
+          <p
+            className={styles.recoverText}
+            onClick={() => dispatch(openModal(ModalTypes.RECOVER_PASSWORD))}
+          >
+            Olvidé mi contraseña
+          </p>
           <div className={styles.registerContainer}>
             <AccountCircleOutlined color="primary" />
             <p
