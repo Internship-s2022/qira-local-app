@@ -14,7 +14,7 @@ import * as thunksCategories from 'src/redux/category/thunk';
 import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { openCart } from 'src/redux/shopping-cart/actions';
+import { closeCart, openCart } from 'src/redux/shopping-cart/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
 
@@ -33,6 +33,7 @@ const Header = () => {
   useEffect(() => {
     dispatch(thunksCategories.getPublicCategories());
     dispatch(getExchangeRate());
+    dispatch(closeCart());
   }, []);
 
   const StyledBadge = styled(Badge)<BadgeProps>(() => ({
