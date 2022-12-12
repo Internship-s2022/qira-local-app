@@ -5,7 +5,6 @@
 
 .formContainer {
   display: flex;
-  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -28,6 +27,7 @@
 
 .container {
   display: flex;
+  gap: 30px;
   align-self: center;
   justify-content: space-around;
   padding: 20px 20px 2px;
@@ -39,14 +39,14 @@
 }
 
 .shortInput {
-  width: 100px;
-  margin-right: 5px;
+  max-width: 100px;
 }
 
 .phoneInputs {
   display: flex;
+  gap: 20px;
   justify-content: space-between;
-  width: 100%;
+  max-width: 100%;
 }
 
 .sendBtn {
