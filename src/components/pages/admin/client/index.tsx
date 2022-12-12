@@ -49,7 +49,12 @@ const ClientForm = (): JSX.Element => {
     }
   }, [selectedClient]);
 
-  const { handleSubmit, control, reset } = useForm<UpdateClientValues>({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { isDirty },
+  } = useForm<UpdateClientValues>({
     defaultValues: {
       email: '',
       codeArea: '',
@@ -239,6 +244,7 @@ const ClientForm = (): JSX.Element => {
               variant="contained"
               className={styles.sendBtn}
               onClick={handleSubmit(onSubmit)}
+              disabled={!isDirty}
             >
               Editar Cliente
             </Button>

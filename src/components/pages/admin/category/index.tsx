@@ -24,7 +24,14 @@ const CategoryForm = (): JSX.Element => {
   const params = useParams();
   const navigate = useNavigate();
   const category = useSelector((state: RootState) => state.categories.selectedCategory);
-  const { handleSubmit, control, reset, setValue } = useForm<CategoryFormValues>({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    setValue,
+    watch,
+    formState: { isDirty },
+  } = useForm<CategoryFormValues>({
     defaultValues: {
       name: '',
       image: undefined,
@@ -33,6 +40,7 @@ const CategoryForm = (): JSX.Element => {
     mode: 'onBlur',
     resolver: joiResolver(CategoryValidations),
   });
+  const imageInput = watch('image');
 
   useEffect(() => {
     params.id && dispatch(getCategoryById(params.id));
@@ -130,7 +138,12 @@ const CategoryForm = (): JSX.Element => {
             <ImageInput control={control} name="image" label="Imagen *" setValue={setValue} />
           </div>
         </div>
-        <Button className={styles.button} variant="contained" onClick={handleSubmit(onSubmit)}>
+        <Button
+          className={styles.button}
+          variant="contained"
+          onClick={handleSubmit(onSubmit)}
+          disabled={params.id ? !isDirty && !imageInput?.isNew : false}
+        >
           {params.id ? 'Editar' : 'Agregar'}
         </Button>
       </form>

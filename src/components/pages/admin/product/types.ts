@@ -4,13 +4,13 @@ import { NewPdfFile } from 'src/components/shared/ui/pdf-input/types';
 export interface ProductFormValues {
   name: string;
   description?: string;
-  price: number;
+  price: string;
   image: NewImageFile;
   technicalFile?: NewPdfFile;
   brand: string;
   category: string;
   currency: string;
-  stock: number;
+  stock: string;
   isNew?: boolean;
 }
 
