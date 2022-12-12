@@ -236,6 +236,10 @@
     width: fit-content;
   }
 
+  .userName {
+    display: none;
+  }
+
   .pLogin {
     display: none;
   }
