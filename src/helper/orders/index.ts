@@ -3,11 +3,15 @@ import { format } from 'date-fns';
 import { OrderState } from 'src/types';
 
 export const formatOrders = (data) => {
+  data.sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime());
+
   const listData = data.map((order) => {
     return {
       id: order._id,
       client: order.client.businessName,
       orderDate: formatDate(order.orderDate),
+      payAuthDate: formatDate(order.payAuthDate),
+      deliverDate: formatDate(order.deliverDate),
       amounts: '$ ' + order.amounts.total.toFixed(2),
       state: formatOrderStateText(order.state),
     };

@@ -35,7 +35,9 @@ const Orders = (): JSX.Element => {
   }, []);
 
   const headers: Headers[] = [
-    { header: 'Fecha', key: 'orderDate' },
+    { header: 'Fecha de pago', key: 'orderDate' },
+    { header: 'Fecha de aprobación', key: 'payAuthDate' },
+    { header: 'Fecha de entrega', key: 'deliverDate' },
     { header: 'Cliente', key: 'client' },
     { header: 'Total', key: 'amounts' },
     { header: 'Estado', key: 'state' },
