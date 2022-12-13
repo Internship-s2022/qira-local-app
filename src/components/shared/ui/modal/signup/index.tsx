@@ -65,7 +65,7 @@ const SignUpForm = () => {
         zipCode: data.zipCode,
         street: data.street,
       },
-      phoneNumber: data.codeArea + data.phoneNumber,
+      phoneNumber: data.codeArea + '-' + data.phoneNumber,
       email: data.email,
       password: data.password,
       isActive: true,

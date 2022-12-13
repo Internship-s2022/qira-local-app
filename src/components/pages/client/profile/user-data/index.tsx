@@ -16,11 +16,12 @@ import { updateUserData } from './validations';
 const UserData = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const currentUser = useSelector((state: RootState) => state.auth.user);
+
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       email: currentUser?.email,
-      codeArea: currentUser?.phoneNumber.substring(0, 3),
-      phoneNumber: currentUser?.phoneNumber.substring(3),
+      codeArea: currentUser?.phoneNumber.split('-').at(0),
+      phoneNumber: currentUser?.phoneNumber.split('-').at(1),
     },
     resolver: joiResolver(updateUserData),
     mode: 'onBlur',
@@ -29,13 +30,13 @@ const UserData = (): JSX.Element => {
   const phoneNumberInput = watch('phoneNumber');
 
   const disabledBtn = useMemo(() => {
-    return currentUser.phoneNumber === codeAreaInput + phoneNumberInput;
+    return currentUser.phoneNumber === codeAreaInput + '-' + phoneNumberInput;
   }, [currentUser, codeAreaInput, phoneNumberInput]);
 
   const onSubmit = async (data) => {
     const modalOptions: Options = {};
     const response = await dispatch(
-      updateClientInformation({ phoneNumber: data.codeArea + data.phoneNumber }),
+      updateClientInformation({ phoneNumber: data.codeArea + '-' + data.phoneNumber }),
     );
     if (response) {
       if (response.type === 'UPDATE_CLIENT_INFORMATION_SUCCESS') {

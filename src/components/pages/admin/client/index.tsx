@@ -36,8 +36,8 @@ const ClientForm = (): JSX.Element => {
     if (selectedClient?.email) {
       reset({
         email: selectedClient?.email,
-        codeArea: selectedClient?.phoneNumber.substring(0, 3),
-        phoneNumber: selectedClient?.phoneNumber.substring(3, 10),
+        codeArea: selectedClient?.phoneNumber.split('-').at(0),
+        phoneNumber: selectedClient?.phoneNumber.split('-').at(1),
         businessName: selectedClient?.businessName,
         cuit: selectedClient?.cuit,
         ivaCondition: selectedClient?.ivaCondition,
@@ -81,7 +81,7 @@ const ClientForm = (): JSX.Element => {
   const formatDataFunction = (data) => {
     const dataFormated = {
       email: data.email,
-      phoneNumber: data.codeArea + data.phoneNumber,
+      phoneNumber: data.codeArea + '-' + data.phoneNumber,
       businessName: data.businessName,
       cuit: data.cuit,
       ivaCondition: data.ivaCondition,
