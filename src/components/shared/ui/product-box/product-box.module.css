@@ -20,6 +20,10 @@
   right: 8px;
 }
 
+.delete:hover {
+  cursor: pointer;
+}
+
 .firstRowContainer {
   display: flex;
   justify-content: flex-start;
