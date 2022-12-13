@@ -32,6 +32,19 @@ In the project directory, you can run:
 - Run `yarn lint` to check the lint.
 - Run `yarn lint:fix` to fix all the lint issues and format with prettier.
 
+## Running WDIO Tests
+To execute the tests, use the following command:
+
+`yarn wdio-test`
+
+After running the test, a report is generated with Allure, to visualize this report use the following command:
+
+`yarn allure-report`
+
+To delete the files related to the report use the following command:
+
+`yarn pretest`
+
 ## Basic structure and configurations
 
 ```

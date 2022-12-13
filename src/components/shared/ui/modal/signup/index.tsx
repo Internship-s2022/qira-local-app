@@ -264,11 +264,12 @@ const SignUpForm = () => {
           variant="contained"
           className={styles.signUpBtn}
           onClick={handleSubmit(onSubmit)}
+          data-testid="signup-btn"
         >
           Crear cuenta
         </Button>
       )}
-      <div className={styles.loginContainer}>
+      <div className={styles.loginContainer} data-testid="back-login">
         <AccountCircleOutlined color="primary" />
         <p className={styles.loginText} onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>
           ¿Ya estás registrado? Inicia sesión.
