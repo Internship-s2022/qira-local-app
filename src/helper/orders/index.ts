@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 import { OrderState } from 'src/types';
 
 export const formatOrders = (data) => {
@@ -5,7 +7,7 @@ export const formatOrders = (data) => {
     return {
       id: order._id,
       client: order.client.businessName,
-      orderDate: order.orderDate.split('T').at(0),
+      orderDate: formatDate(order.orderDate),
       amounts: '$ ' + order.amounts.total.toFixed(2),
       state: formatOrderStateText(order.state),
     };
@@ -30,4 +32,11 @@ export const formatOrderStateText = (state: OrderState) => {
       break;
   }
   return orderState;
+};
+
+export const formatDate = (date?: string | Date) => {
+  if (date) {
+    const newDate = new Date(date);
+    return format(newDate, 'dd/MM/yyyy');
+  }
 };
