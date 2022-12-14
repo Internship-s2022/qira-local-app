@@ -7,4 +7,5 @@ export type InputProps<TValuesForm> = UseControllerProps<TValuesForm> &
 
 export interface CustomProps {
   optionalLabel?: string;
+  tooltipText?: string;
 }
