@@ -83,6 +83,9 @@ const SignUpForm = () => {
       modalOptions.onCloseCallback = () => dispatch(closeModal());
       reset();
     }
+    if (response.payload.message === 'The email address is already in use by another account.') {
+      modalOptions.message = 'La cuenta de email que intenta registrar ya existe.';
+    }
     if (!modalOptions.message) {
       modalOptions.message = 'Ha ocurrido un error';
     }
