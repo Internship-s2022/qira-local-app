@@ -28,15 +28,15 @@ const ShoppingCart = (): JSX.Element => {
     dispatch(closeCart());
     if (token && userRole === UserRole.CLIENT) {
       navigate('/order/summary');
-    } else {
-      if (UserRole.ADMIN === userRole) {
-        dispatch(resetState());
-      }
+    } else if (UserRole.ADMIN === userRole) {
+      dispatch(resetState());
       dispatch(
         openModal(ModalTypes.INFO, {
           message: 'Las compras pueden ser realizadas sólo por clientes.',
         }),
       );
+    } else {
+      dispatch(openModal(ModalTypes.LOGIN));
     }
   };
 
