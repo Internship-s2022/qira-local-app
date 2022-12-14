@@ -141,7 +141,6 @@ const CategoryForm = (): JSX.Element => {
               name="url"
               type="text"
               optionalLabel="URL *"
-              optionalTooltip={true}
               tooltipText={
                 'La URL debe contener sólo palabras en minúscula y separadas por un guión (-).'
               }

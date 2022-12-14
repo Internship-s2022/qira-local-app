@@ -13,7 +13,6 @@ export const InputText = <TValuesForm extends FieldValues>({
   optionalLabel,
   className,
   tooltipText,
-  optionalTooltip,
   ...props
 }: InputProps<TValuesForm>): JSX.Element => {
   const {
@@ -26,7 +25,7 @@ export const InputText = <TValuesForm extends FieldValues>({
         <label htmlFor={optionalLabel} data-testid={`${name}-label`}>
           {optionalLabel}
         </label>
-        {optionalTooltip && (
+        {tooltipText && (
           <Tooltip title={tooltipText} placement="right" arrow>
             <HelpOutline color="primary" />
           </Tooltip>
