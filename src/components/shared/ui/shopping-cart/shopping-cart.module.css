@@ -37,12 +37,22 @@
   background-color: white;
 }
 
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+}
+
 .title {
   align-self: flex-start;
   margin-left: 15px;
   font-size: 16px;
   font-weight: 600;
   color: #000000;
+}
+
+.deleteIcon:hover {
+  color: #f05523;
 }
 
 .productsContainer {

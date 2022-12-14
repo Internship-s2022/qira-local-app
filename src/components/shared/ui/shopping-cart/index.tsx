@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Close, ShoppingCartOutlined } from '@mui/icons-material';
-import { Box, Button, Modal } from '@mui/material';
+import { Close, Delete, ShoppingCartOutlined } from '@mui/icons-material';
+import { Box, Button, IconButton, Modal, Tooltip } from '@mui/material';
 
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { closeCart } from 'src/redux/shopping-cart/actions';
+import { closeCart, resetState } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
@@ -46,7 +46,14 @@ const ShoppingCart = (): JSX.Element => {
         <div className={styles.mainContainer}>
           {shoppingCartProducts.length >= 1 ? (
             <>
-              <p className={styles.title}>Productos ({shoppingCartProducts.length})</p>
+              <div className={styles.titleContainer}>
+                <p className={styles.title}>Productos ({shoppingCartProducts.length})</p>
+                <Tooltip title={'Vaciar carrito'} placement="right">
+                  <IconButton onClick={() => dispatch(resetState())}>
+                    <Delete className={styles.deleteIcon} />
+                  </IconButton>
+                </Tooltip>
+              </div>
               <div className={styles.productsContainer}>
                 {shoppingCartProducts.map((product) => (
                   <ProductBox key={product.product._id} product={product.product} />
