@@ -1,7 +1,9 @@
 import React from 'react';
 import { FieldValues, useController } from 'react-hook-form';
-import { TextField } from '@mui/material';
+import { HelpOutline } from '@mui/icons-material';
+import { TextField, Tooltip } from '@mui/material';
 
+import styles from './input.module.css';
 import { InputProps } from './types';
 
 export const InputText = <TValuesForm extends FieldValues>({
@@ -10,6 +12,8 @@ export const InputText = <TValuesForm extends FieldValues>({
   defaultValue,
   optionalLabel,
   className,
+  tooltipText,
+  optionalTooltip,
   ...props
 }: InputProps<TValuesForm>): JSX.Element => {
   const {
@@ -18,10 +22,15 @@ export const InputText = <TValuesForm extends FieldValues>({
   } = useController({ name, control, defaultValue });
   return (
     <div className={className}>
-      <div>
+      <div className={styles.labelContainer}>
         <label htmlFor={optionalLabel} data-testid={`${name}-label`}>
           {optionalLabel}
         </label>
+        {optionalTooltip && (
+          <Tooltip title={tooltipText} placement="right" arrow>
+            <HelpOutline color="primary" />
+          </Tooltip>
+        )}
       </div>
       <div>
         <TextField
