@@ -95,7 +95,7 @@ export const signUpValidations = Joi.object({
     .regex(/^[0-9\-+]{4}$/)
     .required()
     .messages({
-      'string.pattern.base': 'Debe contener solo 4 dígitos.',
+      'string.pattern.base': 'Debe contener 4 dígitos.',
       'string.empty': 'Campo requerido.',
     }),
   street: Joi.string()
