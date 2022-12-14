@@ -128,6 +128,7 @@ const CategoryForm = (): JSX.Element => {
         <div className={styles.columnsContainer}>
           <div className={styles.inputsContainer}>
             <InputText
+              className={styles.input}
               control={control}
               name="name"
               type="text"
@@ -137,6 +138,7 @@ const CategoryForm = (): JSX.Element => {
               size="small"
             />
             <InputText
+              className={styles.input}
               control={control}
               name="url"
               type="text"
