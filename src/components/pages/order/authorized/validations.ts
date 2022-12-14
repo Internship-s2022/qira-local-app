@@ -26,14 +26,14 @@ export const AuthorizedValidations = Joi.object({
         .required()
         .messages({
           'string.empty': 'Campo requerido.',
-          'string.pattern.base': 'Debe contener 7-8 caracteres númericos.',
+          'string.pattern.base': 'Debe contener 7-8 dígitos.',
         }),
       phoneNumber: Joi.string()
         .regex(/^[0-9\-+]{8,11}$/)
         .required()
         .messages({
           'string.empty': 'Campo requerido.',
-          'string.pattern.base': 'Debe contener 8-11 caracteres númericos.',
+          'string.pattern.base': 'Debe contener 8-11 dígitos.',
         }),
     }),
   ),
