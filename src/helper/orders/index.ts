@@ -12,7 +12,7 @@ export const formatOrders = (data) => {
       orderDate: formatDate(order.orderDate),
       payAuthDate: formatDate(order.payAuthDate),
       deliverDate: formatDate(order.deliverDate),
-      amounts: '$ ' + order.amounts.total.toFixed(2),
+      amounts: '$' + order.amounts.total.toFixed(2),
       state: formatOrderStateText(order.state),
     };
   });

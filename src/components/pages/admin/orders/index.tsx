@@ -39,7 +39,7 @@ const Orders = (): JSX.Element => {
     { header: 'Fecha de aprobación', key: 'payAuthDate' },
     { header: 'Fecha de entrega', key: 'deliverDate' },
     { header: 'Cliente', key: 'client' },
-    { header: 'Total', key: 'amounts' },
+    { header: 'Importe (ARS)', key: 'amounts' },
     { header: 'Estado', key: 'state' },
   ];
 
