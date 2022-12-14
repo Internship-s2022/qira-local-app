@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { CancelOutlined, ShoppingCartOutlined } from '@mui/icons-material';
+import { CancelOutlined, Close, ShoppingCartOutlined } from '@mui/icons-material';
 
 import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { RootState } from 'src/redux/store';
@@ -14,7 +14,7 @@ export const FinalScreen = (): JSX.Element => {
   const error = useSelector((state: RootState) => state.orders.error);
 
   useEffect(() => {
-    setTimeout(() => navigate('/'), 10000);
+    setTimeout(() => navigate('/'), 5000);
   }, []);
 
   return (
@@ -33,6 +33,7 @@ export const FinalScreen = (): JSX.Element => {
           <QiraLoader />
         ) : (
           <div className={styles.infoContainer}>
+            <Close className={styles.close} onClick={() => navigate('/')} />
             {error ? (
               <>
                 <CancelOutlined className={styles.cartLogo} />
