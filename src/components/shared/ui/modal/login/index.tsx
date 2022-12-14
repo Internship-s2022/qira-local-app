@@ -57,19 +57,16 @@ export const LoginModal = () => {
     const modalOptions: Options = {};
     const response = await dispatch(login(User));
     if (response.type === AuthActions.LOGIN_SUCCESS) {
-      modalOptions.message = 'Sesión iniciada exitosamente.';
-      modalOptions.onCloseCallback = () => {
-        dispatch(closeModal());
-        if (response.payload.role === UserRole.ADMIN) {
-          navigate('/admin/orders');
-        }
-      };
+      dispatch(closeModal());
+      if (response.payload.role === UserRole.ADMIN) {
+        navigate('/admin/orders');
+      }
     }
-    if (!modalOptions.message) {
+    if (response.type === AuthActions.LOGIN_ERROR) {
+      dispatch(openModal(ModalTypes.INFO, modalOptions));
       modalOptions.message = 'Usuario o contraseña incorrecta.';
       modalOptions.onCloseCallback = () => dispatch(openModal(ModalTypes.LOGIN));
     }
-    dispatch(openModal(ModalTypes.INFO, modalOptions));
   };
 
   return (
