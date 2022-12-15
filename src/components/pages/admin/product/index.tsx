@@ -1,3 +1,4 @@
+import Dinero from 'dinero.js';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,7 +48,7 @@ const ProductForm = (): JSX.Element => {
     defaultValues: {
       name: '',
       description: '',
-      price: '',
+      price: undefined,
       image: undefined,
       technicalFile: undefined,
       brand: '',
@@ -80,7 +81,7 @@ const ProductForm = (): JSX.Element => {
       reset({
         name: product.name,
         description: product.description,
-        price: product.price.toString(),
+        price: parseFloat(Dinero({ amount: product.price }).toFormat('0.00')),
         image: {
           url: product.image.url,
           isNew: false,
@@ -139,7 +140,7 @@ const ProductForm = (): JSX.Element => {
     const submitData = {
       name: data.name,
       description: data.description,
-      price: data.price,
+      price: Dinero({ amount: data.price * 100 }).getAmount(),
       image: imageToSend,
       technicalFile: pdfToSend,
       brand: data.brand,

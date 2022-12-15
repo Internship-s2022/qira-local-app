@@ -1,3 +1,4 @@
+import Dinero from 'dinero.js';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Add, Close, Remove } from '@mui/icons-material';
@@ -18,8 +19,10 @@ import { ProductBoxProps } from './types';
 
 const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
-  const dollarRate = 160;
+  const exchangeRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate?.value);
   const productQuantity = useSelector((state: RootState) => getProductQuantity(state, product._id));
+
+  const dollarRate = exchangeRate ? parseFloat(exchangeRate) : 0;
 
   return (
     <div className={styles.container}>
@@ -66,7 +69,11 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
         <div className={styles.priceContainer}>
           <p className={styles.priceText}>
             {product.currency === Currency.DOLLAR
-              ? 'AR$ ' + (product.price * productQuantity * dollarRate).toFixed(2)
+              ? 'AR$ ' +
+                Dinero({ amount: product.price })
+                  .multiply(productQuantity)
+                  .multiply(dollarRate)
+                  .toFormat('0,0.00')
               : formatPriceText(product, productQuantity)}
           </p>
           <p className={styles.ivaText}> + IVA</p>

@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import Dinero from 'dinero.js';
 
 import { OrderState } from 'src/types';
 
@@ -12,7 +13,7 @@ export const formatOrders = (data) => {
       orderDate: formatDate(order.orderDate),
       payAuthDate: formatDate(order.payAuthDate),
       deliverDate: formatDate(order.deliverDate),
-      amounts: '$' + order.amounts.total.toFixed(2),
+      amounts: Dinero({ amount: Math.round(order.amounts.total) }).toFormat('$0,0.00'),
       state: formatOrderStateText(order.state),
     };
   });
