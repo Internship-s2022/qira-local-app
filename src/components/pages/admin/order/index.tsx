@@ -59,7 +59,7 @@ const OrderDetails = (): JSX.Element => {
         dispatch(closeModal());
       };
     } else if (response?.type === Actions.APPROVE_ORDER_SUCCESS) {
-      modalOptions.message = 'Orden aprobada exitosamente.';
+      modalOptions.message = 'Órden aprobada exitosamente.';
       modalOptions.onCloseCallback = () => {
         dispatch(closeModal());
       };
@@ -80,7 +80,7 @@ const OrderDetails = (): JSX.Element => {
         dispatch(closeModal());
       };
     } else if (response?.type === Actions.DELIVER_ORDER_SUCCESS) {
-      modalOptions.message = 'Orden entregada exitosamente.';
+      modalOptions.message = 'Órden entregada exitosamente.';
       modalOptions.onCloseCallback = () => {
         dispatch(closeModal());
       };
@@ -98,7 +98,7 @@ const OrderDetails = (): JSX.Element => {
         dispatch(closeModal());
       };
     } else if (response?.type === Actions.REJECT_ORDER_SUCCESS) {
-      modalOptions.message = 'Orden rechazada exitosamente.';
+      modalOptions.message = 'Órden rechazada exitosamente.';
       modalOptions.onCloseCallback = () => {
         dispatch(closeModal());
       };
