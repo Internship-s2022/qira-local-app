@@ -55,13 +55,7 @@ export const SharedModal = (): JSX.Element => {
   const handleConfirm = options?.onCloseCallback || (() => dispatch(closeModal()));
 
   return (
-    <Modal
-      className={style.modal}
-      open={open}
-      onClose={() => {
-        dispatch(closeModal());
-      }}
-    >
+    <Modal className={style.modal} open={open} onClose={handleConfirm}>
       <Box className={style.container}>
         <Close onClick={handleConfirm} className={style.closeModal} data-testid="cross-modal" />
         {modalComponent}

@@ -69,8 +69,6 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
     case Actions.SET_TOKEN:
       return {
         ...state,
-        isFetching: false,
-        error: false,
         token: action.payload.token,
         role: action.payload.role,
       };
