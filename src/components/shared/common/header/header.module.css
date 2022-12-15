@@ -224,7 +224,11 @@
   }
 
   .userIcon {
-    font-size: 30px;
+    font-size: 40px;
+  }
+
+  .shoppingCart {
+    font-size: 40px;
   }
 
   .menu {
@@ -318,13 +322,5 @@
   .navBarContainer {
     justify-content: space-between;
     height: 20px;
-  }
-
-  .userIcon {
-    font-size: 40px;
-  }
-
-  .shoppingCart {
-    font-size: 40px;
   }
 }
