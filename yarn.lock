@@ -2915,6 +2915,11 @@
   resolved "https://registry.yarnpkg.com/@types/diff/-/diff-5.0.2.tgz#dd565e0086ccf8bc6522c6ebafd8a3125c91c12b"
   integrity sha512-uw8eYMIReOwstQ0QKF0sICefSy8cNO/v7gOTiIy9SbwuHyEecJUm7qlgueOO5S1udZ5I/irVydHVwMchgzbKTg==
 
+"@types/dinero.js@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@types/dinero.js/-/dinero.js-1.9.0.tgz#e11356764339e3d361d38bd54910282b106dc321"
+  integrity sha512-H2XdE6N/A2wJ/TJhGqeHDMUhCaey2R/Lcq9ichGBncKsFGvqrroXZWPNdDkCcgQOBPoCD4n9QuSBUC/35wuJiw==
+
 "@types/easy-table@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/easy-table/-/easy-table-1.2.0.tgz#d7153551a2c3f6571dddff974b05aa2fb1a4a948"
