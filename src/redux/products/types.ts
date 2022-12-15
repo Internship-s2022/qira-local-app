@@ -38,7 +38,7 @@ export interface ProductToSend {
   brand: string;
   category: string;
   currency: string;
-  stock: number;
+  stock: string;
   isNew: boolean;
 }
 

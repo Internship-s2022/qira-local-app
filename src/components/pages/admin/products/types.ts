@@ -3,7 +3,7 @@ export interface FormattedProduct {
   category: string;
   name: string;
   currency: string;
-  price: number;
+  price: string;
   stock: number;
   isActive: boolean;
   logicDelete: boolean;
