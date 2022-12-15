@@ -44,7 +44,7 @@ export const updateClientValidations = Joi.object({
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener solo 11 dígitos.',
+      'string.pattern.base': 'Debe contener 11 dígitos.',
     }),
   ivaCondition: Joi.string()
     .valid(
@@ -76,7 +76,7 @@ export const updateClientValidations = Joi.object({
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Puede contener letras y números.',
+      'string.pattern.base': 'La localidad es inválida.',
     }),
   zipCode: Joi.string()
     .regex(/^[0-9\-+]{4}$/)
