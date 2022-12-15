@@ -2,8 +2,8 @@
   position: relative;
   width: max-content;
   max-height: 90vh;
-  padding: 0.5rem;
-  overflow-y: hidden;
+  padding: 10px;
+  overflow-y: auto;
   background-color: white;
   border-radius: 5px;
   outline: none;
