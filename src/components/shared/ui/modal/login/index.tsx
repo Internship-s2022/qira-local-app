@@ -11,7 +11,6 @@ import { login } from 'src/redux/auth/thunks';
 import { Actions as AuthActions } from 'src/redux/auth/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes, Options } from 'src/redux/modal/types';
-import { closeSidebar } from 'src/redux/sidebar/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
 

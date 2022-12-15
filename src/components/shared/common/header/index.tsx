@@ -53,7 +53,6 @@ const Header = () => {
       height: '17px',
     },
   }));
-  console.log(location.pathname);
   return (
     <header className={styles.headerContainer}>
       <div className={styles.navBarContainer}>
