@@ -33,6 +33,7 @@ const ProductForm = (): JSX.Element => {
   const navigate = useNavigate();
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
   const product = useSelector((state: RootState) => state.products.selectedProduct);
+  const products = useSelector((state: RootState) => state.products.products);
   const categoryOptions = useSelector(getCategoryOptions);
 
   const {
@@ -97,7 +98,16 @@ const ProductForm = (): JSX.Element => {
     }
   }, [product]);
 
+  const duplicatedProduct = (data: ProductFormValues) => {
+    return products.some((product) => product.name === data.name && product.brand === data.brand);
+  };
+
   const onSubmit = async (data: ProductFormValues) => {
+    if (duplicatedProduct(data)) {
+      return dispatch(
+        openModal(ModalTypes.INFO, { message: 'El producto que intenta crear ya existe.' }),
+      );
+    }
     const image = data.image;
     let imageToSend: FileToSend;
     if (image?.isNew) {

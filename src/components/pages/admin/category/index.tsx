@@ -25,6 +25,7 @@ const CategoryForm = (): JSX.Element => {
   const params = useParams();
   const navigate = useNavigate();
   const category = useSelector((state: RootState) => state.categories.selectedCategory);
+  const categories = useSelector((state: RootState) => state.categories.categories);
   const {
     handleSubmit,
     control,
@@ -63,7 +64,16 @@ const CategoryForm = (): JSX.Element => {
     }
   }, [category]);
 
+  const duplcatedCategory = (data: CategoryFormValues) => {
+    return categories.some((category) => category.name === data.name || category.url === data.url);
+  };
+
   const onSubmit = async (data: CategoryFormValues) => {
+    if (duplcatedCategory(data)) {
+      return dispatch(
+        openModal(ModalTypes.INFO, { message: 'La categoría que intenta crear ya existe.' }),
+      );
+    }
     const image = data.image;
     let imageToSend: ImageToSend;
     if (image?.isNew) {
