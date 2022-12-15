@@ -33,13 +33,13 @@
 .titleContainer {
   display: flex;
   justify-content: space-between;
-  border-bottom: solid #f05523 1.5px;
+  border-bottom: solid black 1.5px;
 }
 
 .title {
   margin-left: 15px;
   font-size: 30px;
-  color: #f05523;
+  color: black;
 }
 
 .container {
