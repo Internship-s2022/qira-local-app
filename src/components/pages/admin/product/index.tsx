@@ -48,7 +48,7 @@ const ProductForm = (): JSX.Element => {
     defaultValues: {
       name: '',
       description: '',
-      price: '',
+      price: undefined,
       image: undefined,
       technicalFile: undefined,
       brand: '',
