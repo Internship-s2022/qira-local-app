@@ -21,8 +21,12 @@ const Orders = (): JSX.Element => {
   const navigate = useNavigate();
   const isFetching = useSelector((state: RootState) => state.orders.isFetching);
   const filteredOrderList = useSelector((state: RootState) => getOrdersFilteredByState(state));
+  const filterState = useSelector((state: RootState) => state.orders.filterState);
 
   const clickHandler = (param) => {
+    if (param === filterState) {
+      return dispatch(setFilterStateAction(undefined));
+    }
     dispatch(setFilterStateAction(param));
   };
 
@@ -31,9 +35,11 @@ const Orders = (): JSX.Element => {
   }, []);
 
   const headers: Headers[] = [
-    { header: 'Fecha', key: 'orderDate' },
+    { header: 'Fecha de pago', key: 'orderDate' },
+    { header: 'Fecha de aprobación', key: 'payAuthDate' },
+    { header: 'Fecha de entrega', key: 'deliverDate' },
     { header: 'Cliente', key: 'client' },
-    { header: 'Total', key: 'amounts' },
+    { header: 'Importe (ARS)', key: 'amounts' },
     { header: 'Estado', key: 'state' },
   ];
 
@@ -55,7 +61,7 @@ const Orders = (): JSX.Element => {
         <div className={styles.btnContainer}>
           <Button
             className={styles.btn}
-            variant="contained"
+            variant={filterState === 'APPROVE_PENDING' ? 'contained' : 'outlined'}
             onClick={() => {
               clickHandler(OrderState.APPROVE_PENDING);
             }}
@@ -64,7 +70,7 @@ const Orders = (): JSX.Element => {
           </Button>
           <Button
             className={styles.btn}
-            variant="contained"
+            variant={filterState === 'DELIVERY_PENDING' ? 'contained' : 'outlined'}
             onClick={() => {
               clickHandler(OrderState.DELIVERY_PENDING);
             }}
@@ -73,7 +79,7 @@ const Orders = (): JSX.Element => {
           </Button>
           <Button
             className={styles.btn}
-            variant="contained"
+            variant={filterState === 'DELIVERED' ? 'contained' : 'outlined'}
             onClick={() => {
               clickHandler(OrderState.DELIVERED);
             }}
@@ -82,7 +88,7 @@ const Orders = (): JSX.Element => {
           </Button>
           <Button
             className={styles.btn}
-            variant="contained"
+            variant={filterState === 'REJECTED' ? 'contained' : 'outlined'}
             onClick={() => {
               clickHandler(OrderState.REJECTED);
             }}
