@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   AccountCircle,
+  ArrowBack,
   InfoOutlined,
   KeyboardArrowDown,
   MenuOutlined,
   Search,
   ShoppingCart,
 } from '@mui/icons-material';
-import { Badge, BadgeProps, styled } from '@mui/material';
+import { Badge, BadgeProps, styled, Tooltip } from '@mui/material';
 
 import * as thunksCategories from 'src/redux/category/thunk';
 import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
@@ -61,7 +62,13 @@ const Header = () => {
           {exchangeRate && (
             <>
               <p className={styles.exchangeRate}>{`ARS ${exchangeRate?.value}`}</p>
-              <InfoOutlined className={styles.infoIcon} />
+              <Tooltip
+                title={`La fecha de cotizacion es: ${exchangeRate.date}`}
+                placement="right"
+                arrow
+              >
+                <InfoOutlined className={styles.infoIcon} />
+              </Tooltip>
             </>
           )}
         </div>
@@ -85,6 +92,14 @@ const Header = () => {
                       location.pathname.includes('/profile') ? styles.menuOnProfile : styles.menu
                     }
                   />
+                  <ArrowBack
+                    onClick={() => navigate('/')}
+                    className={
+                      location.pathname.includes('/profile')
+                        ? styles.arrowBackOnProfile
+                        : styles.arrowBack
+                    }
+                  ></ArrowBack>
                 </div>
               )}
               <div onClick={() => dispatch(closeSidebar())}>

@@ -7,31 +7,29 @@
   display: flex;
   width: 100%;
   height: 30px;
-  margin: auto;
   background-color: white;
-}
-
-.logoQira {
-  height: 45px;
-  margin: 12px 20px;
 }
 
 .currency {
   display: flex;
+  gap: 5px;
   align-self: center;
-  margin-left: 105px;
+  margin-left: 5%;
   font-size: 16px;
   color: #f05523;
 }
 
+.currency p {
+  margin: 0;
+}
+
 .exchangeRate {
-  margin-left: 5px;
+  margin-left: 0;
   font-weight: bold;
 }
 
 .infoIcon {
   align-self: center;
-  margin-left: 5px;
   font-size: 18px;
 }
 
@@ -48,6 +46,11 @@
   margin: auto;
 }
 
+.logoQira {
+  height: 45px;
+  margin: 12px 20px;
+}
+
 .searchContainer {
   display: flex;
   gap: 20px;
@@ -56,7 +59,7 @@
 .searchBar {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 300px;
   padding: 6px;
   background-color: white;
@@ -135,14 +138,17 @@
 
 .profileContainer {
   display: flex;
+  gap: 10px;
   align-items: center;
+}
+
+.pLogin {
+  font-size: 18px;
 }
 
 .btnLogin {
   display: flex;
   align-items: center;
-  width: 150px;
-  padding: 8px 10px;
 }
 
 .btnLogin :hover {
@@ -157,20 +163,16 @@
 
 .userIcon {
   margin-right: 5px;
+  font-size: 32px;
 }
 
 .userName {
-  font-size: 16px;
+  font-size: 18px;
   color: white;
   text-decoration: none;
 }
 
-.shoppingCartContainer {
-  margin: 0;
-}
-
 .shoppingCart {
-  padding: 0 4px;
   font-size: 32px;
   color: white;
 }
@@ -183,7 +185,61 @@
   display: none;
 }
 
-@media screen and (max-width: 678px) {
+.arrowBack {
+  display: none;
+}
+@media screen and (max-width: 1024px) {
+  .logoQira {
+    display: none;
+  }
+
+  .menuAndLogoContainer {
+    display: flex;
+  }
+
+  .logoQ {
+    width: 50px;
+    color: white;
+  }
+
+  .arrowBack {
+    display: none;
+  }
+
+  .arrowBackOnProfile {
+    display: none;
+  }
+
+  .pLogin {
+    display: none;
+  }
+
+  .userName {
+    display: none;
+  }
+
+  .btnLogin {
+    display: flex;
+    width: fit-content;
+  }
+
+  .userIcon {
+    font-size: 30px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .menuOnProfile {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .mainHeader {
+    gap: 10px;
+  }
+
   .currency {
     margin-left: 30px;
     font-size: 12px;
@@ -197,11 +253,20 @@
     display: none;
   }
 
+  .arrowBackOnProfile {
+    display: flex;
+    margin-top: 5px;
+    font-size: 40px;
+    color: white;
+  }
+
+  .arrowBackOnProfile:hover {
+    cursor: pointer;
+  }
+
   .menuAndLogoContainer {
     display: flex;
     gap: 10px;
-    justify-content: center;
-    width: 100px;
   }
 
   .logoQ {
@@ -210,7 +275,7 @@
   }
 
   .menu {
-    margin-left: 20px;
+    display: flex;
     font-size: 50px;
     color: white;
   }
@@ -221,20 +286,20 @@
 
   .searchBar {
     display: flex;
+    justify-content: space-between;
     width: fit-content;
+    height: 40px;
     padding: 0;
-    margin: 0 0 0 20px;
+    margin: 0;
   }
 
   .searchBar input {
     align-self: center;
-    width: 180px;
-    height: 40px;
-    margin: 0 0 0 10px;
+    width: 80%;
+    margin: 0 0 0 5px;
   }
 
   .searchBar input::placeholder {
-    margin-left: 10px;
     font-size: 14px;
   }
 
@@ -256,7 +321,7 @@
   }
 
   .userIcon {
-    font-size: 50px;
+    font-size: 40px;
   }
 
   .shoppingCart {
