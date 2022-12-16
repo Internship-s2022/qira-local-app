@@ -26,6 +26,7 @@ const CategoryForm = (): JSX.Element => {
   const navigate = useNavigate();
   const category = useSelector((state: RootState) => state.categories.selectedCategory);
   const categories = useSelector((state: RootState) => state.categories.categories);
+  const categoriesNotSelected = categories.filter((item) => item?._id !== category?._id);
   const {
     handleSubmit,
     control,
@@ -64,12 +65,14 @@ const CategoryForm = (): JSX.Element => {
     }
   }, [category]);
 
-  const duplcatedCategory = (data: CategoryFormValues) => {
-    return categories.some((category) => category.name === data.name || category.url === data.url);
+  const duplicatedCategory = (data: CategoryFormValues) => {
+    return categoriesNotSelected.some(
+      (category) => category.name === data.name || category.url === data.url,
+    );
   };
 
   const onSubmit = async (data: CategoryFormValues) => {
-    if (duplcatedCategory(data)) {
+    if (duplicatedCategory(data)) {
       return dispatch(
         openModal(ModalTypes.INFO, { message: 'La categoría que intenta crear ya existe.' }),
       );
