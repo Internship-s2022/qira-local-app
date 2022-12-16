@@ -36,6 +36,7 @@ const ProductForm = (): JSX.Element => {
   const product = useSelector((state: RootState) => state.products.selectedProduct);
   const products = useSelector((state: RootState) => state.products.products);
   const categoryOptions = useSelector(getCategoryOptions);
+  const productsNotSelected = products.filter((item) => item?._id !== product?._id);
 
   const {
     handleSubmit,
@@ -100,7 +101,9 @@ const ProductForm = (): JSX.Element => {
   }, [product]);
 
   const duplicatedProduct = (data: ProductFormValues) => {
-    return products.some((product) => product.name === data.name && product.brand === data.brand);
+    return productsNotSelected.some(
+      (product) => product.name === data.name && product.brand === data.brand,
+    );
   };
 
   const onSubmit = async (data: ProductFormValues) => {
