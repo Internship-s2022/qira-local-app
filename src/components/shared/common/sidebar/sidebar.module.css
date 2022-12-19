@@ -79,6 +79,10 @@
   background-color: var(--color-primary-dark);
 }
 
+.linkSelected {
+  background-color: var(--color-primary-dark);
+}
+
 .arrowTab {
   display: flex;
   align-items: center;

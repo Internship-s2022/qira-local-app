@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import { breadcrumbsClasses, Button } from '@mui/material';
 
 import { logout } from 'src/redux/auth/thunks';
 import { closeModal, openModal } from 'src/redux/modal/actions';
@@ -14,6 +14,23 @@ import { SidebarProps } from './types';
 
 const Sidebar = (props: SidebarProps): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+
+  const routeComparation = () => {
+    switch (location.pathname) {
+      case 'admin/orders':
+        console.log('ruta:', location.pathname);
+        return 'Ordenes de compra';
+      case 'admin/clients':
+        return 'Clientes';
+      case 'admin/products':
+        return 'Productos';
+      case 'admin/categories':
+        return 'Categorias';
+      case '/admin/deliver':
+        return 'Entregar pedido';
+    }
+  };
+
   return (
     <aside className={styles.aside}>
       <div className={styles.container}>
@@ -34,7 +51,9 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
                       {link.title}
                     </li>
                   ) : (
-                    <li>{link.title}</li>
+                    <li className={routeComparation() === link.title ? styles.linkSelected : ''}>
+                      {link.title}
+                    </li>
                   )}
                 </NavLink>
               );
