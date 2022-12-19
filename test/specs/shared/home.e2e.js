@@ -7,10 +7,11 @@ import Footer from '../../page-objects/footer.page';
 describe('Testing Home', () => {
   beforeAll('Open browser', async () => {
     await Header.openBrowser();
+    await browser.setWindowSize(1366, 768);
   });
   describe('Testing Header', () => {
     it('Window tab', async () => {
-      await expect(HomeContent.featuredCategories).toHaveTitle('Qira Local');
+      await expect(browser).toHaveTitle('Qira Local');
     });
     it('Qira logo redirection', async () => {
       await expect(HomeContent.featuredCategories).toHaveTitle('Qira Local');
@@ -23,7 +24,8 @@ describe('Testing Home', () => {
     });
     it('Exchange information', async () => {
       await expect(Header.exchangeInfo).toExist();
-      await expect(Header.exchangeInfo).toHaveTextContaining('Tipo de cambio');
+      const exchangeValue = await Header.getExchange();
+      await expect(Header.exchangeInfo).toHaveText('Tipo de cambio', `${exchangeValue}`);
     });
     it('Categories dropdown', async () => {
       await expect(Header.btnCategories).toExist();
@@ -49,7 +51,7 @@ describe('Testing Home', () => {
     });
     it('Login button functionality', async () => {
       await expect(Header.loginButton).toExist();
-      await expect(Header.loginButton).toHaveText('Iniciar Sesión');
+      await expect(Header.loginButton).toHaveText('Iniciar sesión');
       await expect(Header.loginButton).toBeClickable();
       await Header.loginButton.click();
       await expect(LoginPage.formContainer).toBeDisplayed();
@@ -63,7 +65,7 @@ describe('Testing Home', () => {
       await expect(ShoppingCart.cartModal).toBeDisplayed();
       await expect(ShoppingCart.cartModal).toHaveTextContaining(
         'Su carrito se encuentra vacío.',
-        'Por favor, seleccione un artículo para empezar.',
+        'Por favor, seleccione un artículo para comenzar.',
       );
       await ShoppingCart.closeModal.click();
       await expect(ShoppingCart.cartModal).not.toBeDisplayed();
@@ -103,9 +105,9 @@ describe('Testing Home', () => {
     it('Featured Categories', async () => {
       await HomeContent.featuredCategories.scrollIntoView();
       await expect(HomeContent.featuredCategoriesTitle).toHaveText('Categorías destacadas');
-      await expect(HomeContent.category).toHaveText('Insecticidas');
-      const hRef = await HomeContent.category.getProperty('href');
-      await expect(HomeContent.category).toHaveHrefContaining('/category/insecticidas');
+      const categoryText = await HomeContent.category.getText();
+      const categoryName = await categoryText.toLowerCase();
+      await expect(HomeContent.category).toHaveHrefContaining(`/category/${categoryName}`);
     });
   });
   describe('Testing footer', () => {
@@ -118,25 +120,25 @@ describe('Testing Home', () => {
       await Footer.socialIconFb.click();
       await browser.switchWindow('Facebook');
       await expect(browser).toHaveUrl('https://www.facebook.com/qira-local');
-      await browser.switchWindow('React App');
+      await browser.switchWindow('Qira Local');
     });
     it('Testing social media icons - Instagram', async () => {
       await Footer.socialIconIg.click();
       await browser.switchWindow('Instagram');
       await expect(browser).toHaveUrl('https://www.instagram.com/qira-local/');
-      await browser.switchWindow('React App');
+      await browser.switchWindow('Qira Local');
     });
     it('Testing social media icons - Twitter', async () => {
       await Footer.socialIconTw.click();
       await browser.switchWindow('Twitter');
       await expect(browser).toHaveUrl('https://twitter.com/radiumrocket');
-      await browser.switchWindow('React App');
+      await browser.switchWindow('Qira Local');
     });
     it('Testing social media icons - Linkedin', async () => {
       await Footer.socialIconIn.click();
       await browser.switchWindow('LinkedIn');
       await expect(browser).toHaveUrl('https://www.linkedin.com/qira-local?_l=en_US');
-      await browser.switchWindow('React App');
+      await browser.switchWindow('Qira Local');
     });
     it('Testing social media icons - WhatsApp', async () => {
       await Footer.socialIconWpp.click();

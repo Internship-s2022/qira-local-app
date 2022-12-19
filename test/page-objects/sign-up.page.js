@@ -1,106 +1,106 @@
 class SignUpPage {
-//Getters
-  get emailInput () {
+  //Getters
+  get emailInput() {
     return $('[data-testid=email-field] input');
   }
-  get emailError () {
+  get emailError() {
     return $('[data-testid=email-field] p');
   }
-  get passwordInput () {
+  get passwordInput() {
     return $('[data-testid=password-field] input');
   }
-  get passwordError () {
+  get passwordError() {
     return $('[data-testid=password-field] p');
   }
-  get repeatPwInput () {
+  get repeatPwInput() {
     return $('[data-testid=repeatPassword-field] input');
   }
-  get repeatPwError () {
+  get repeatPwError() {
     return $('[data-testid=repeatPassword-field] p');
   }
-  get codeAreaInput () {
+  get codeAreaInput() {
     return $('[data-testid=codeArea-field] input');
   }
-  get codeAreaError () {
+  get codeAreaError() {
     return $('[data-testid=codeArea-field] p');
   }
-  get phoneNumberInput () {
+  get phoneNumberInput() {
     return $('[data-testid=phoneNumber-field] input');
   }
-  get phoneNumberError () {
+  get phoneNumberError() {
     return $('[data-testid=phoneNumber-field] p');
   }
-  get businessNameInput () {
+  get businessNameInput() {
     return $('[data-testid=businessName-field] input');
   }
-  get businessNameError () {
+  get businessNameError() {
     return $('[data-testid=businessName-field] p');
   }
-  get ivaConditionInput () {
+  get ivaConditionInput() {
     return $('[data-testid=ivaCondition-select]');
   }
-  get ivaConditionOpt () {
-    return $('[data-testid="3-item"]')
+  get ivaConditionOpt() {
+    return $('[data-testid="3-item"]');
   }
-  get ivaConditionError () {
+  get ivaConditionError() {
     return $('[data-testid=ivaCondition-select] p');
   }
-  get cuitInput () {
+  get cuitInput() {
     return $('[data-testid=cuit-field] input');
   }
-  get cuitError () {
+  get cuitError() {
     return $('[data-testid=cuit-field] p');
   }
-  get streetInput () {
+  get streetInput() {
     return $('[data-testid=street-field] input');
   }
-  get streetError () {
+  get streetError() {
     return $('[data-testid=street-field] p');
   }
-  get zipCodeInput () {
+  get zipCodeInput() {
     return $('[data-testid=zipCode-field] input');
   }
-  get zipCodeError () {
+  get zipCodeError() {
     return $('[data-testid=zipCode-field] p');
   }
-  get cityInput () {
+  get cityInput() {
     return $('[data-testid=city-field] input');
   }
-  get cityError () {
+  get cityError() {
     return $('[data-testid=city-field] p');
   }
-  get provinceInput () {
+  get provinceInput() {
     return $('[data-testid=province-field] input');
   }
-  get provinceError () {
+  get provinceError() {
     return $('[data-testid=province-field] p');
   }
-  get signUpBtn () {
+  get signUpBtn() {
     return $('[data-testid="signup-btn"]');
   }
-  get errorModal () {
+  get errorModal() {
     return $('[data-testid=error-modal]');
   }
-  get errorModalBtn () {
+  get errorModalBtn() {
     return $('[data-testid=error-modal-btn]');
   }
-  get modalContainer () {
-    return $('[data-testid=modal-container]')
+  get modalContainer() {
+    return $('[data-testid=modal-container]');
   }
-  get crossModal () {
+  get crossModal() {
     return $('[data-testid=cross-modal]');
   }
-  get backLogin () {
-    return $('[data-testid=back-login] p')
+  get backLogin() {
+    return $('[data-testid=back-login] p');
   }
-  get infoModal () {
-    return $('[data-testid=info-modal]')
+  get infoModal() {
+    return $('[data-testid=info-modal]');
   }
-  get infoModalMessage () {
-    return $('[data-testid="info-message"]')
+  get infoModalMessage() {
+    return $('[data-testid="info-message"]');
   }
-  get infoModalBtn () {
-    return $('[data-testid=info-modal-btn]')
+  get infoModalBtn() {
+    return $('[data-testid=info-modal-btn]');
   }
 
   //Methods
@@ -144,7 +144,7 @@ class SignUpPage {
       await this.provinceInput.setValue(values.province);
     }
     await this.signUpBtn.click();
-  };
-};
+  }
+}
 
 export default new SignUpPage();

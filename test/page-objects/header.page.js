@@ -3,6 +3,9 @@ class Header {
   get exchangeInfo() {
     return $('[data-testid=exchange-info]');
   }
+  get tooltip() {
+    return $('[role=tooltip]');
+  }
   get logoQira() {
     return $('[data-testid=logo-qira]');
   }
@@ -34,6 +37,12 @@ class Header {
 
   async openBrowser() {
     browser.url('http://localhost:3000');
+  }
+
+  async getExchange() {
+    const exchangeText = await this.exchangeInfo.getText();
+    const exchangeValue = await exchangeText.split('Tipo de cambio').at(1);
+    return exchangeValue;
   }
 }
 

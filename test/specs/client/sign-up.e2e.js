@@ -16,23 +16,23 @@ describe('Sign up page testing', () => {
     street: 'Cordoba 3701',
     zipCode: '2000',
     city: 'Rosario',
-    province: 'Santa Fe'
+    province: 'Santa Fe',
   };
   const randomWord = Index.generateRandomWord(7);
   const randomEmail = `${randomWord}@qira.com`;
 
-  beforeEach('Open browser', async() => {
+  beforeEach('Open browser', async () => {
     await LoginPage.openBrowser();
     await Header.loginButton.click();
     await LoginPage.signUpBtn.click();
   });
 
-  it('Check titles', async() => {
+  it('Check titles', async () => {
     expect(SignUpPage.modalContainer).toHaveTextContaining('Crear cuenta');
   });
 
   it('Try to sign up without enter data', async () => {
-    await SignUpPage.signUp({ });
+    await SignUpPage.signUp({});
     await expect(SignUpPage.emailError).toBeDisplayed();
     await expect(SignUpPage.emailError).toHaveText('Campo requerido.');
     await expect(SignUpPage.passwordError).toBeDisplayed();
@@ -128,13 +128,13 @@ describe('Sign up page testing', () => {
   });
 
   it('Try to sign up filling only province', async () => {
-    await SignUpPage.signUp({ province: 'Santa Fe'});
+    await SignUpPage.signUp({ province: 'Santa Fe' });
     await expect(SignUpPage.provinceError).toBeDisplayed();
     await expect(SignUpPage.provinceError).toHaveText('');
   });
 
   it('Try to sign up filling all inputs with valid data but email with invalid format', async () => {
-    await SignUpPage.signUp({ ...values, email: 'ariana.com'});
+    await SignUpPage.signUp({ ...values, email: 'ariana.com' });
     await expect(SignUpPage.emailError).toBeDisplayed();
     await expect(SignUpPage.emailError).toHaveText('Debe tener formato válido de email.');
   });
@@ -266,7 +266,7 @@ describe('Sign up page testing', () => {
   });
 
   it('Try to sign up filling all inputs with valid data but phone number with numbers and letters', async () => {
-    await SignUpPage.signUp({ ...values, phoneNumber: '123tel'});
+    await SignUpPage.signUp({ ...values, phoneNumber: '123tel' });
     await expect(SignUpPage.phoneNumberError).toBeDisplayed();
     await expect(SignUpPage.phoneNumberError).toHaveText('Debe contener 6-7 caracteres numéricos.');
   });
@@ -278,7 +278,10 @@ describe('Sign up page testing', () => {
   });
 
   it('Try to sign up filling all inputs with valid data but business name with more than than 50 characters', async () => {
-    await SignUpPage.signUp({ ...values, businessName: 'Radium Rocket Radium Rocket Radium Rocket Radium Ro' });
+    await SignUpPage.signUp({
+      ...values,
+      businessName: 'Radium Rocket Radium Rocket Radium Rocket Radium Ro',
+    });
     await expect(SignUpPage.businessNameError).toBeDisplayed();
     await expect(SignUpPage.businessNameError).toHaveText('No debe contener mas de 50 caracteres.');
   });
@@ -328,37 +331,49 @@ describe('Sign up page testing', () => {
   it('Try to sign up filling all inputs with valid data but street with only letters', async () => {
     await SignUpPage.signUp({ ...values, street: 'Cordoba' });
     await expect(SignUpPage.streetError).toBeDisplayed();
-    await expect(SignUpPage.streetError).toHaveText('Debe contener letras y números separados por un espacio.');
+    await expect(SignUpPage.streetError).toHaveText(
+      'Debe contener letras y números separados por un espacio.',
+    );
   });
 
   it('Try to sign up filling all inputs with valid data but street with only numbers', async () => {
     await SignUpPage.signUp({ ...values, street: '1294' });
     await expect(SignUpPage.streetError).toBeDisplayed();
-    await expect(SignUpPage.streetError).toHaveText('Debe contener letras y números separados por un espacio.');
+    await expect(SignUpPage.streetError).toHaveText(
+      'Debe contener letras y números separados por un espacio.',
+    );
   });
 
   it('Try to sign up filling all inputs with valid data but street with letters and numbers with no space between', async () => {
     await SignUpPage.signUp({ ...values, street: 'Catamarca1234' });
     await expect(SignUpPage.streetError).toBeDisplayed();
-    await expect(SignUpPage.streetError).toHaveText('Debe contener letras y números separados por un espacio.');
+    await expect(SignUpPage.streetError).toHaveText(
+      'Debe contener letras y números separados por un espacio.',
+    );
   });
 
   it('Try to sign up filling all inputs with valid data but street with letters and symbols', async () => {
     await SignUpPage.signUp({ ...values, street: 'Catamarca ###' });
     await expect(SignUpPage.streetError).toBeDisplayed();
-    await expect(SignUpPage.streetError).toHaveText('Debe contener letras y números separados por un espacio.');
+    await expect(SignUpPage.streetError).toHaveText(
+      'Debe contener letras y números separados por un espacio.',
+    );
   });
 
   it('Try to sign up filling all inputs with valid data but street with numbers and symbols', async () => {
     await SignUpPage.signUp({ ...values, street: '### 123' });
     await expect(SignUpPage.streetError).toBeDisplayed();
-    await expect(SignUpPage.streetError).toHaveText('Debe contener letras y números separados por un espacio.');
+    await expect(SignUpPage.streetError).toHaveText(
+      'Debe contener letras y números separados por un espacio.',
+    );
   });
 
   it('Try to sign up filling all inputs with valid data but street with only symbols', async () => {
     await SignUpPage.signUp({ ...values, street: '##### ???' });
     await expect(SignUpPage.streetError).toBeDisplayed();
-    await expect(SignUpPage.streetError).toHaveText('Debe contener letras y números separados por un espacio.');
+    await expect(SignUpPage.streetError).toHaveText(
+      'Debe contener letras y números separados por un espacio.',
+    );
   });
 
   it('Try to sign up filling all inputs with valid data but zip code with less than 4 digits', async () => {
@@ -490,7 +505,7 @@ describe('Sign up page testing', () => {
   });
 
   it('Sign up error - We try to register the same account', async () => {
-    await SignUpPage.signUp({ ...values, email:randomEmail });
+    await SignUpPage.signUp({ ...values, email: randomEmail });
     await expect(SignUpPage.infoModal).toBeDisplayed();
     await expect(SignUpPage.infoModalMessage).toHaveText('Ha ocurrido un error');
     await SignUpPage.infoModalBtn.click();
