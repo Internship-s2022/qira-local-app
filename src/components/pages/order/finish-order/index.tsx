@@ -1,9 +1,10 @@
+import { format, parse } from 'date-fns';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { formatIvaConditionsText } from 'src/helper/clients/clients';
 import { RootState } from 'src/redux/store';
-import { IvaCondition } from 'src/types';
 import { capitalizeFirstLetter } from 'src/utils/formatters';
 
 import styles from './finish-order.module.css';
@@ -13,32 +14,17 @@ export const FinishOrder = (): JSX.Element => {
   const client = useSelector((state: RootState) => state.auth.user);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const authorized = useSelector((state: RootState) => state.shoppingCart.authorized);
+  const estimatedDeliveryDate = useSelector(
+    (state: RootState) => state.shoppingCart.estimatedDeliveryDate,
+  );
 
-  const formatIvaConditionsText = () => {
-    let ivaCondition: string;
-    switch (client.ivaCondition) {
-      case IvaCondition.exempt:
-        ivaCondition = 'Exento';
-        break;
-      case IvaCondition.finalConsumer:
-        ivaCondition = 'Consumidor Final';
-        break;
-      case IvaCondition.registeredResponsible:
-        ivaCondition = 'Responsable Inscripto';
-        break;
-      case IvaCondition.selfEmployment:
-        ivaCondition = 'Monotributista';
-        break;
-      default:
-        break;
-    }
-    return ivaCondition;
-  };
+  const parsedDate = parse(estimatedDeliveryDate, 'MM/dd/yyyy', new Date());
+  const formattedDate = format(parsedDate, 'dd/MM/yyyy');
 
   return (
     <div className={styles.mainContainer}>
       <div>
-        <h1>Finalizar compra</h1>
+        <h1 className={styles.title}>Finalizar compra</h1>
         <p className={styles.subtitle}>Revise y confirme su compra</p>
       </div>
       <div className={styles.columnsContainer}>
@@ -50,7 +36,7 @@ export const FinishOrder = (): JSX.Element => {
               <p className={styles.cardTitle}>{client.businessName}</p>
               <div>
                 <p className={styles.cardText}>
-                  CUIT: {client.cuit} - {formatIvaConditionsText()}
+                  CUIT: {client.cuit} - {formatIvaConditionsText(client.ivaCondition)}
                 </p>
                 <p className={styles.cardText}>
                   {capitalizeFirstLetter(client.address.street)} - CP: {client.address.zipCode}
@@ -85,12 +71,16 @@ export const FinishOrder = (): JSX.Element => {
             </>
           </div>
           <div className={styles.dataContainer}>
-            <p className={styles.sectionTitle}>Dirección de retiro</p>
-            <div className={styles.dataCard}>
+            <p className={styles.sectionTitle}>Dirección y fecha de retiro</p>
+            <div
+              className={styles.clickableDataCard}
+              onClick={() => navigate('/order/delivery-date')}
+            >
               <p className={styles.cardTitle}>Qira Central Storage</p>
               <div>
                 <p className={styles.cardText}>Córdoba 1764 - CP: 2000</p>
                 <p className={styles.cardText}>Rosario - Santa Fe</p>
+                <p className={styles.cardText}>Fecha: {formattedDate}</p>
               </div>
             </div>
           </div>

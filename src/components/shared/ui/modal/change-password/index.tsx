@@ -37,7 +37,6 @@ export const ChangePassword = () => {
   });
 
   const submitHandler = (data) => {
-    console.log(data);
     options.onConfirmCallback(data);
     reset();
   };

@@ -1,15 +1,16 @@
-import LoginPage from  '../page-objects/login.page';
+import LoginPage from  '../../page-objects/login.page';
+import Header from '../../page-objects/header.page';
 
 describe('Login page testing', () => {
   beforeAll('Open browser', () => {
     LoginPage.openBrowser();
   });
   beforeEach('Refresh the page', () => {
-    LoginPage.loginButton.click();
     browser.refresh();
+    Header.loginButton.click();
   });
   it('Try to login with no data should display inputs error messages', async () => {
-    await LoginPage.login('', '');
+    await LoginPage.login();
     await expect(LoginPage.emailError).toBeDisplayed();
     await expect(LoginPage.emailError).toHaveText('Campo requerido.');
     await expect(LoginPage.passwordError).toBeDisplayed();

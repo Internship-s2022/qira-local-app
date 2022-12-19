@@ -5,6 +5,10 @@ const initialState: ShoppingCartState = {
   isOpen: false,
   receipt: undefined,
   authorized: [],
+  estimatedDeliveryDate: undefined,
+  isFetching: false,
+  message: '',
+  error: undefined,
 };
 
 export const shoppingCartReducer = (
@@ -12,6 +16,25 @@ export const shoppingCartReducer = (
   action: ActionsType,
 ): ShoppingCartState => {
   switch (action.type) {
+    case Actions.CREATE_ORDER_PENDING:
+      return {
+        ...state,
+        isFetching: true,
+        error: false,
+      };
+    case Actions.CREATE_ORDER_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        message: 'Orden creada exitósamente.',
+      };
+    case Actions.CREATE_ORDER_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
+        message: action.payload.message,
+      };
     case Actions.ADD_PRODUCT: {
       let newList = [...state.products];
       const result = state.products.findIndex(
@@ -87,10 +110,16 @@ export const shoppingCartReducer = (
         ...state,
         authorized: action.payload,
       };
-    case Actions.REMOVE_AUTHORIZED:
+    case Actions.CLEAR_ORDER_DATA:
       return {
         ...state,
         authorized: [],
+        estimatedDeliveryDate: undefined,
+      };
+    case Actions.SET_DELIVERY_DATE:
+      return {
+        ...state,
+        estimatedDeliveryDate: action.payload,
       };
     case Actions.RESET_STATE:
       return initialState;

@@ -1,10 +1,15 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  padding: 0 60px 50px;
+  padding: 1% 4%;
+}
+
+.title {
+  font-size: 32px;
 }
 
 .subtitle {
+  font-size: 18px;
   font-weight: 400;
   color: #f05523;
 }

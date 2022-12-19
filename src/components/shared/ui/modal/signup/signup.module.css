@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -14,24 +13,25 @@
 
 .formContainer {
   display: flex;
+  gap: 30px;
   justify-content: space-around;
+  width: 95%;
 }
 
 .columnContainer {
-  width: 45%;
+  width: 400px;
 }
 
 .input {
-  width: 100%;
+  max-width: 100%;
 }
 
 .midInput {
-  width: 45%;
+  max-width: 47.5%;
 }
 
 .shortInput {
-  width: 110px;
-  margin-right: 10px;
+  max-width: 110px;
 }
 
 .loginContainer {
@@ -49,8 +49,9 @@
 .phoneInputs,
 .addressInputs {
   display: flex;
+  gap: 20px;
   justify-content: space-between;
-  width: 100%;
+  max-width: 100%;
 }
 
 .signUpBtn {

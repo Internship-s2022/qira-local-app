@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Article } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
-import { Headers } from 'src/components/shared/ui/list/types';
+import { Headers, TableButton } from 'src/components/shared/ui/list/types';
 import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { setFilterStateAction } from 'src/redux/orders/actions';
 import { getOrdersFilteredByState } from 'src/redux/orders/selectors/getOrdersByState';
@@ -16,10 +18,15 @@ import { FormattedOrder } from './types';
 
 const Orders = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
-  const isFetching = useSelector((state: RootState) => state.clients.isFetching);
+  const navigate = useNavigate();
+  const isFetching = useSelector((state: RootState) => state.orders.isFetching);
   const filteredOrderList = useSelector((state: RootState) => getOrdersFilteredByState(state));
+  const filterState = useSelector((state: RootState) => state.orders.filterState);
 
   const clickHandler = (param) => {
+    if (param === filterState) {
+      return dispatch(setFilterStateAction(undefined));
+    }
     dispatch(setFilterStateAction(param));
   };
 
@@ -28,10 +35,23 @@ const Orders = (): JSX.Element => {
   }, []);
 
   const headers: Headers[] = [
-    { header: 'Fecha', key: 'orderDate' },
+    { header: 'Fecha de pago', key: 'orderDate' },
+    { header: 'Fecha de aprobación', key: 'payAuthDate' },
+    { header: 'Fecha de entrega', key: 'deliverDate' },
     { header: 'Cliente', key: 'client' },
-    { header: 'Total', key: 'amounts' },
+    { header: 'Importe (ARS)', key: 'amounts' },
     { header: 'Estado', key: 'state' },
+  ];
+
+  const buttons: ((rowData: FormattedOrder) => TableButton)[] = [
+    (rowData) => ({
+      active: true,
+      icon: <Article />,
+      title: 'Detalles',
+      onClick: () => {
+        navigate(`/admin/order/${rowData.id}`);
+      },
+    }),
   ];
 
   return (
@@ -41,7 +61,7 @@ const Orders = (): JSX.Element => {
         <div className={styles.btnContainer}>
           <Button
             className={styles.btn}
-            variant="contained"
+            variant={filterState === 'APPROVE_PENDING' ? 'contained' : 'outlined'}
             onClick={() => {
               clickHandler(OrderState.APPROVE_PENDING);
             }}
@@ -50,7 +70,7 @@ const Orders = (): JSX.Element => {
           </Button>
           <Button
             className={styles.btn}
-            variant="contained"
+            variant={filterState === 'DELIVERY_PENDING' ? 'contained' : 'outlined'}
             onClick={() => {
               clickHandler(OrderState.DELIVERY_PENDING);
             }}
@@ -59,7 +79,7 @@ const Orders = (): JSX.Element => {
           </Button>
           <Button
             className={styles.btn}
-            variant="contained"
+            variant={filterState === 'DELIVERED' ? 'contained' : 'outlined'}
             onClick={() => {
               clickHandler(OrderState.DELIVERED);
             }}
@@ -68,7 +88,7 @@ const Orders = (): JSX.Element => {
           </Button>
           <Button
             className={styles.btn}
-            variant="contained"
+            variant={filterState === 'REJECTED' ? 'contained' : 'outlined'}
             onClick={() => {
               clickHandler(OrderState.REJECTED);
             }}
@@ -78,9 +98,16 @@ const Orders = (): JSX.Element => {
         </div>
       </div>
       {isFetching ? (
-        <QiraLoader />
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
-        <List<FormattedOrder> headers={headers} data={filteredOrderList}></List>
+        <List<FormattedOrder>
+          headers={headers}
+          data={filteredOrderList}
+          showButtons={true}
+          buttons={buttons}
+        />
       )}
     </div>
   );

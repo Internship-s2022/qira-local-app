@@ -1,7 +1,8 @@
+import Dinero from 'dinero.js';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Add, Close, Remove } from '@mui/icons-material';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 
 import { formatPriceText } from 'src/helper/products';
 import {
@@ -18,8 +19,10 @@ import { ProductBoxProps } from './types';
 
 const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
-  const dollarRate = 160;
+  const exchangeRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate?.value);
   const productQuantity = useSelector((state: RootState) => getProductQuantity(state, product._id));
+
+  const dollarRate = exchangeRate ? parseFloat(exchangeRate) : 0;
 
   return (
     <div className={styles.container}>
@@ -31,19 +34,28 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
       <div className={styles.secondRowContainer}>
         <p className={styles.quantityText}>Seleccionar cantidad</p>
         <div className={styles.quantity}>
-          <IconButton
-            className={styles.iconButton}
-            onClick={() => dispatch(decreaseProductQuantity(product._id))}
-          >
-            <Remove />
-          </IconButton>
+          <Tooltip title={'Quitar'}>
+            <IconButton
+              className={styles.iconButton}
+              onClick={() => dispatch(decreaseProductQuantity(product._id))}
+            >
+              <Remove />
+            </IconButton>
+          </Tooltip>
           <p>{productQuantity}</p>
-          <IconButton
-            className={styles.iconButton}
-            onClick={() => dispatch(increaseProductQuantity(product._id))}
+          <Tooltip
+            title={productQuantity >= product.stock ? 'No hay más stock disponible.' : 'Añadir'}
           >
-            <Add />
-          </IconButton>
+            <span>
+              <IconButton
+                className={styles.iconButton}
+                disabled={productQuantity >= product.stock}
+                onClick={() => dispatch(increaseProductQuantity(product._id))}
+              >
+                <Add />
+              </IconButton>
+            </span>
+          </Tooltip>
         </div>
       </div>
       <div className={styles.thirdRowContainer}>
@@ -57,7 +69,11 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
         <div className={styles.priceContainer}>
           <p className={styles.priceText}>
             {product.currency === Currency.DOLLAR
-              ? 'AR$ ' + (product.price * productQuantity * dollarRate).toFixed(2)
+              ? 'AR$ ' +
+                Dinero({ amount: product.price })
+                  .multiply(productQuantity)
+                  .multiply(dollarRate)
+                  .toFormat('0,0.00')
               : formatPriceText(product, productQuantity)}
           </p>
           <p className={styles.ivaText}> + IVA</p>

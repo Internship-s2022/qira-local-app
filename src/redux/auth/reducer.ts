@@ -12,8 +12,10 @@ const initialState: AuthState = {
 export const authReducer = (state: AuthState = initialState, action: ActionsType): AuthState => {
   switch (action.type) {
     case Actions.LOGIN_PENDING:
+    case Actions.LOGOUT_PENDING:
     case Actions.GET_AUTH_PENDING:
     case Actions.REGISTER_PENDING:
+    case Actions.UPDATE_CLIENT_INFORMATION_PENDING:
       return {
         ...state,
         isFetching: true,
@@ -36,16 +38,17 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
         message: 'Register successfully',
       };
     case Actions.LOGIN_ERROR:
+    case Actions.LOGOUT_ERROR:
     case Actions.GET_AUTH_ERROR:
     case Actions.REGISTER_ERROR:
+    case Actions.UPDATE_CLIENT_INFORMATION_ERROR:
       return {
         ...state,
         isFetching: false,
         error: true,
         message: action.payload.message,
       };
-    case Actions.LOGOUT_USER:
-      sessionStorage.clear();
+    case Actions.LOGOUT_SUCCESS:
       return initialState;
     case Actions.GET_AUTH_SUCCESS:
       return {
@@ -63,10 +66,23 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
         token: action.payload.token,
         role: action.payload.role,
       };
+    case Actions.SET_TOKEN:
+      return {
+        ...state,
+        token: action.payload.token,
+        role: action.payload.role,
+      };
     case Actions.RESET_MESSAGE:
       return {
         ...state,
         message: '',
+      };
+    case Actions.UPDATE_CLIENT_INFORMATION_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: false,
+        user: action.payload,
       };
     default:
       return state;

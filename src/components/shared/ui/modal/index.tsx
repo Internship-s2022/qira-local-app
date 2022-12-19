@@ -13,6 +13,7 @@ import { Error } from './error';
 import { Info } from './info';
 import { LoginModal } from './login';
 import style from './modal.module.css';
+import { RecoverPassword } from './recover-password';
 import SignUpForm from './signup';
 import { UploadImage } from './upload-image/index';
 import { UploadPdf } from './upload-pdf';
@@ -46,22 +47,17 @@ export const SharedModal = (): JSX.Element => {
     case ModalTypes.REGISTER_FORM:
       modalComponent = <SignUpForm />;
       break;
+    case ModalTypes.RECOVER_PASSWORD:
+      modalComponent = <RecoverPassword />;
+      break;
     default:
   }
   const handleConfirm = options?.onCloseCallback || (() => dispatch(closeModal()));
 
   return (
-    <Modal
-      className={style.modal}
-      open={open}
-      onClose={() => {
-        dispatch(closeModal());
-      }}
-    >
+    <Modal className={style.modal} open={open} onClose={handleConfirm}>
       <Box className={style.container}>
-        <Close onClick={handleConfirm} className={style.closeModal} data-testid="cross-modal">
-          x
-        </Close>
+        <Close onClick={handleConfirm} className={style.closeModal} data-testid="cross-modal" />
         {modalComponent}
       </Box>
     </Modal>

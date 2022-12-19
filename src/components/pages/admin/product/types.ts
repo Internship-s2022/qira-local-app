@@ -10,7 +10,7 @@ export interface ProductFormValues {
   brand: string;
   category: string;
   currency: string;
-  stock: number;
+  stock: string;
   isNew?: boolean;
 }
 

@@ -8,6 +8,8 @@ import ClientForm from '../admin/client/';
 import Categories from './categories';
 import CategoryForm from './category';
 import Clients from './clients';
+import DeliverOrders from './deliver';
+import OrderDetails from './order';
 import Orders from './orders';
 import ProductForm from './product';
 import Products from './products';
@@ -17,6 +19,7 @@ const AdminRouter = (): JSX.Element => {
     <Routes>
       <Route element={<AdminLayout />}>
         <Route path={AdminRoutes.ORDERS} element={<Orders />} />
+        <Route path={AdminRoutes.ORDER} element={<OrderDetails />} />
         <Route path={AdminRoutes.CLIENTS} element={<Clients />} />
         <Route path={AdminRoutes.CLIENT} element={<ClientForm />} />
         <Route path={AdminRoutes.PRODUCT_CREATE} element={<ProductForm />} />
@@ -25,7 +28,7 @@ const AdminRouter = (): JSX.Element => {
         <Route path={AdminRoutes.CATEGORIES} element={<Categories />} />
         <Route path={AdminRoutes.CATEGORY_CREATE} element={<CategoryForm />} />
         <Route path={AdminRoutes.CATEGORY_EDIT} element={<CategoryForm />} />
-        <Route path={AdminRoutes.DELIVER} element={<h1>Entregar pedido</h1>} />
+        <Route path={AdminRoutes.DELIVER} element={<DeliverOrders />} />
         <Route path="*" element={<Navigate to="orders" replace />} />
       </Route>
     </Routes>

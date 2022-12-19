@@ -15,10 +15,39 @@ export const getOrderActions = createAsyncAction(
   Actions.GET_ORDER_ERROR,
 )<void, Order, ApiResponse<unknown>>();
 
-export const createOrderActions = createAsyncAction(
-  Actions.CREATE_ORDER_PENDING,
-  Actions.CREATE_ORDER_SUCCESS,
-  Actions.CREATE_ORDER_ERROR,
+export const approveOrderActions = createAsyncAction(
+  Actions.APPROVE_ORDER_PENDING,
+  Actions.APPROVE_ORDER_SUCCESS,
+  Actions.APPROVE_ORDER_ERROR,
+)<void, Order, ApiResponse<unknown>>();
+
+export const deliverOrderActions = createAsyncAction(
+  Actions.DELIVER_ORDER_PENDING,
+  Actions.DELIVER_ORDER_SUCCESS,
+  Actions.DELIVER_ORDER_ERROR,
+)<void, Order, ApiResponse<unknown>>();
+
+export const rejectOrderActions = createAsyncAction(
+  Actions.REJECT_ORDER_PENDING,
+  Actions.REJECT_ORDER_SUCCESS,
+  Actions.REJECT_ORDER_ERROR,
+)<void, Order, ApiResponse<unknown>>();
+
+export const getClientOrdersActions = createAsyncAction(
+  Actions.GET_CLIENT_ORDERS_PENDING,
+  Actions.GET_CLIENT_ORDERS_SUCCESS,
+  Actions.GET_CLIENT_ORDERS_ERROR,
+)<void, Order[], ApiResponse<unknown>>();
+export const getOrderToDeliverActions = createAsyncAction(
+  Actions.GET_ORDER_TO_DELIVER_PENDING,
+  Actions.GET_ORDER_TO_DELIVER_SUCCESS,
+  Actions.GET_ORDER_TO_DELIVER_ERROR,
+)<void, Order, ApiResponse<unknown>>();
+
+export const getClientOrderActions = createAsyncAction(
+  Actions.GET_CLIENT_ORDER_BY_ID_PENDING,
+  Actions.GET_CLIENT_ORDER_BY_ID_SUCCESS,
+  Actions.GET_CLIENT_ORDER_BY_ID_ERROR,
 )<void, Order, ApiResponse<unknown>>();
 
 export const setFilterStateAction = createAction(Actions.SET_FILTER_STATE)<FilterInput>();

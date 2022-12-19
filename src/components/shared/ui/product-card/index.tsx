@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Add, Remove } from '@mui/icons-material';
-import { Button, IconButton } from '@mui/material';
+import { Button, IconButton, Tooltip } from '@mui/material';
 
 import { formatPriceText } from 'src/helper/products';
 import {
@@ -51,19 +51,28 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
       </div>
       {productQuantity > 0 ? (
         <div className={styles.quantity}>
-          <IconButton
-            className={styles.iconButton}
-            onClick={() => dispatch(decreaseProductQuantity(product._id))}
-          >
-            <Remove />
-          </IconButton>
+          <Tooltip title={'Quitar'}>
+            <IconButton
+              className={styles.iconButton}
+              onClick={() => dispatch(decreaseProductQuantity(product._id))}
+            >
+              <Remove />
+            </IconButton>
+          </Tooltip>
           <p>{productQuantity}</p>
-          <IconButton
-            className={styles.iconButton}
-            onClick={() => dispatch(increaseProductQuantity(product._id))}
+          <Tooltip
+            title={productQuantity >= product.stock ? 'No hay más stock disponible.' : 'Añadir'}
           >
-            <Add />
-          </IconButton>
+            <span>
+              <IconButton
+                className={styles.iconButton}
+                disabled={productQuantity >= product.stock}
+                onClick={() => dispatch(increaseProductQuantity(product._id))}
+              >
+                <Add />
+              </IconButton>
+            </span>
+          </Tooltip>
         </div>
       ) : (
         <Button

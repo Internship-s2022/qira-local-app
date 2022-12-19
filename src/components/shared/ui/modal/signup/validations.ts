@@ -32,17 +32,17 @@ export const signUpValidations = Joi.object({
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 2-4 caracteres numéricos.',
+      'string.pattern.base': 'Debe contener 2-4 dígitos.',
     }),
   phoneNumber: Joi.string()
-    .regex(/^[0-9\-+]{6,7}$/)
+    .regex(/^[0-9\-+]{7,8}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 6-7 caracteres númericos.',
+      'string.pattern.base': 'Debe contener 7-8 dígitos.',
     }),
   businessName: Joi.string()
-    .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+    .regex(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)
     .min(3)
     .max(50)
     .required()
@@ -50,14 +50,14 @@ export const signUpValidations = Joi.object({
       'string.min': 'Debe contener al menos 3 caracteres.',
       'string.max': 'No debe contener mas de 50 caracteres.',
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener solo letras.',
+      'string.pattern.base': 'Puede contener letras y números.',
     }),
   cuit: Joi.string()
     .regex(/^[0-9\-+]{11}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener solo 11 caracteres numéricos.',
+      'string.pattern.base': 'Debe contener solo 11 dígitos.',
     }),
   ivaCondition: Joi.string()
     .valid(
@@ -95,7 +95,7 @@ export const signUpValidations = Joi.object({
     .regex(/^[0-9\-+]{4}$/)
     .required()
     .messages({
-      'string.pattern.base': 'Debe contener solo 4 números.',
+      'string.pattern.base': 'Debe contener 4 dígitos.',
       'string.empty': 'Campo requerido.',
     }),
   street: Joi.string()
@@ -104,7 +104,7 @@ export const signUpValidations = Joi.object({
     .required()
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
-      'string.pattern.base': 'Debe contener letras y números separados por un espacio.',
+      'string.pattern.base': 'La dirección es inválida.',
       'string.empty': 'Campo requerido.',
     }),
 });

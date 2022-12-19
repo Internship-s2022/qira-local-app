@@ -1,5 +1,5 @@
-import { apiBCRA } from 'src/config/api';
+import { api } from 'src/config/api';
 
 import { ExchangeRate } from './types';
 
-export const getExchangeRate = () => apiBCRA.get<ExchangeRate[]>('');
+export const getExchangeRate = () => api.get<ExchangeRate>('/public/exchange-rate');

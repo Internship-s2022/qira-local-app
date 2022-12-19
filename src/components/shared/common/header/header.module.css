@@ -6,22 +6,31 @@
 .navBarContainer {
   display: flex;
   width: 100%;
-  max-width: 1200px;
   height: 30px;
-  margin: auto;
   background-color: white;
 }
 
-.logoQira {
-  height: 45px;
-  margin: 12px 20px 12px 100px;
-}
-
 .currency {
+  display: flex;
+  gap: 5px;
   align-self: center;
-  margin-left: 100px;
+  margin-left: 5%;
   font-size: 16px;
   color: #f05523;
+}
+
+.currency p {
+  margin: 0;
+}
+
+.exchangeRate {
+  margin-left: 0;
+  font-weight: bold;
+}
+
+.infoIcon {
+  align-self: center;
+  font-size: 18px;
 }
 
 .mainHeaderContainer {
@@ -30,21 +39,27 @@
 
 .mainHeader {
   display: flex;
+  gap: 20px;
   align-items: center;
-  justify-content: space-between;
-  max-width: 1200px;
+  justify-content: space-evenly;
   height: 100px;
   margin: auto;
 }
 
+.logoQira {
+  height: 45px;
+  margin: 12px 20px;
+}
+
 .searchContainer {
   display: flex;
+  gap: 20px;
 }
 
 .searchBar {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 300px;
   padding: 6px;
   background-color: white;
@@ -53,7 +68,6 @@
 
 .searchBar input {
   align-self: center;
-  margin: 3px 0 0;
   margin: none;
   border: none;
   outline: none;
@@ -80,7 +94,6 @@
   width: 150px;
   min-height: 27px;
   padding: 5px 10px;
-  margin-right: 10px;
   font-size: 16px;
   color: white;
   background-color: #f05523;
@@ -125,35 +138,189 @@
 
 .profileContainer {
   display: flex;
+  gap: 10px;
   align-items: center;
+}
+
+.pLogin {
+  font-size: 18px;
 }
 
 .btnLogin {
   display: flex;
   align-items: center;
-  width: 150px;
-  padding: 8px 10px;
 }
 
 .btnLogin :hover {
   cursor: pointer;
 }
 
+.userIconLink {
+  display: flex;
+  color: white;
+  text-decoration: none;
+}
+
 .userIcon {
-  width: 40px;
+  margin-right: 5px;
+  font-size: 32px;
 }
 
 .userName {
-  font-size: 16px;
+  font-size: 18px;
   color: white;
   text-decoration: none;
 }
 
 .shoppingCart {
-  margin: 0 100px 0 0;
+  font-size: 32px;
   color: white;
 }
 
 .shoppingCart :hover {
   cursor: pointer;
+}
+
+.menuAndLogoContainer {
+  display: none;
+}
+
+.arrowBack {
+  display: none;
+}
+@media screen and (max-width: 1024px) {
+  .logoQira {
+    display: none;
+  }
+
+  .menuAndLogoContainer {
+    display: flex;
+  }
+
+  .logoQ {
+    width: 50px;
+    color: white;
+  }
+
+  .arrowBack {
+    display: none;
+  }
+
+  .arrowBackOnProfile {
+    display: none;
+  }
+
+  .pLogin {
+    display: none;
+  }
+
+  .userName {
+    display: none;
+  }
+
+  .btnLogin {
+    display: flex;
+    width: fit-content;
+  }
+
+  .userIcon {
+    font-size: 40px;
+  }
+
+  .shoppingCart {
+    font-size: 40px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .menuOnProfile {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .mainHeader {
+    gap: 10px;
+  }
+
+  .currency {
+    margin-left: 30px;
+    font-size: 12px;
+  }
+
+  .buttonCategories {
+    display: none;
+  }
+
+  .logoQira {
+    display: none;
+  }
+
+  .arrowBackOnProfile {
+    display: flex;
+    margin-top: 5px;
+    font-size: 40px;
+    color: white;
+  }
+
+  .arrowBackOnProfile:hover {
+    cursor: pointer;
+  }
+
+  .menuAndLogoContainer {
+    display: flex;
+    gap: 10px;
+  }
+
+  .logoQ {
+    width: 50px;
+    color: white;
+  }
+
+  .menu {
+    display: flex;
+    font-size: 50px;
+    color: white;
+  }
+
+  .menuOnProfile {
+    display: none;
+  }
+
+  .searchBar {
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .searchBar input {
+    align-self: center;
+    width: 80%;
+    margin: 0 0 0 5px;
+  }
+
+  .searchBar input::placeholder {
+    font-size: 14px;
+  }
+
+  .btnLogin {
+    width: fit-content;
+  }
+
+  .userName {
+    display: none;
+  }
+
+  .pLogin {
+    display: none;
+  }
+
+  .navBarContainer {
+    justify-content: space-between;
+    height: 20px;
+  }
 }

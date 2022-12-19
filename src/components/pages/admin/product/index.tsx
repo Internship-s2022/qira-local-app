@@ -1,9 +1,11 @@
+import Dinero from 'dinero.js';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { Button } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
+import { Button, IconButton } from '@mui/material';
 
 import { SharedCheckbox } from 'src/components/shared/ui/checkbox';
 import { ImageInput } from 'src/components/shared/ui/image-input';
@@ -32,9 +34,18 @@ const ProductForm = (): JSX.Element => {
   const navigate = useNavigate();
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
   const product = useSelector((state: RootState) => state.products.selectedProduct);
+  const products = useSelector((state: RootState) => state.products.products);
   const categoryOptions = useSelector(getCategoryOptions);
+  const productsNotSelected = products.filter((item) => item?._id !== product?._id);
 
-  const { handleSubmit, control, reset, setValue } = useForm<ProductFormValues>({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    setValue,
+    watch,
+    formState: { isDirty },
+  } = useForm<ProductFormValues>({
     defaultValues: {
       name: '',
       description: '',
@@ -44,12 +55,16 @@ const ProductForm = (): JSX.Element => {
       brand: '',
       category: '',
       currency: Currency.PESO,
-      stock: undefined,
+      stock: '',
       isNew: true,
     },
     mode: 'onBlur',
     resolver: joiResolver(ProductValidation),
   });
+  const imageInput = watch('image');
+  const pdfInput = watch('technicalFile');
+
+  const fileInputs = imageInput?.isNew || pdfInput?.isNew;
 
   useEffect(() => {
     params.id && dispatch(getProductById(params.id));
@@ -67,7 +82,7 @@ const ProductForm = (): JSX.Element => {
       reset({
         name: product.name,
         description: product.description,
-        price: product.price,
+        price: parseFloat(Dinero({ amount: product.price }).toFormat('0.00')),
         image: {
           url: product.image.url,
           isNew: false,
@@ -79,13 +94,24 @@ const ProductForm = (): JSX.Element => {
         brand: product.brand,
         category: product.category._id,
         currency: product.currency,
-        stock: product.stock,
+        stock: product.stock.toString(),
         isNew: product.isNew,
       });
     }
   }, [product]);
 
+  const duplicatedProduct = (data: ProductFormValues) => {
+    return productsNotSelected.some(
+      (product) => product.name === data.name && product.brand === data.brand,
+    );
+  };
+
   const onSubmit = async (data: ProductFormValues) => {
+    if (duplicatedProduct(data)) {
+      return dispatch(
+        openModal(ModalTypes.INFO, { message: 'El producto que intenta crear ya existe.' }),
+      );
+    }
     const image = data.image;
     let imageToSend: FileToSend;
     if (image?.isNew) {
@@ -117,7 +143,7 @@ const ProductForm = (): JSX.Element => {
     const submitData = {
       name: data.name,
       description: data.description,
-      price: data.price,
+      price: Dinero({ amount: data.price * 100 }).getAmount(),
       image: imageToSend,
       technicalFile: pdfToSend,
       brand: data.brand,
@@ -166,6 +192,17 @@ const ProductForm = (): JSX.Element => {
         <>
           <div className={styles.titleContainer}>
             <h1>{params.id ? 'Editar producto' : 'Agregar nuevo producto'}</h1>
+            <div className={styles.goBack}>
+              <h3>Volver a la lista</h3>
+              <IconButton
+                className={styles.backButton}
+                disableRipple={true}
+                size="large"
+                onClick={() => navigate('/admin/products')}
+              >
+                <ArrowBack />
+              </IconButton>
+            </div>
           </div>
           <form className={styles.container}>
             <div className={styles.columnsContainer}>
@@ -174,6 +211,7 @@ const ProductForm = (): JSX.Element => {
                   <SharedSelect
                     optionalLabel="Categoría *"
                     options={categoryOptions}
+                    margin="dense"
                     name="category"
                     control={control}
                     fullWidth
@@ -205,6 +243,7 @@ const ProductForm = (): JSX.Element => {
                     options={currencyOptions}
                     name="currency"
                     control={control}
+                    margin="dense"
                     fullWidth
                     size="small"
                     className={styles.currency}
@@ -261,7 +300,12 @@ const ProductForm = (): JSX.Element => {
                 />
               </div>
             </div>
-            <Button className={styles.sendBtn} variant="contained" onClick={handleSubmit(onSubmit)}>
+            <Button
+              className={styles.sendBtn}
+              variant="contained"
+              onClick={handleSubmit(onSubmit)}
+              disabled={params.id ? !isDirty && !fileInputs : false}
+            >
               {params.id ? 'Editar' : 'Agregar'}
             </Button>
           </form>

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AccountBalanceOutlined, ContentCopyOutlined } from '@mui/icons-material';
-import { Button } from '@mui/material';
+import { Button, Tooltip } from '@mui/material';
 
 import { CustomFile } from 'src/components/shared/ui/modal/types';
 import { toBase64 } from 'src/helper/form';
@@ -16,6 +16,7 @@ import styles from './payment-method.module.css';
 const PaymentMethod = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const receipt = useSelector((state: RootState) => state.shoppingCart?.receipt);
+  const [openTooltip, setOpenTooltip] = useState<boolean>(false);
 
   useEffect(() => {
     return () => {
@@ -78,10 +79,26 @@ const PaymentMethod = (): JSX.Element => {
               <p className={styles.dataInfo}>info@alz-agro.com</p>
             </div>
             <div>
-              <a className={styles.copyData} href="">
-                <ContentCopyOutlined className={styles.copyIcon} />
-                Copiar datos
-              </a>
+              <Tooltip
+                PopperProps={{
+                  disablePortal: true,
+                }}
+                onClose={() => setOpenTooltip(false)}
+                open={openTooltip}
+                title="CBU copiado al portapapeles."
+                placement="right"
+              >
+                <a
+                  className={styles.copyData}
+                  onClick={() => {
+                    navigator.clipboard.writeText('1500021300008970698789');
+                    setOpenTooltip(true);
+                  }}
+                >
+                  <ContentCopyOutlined className={styles.copyIcon} />
+                  Copiar datos
+                </a>
+              </Tooltip>
             </div>
           </div>
           <div>
@@ -94,7 +111,7 @@ const PaymentMethod = (): JSX.Element => {
                     onConfirmCallback: (selectedFile) => {
                       onUpload(selectedFile);
                     },
-                    onCloseCallback: () => dispatch(closeModal),
+                    onCloseCallback: () => dispatch(closeModal()),
                   }),
                 )
               }
@@ -102,7 +119,7 @@ const PaymentMethod = (): JSX.Element => {
               variant="contained"
               className={styles.btnUpload}
             >
-              Cargar comprobante
+              {receipt ? 'Modificar archivo' : 'Cargar comprobante'}
             </Button>
           </div>
         </div>

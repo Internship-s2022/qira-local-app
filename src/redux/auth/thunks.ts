@@ -4,8 +4,14 @@ import { Dispatch } from 'redux';
 import { auth } from 'src/helper/firebase';
 
 import { RootAction } from '../store';
-import { getAuthUserActions, loginActions, registerActions } from './actions';
-import { getAuthUser, registerUser } from './api';
+import {
+  getAuthUserActions,
+  loginActions,
+  logoutActions,
+  registerActions,
+  updateClientInformationActions,
+} from './actions';
+import { getAuthUser, registerUser, updateClientInformationApi } from './api';
 
 export const login = (credentials) => {
   return async (dispatch: Dispatch<RootAction>) => {
@@ -16,14 +22,12 @@ export const login = (credentials) => {
         credentials.email,
         credentials.password,
       );
+
       const token = await response.user.getIdToken();
       const {
         claims: { role },
       } = await response.user.getIdTokenResult();
       const userData = await getAuthUser(token);
-      sessionStorage.setItem('user', JSON.stringify(userData.data));
-      sessionStorage.setItem('token', token);
-      sessionStorage.setItem('role', role);
       return dispatch(loginActions.success({ user: userData.data, token: token, role: role }));
     } catch (error) {
       return dispatch(loginActions.failure(error));
@@ -54,7 +58,31 @@ export const register = (user) => {
         dispatch(registerActions.success());
       }
     } catch (error) {
-      return dispatch(registerActions.failure(error));
+      return dispatch(registerActions.failure(error.response.data));
+    }
+  };
+};
+
+export const updateClientInformation = (data) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(updateClientInformationActions.request());
+      const response = await updateClientInformationApi(data);
+      return dispatch(updateClientInformationActions.success(response.data));
+    } catch (error) {
+      dispatch(updateClientInformationActions.failure(error));
+    }
+  };
+};
+
+export const logout = () => {
+  return async (dispatch: Dispatch<RootAction>) => {
+    try {
+      dispatch(logoutActions.request());
+      await auth().signOut();
+      return dispatch(logoutActions.success());
+    } catch (error) {
+      return dispatch(logoutActions.failure(error));
     }
   };
 };

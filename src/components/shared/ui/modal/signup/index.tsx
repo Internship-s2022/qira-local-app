@@ -65,7 +65,7 @@ const SignUpForm = () => {
         zipCode: data.zipCode,
         street: data.street,
       },
-      phoneNumber: data.codeArea + data.phoneNumber,
+      phoneNumber: data.codeArea + '-' + data.phoneNumber,
       email: data.email,
       password: data.password,
       isActive: true,
@@ -82,6 +82,9 @@ const SignUpForm = () => {
       modalOptions.message = 'Cuenta creada exitosamente.';
       modalOptions.onCloseCallback = () => dispatch(closeModal());
       reset();
+    }
+    if (response.payload.message === 'The email address is already in use by another account.') {
+      modalOptions.message = 'La cuenta de email que intenta registrar ya existe.';
     }
     if (!modalOptions.message) {
       modalOptions.message = 'Ha ocurrido un error';
@@ -264,11 +267,12 @@ const SignUpForm = () => {
           variant="contained"
           className={styles.signUpBtn}
           onClick={handleSubmit(onSubmit)}
+          data-testid="signup-btn"
         >
           Crear cuenta
         </Button>
       )}
-      <div className={styles.loginContainer}>
+      <div className={styles.loginContainer} data-testid="back-login">
         <AccountCircleOutlined color="primary" />
         <p className={styles.loginText} onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>
           ¿Ya estás registrado? Inicia sesión.

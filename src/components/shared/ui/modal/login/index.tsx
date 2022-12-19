@@ -2,6 +2,7 @@ import Joi from 'joi';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { AccountCircleOutlined, LockOutlined, MailOutlineOutlined } from '@mui/icons-material';
 import { Button, InputAdornment } from '@mui/material';
@@ -11,6 +12,7 @@ import { Actions as AuthActions } from 'src/redux/auth/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes, Options } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
+import { UserRole } from 'src/types';
 
 import { InputText } from '../../input';
 import { Loader } from '../../loader';
@@ -41,6 +43,7 @@ const loginValidation = Joi.object({
 export const LoginModal = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const isFetching = useSelector((state: RootState) => state.auth.isFetching);
+  const navigate = useNavigate();
   const { handleSubmit, control } = useForm<FormValues>({
     defaultValues: {
       email: '',
@@ -54,13 +57,16 @@ export const LoginModal = () => {
     const modalOptions: Options = {};
     const response = await dispatch(login(User));
     if (response.type === AuthActions.LOGIN_SUCCESS) {
-      modalOptions.message = 'Sesión iniciada exitosamente.';
-      modalOptions.onCloseCallback = () => dispatch(closeModal());
+      dispatch(closeModal());
+      if (response.payload.role === UserRole.ADMIN) {
+        navigate('/admin/orders');
+      }
     }
-    if (!modalOptions.message) {
+    if (response.type === AuthActions.LOGIN_ERROR) {
+      dispatch(openModal(ModalTypes.INFO, modalOptions));
       modalOptions.message = 'Usuario o contraseña incorrecta.';
+      modalOptions.onCloseCallback = () => dispatch(openModal(ModalTypes.LOGIN));
     }
-    dispatch(openModal(ModalTypes.INFO, modalOptions));
   };
 
   return (
@@ -78,6 +84,7 @@ export const LoginModal = () => {
               variant="outlined"
               margin="dense"
               size="small"
+              data-testid="login-email"
               fullWidth={true}
               InputProps={{
                 startAdornment: (
@@ -93,10 +100,11 @@ export const LoginModal = () => {
               control={control}
               name="password"
               type="password"
-              optionalLabel="Password *"
+              optionalLabel="Contraseña *"
               variant="outlined"
               margin="dense"
               size="small"
+              data-testid="login-password"
               fullWidth={true}
               InputProps={{
                 startAdornment: (
@@ -112,7 +120,9 @@ export const LoginModal = () => {
           ) : (
             <Button
               onClick={handleSubmit(onSubmit)}
+              type="submit"
               variant="contained"
+              fullWidth={true}
               className={styles.button}
               data-testid="login-submit"
             >
@@ -120,9 +130,16 @@ export const LoginModal = () => {
             </Button>
           )}
 
+          <p
+            className={styles.recoverText}
+            onClick={() => dispatch(openModal(ModalTypes.RECOVER_PASSWORD))}
+          >
+            Olvidé mi contraseña
+          </p>
           <div className={styles.registerContainer}>
             <AccountCircleOutlined color="primary" />
             <p
+              data-testid="sign-up-btn"
               className={styles.registerText}
               onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}
             >

@@ -1,5 +1,7 @@
-import { action } from 'typesafe-actions';
+import { action, createAsyncAction } from 'typesafe-actions';
 
+import { Order } from '../orders/types';
+import { ApiResponse } from '../store';
 import { Actions } from './types';
 
 export const addProduct = (product) => action(Actions.ADD_PRODUCT, product);
@@ -20,6 +22,15 @@ export const removeTransferReceipt = () => action(Actions.REMOVE_TRANSFER_RECEIP
 
 export const setAuthorized = (authorizedList) => action(Actions.SET_AUTHORIZED, authorizedList);
 
-export const removeAuthorized = () => action(Actions.REMOVE_AUTHORIZED);
+export const clearOrderData = () => action(Actions.CLEAR_ORDER_DATA);
 
 export const resetState = () => action(Actions.RESET_STATE);
+
+export const setDeliveryDate = (estimatedDeliveryDate) =>
+  action(Actions.SET_DELIVERY_DATE, estimatedDeliveryDate);
+
+export const createOrderActions = createAsyncAction(
+  Actions.CREATE_ORDER_PENDING,
+  Actions.CREATE_ORDER_SUCCESS,
+  Actions.CREATE_ORDER_ERROR,
+)<void, Order, ApiResponse<unknown>>();

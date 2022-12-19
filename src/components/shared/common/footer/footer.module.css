@@ -47,6 +47,22 @@
   margin-left: 5px;
 }
 
+.wspIcon {
+  padding: 3px;
+  margin-right: 20px;
+  font-size: 60px;
+  color: white;
+  background-color: #25d366;
+  border-radius: 10px;
+}
+
+.wspIconContainer {
+  position: fixed;
+  z-index: 100;
+  align-self: flex-end;
+  margin-top: 88vh;
+}
+
 @media screen and (max-width: 678px) {
   .socialMediaContainer {
     padding: 0;

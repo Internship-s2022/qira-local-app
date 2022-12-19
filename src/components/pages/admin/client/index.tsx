@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { MailOutlineOutlined, PhoneOutlined } from '@mui/icons-material';
-import { Button, InputAdornment } from '@mui/material';
+import { ArrowBack, MailOutlineOutlined, PhoneOutlined } from '@mui/icons-material';
+import { Button, IconButton, InputAdornment } from '@mui/material';
 
 import { InputText } from 'src/components/shared/ui/input';
 import { SharedSelect } from 'src/components/shared/ui/select';
@@ -36,8 +36,8 @@ const ClientForm = (): JSX.Element => {
     if (selectedClient?.email) {
       reset({
         email: selectedClient?.email,
-        codeArea: selectedClient?.phoneNumber.substring(0, 3),
-        phoneNumber: selectedClient?.phoneNumber.substring(3, 10),
+        codeArea: selectedClient?.phoneNumber.split('-').at(0),
+        phoneNumber: selectedClient?.phoneNumber.split('-').at(1),
         businessName: selectedClient?.businessName,
         cuit: selectedClient?.cuit,
         ivaCondition: selectedClient?.ivaCondition,
@@ -49,7 +49,12 @@ const ClientForm = (): JSX.Element => {
     }
   }, [selectedClient]);
 
-  const { handleSubmit, control, reset } = useForm<UpdateClientValues>({
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { isDirty },
+  } = useForm<UpdateClientValues>({
     defaultValues: {
       email: '',
       codeArea: '',
@@ -76,7 +81,7 @@ const ClientForm = (): JSX.Element => {
   const formatDataFunction = (data) => {
     const dataFormated = {
       email: data.email,
-      phoneNumber: data.codeArea + data.phoneNumber,
+      phoneNumber: data.codeArea + '-' + data.phoneNumber,
       businessName: data.businessName,
       cuit: data.cuit,
       ivaCondition: data.ivaCondition,
@@ -113,6 +118,17 @@ const ClientForm = (): JSX.Element => {
         <section className={styles.sectionContainer}>
           <div className={styles.titleContainer}>
             <h2 className={styles.title}>Datos del cliente</h2>
+            <div className={styles.goBack}>
+              <h3>Volver a la lista</h3>
+              <IconButton
+                className={styles.backButton}
+                disableRipple={true}
+                size="large"
+                onClick={() => navigate('/admin/clients')}
+              >
+                <ArrowBack />
+              </IconButton>
+            </div>
           </div>
           <form className={styles.formContainer}>
             <div className={styles.container}>
@@ -121,7 +137,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="businessName"
                   type="text"
-                  optionalLabel="Razón Social"
+                  optionalLabel="Razón Social *"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -131,7 +147,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="cuit"
                   type="text"
-                  optionalLabel="CUIT"
+                  optionalLabel="CUIT *"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -140,7 +156,7 @@ const ClientForm = (): JSX.Element => {
                 <SharedSelect
                   control={control}
                   name="ivaCondition"
-                  optionalLabel="Condición de IVA"
+                  optionalLabel="Condición de IVA *"
                   margin="dense"
                   size="small"
                   options={IvaConditionOptions}
@@ -149,7 +165,7 @@ const ClientForm = (): JSX.Element => {
                 <InputText
                   control={control}
                   name="email"
-                  optionalLabel="Email"
+                  optionalLabel="Email *"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -168,7 +184,7 @@ const ClientForm = (): JSX.Element => {
                     control={control}
                     name="codeArea"
                     type="text"
-                    optionalLabel="Cod. área"
+                    optionalLabel="Cod. área *"
                     variant="outlined"
                     margin="dense"
                     size="small"
@@ -177,7 +193,7 @@ const ClientForm = (): JSX.Element => {
                     control={control}
                     name="phoneNumber"
                     type="text"
-                    optionalLabel="Teléfono"
+                    optionalLabel="Teléfono *"
                     variant="outlined"
                     margin="dense"
                     size="small"
@@ -196,7 +212,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="street"
                   type="text"
-                  optionalLabel="Dirección"
+                  optionalLabel="Dirección *"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -206,7 +222,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="zipCode"
                   type="text"
-                  optionalLabel="Código postal"
+                  optionalLabel="Código postal *"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -216,7 +232,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="city"
                   type="text"
-                  optionalLabel="Localidad"
+                  optionalLabel="Localidad *"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -226,7 +242,7 @@ const ClientForm = (): JSX.Element => {
                   control={control}
                   name="province"
                   type="text"
-                  optionalLabel="Provincia"
+                  optionalLabel="Provincia *"
                   variant="outlined"
                   margin="dense"
                   size="small"
@@ -239,6 +255,7 @@ const ClientForm = (): JSX.Element => {
               variant="contained"
               className={styles.sendBtn}
               onClick={handleSubmit(onSubmit)}
+              disabled={!isDirty}
             >
               Editar Cliente
             </Button>

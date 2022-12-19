@@ -13,6 +13,7 @@ const themeOptions: ThemeOptions = {
     },
     info: {
       main: '#3A9FCF',
+      contrastText: '#fff',
     },
     error: {
       main: '#AE2D04',
@@ -21,6 +22,9 @@ const themeOptions: ThemeOptions = {
       primary: '#000',
       secondary: '#fff',
     },
+  },
+  typography: {
+    fontFamily: ['Work Sans'].join(','),
   },
 };
 

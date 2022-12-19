@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
-import { Button } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
+import { Button, IconButton } from '@mui/material';
 
 import { ImageInput } from 'src/components/shared/ui/image-input';
 import { InputText } from 'src/components/shared/ui/input';
@@ -24,7 +25,16 @@ const CategoryForm = (): JSX.Element => {
   const params = useParams();
   const navigate = useNavigate();
   const category = useSelector((state: RootState) => state.categories.selectedCategory);
-  const { handleSubmit, control, reset, setValue } = useForm<CategoryFormValues>({
+  const categories = useSelector((state: RootState) => state.categories.categories);
+  const categoriesNotSelected = categories.filter((item) => item?._id !== category?._id);
+  const {
+    handleSubmit,
+    control,
+    reset,
+    setValue,
+    watch,
+    formState: { isDirty },
+  } = useForm<CategoryFormValues>({
     defaultValues: {
       name: '',
       image: undefined,
@@ -33,6 +43,7 @@ const CategoryForm = (): JSX.Element => {
     mode: 'onBlur',
     resolver: joiResolver(CategoryValidations),
   });
+  const imageInput = watch('image');
 
   useEffect(() => {
     params.id && dispatch(getCategoryById(params.id));
@@ -54,7 +65,18 @@ const CategoryForm = (): JSX.Element => {
     }
   }, [category]);
 
+  const duplicatedCategory = (data: CategoryFormValues) => {
+    return categoriesNotSelected.some(
+      (category) => category.name === data.name || category.url === data.url,
+    );
+  };
+
   const onSubmit = async (data: CategoryFormValues) => {
+    if (duplicatedCategory(data)) {
+      return dispatch(
+        openModal(ModalTypes.INFO, { message: 'La categoría que intenta crear ya existe.' }),
+      );
+    }
     const image = data.image;
     let imageToSend: ImageToSend;
     if (image?.isNew) {
@@ -103,11 +125,23 @@ const CategoryForm = (): JSX.Element => {
     <>
       <div className={styles.titleContainer}>
         <h1>{params.id ? 'Editar categoría' : 'Agregar nueva categoría'}</h1>
+        <div className={styles.goBack}>
+          <h3>Volver a la lista</h3>
+          <IconButton
+            className={styles.backButton}
+            disableRipple={true}
+            size="large"
+            onClick={() => navigate('/admin/categories')}
+          >
+            <ArrowBack />
+          </IconButton>
+        </div>
       </div>
       <form className={styles.formContainer}>
         <div className={styles.columnsContainer}>
           <div className={styles.inputsContainer}>
             <InputText
+              className={styles.input}
               control={control}
               name="name"
               type="text"
@@ -117,10 +151,14 @@ const CategoryForm = (): JSX.Element => {
               size="small"
             />
             <InputText
+              className={styles.input}
               control={control}
               name="url"
               type="text"
               optionalLabel="URL *"
+              tooltipText={
+                'La URL debe contener sólo palabras en minúscula y separadas por un guión (-).'
+              }
               variant="outlined"
               margin="dense"
               size="small"
@@ -130,7 +168,12 @@ const CategoryForm = (): JSX.Element => {
             <ImageInput control={control} name="image" label="Imagen *" setValue={setValue} />
           </div>
         </div>
-        <Button className={styles.button} variant="contained" onClick={handleSubmit(onSubmit)}>
+        <Button
+          className={styles.button}
+          variant="contained"
+          onClick={handleSubmit(onSubmit)}
+          disabled={params.id ? !isDirty && !imageInput?.isNew : false}
+        >
           {params.id ? 'Editar' : 'Agregar'}
         </Button>
       </form>

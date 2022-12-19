@@ -3,7 +3,6 @@ import { FieldValues, useController } from 'react-hook-form';
 import { TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 
-import styles from './select.module.css';
 import { SharedSelectProps } from './types';
 
 export const SharedSelect = <TValuesSelect extends FieldValues>({
@@ -20,7 +19,7 @@ export const SharedSelect = <TValuesSelect extends FieldValues>({
   } = useController({ name, control, defaultValue });
   return (
     <div className={className}>
-      <div className={styles.label}>
+      <div>
         <label htmlFor={optionalLabel}>{optionalLabel}</label>
       </div>
       <TextField
@@ -30,9 +29,10 @@ export const SharedSelect = <TValuesSelect extends FieldValues>({
         fullWidth
         helperText={error?.message != undefined ? error.message : ' '}
         error={error?.message != undefined}
+        data-testid={`${name}-select`}
       >
         {props.options.map((option, index) => (
-          <MenuItem key={index} value={option.value}>
+          <MenuItem key={index} value={option.value} data-testid={`${index}-item`}>
             {option.label}
           </MenuItem>
         ))}
