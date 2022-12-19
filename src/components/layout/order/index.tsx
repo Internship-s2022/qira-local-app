@@ -52,8 +52,11 @@ const OrderLayout = (): JSX.Element => {
       btnOptions = {
         text: 'Continuar compra',
         onClick: () => navigate(`/order${OrderRoutes.AUTHORIZED}`),
-        disabled: false,
+        disabled: cartProducts.length > 0 ? false : true,
       };
+      if (cartProducts.length === 0) {
+        setTimeout(() => navigate('/'), 3000);
+      }
       break;
     case `/order${OrderRoutes.AUTHORIZED}`:
       btnOptions = {
