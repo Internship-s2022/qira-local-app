@@ -21,7 +21,7 @@ const OrderCard = ({ order }: OrderCardProps): JSX.Element => {
         <p className={styles.orangeText}>{order._id}</p>
       </div>
       <p className={styles.priceText}>
-        {Dinero({ amount: order.amounts.total }).toFormat('$0,0.00')}
+        {Dinero({ amount: order?.amounts.total }).toFormat('$0,0.00')}
       </p>
       <div className={styles.textContainer}>
         <p className={styles.dataText}>Estado: </p>
