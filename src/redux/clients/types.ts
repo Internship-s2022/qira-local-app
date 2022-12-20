@@ -15,6 +15,7 @@ export interface Client {
   email: string;
   isActive: boolean;
   logicDelete: boolean;
+  approved: boolean;
   firebaseUid: string;
 }
 
@@ -47,4 +48,8 @@ export enum Actions {
   UPDATE_CLIENT_SUCCESS = 'UPDATE_CLIENT_SUCCESS',
   UPDATE_CLIENT_PENDING = 'UPDATE_CLIENT_PENDING',
   UPDATE_CLIENT_ERROR = 'UPDATE_CLIENT_ERROR',
+
+  APPROVE_CLIENT_SUCCESS = 'APPROVE_CLIENT_SUCCESS',
+  APPROVE_CLIENT_PENDING = 'APPROVE_CLIENT_PENDING',
+  APPROVE_CLIENT_ERROR = 'APPROVE_CLIENT_ERROR',
 }

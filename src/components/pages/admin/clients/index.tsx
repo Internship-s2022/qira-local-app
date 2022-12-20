@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Check, Close, Edit, LockPerson } from '@mui/icons-material';
+import { Check, Close, Edit, HowToReg, LockPerson } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
 import * as thunks from 'src/redux/clients/thunk';
@@ -19,6 +19,8 @@ interface Client {
   phoneNumber: string;
   email: string;
   isActive: boolean;
+  state: string;
+  approved: boolean;
 }
 
 const Clients = (): JSX.Element => {
@@ -40,8 +42,9 @@ const Clients = (): JSX.Element => {
         email: client.email,
         phoneNumber: client.phoneNumber,
         isActive: client.isActive,
-        state: client.isActive ? 'Aprobado' : 'Pendiente',
+        state: client.approved ? (client.isActive ? 'Habilitado' : 'Inhabilitado') : 'Pendiente',
         firebaseUid: client.firebaseUid ? client.firebaseUid : '',
+        approved: client.approved,
       };
     });
     return listData;
@@ -58,21 +61,38 @@ const Clients = (): JSX.Element => {
   const buttons: ((rowData: Client) => TableButton)[] = [
     (rowData) => ({
       active: true,
-      icon: rowData.isActive ? <Close /> : <Check />,
-      title: rowData.isActive ? 'Desactivar' : 'Activar',
+      icon: rowData.approved ? rowData.isActive ? <Close /> : <Check /> : <HowToReg />,
+      title: rowData.approved ? (rowData.isActive ? 'Desactivar' : 'Activar') : 'Aprobar',
       onClick: () => {
-        rowData.isActive
-          ? dispatch(
-              openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro de que desea desactivar el cliente?',
-                onConfirmCallback: () => dispatch(thunks.inactivateClient(rowData.id)),
-                onCloseCallback: () => dispatch(closeModal()),
-              }),
-            )
+        rowData.approved
+          ? rowData.isActive
+            ? dispatch(
+                openModal(ModalTypes.CONFIRM, {
+                  message: '¿Está seguro de que desea desactivar el cliente?',
+                  onConfirmCallback: () => {
+                    dispatch(thunks.inactivateClient(rowData.id));
+                    dispatch(closeModal());
+                  },
+                  onCloseCallback: () => dispatch(closeModal()),
+                }),
+              )
+            : dispatch(
+                openModal(ModalTypes.CONFIRM, {
+                  message: '¿Está seguro de que desea activar el cliente?',
+                  onConfirmCallback: () => {
+                    dispatch(thunks.activateClient(rowData.id));
+                    dispatch(closeModal());
+                  },
+                  onCloseCallback: () => dispatch(closeModal()),
+                }),
+              )
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro de que desea activar el cliente?',
-                onConfirmCallback: () => dispatch(thunks.activateClient(rowData.id)),
+                message: '¿Está seguro de que desea aprobar el cliente?',
+                onConfirmCallback: () => {
+                  dispatch(thunks.approveClient(rowData.id));
+                  dispatch(closeModal());
+                },
                 onCloseCallback: () => dispatch(closeModal()),
               }),
             );

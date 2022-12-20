@@ -5,6 +5,7 @@ import { closeModal } from 'src/redux/modal/actions';
 import { AppThunk } from '../store';
 import {
   activateActions,
+  approveClientActions,
   getClientActions,
   getClientsActions,
   inactivateActions,
@@ -74,6 +75,18 @@ export const updateClient = (id, data) => {
       return dispatch(updateClientActions.success(response.data));
     } catch (error) {
       dispatch(updateClientActions.failure(error));
+    }
+  };
+};
+
+export const approveClient = (id) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(approveClientActions.request());
+      const response = await API.approveClient(id);
+      return dispatch(approveClientActions.success(response.data));
+    } catch (error) {
+      dispatch(approveClientActions.failure(error));
     }
   };
 };
