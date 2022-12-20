@@ -13,6 +13,7 @@ import {
 import { getProductQuantity } from 'src/redux/shopping-cart/selectors/getProductQuantity';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { Currency } from 'src/types';
+import { removeSpaces } from 'src/utils/formatters';
 
 import styles from './product-box.module.css';
 import { ProductBoxProps } from './types';
@@ -25,11 +26,17 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
   const dollarRate = exchangeRate ? parseFloat(exchangeRate) : 0;
 
   return (
-    <div className={styles.container}>
-      <Close className={styles.delete} onClick={() => dispatch(deleteProduct(product._id))} />
+    <div className={styles.container} data-testid="box">
+      <Close
+        data-testid="cross-prod-box"
+        className={styles.delete}
+        onClick={() => dispatch(deleteProduct(product._id))}
+      />
       <div className={styles.firstRowContainer}>
         <img className={styles.image} src={product.image.url}></img>
-        <p className={styles.productName}>{product.brand + ' ' + product.name}</p>
+        <p data-testid={`box-${removeSpaces(product.name)}`} className={styles.productName}>
+          {product.brand + ' ' + product.name}
+        </p>
       </div>
       <div className={styles.secondRowContainer}>
         <p className={styles.quantityText}>Seleccionar cantidad</p>
@@ -37,6 +44,7 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
           <Tooltip title={'Quitar'}>
             <IconButton
               className={styles.iconButton}
+              data-testid="box-decrease"
               onClick={() => dispatch(decreaseProductQuantity(product._id))}
             >
               <Remove />
@@ -50,6 +58,7 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
               <IconButton
                 className={styles.iconButton}
                 disabled={productQuantity >= product.stock}
+                data-testid="box-increase"
                 onClick={() => dispatch(increaseProductQuantity(product._id))}
               >
                 <Add />

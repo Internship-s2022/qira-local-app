@@ -14,18 +14,18 @@ const Footer = () => {
       >
         <WhatsApp className={styles.wspIcon} />
       </a>
-      <footer className={styles.container} data-testid="test">
+      <footer className={styles.container} data-testid="footer-container">
         <div className={styles.footerContainer}>
-          <div className={styles.logoContainer}>
+          <div className={styles.logoContainer} data-testid="footer-info">
             <img
               className={styles.logo}
               src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.png`}
             />
             <span className={styles.license}>© 2022 QIRA. Todos los derechos reservados.</span>
           </div>
-          <div className={styles.socialMediaContainer}>
+          <div className={styles.socialMediaContainer} data-testid="social-media">
             <span className={styles.titelSocialMedia}>Seguinos en nuestras redes</span>
-            <div className={styles.socialMedia}>
+            <div className={styles.socialMedia} data-testid="social-icons">
               <a href="https://www.facebook.com/qira-local" target="_blank" rel="noreferrer">
                 <img
                   className={styles.socialIcon}
