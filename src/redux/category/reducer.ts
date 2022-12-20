@@ -1,6 +1,6 @@
 import { Actions, ActionsType, CategoryState } from './types';
 
-const initialState: CategoryState = {
+export const initialState: CategoryState = {
   categories: [],
   isFetching: false,
   error: undefined,

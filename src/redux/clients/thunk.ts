@@ -2,7 +2,6 @@ import { Dispatch } from 'redux';
 
 import { closeModal } from 'src/redux/modal/actions';
 
-import { AppThunk } from '../store';
 import {
   activateActions,
   getClientActions,
@@ -12,7 +11,7 @@ import {
 } from './actions';
 import * as API from './api';
 
-export const getClients: AppThunk = () => {
+export const getClients = () => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getClientsActions.request());
@@ -24,7 +23,7 @@ export const getClients: AppThunk = () => {
   };
 };
 
-export const activateClient: AppThunk = (id) => {
+export const activateClient = (id) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(activateActions.request());
@@ -38,7 +37,7 @@ export const activateClient: AppThunk = (id) => {
   };
 };
 
-export const inactivateClient: AppThunk = (id) => {
+export const inactivateClient = (id) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(inactivateActions.request());
@@ -52,7 +51,7 @@ export const inactivateClient: AppThunk = (id) => {
   };
 };
 
-export const getClient: AppThunk = (id) => {
+export const getClient = (id) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getClientActions.request());

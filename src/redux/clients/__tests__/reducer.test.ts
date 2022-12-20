@@ -6,8 +6,16 @@ import {
   updateClientActions,
 } from '../actions';
 import { clientReducer, initialState } from '../reducer';
-import { ActionsType } from '../types';
+import { ActionsType, ClientState } from '../types';
 import { mockedClient, mockedError, mockedInactiveClient } from './actions.test';
+
+const mockedInitialState: ClientState = {
+  clients: [mockedClient],
+  error: undefined,
+  isFetching: false,
+  message: '',
+  selectedClient: undefined,
+};
 
 describe('Client reducer', () => {
   it('Should return the initial state by default', () => {
@@ -65,16 +73,14 @@ describe('Client reducer', () => {
     });
   });
 
-  it('Should return the correct state for ACTIVATE_CLIENT_SUCCESS, INACTIVATE_CLIENT_SUCCESS & UPDATE_CLIENT_SUCCESS actions', () => {
-    const expectedResult = { clients: [], isFetching: false };
-    expect(clientReducer(initialState, activateActions.success(mockedClient))).toMatchObject(
-      expectedResult,
+  it('Should return the correct state for ACTIVATE_CLIENT_SUCCESS & INACTIVATE_CLIENT_SUCCESS', () => {
+    const expectedActivateResult = { ...mockedInitialState, clients: [mockedClient] };
+    const expectedInactivateResult = { ...mockedInitialState, clients: [mockedInactiveClient] };
+    expect(clientReducer(mockedInitialState, activateActions.success(mockedClient))).toMatchObject(
+      expectedActivateResult,
     );
     expect(
-      clientReducer(initialState, inactivateActions.success(mockedInactiveClient)),
-    ).toMatchObject(expectedResult);
-    expect(clientReducer(initialState, updateClientActions.success(mockedClient))).toMatchObject(
-      expectedResult,
-    );
+      clientReducer(mockedInitialState, inactivateActions.success(mockedInactiveClient)),
+    ).toMatchObject(expectedInactivateResult);
   });
 });
