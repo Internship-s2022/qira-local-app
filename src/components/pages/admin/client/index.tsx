@@ -31,7 +31,7 @@ const ClientForm = (): JSX.Element => {
   useEffect(() => {
     dispatch(thunks.getClient(params.id));
   }, []);
-  console.log('is fetching', isFetching);
+
   useEffect(() => {
     if (selectedClient?.email) {
       reset({
