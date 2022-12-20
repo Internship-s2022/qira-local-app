@@ -30,6 +30,7 @@ export interface User {
   phoneNumber: string;
   email: string;
   isActive: boolean;
+  approved: boolean;
   logicDelete: boolean;
   firstName?: string;
   lastName?: string;
