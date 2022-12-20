@@ -21,7 +21,7 @@ export const mockedCategory = {
   name: 'herbicidas',
   image: mockedImage,
   url: 'herbicidas',
-  isActive: true,
+  isActive: false,
   logicDelete: true,
 };
 

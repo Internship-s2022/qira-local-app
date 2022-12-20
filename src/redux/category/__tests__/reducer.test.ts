@@ -6,17 +6,29 @@ import {
   getCategoryActions,
   getPublicCategoriesActions,
   inactivateCategoryActions,
+  resetCategory,
   updateCategoryActions,
 } from '../actions';
 import { categoryReducer, initialState } from '../reducer';
 import { ActionsType } from '../types';
 import { mockedCategory, mockedError } from './actions.test';
 
+const initialStateMocked = {
+  ...initialState,
+  categories: [mockedCategory],
+};
+
 describe('User Reducer', () => {
   it('Should return the initial state by default', () => {
     const result = categoryReducer(undefined, { type: '', payload: '' } as unknown as ActionsType);
 
     expect(result).toBe(initialState);
+  });
+
+  it('Should return the correct state for each RESET_CATEGORY actions', () => {
+    expect(categoryReducer(initialState, resetCategory())).toMatchObject({
+      selectedCategory: undefined,
+    });
   });
 
   it('Should return the correct state for each FETCHING actions', () => {
@@ -109,25 +121,22 @@ describe('User Reducer', () => {
       },
     );
   });
-
   it('Should return the correct state for GET_CATEGORIES_SUCCESS action', () => {
-    const mockedPayload = [mockedCategory];
     expect(
-      categoryReducer(initialState, getCategoriesActions.success(mockedPayload)),
+      categoryReducer(initialState, getCategoriesActions.success([mockedCategory])),
     ).toMatchObject({
       isFetching: false,
       error: undefined,
-      categories: mockedPayload,
+      categories: [mockedCategory],
     });
   });
   it('Should return the correct state for GET_PUBLIC_CATEGORIES_SUCCESS action', () => {
-    const mockedPayload = [mockedCategory];
     expect(
-      categoryReducer(initialState, getCategoriesActions.success(mockedPayload)),
+      categoryReducer(initialState, getCategoriesActions.success([mockedCategory])),
     ).toMatchObject({
       isFetching: false,
       error: undefined,
-      categories: mockedPayload,
+      categories: [mockedCategory],
     });
   });
   it('Should return the correct state for GET_CATEGORY_SUCCESS action', () => {
@@ -140,35 +149,27 @@ describe('User Reducer', () => {
   });
   it('Should return the correct state for CREATE_CATEGORY_SUCCESS action', () => {
     expect(
-      categoryReducer(initialState, createCategoryActions.success(mockedCategory)),
+      categoryReducer(initialStateMocked, createCategoryActions.success(mockedCategory)),
     ).toMatchObject({
       isFetching: false,
       error: undefined,
-      categories: [mockedCategory],
+      categories: [mockedCategory, mockedCategory],
     });
   });
-  // it('Should return the correct state for DELETE_CATEGORY_SUCCESS action', () => {
-  //   expect(
-  //     categoryReducer(initialState, deleteCategoryActions.success(mockedCategory)),
-  //   ).toMatchObject({
-  //     isFetching: false,
-  //     categories: [mockedCategory],
-  //   });
-  // });
-  // it('Should return the correct state for ACTIVATE_CATEGORY_SUCCESS action', () => {
-  //   expect(
-  //     categoryReducer(initialState, activateCategoryActions.success(mockedCategory)),
-  //   ).toMatchObject({
-  //     isFetching: false,
-  //     categories: [mockedCategory],
-  //   });
-  // });
-  // it('Should return the correct state for INACTIVATE_CATEGORY_SUCCESS action', () => {
-  //   expect(
-  //     categoryReducer(initialState, inactivateCategoryActions.success(mockedCategory)),
-  //   ).toMatchObject({
-  //     isFetching: false,
-  //     categories: [mockedCategory],
-  //   });
-  // });
+
+  it('Should return the correct state for ACTIVATE_CATEGORY_SUCCESS action', () => {
+    const newMockedCategory = {
+      ...mockedCategory,
+      isActive: true,
+    };
+    expect(
+      categoryReducer(initialStateMocked, activateCategoryActions.success(newMockedCategory)),
+    ).toMatchObject({
+      isFetching: false,
+      categories: [newMockedCategory],
+      error: undefined,
+      message: '',
+      selectedCategory: undefined,
+    });
+  });
 });
