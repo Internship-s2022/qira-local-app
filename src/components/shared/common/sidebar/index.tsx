@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
-import { breadcrumbsClasses, Button } from '@mui/material';
+import { Button } from '@mui/material';
 
 import { logout } from 'src/redux/auth/thunks';
 import { closeModal, openModal } from 'src/redux/modal/actions';
@@ -17,20 +17,23 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
 
   const routeComparation = () => {
     switch (location.pathname) {
-      case 'admin/orders':
-        console.log('ruta:', location.pathname);
+      case '/admin/orders':
         return 'Ordenes de compra';
-      case 'admin/clients':
+      case '/admin/clients':
         return 'Clientes';
-      case 'admin/products':
+      case '/admin/products':
         return 'Productos';
-      case 'admin/categories':
+      case '/admin/categories':
         return 'Categorias';
       case '/admin/deliver':
         return 'Entregar pedido';
     }
   };
+  useEffect(() => {
+    routeComparation();
+  }, [location.pathname]);
 
+  console.log('ejecuta la funcion', routeComparation());
   return (
     <aside className={styles.aside}>
       <div className={styles.container}>
@@ -38,7 +41,7 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
           <p>{props.title}</p>
         </div>
         <nav className={styles.navList}>
-          <ul>
+          <ul className={styles.list}>
             {props.links.map((link, index) => {
               return (
                 <NavLink
