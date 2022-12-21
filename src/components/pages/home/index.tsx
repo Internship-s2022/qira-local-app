@@ -39,7 +39,7 @@ const Home = (): JSX.Element => {
         </div>
       </section>
       <section className={styles.categorySection}>
-        <h2>Categorias destacadas</h2>
+        <h2>Categorías destacadas</h2>
         <div className={styles.categoriesContainer}>
           {categories.map((category) => {
             return (
