@@ -1,14 +1,19 @@
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
-import { store } from 'src/redux/store';
+import { rootReducer } from 'src/redux/store';
 
-const customRender = (children) => {
+const customRender = (children: JSX.Element, mockedStore?) => {
+  const enhancer = applyMiddleware(thunk);
+  const customStore = createStore(rootReducer, mockedStore, enhancer);
+
   return render(
     <BrowserRouter>
-      <Provider store={store}>{children}</Provider>
+      <Provider store={customStore}>{children}</Provider>
     </BrowserRouter>,
   );
 };

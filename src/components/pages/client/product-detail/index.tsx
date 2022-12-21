@@ -6,7 +6,7 @@ import { Button, IconButton, Tooltip } from '@mui/material';
 
 import { formatPriceText } from 'src/helper/products';
 import { getProductById } from 'src/redux/products/selectors/getProductById';
-import { getPublicProducts } from 'src/redux/products/thunks';
+import { getPublicProducts } from 'src/redux/products/thunk';
 import { addProduct } from 'src/redux/shopping-cart/actions';
 import { getProductQuantity } from 'src/redux/shopping-cart/selectors/getProductQuantity';
 import { AppDispatch, RootState } from 'src/redux/store';

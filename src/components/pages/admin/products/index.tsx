@@ -1,6 +1,6 @@
 import Dinero from 'dinero.js';
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Add, Check, Close, DeleteForever, Edit } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
@@ -10,14 +10,14 @@ import { Headers, TableButton } from 'src/components/shared/ui/list/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import * as thunks from 'src/redux/products/thunk';
-import { AppDispatch, RootState } from 'src/redux/store';
+import { AppDispatch, RootState, useAppDispatch } from 'src/redux/store';
 import { Currency } from 'src/types';
 
 import styles from './products.module.css';
 import { Product } from './types';
 
 const Products = (): JSX.Element => {
-  const dispatch: AppDispatch<null> = useDispatch();
+  const dispatch: AppDispatch<null> = useAppDispatch();
   const navigate = useNavigate();
   const products = useSelector((state: RootState) => state.products.products);
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
@@ -100,7 +100,7 @@ const Products = (): JSX.Element => {
   ];
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="products-list">
       <div className={styles.titleContainer}>
         <h1>Productos</h1>
         <div className={styles.addNewProduct}>

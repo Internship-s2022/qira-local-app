@@ -10,7 +10,7 @@ export const Confirm = () => {
   const options = useSelector((state: RootState) => state.modal.options);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="confirm-modal">
       <div className={styles.messageContainer}>{options.message}</div>
       <div className={styles.buttonContainer}>
         <Button

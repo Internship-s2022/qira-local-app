@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ProductCard from 'src/components/shared/ui/product-card';
 import { getPublicCategories } from 'src/redux/category/thunk';
 import { getNewProducts } from 'src/redux/products/selectors/new-products';
-import { getPublicProducts } from 'src/redux/products/thunks';
+import { getPublicProducts } from 'src/redux/products/thunk';
 import { clearOrderData } from 'src/redux/shopping-cart/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 
