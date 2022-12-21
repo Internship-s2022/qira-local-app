@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
@@ -14,6 +14,7 @@ import { SidebarProps } from './types';
 
 const Sidebar = (props: SidebarProps): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const location = useLocation();
 
   const routeComparation = () => {
     switch (location.pathname) {
@@ -29,11 +30,7 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
         return 'Entregar pedido';
     }
   };
-  useEffect(() => {
-    routeComparation();
-  }, [location.pathname]);
 
-  console.log('ejecuta la funcion', routeComparation());
   return (
     <aside className={styles.aside}>
       <div className={styles.container}>
@@ -54,7 +51,9 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
                       {link.title}
                     </li>
                   ) : (
-                    <li className={routeComparation() === link.title ? styles.linkSelected : ''}>
+                    <li
+                      className={routeComparation().includes(link.title) ? styles.linkSelected : ''}
+                    >
                       {link.title}
                     </li>
                   )}
