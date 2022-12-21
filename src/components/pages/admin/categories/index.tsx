@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Add, Check, Close, DeleteForever, Edit } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
@@ -14,7 +14,7 @@ import {
 } from 'src/redux/category/thunk';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { AppDispatch, RootState } from 'src/redux/store';
+import { AppDispatch, RootState, useAppDispatch } from 'src/redux/store';
 
 import styles from './categories.module.css';
 
@@ -26,7 +26,7 @@ interface Category {
 }
 
 const Categories = (): JSX.Element => {
-  const dispatch: AppDispatch<null> = useDispatch();
+  const dispatch: AppDispatch<null> = useAppDispatch();
   const navigate = useNavigate();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const isFetching = useSelector((state: RootState) => state.categories.isFetching);
@@ -106,7 +106,7 @@ const Categories = (): JSX.Element => {
   ];
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid={'categories-list'}>
       <div className={styles.titleContainer}>
         <h1>Categorías</h1>
         <div className={styles.addNewCategory}>
