@@ -305,6 +305,7 @@ const ProductForm = (): JSX.Element => {
               variant="contained"
               onClick={handleSubmit(onSubmit)}
               disabled={params.id ? !isDirty && !fileInputs : false}
+              type="submit"
             >
               {params.id ? 'Editar' : 'Agregar'}
             </Button>

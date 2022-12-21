@@ -69,7 +69,12 @@ const DeliverOrders = (): JSX.Element => {
             margin="dense"
             size="small"
           />
-          <Button className={styles.button} variant="contained" onClick={handleSubmit(onSubmit)}>
+          <Button
+            className={styles.button}
+            variant="contained"
+            onClick={handleSubmit(onSubmit)}
+            type="submit"
+          >
             Continuar
           </Button>
         </div>
