@@ -1,4 +1,6 @@
 import React from 'react';
+import { fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { mockedStore } from 'src/redux/__mocks__';
 import * as Store from 'src/redux/store';
@@ -21,5 +23,52 @@ describe('Client From - Unit Test', () => {
     mockFunction();
     const component = customRender(<ClientForm />, mockedInitialState);
     await component.getByTestId('client-form');
+  });
+
+  describe('Email input', () => {
+    it('should show error if the input is clicked and left empty', async () => {
+      mockFunction();
+      const { getByTestId, findByText, queryByText } = customRender(
+        <ClientForm />,
+        mockedInitialState,
+      );
+      const emailInput = getByTestId('email-fieldTest');
+      expect(emailInput).toBeInTheDocument();
+      let error = queryByText('Campo requerido.');
+      expect(error).not.toBeInTheDocument();
+      userEvent.click(emailInput);
+      userEvent.tab();
+      error = await findByText('Campo requerido.');
+      expect(error).toBeInTheDocument();
+    });
+    it('should show error if input text is invalid', async () => {
+      mockFunction();
+      const { getByTestId, findByText, queryByText } = customRender(
+        <ClientForm />,
+        mockedInitialState,
+      );
+      const emailInput = getByTestId('email-fieldTest');
+      expect(emailInput).toBeInTheDocument();
+      let error = queryByText('Debe tener formato válido de email.');
+      expect(error).not.toBeInTheDocument();
+      userEvent.click(emailInput);
+      fireEvent.change(emailInput, { target: { value: 'invalid.email@gmail' } });
+      userEvent.tab();
+      error = await findByText('Debe tener formato válido de email.');
+      expect(error).toBeInTheDocument();
+    });
+    it('should not show error if input text is valid', () => {
+      mockFunction();
+      const { getByTestId, queryByText } = customRender(<ClientForm />, mockedInitialState);
+      const emailInput = getByTestId('email-fieldTest');
+      expect(emailInput).toBeInTheDocument();
+      let error = queryByText('Debe tener formato válido de email.');
+      expect(error).not.toBeInTheDocument();
+      userEvent.click(emailInput);
+      fireEvent.change(emailInput, { target: { value: 'luchito@radiumrocket.com' } });
+      userEvent.tab();
+      error = queryByText('Debe tener formato válido de email.');
+      expect(error).not.toBeInTheDocument();
+    });
   });
 });

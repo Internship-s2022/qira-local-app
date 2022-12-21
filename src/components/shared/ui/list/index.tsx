@@ -41,7 +41,12 @@ const List = <T extends RowData>(props: ListProps<T>) => {
                     (btn, index) =>
                       btn(row).active && (
                         <Tooltip key={index} title={btn(row).title}>
-                          <IconButton onClick={btn(row).onClick}>{btn(row).icon}</IconButton>
+                          <IconButton
+                            data-testid={btn(row).title + '-btn'}
+                            onClick={btn(row).onClick}
+                          >
+                            {btn(row).icon}
+                          </IconButton>
                         </Tooltip>
                       ),
                   )}

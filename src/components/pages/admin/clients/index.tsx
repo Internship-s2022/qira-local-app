@@ -103,7 +103,7 @@ const Clients = (): JSX.Element => {
   ];
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid={'clients-list'}>
       <div className={styles.titleContainer}>
         <h1>Clientes</h1>
       </div>
