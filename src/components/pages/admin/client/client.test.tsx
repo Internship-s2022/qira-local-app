@@ -10,7 +10,7 @@ import ClientForm from '.';
 
 const mockedDispatch = jest.fn();
 
-describe('Client From - Unit Test', () => {
+describe('Client Form - Unit Test', () => {
   const mockFunction = () => {
     jest.spyOn(Store, 'useAppDispatch').mockReturnValue(mockedDispatch);
   };
@@ -22,7 +22,8 @@ describe('Client From - Unit Test', () => {
   it('Should render the component correctly', async () => {
     mockFunction();
     const component = customRender(<ClientForm />, mockedInitialState);
-    await component.getByTestId('client-form');
+    const form = await component.getByTestId('client-form');
+    expect(form).toBeInTheDocument();
   });
 
   describe('Email input', () => {
