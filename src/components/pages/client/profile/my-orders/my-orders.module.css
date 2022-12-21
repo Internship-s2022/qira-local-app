@@ -34,3 +34,18 @@
     left: 35vw;
   }
 }
+
+.noOrderMessage {
+  width: 575px;
+  margin-left: 60px;
+}
+
+.buttonHome {
+  font-weight: bold;
+  color: #f05523;
+  text-decoration: none;
+}
+
+.buttonHome:hover {
+  cursor: pointer;
+}
