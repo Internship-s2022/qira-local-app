@@ -1,20 +1,27 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { CancelOutlined, Close, ShoppingCartOutlined } from '@mui/icons-material';
 
 import QiraLoader from 'src/components/shared/ui/qira-loader';
-import { RootState } from 'src/redux/store';
+import { resetState } from 'src/redux/shopping-cart/actions';
+import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './final-screen.module.css';
 
 export const FinalScreen = (): JSX.Element => {
   const navigate = useNavigate();
-  const isFetching = useSelector((state: RootState) => state.orders.isFetching);
-  const error = useSelector((state: RootState) => state.orders.error);
+  const dispatch: AppDispatch<null> = useDispatch();
+  const isFetching = useSelector((state: RootState) => state.shoppingCart.isFetching);
+  const error = useSelector((state: RootState) => state.shoppingCart.error);
 
   useEffect(() => {
-    setTimeout(() => navigate('/'), 5000);
+    if (!isFetching) {
+      setTimeout(() => {
+        dispatch(resetState());
+        navigate('/');
+      }, 5000);
+    }
   }, []);
 
   return (
