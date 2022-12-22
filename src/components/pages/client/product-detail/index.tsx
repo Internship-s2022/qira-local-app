@@ -162,7 +162,7 @@ export const ProductDetail = (): JSX.Element => {
               </div>
               <div>
                 <div className={styles.priceContainerAmount}>
-                  <p>TOTAL</p>
+                  {productQuantity ? <p>TOTAL</p> : <p>PRECIO UNITARIO</p>}
                   <p className={styles.priceText}>
                     {selectedProduct && formatPriceText(selectedProduct, count)}
                   </p>
