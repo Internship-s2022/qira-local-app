@@ -33,6 +33,11 @@ export const UploadImage = () => {
     <div className={styles.container}>
       <div className={styles.titleModalImage}>Selecciona una imagen</div>
       <div className={styles.imageContainer}>
+        {!preview && (
+          <div className={styles.formatText}>
+            Formatos de imagen permitidos: .jpg, .png, .svg, .gif{' '}
+          </div>
+        )}
         {selectedFile && <img className={styles.image} src={preview} />}
       </div>
       <div className={styles.buttonContainer}>

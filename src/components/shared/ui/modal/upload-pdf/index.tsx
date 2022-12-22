@@ -27,7 +27,7 @@ export const UploadPdf = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.titleModalImage}>Selecciona un archivo</div>
+      <div className={styles.titleModalPdf}>Selecciona un archivo</div>
       <div className={styles.fileContainer}>
         {preview && <div className={styles.fileName}>{preview}</div>}
       </div>

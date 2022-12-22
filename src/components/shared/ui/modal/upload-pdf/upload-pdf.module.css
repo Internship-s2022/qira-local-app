@@ -26,9 +26,15 @@
   justify-content: space-between;
 }
 
-.titleModalImage {
+.titleModalPdf {
   padding: 5px 10px;
   font-size: 25px;
   border-radius: 5px;
   box-shadow: solid 2px;
+}
+
+.fileName {
+  max-width: 285px;
+  overflow-x: hidden;
+  font-size: 15px;
 }
