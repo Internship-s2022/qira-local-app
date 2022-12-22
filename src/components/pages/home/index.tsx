@@ -70,7 +70,12 @@ const Home = (): JSX.Element => {
                 <div className={styles.categoryCard}>
                   {category ? (
                     <>
-                      <img className={styles.imgCategory} src={category.image.url} alt="" />
+                      <img
+                        className={styles.imgCategory}
+                        src={category.image.url}
+                        alt={category.name}
+                        title={category.name}
+                      />
                       <div className={styles.nameCategory}>{category.name}</div>
                     </>
                   ) : (

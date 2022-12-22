@@ -36,6 +36,8 @@ const ProductCard = ({ product }: ProductCardProps): JSX.Element => {
           onClick={() => navigate(`/product/${product._id}`)}
           className={styles.image}
           src={product.image.url}
+          alt={product.brand + ' ' + product.name}
+          title={product.brand + ' ' + product.name}
         />
         {product.isNew && <p className={styles.isNewLabel}>NUEVO</p>}
       </div>
