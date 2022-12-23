@@ -62,13 +62,13 @@ const Clients = (): JSX.Element => {
     (rowData) => ({
       active: true,
       icon: rowData.approved ? rowData.isActive ? <Close /> : <Check /> : <HowToReg />,
-      title: rowData.approved ? (rowData.isActive ? 'Desactivar' : 'Activar') : 'Aprobar',
+      title: rowData.approved ? (rowData.isActive ? 'Deshabilitar' : 'Habilitar') : 'Aprobar',
       onClick: () => {
         rowData.approved
           ? rowData.isActive
             ? dispatch(
                 openModal(ModalTypes.CONFIRM, {
-                  message: '¿Está seguro de que desea desactivar el cliente?',
+                  message: '¿Está seguro de que desea deshabilitar el cliente?',
                   onConfirmCallback: () => {
                     dispatch(thunks.inactivateClient(rowData.id));
                     dispatch(closeModal());
@@ -78,7 +78,7 @@ const Clients = (): JSX.Element => {
               )
             : dispatch(
                 openModal(ModalTypes.CONFIRM, {
-                  message: '¿Está seguro de que desea activar el cliente?',
+                  message: '¿Está seguro de que desea habilitar el cliente?',
                   onConfirmCallback: () => {
                     dispatch(thunks.activateClient(rowData.id));
                     dispatch(closeModal());
