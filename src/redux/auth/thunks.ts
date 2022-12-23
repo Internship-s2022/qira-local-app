@@ -55,7 +55,7 @@ export const register = (user) => {
       dispatch(registerActions.request());
       const response = await registerUser(user);
       if (response.data) {
-        dispatch(registerActions.success());
+        return dispatch(registerActions.success());
       }
     } catch (error) {
       return dispatch(registerActions.failure(error.response.data));
