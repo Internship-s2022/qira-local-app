@@ -28,6 +28,7 @@
 @media screen and (max-width: 767px) {
   .title {
     align-self: flex-start;
+    margin-bottom: 10px;
   }
 
   .orderContainer {

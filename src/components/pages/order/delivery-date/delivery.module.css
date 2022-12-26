@@ -4,9 +4,13 @@
   padding: 4% 10% 4% 12%;
 }
 
+.container h2 {
+  font-size: 32px;
+}
+
 .subTitle {
   margin: 0 0 30px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
   color: #f05523;
 }

@@ -121,6 +121,10 @@
 
   .pricesSidebar {
     width: 100vw;
-    padding-bottom: 2%;
+    padding-bottom: 5%;
+  }
+
+  .title {
+    margin-bottom: 25px;
   }
 }
