@@ -9,6 +9,7 @@ import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { closeSidebar } from 'src/redux/sidebar/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
+import { UserRole } from 'src/types';
 
 import styles from './sidebar-home.module.css';
 import { propsSidebar } from './types';
@@ -17,6 +18,7 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const currentUser = useSelector((state: RootState) => state.auth.user);
+  const role = useSelector((state: RootState) => state.auth.role);
 
   const [showList, setShowList] = useState<boolean>(false);
   useEffect(() => {
@@ -68,6 +70,25 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
                     ))}
                   </ul>
                 </>
+              )}
+              {role && role === UserRole.CLIENT && (
+                <div className={styles.clientLinks}>
+                  <span className={styles.options}>
+                    <Link className={styles.linkProfile} to="/profile/my-orders">
+                      Mis pedidos
+                    </Link>
+                  </span>
+                  <span className={styles.options}>
+                    <Link className={styles.linkProfile} to="/profile/bill-information">
+                      Datos de facturación
+                    </Link>
+                  </span>
+                  <span className={styles.options}>
+                    <Link className={styles.linkProfile} to="/profile/user-data">
+                      Datos de usuario
+                    </Link>
+                  </span>
+                </div>
               )}
               <li>
                 <div

@@ -25,6 +25,9 @@
 }
 
 .sidebarList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   padding: 0;
   margin-left: 20px;
   list-style: none;
@@ -32,9 +35,14 @@
 
 .options {
   padding: 5px;
-  margin: 30px 0;
   font-size: 18px;
   font-weight: bold;
+}
+
+.clientLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .linkProfile {

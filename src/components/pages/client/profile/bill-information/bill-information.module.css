@@ -6,11 +6,18 @@
 
 .formContainer {
   display: flex;
+  gap: 40px;
   justify-content: space-between;
-  width: 500px;
 }
 
 .columnContainer {
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 767px) {
+  .formContainer {
+    flex-direction: column;
+    gap: 0;
+  }
 }

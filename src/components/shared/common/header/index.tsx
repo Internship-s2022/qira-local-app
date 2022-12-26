@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   AccountCircle,
-  ArrowBack,
   InfoOutlined,
   KeyboardArrowDown,
   MenuOutlined,
@@ -84,21 +83,9 @@ const Header = () => {
               />
             </Link>
             <div className={styles.menuAndLogoContainer}>
-              {currentRole != UserRole.ADMIN && (
+              {currentRole !== UserRole.ADMIN && (
                 <div onClick={() => dispatch(sidebarIsOpen ? closeSidebar() : openSidebar())}>
-                  <MenuOutlined
-                    className={
-                      location.pathname.includes('/profile') ? styles.menuOnProfile : styles.menu
-                    }
-                  />
-                  <ArrowBack
-                    onClick={() => navigate('/')}
-                    className={
-                      location.pathname.includes('/profile')
-                        ? styles.arrowBackOnProfile
-                        : styles.arrowBack
-                    }
-                  ></ArrowBack>
+                  <MenuOutlined className={styles.menu} />
                 </div>
               )}
               <div onClick={() => dispatch(closeSidebar())}>

@@ -202,14 +202,6 @@
     color: white;
   }
 
-  .arrowBack {
-    display: none;
-  }
-
-  .arrowBackOnProfile {
-    display: none;
-  }
-
   .pLogin {
     display: none;
   }
@@ -234,10 +226,6 @@
   .menu {
     display: none;
   }
-
-  .menuOnProfile {
-    display: none;
-  }
 }
 @media screen and (max-width: 768px) {
   .mainHeader {
@@ -257,17 +245,6 @@
     display: none;
   }
 
-  .arrowBackOnProfile {
-    display: flex;
-    margin-top: 5px;
-    font-size: 40px;
-    color: white;
-  }
-
-  .arrowBackOnProfile:hover {
-    cursor: pointer;
-  }
-
   .menuAndLogoContainer {
     display: flex;
     gap: 10px;
@@ -282,10 +259,6 @@
     display: flex;
     font-size: 50px;
     color: white;
-  }
-
-  .menuOnProfile {
-    display: none;
   }
 
   .searchBar {
