@@ -47,14 +47,18 @@ export const UploadPdf = () => {
         )}
       </div>
       <div className={styles.buttonContainer}>
-        <Button variant={preview ? 'outlined' : 'contained'} component="label">
+        <Button
+          variant={preview ? 'outlined' : 'contained'}
+          className={styles.button}
+          component="label"
+        >
           {preview ? <> Elegir otro archivo </> : <> Subir Archivo </>}
           <input hidden type="file" accept=".pdf" onChange={onSelectFile} />
         </Button>
         {preview && (
           <Button
             onClick={() => options.onConfirmCallback(selectedFile)}
-            className={styles.buttonSend}
+            className={styles.button}
             variant="contained"
             component="label"
           >
