@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import AdminRouter from './components/pages/admin';
-import ClientRouter from './components/pages/client';
-import ProfileRouter from './components/pages/client/profile';
-import OrderRouter from './components/pages/order';
 import { SharedModal } from './components/shared/ui/modal';
+import QiraLoader from './components/shared/ui/qira-loader';
 import { tokenListener } from './helper/firebase';
 import PrivateRoute from './helper/routes/private-routes';
 import { UserRole } from './types';
+const AdminRouter = lazy(() => import('./components/pages/admin'));
+const ClientRouter = lazy(() => import('./components/pages/client'));
+const ProfileRouter = lazy(() => import('./components/pages/client/profile'));
+const OrderRouter = lazy(() => import('./components/pages/order'));
 
 const App = (): JSX.Element => {
   useEffect(() => {
@@ -17,17 +18,25 @@ const App = (): JSX.Element => {
 
   return (
     <BrowserRouter>
-      <SharedModal />
-      <Routes>
-        <Route path="*" element={<ClientRouter />} />
-        <Route element={<PrivateRoute role={UserRole.ADMIN} />}>
-          <Route path="/admin/*" element={<AdminRouter />} />
-        </Route>
-        <Route element={<PrivateRoute role={UserRole.CLIENT} />}>
-          <Route path="/order/*" element={<OrderRouter />} />
-          <Route path="/profile/*" element={<ProfileRouter />} />
-        </Route>
-      </Routes>
+      <Suspense
+        fallback={
+          <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
+            <QiraLoader />
+          </div>
+        }
+      >
+        <SharedModal />
+        <Routes>
+          <Route path="*" element={<ClientRouter />} />
+          <Route element={<PrivateRoute role={UserRole.ADMIN} />}>
+            <Route path="/admin/*" element={<AdminRouter />} />
+          </Route>
+          <Route element={<PrivateRoute role={UserRole.CLIENT} />}>
+            <Route path="/order/*" element={<OrderRouter />} />
+            <Route path="/profile/*" element={<ProfileRouter />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
