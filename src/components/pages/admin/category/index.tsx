@@ -173,6 +173,7 @@ const CategoryForm = (): JSX.Element => {
           variant="contained"
           onClick={handleSubmit(onSubmit)}
           disabled={params.id ? !isDirty && !imageInput?.isNew : false}
+          type="submit"
         >
           {params.id ? 'Editar' : 'Agregar'}
         </Button>

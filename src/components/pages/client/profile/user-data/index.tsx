@@ -97,6 +97,7 @@ const UserData = (): JSX.Element => {
             fullWidth
             className={styles.button}
             disabled={disabledBtn}
+            type="submit"
           >
             Guardar
           </Button>

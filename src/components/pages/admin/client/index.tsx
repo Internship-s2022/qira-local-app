@@ -256,6 +256,7 @@ const ClientForm = (): JSX.Element => {
               className={styles.sendBtn}
               onClick={handleSubmit(onSubmit)}
               disabled={!isDirty}
+              type="submit"
             >
               Editar Cliente
             </Button>
