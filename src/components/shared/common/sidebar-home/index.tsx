@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowDropDownOutlined, ArrowLeftOutlined } from '@mui/icons-material';
 
 import { logout } from 'src/redux/auth/thunks';
@@ -16,6 +16,7 @@ import { propsSidebar } from './types';
 
 const SidebarHome = (props: propsSidebar): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const location = useLocation();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const role = useSelector((state: RootState) => state.auth.role);
@@ -35,11 +36,19 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
             <ul className={styles.sidebarList}>
               <li>
                 {currentUser?.email ? (
-                  <span className={styles.options}>
-                    <Link className={styles.linkProfile} to="/profile/my-orders">
-                      Ir a mi perfil
-                    </Link>
-                  </span>
+                  location.pathname.includes('profile') ? (
+                    <span className={styles.options}>
+                      <Link className={styles.linkProfile} to="/">
+                        Ir al inicio
+                      </Link>
+                    </span>
+                  ) : (
+                    <span className={styles.options}>
+                      <Link className={styles.linkProfile} to="/profile/my-orders">
+                        Ir a mi perfil
+                      </Link>
+                    </span>
+                  )
                 ) : (
                   <>
                     <span
