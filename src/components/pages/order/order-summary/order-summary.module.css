@@ -24,3 +24,32 @@
 .productBox {
   margin-right: 10px;
 }
+
+@media screen and (max-width: 767px) {
+  .title {
+    align-self: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .orderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .subtitle {
+    align-self: flex-start;
+  }
+
+  .productQuantity {
+    align-self: flex-start;
+  }
+
+  .productsContainer {
+    justify-content: center;
+  }
+
+  .productBox {
+    margin-right: 0;
+  }
+}

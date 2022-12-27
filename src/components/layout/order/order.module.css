@@ -109,3 +109,22 @@
   font-size: 12px;
   color: white;
 }
+
+@media screen and (max-width: 767px) {
+  .contentContainer {
+    flex-direction: column;
+  }
+
+  .outletContainer {
+    width: 100vw;
+  }
+
+  .pricesSidebar {
+    width: 100vw;
+    padding-bottom: 5%;
+  }
+
+  .title {
+    margin-bottom: 25px;
+  }
+}
