@@ -6,6 +6,7 @@ import { IconButton } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import {
   activateCategory,
   deleteCategory,
@@ -122,7 +123,9 @@ const Categories = (): JSX.Element => {
         </div>
       </div>
       {isFetching ? (
-        <></>
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
         <List<Category>
           headers={headers}
