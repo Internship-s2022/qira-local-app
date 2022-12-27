@@ -60,7 +60,7 @@ const Home = (): JSX.Element => {
       <section className={styles.categorySection}>
         <h2>Categorias destacadas</h2>
         <div className={styles.categoriesContainer}>
-          {(isFetchingCategories ? Array.from(new Array(4)) : categories).map((category) => {
+          {(isFetchingCategories ? Array.from(new Array(6)) : categories).map((category) => {
             return (
               <Link
                 className={styles.nameCategory}
