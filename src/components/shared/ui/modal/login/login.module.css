@@ -56,3 +56,9 @@
   color: #f05523;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 300px;
+  }
+}
