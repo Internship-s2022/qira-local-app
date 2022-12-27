@@ -13,7 +13,7 @@ export const RecoverPassword = () => {
       </p>
       <div className={styles.button}>
         <Button
-          href="https://wa.me/5493412115850?text=Hola,%20me%20gustaria%20realizar%20una%20consulta"
+          href="https://wa.me/5493412115850?text=Hola,%20%C2%A1olvid%C3%A9%20mi%20contrase%C3%B1a!%20Quisiera%20gestionar%20la%20recuperaci%C3%B3n%20de%20la%20misma.%20Por%20favor,%20%C2%BFpodr%C3%ADan%20ayudarme?"
           target="_blank"
           rel="noreferrer"
           variant="contained"
