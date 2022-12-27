@@ -65,6 +65,7 @@ const Header = () => {
                 title={`La fecha de cotizacion es: ${exchangeRate.date}`}
                 placement="right"
                 arrow
+                disableFocusListener
               >
                 <InfoOutlined className={styles.infoIcon} />
               </Tooltip>
