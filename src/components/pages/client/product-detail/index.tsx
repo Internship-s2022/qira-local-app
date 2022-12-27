@@ -38,7 +38,7 @@ export const ProductDetail = (): JSX.Element => {
 
   useEffect(() => {
     params.id && dispatch(getPublicProducts());
-  }, []);
+  }, [params.id]);
 
   useEffect(() => {
     if (productQuantity >= 1) {
