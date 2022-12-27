@@ -63,7 +63,7 @@
   margin-top: 88vh;
 }
 
-@media screen and (max-width: 678px) {
+@media screen and (max-width: 699px) {
   .footerContainer {
     flex-direction: column;
   }
