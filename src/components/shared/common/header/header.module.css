@@ -181,6 +181,10 @@
   cursor: pointer;
 }
 
+.shoppingCartContainer {
+  margin-left: 25px;
+}
+
 .menuAndLogoContainer {
   display: none;
 }
@@ -231,6 +235,10 @@
     font-size: 40px;
   }
 
+  .shoppingCartContainer {
+    margin: 0 10px 0 0;
+  }
+
   .menu {
     display: none;
   }
@@ -239,6 +247,7 @@
     display: none;
   }
 }
+
 @media screen and (max-width: 768px) {
   .mainHeader {
     gap: 10px;
