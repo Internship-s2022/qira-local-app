@@ -91,7 +91,7 @@ const CategoryForm = (): JSX.Element => {
       }
     }
     const submitData = {
-      name: data.name,
+      name: data.name.trim(),
       image: imageToSend,
       url: data.url,
     };

@@ -5,7 +5,7 @@ export const CategoryValidations = Joi.object({
     .min(3)
     .max(50)
     .required()
-    .regex(/^([A-zÀ-ú]+\s)*[A-zÀ-ú]+$/)
+    .regex(/^([A-zÀ-ú]+\s)*[A-zÀ-ú\s?]+$/)
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
       'string.max': 'Debe contener menos de 50 caracteres.',
