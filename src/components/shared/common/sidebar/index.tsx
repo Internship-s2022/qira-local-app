@@ -28,6 +28,8 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
         return 'Categorias';
       case '/admin/deliver':
         return 'Entregar pedido';
+      default:
+        return '';
     }
   };
 
