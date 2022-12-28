@@ -55,7 +55,7 @@ const OrderLayout = (): JSX.Element => {
         disabled: cartProducts.length > 0 ? false : true,
       };
       if (cartProducts.length === 0) {
-        setTimeout(() => navigate('/'), 3000);
+        setTimeout(() => navigate('/'), 1000);
       }
       break;
     case `/order${OrderRoutes.AUTHORIZED}`:
