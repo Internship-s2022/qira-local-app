@@ -55,6 +55,11 @@
   cursor: pointer;
 }
 
+.linkSelected {
+  color: #f05523;
+  text-decoration: none;
+}
+
 .options:hover {
   color: #f05523;
   cursor: pointer;
