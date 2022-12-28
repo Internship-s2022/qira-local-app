@@ -37,13 +37,13 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
               <li>
                 {currentUser?.email ? (
                   location.pathname.includes('profile') ? (
-                    <span className={styles.options}>
+                    <span className={styles.options} onClick={() => dispatch(closeSidebar())}>
                       <Link className={styles.linkProfile} to="/">
                         Ir al inicio
                       </Link>
                     </span>
                   ) : (
-                    <span className={styles.options}>
+                    <span className={styles.options} onClick={() => dispatch(closeSidebar())}>
                       <Link className={styles.linkProfile} to="/profile/my-orders">
                         Ir a mi perfil
                       </Link>
@@ -81,7 +81,7 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
                 </>
               )}
               {role && role === UserRole.CLIENT && (
-                <div className={styles.clientLinks}>
+                <div className={styles.clientLinks} onClick={() => dispatch(closeSidebar())}>
                   <span className={styles.options}>
                     <Link className={styles.linkProfile} to="/profile/my-orders">
                       Mis pedidos
@@ -108,8 +108,12 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
                         onConfirmCallback: () => {
                           dispatch(logout());
                           dispatch(closeModal());
+                          dispatch(closeSidebar());
                         },
-                        onCloseCallback: () => dispatch(closeModal()),
+                        onCloseCallback: () => {
+                          dispatch(closeModal());
+                          dispatch(closeSidebar());
+                        },
                       }),
                     )
                   }

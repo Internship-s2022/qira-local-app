@@ -23,8 +23,8 @@
   left: 50vw;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
   .loaderContainer {
-    left: 40vw;
+    left: 33vw;
   }
 }
