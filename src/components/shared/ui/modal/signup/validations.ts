@@ -42,7 +42,7 @@ export const signUpValidations = Joi.object({
       'string.pattern.base': 'Debe contener 7-8 dígitos.',
     }),
   businessName: Joi.string()
-    .regex(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+/)
+    .regex(/^([0-9]*)(\s?[A-zÀ-ú]+)(\s[0-9A-zÀ-ú]+)*\s?$/)
     .min(3)
     .max(50)
     .trim()
@@ -51,7 +51,7 @@ export const signUpValidations = Joi.object({
       'string.min': 'Debe contener al menos 3 caracteres.',
       'string.max': 'No debe contener mas de 50 caracteres.',
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Puede contener letras y números.',
+      'string.pattern.base': 'Razón social inválida.',
     }),
   cuit: Joi.string()
     .regex(/^[0-9\-+]{11}$/)
@@ -100,9 +100,10 @@ export const signUpValidations = Joi.object({
       'string.empty': 'Campo requerido.',
     }),
   street: Joi.string()
-    .regex(/[a-zA-Z0-9]+\s[a-zA-Z0-9]/)
+    .regex(/^([0-9]*)(\s?[A-zÀ-ú]+)(\s[0-9A-zÀ-ú]+)*\s?$/)
     .min(3)
     .required()
+    .trim()
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
       'string.pattern.base': 'La dirección es inválida.',
