@@ -22,7 +22,7 @@ export const FinalScreen = (): JSX.Element => {
         navigate('/');
       }, 5000);
     }
-  }, []);
+  }, [isFetching]);
 
   return (
     <div className={styles.mainContainer}>
