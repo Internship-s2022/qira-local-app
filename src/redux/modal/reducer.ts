@@ -1,6 +1,6 @@
 import { Actions, ActionsType, ModalState } from './types';
 
-const initialState = {
+export const initialState = {
   isOpen: false,
   type: undefined,
   options: undefined,

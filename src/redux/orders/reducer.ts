@@ -1,6 +1,6 @@
 import { Actions, ActionsType, OrdersState } from './types';
 
-const initialState: OrdersState = {
+export const initialState: OrdersState = {
   orders: [],
   isFetching: false,
   message: '',

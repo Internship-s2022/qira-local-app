@@ -1,6 +1,6 @@
 import { Actions, ActionsType, ProductsState } from './types';
 
-const initialState: ProductsState = {
+export const initialState: ProductsState = {
   products: [],
   isFetching: false,
   message: '',

@@ -1,7 +1,7 @@
 import Dinero from 'dinero.js';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { ArrowBack } from '@mui/icons-material';
@@ -11,6 +11,7 @@ import { SharedCheckbox } from 'src/components/shared/ui/checkbox';
 import { ImageInput } from 'src/components/shared/ui/image-input';
 import { InputText } from 'src/components/shared/ui/input';
 import { PdfInput } from 'src/components/shared/ui/pdf-input';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options as SelectOptions } from 'src/components/shared/ui/select/types';
 import { toBase64 } from 'src/helper/form';
@@ -21,7 +22,7 @@ import { ModalTypes, Options } from 'src/redux/modal/types';
 import { resetProduct } from 'src/redux/products/actions';
 import { createProduct, getProductById, updateProduct } from 'src/redux/products/thunk';
 import { Actions } from 'src/redux/products/types';
-import { AppDispatch, RootState } from 'src/redux/store';
+import { AppDispatch, RootState, useAppDispatch } from 'src/redux/store';
 import { Currency, FileToSend } from 'src/types';
 
 import styles from './product.module.css';
@@ -29,10 +30,10 @@ import { ProductFormValues } from './types';
 import { ProductValidation } from './validations';
 
 const ProductForm = (): JSX.Element => {
-  const dispatch: AppDispatch<null> = useDispatch();
+  const dispatch: AppDispatch<null> = useAppDispatch();
   const params = useParams();
   const navigate = useNavigate();
-  const isFetching = useSelector((state: RootState) => state.clients.isFetching);
+  const isFetching = useSelector((state: RootState) => state.products.isFetching);
   const product = useSelector((state: RootState) => state.products.selectedProduct);
   const products = useSelector((state: RootState) => state.products.products);
   const categoryOptions = useSelector(getCategoryOptions);
@@ -187,7 +188,9 @@ const ProductForm = (): JSX.Element => {
   return (
     <>
       {isFetching ? (
-        <></>
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
         <>
           <div className={styles.titleContainer}>
@@ -199,12 +202,13 @@ const ProductForm = (): JSX.Element => {
                 disableRipple={true}
                 size="large"
                 onClick={() => navigate('/admin/products')}
+                data-testid="back-button"
               >
                 <ArrowBack />
               </IconButton>
             </div>
           </div>
-          <form className={styles.container}>
+          <form className={styles.container} data-testid="product-form">
             <div className={styles.columnsContainer}>
               <div className={styles.column}>
                 <div className={styles.categories}>

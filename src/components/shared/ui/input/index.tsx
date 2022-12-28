@@ -39,6 +39,7 @@ export const InputText = <TValuesForm extends FieldValues>({
           helperText={error?.message != undefined ? error.message : ' '}
           error={error?.message != undefined}
           data-testid={`${name}-field`}
+          inputProps={{ 'data-testid': `${name}-fieldTest` }}
         />
       </div>
     </div>

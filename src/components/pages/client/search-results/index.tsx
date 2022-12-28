@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import ProductCard from 'src/components/shared/ui/product-card';
 import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { getProductsFilteredBySearch } from 'src/redux/products/selectors/getProductsBySearch';
-import { getPublicProducts } from 'src/redux/products/thunks';
+import { getPublicProducts } from 'src/redux/products/thunk';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { capitalizeFirstLetter } from 'src/utils/formatters';
 

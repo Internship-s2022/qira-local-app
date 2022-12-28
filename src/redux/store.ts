@@ -3,6 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { useDispatch } from 'react-redux';
 
 import { authReducer } from './auth/reducer';
 import { ActionsType as AuthActionsType } from './auth/types';
@@ -16,7 +17,7 @@ import { productsReducer } from './products/reducer';
 import { shoppingCartReducer } from './shopping-cart/reducer';
 import { sidebarReducer } from './sidebar/reducer';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   auth: authReducer,
   categories: categoryReducer,
   modal: modalReducer,
@@ -44,6 +45,8 @@ const createPersistedStore = () => {
 };
 
 export const { store, persistor } = createPersistedStore();
+
+export const useAppDispatch: () => AppDispatch<null> = useDispatch;
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type RootAction = AuthActionsType | CategoryActionsType;

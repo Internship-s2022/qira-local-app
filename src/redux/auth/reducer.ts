@@ -1,6 +1,6 @@
 import { Actions, ActionsType, AuthState } from './types';
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   user: undefined,
   token: undefined,
   role: undefined,

@@ -8,6 +8,7 @@ import {
   deleteProductActions,
   getProductActions,
   getProductsActions,
+  getPublicProductsActions,
   inactivateProductActions,
   updateProductActions,
 } from './actions';
@@ -93,6 +94,18 @@ export const deleteProduct = (id) => {
       return dispatch(deleteProductActions.success(response.data)), dispatch(closeModal());
     } catch (error) {
       return dispatch(deleteProductActions.failure(error));
+    }
+  };
+};
+
+export const getPublicProducts = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(getPublicProductsActions.request());
+      const response = await API.getPublicProducts();
+      return dispatch(getPublicProductsActions.success(response.data));
+    } catch (error) {
+      return dispatch(getPublicProductsActions.failure(error));
     }
   };
 };

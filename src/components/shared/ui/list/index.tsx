@@ -16,7 +16,7 @@ import { ListProps, RowData } from './types';
 const List = <T extends RowData>(props: ListProps<T>) => {
   return (
     <TableContainer className={styles.container}>
-      <Table className={styles.table}>
+      <Table className={styles.table} data-testid="shared-list">
         <TableHead className={styles.tableHeader}>
           <TableRow>
             {props.headers.map((row) => (
@@ -41,7 +41,12 @@ const List = <T extends RowData>(props: ListProps<T>) => {
                     (btn, index) =>
                       btn(row).active && (
                         <Tooltip key={index} title={btn(row).title}>
-                          <IconButton onClick={btn(row).onClick}>{btn(row).icon}</IconButton>
+                          <IconButton
+                            data-testid={btn(row).title + '-btn'}
+                            onClick={btn(row).onClick}
+                          >
+                            {btn(row).icon}
+                          </IconButton>
                         </Tooltip>
                       ),
                   )}

@@ -1,8 +1,9 @@
 import { Actions, ActionsType, sidebarState } from './types';
 
-const initialState = {
+export const initialState = {
   isOpen: false,
 };
+
 export const sidebarReducer = (
   state: sidebarState = initialState,
   action: ActionsType,

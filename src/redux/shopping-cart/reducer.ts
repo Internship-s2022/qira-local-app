@@ -1,6 +1,6 @@
 import { Actions, ActionsType, ShoppingCartState } from './types';
 
-const initialState: ShoppingCartState = {
+export const initialState: ShoppingCartState = {
   products: [],
   isOpen: false,
   receipt: undefined,
