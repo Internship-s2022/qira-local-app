@@ -137,7 +137,7 @@ const CategoryForm = (): JSX.Element => {
           </IconButton>
         </div>
       </div>
-      <form className={styles.formContainer}>
+      <form className={styles.formContainer} data-testid={'category-form'}>
         <div className={styles.columnsContainer}>
           <div className={styles.inputsContainer}>
             <InputText

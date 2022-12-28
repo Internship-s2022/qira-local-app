@@ -1,6 +1,6 @@
 import { Actions, ActionsType, ClientState } from './types';
 
-const initialState: ClientState = {
+export const initialState: ClientState = {
   clients: [],
   selectedClient: undefined,
   isFetching: false,
