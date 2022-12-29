@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   AccountCircle,
-  ArrowBack,
   InfoOutlined,
   KeyboardArrowDown,
   MenuOutlined,
@@ -26,7 +25,6 @@ import styles from './header.module.css';
 const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const currentUser = useSelector((state: RootState) => state.auth.user);
@@ -84,21 +82,9 @@ const Header = () => {
               />
             </Link>
             <div className={styles.menuAndLogoContainer}>
-              {currentRole != UserRole.ADMIN && (
+              {currentRole !== UserRole.ADMIN && (
                 <div onClick={() => dispatch(sidebarIsOpen ? closeSidebar() : openSidebar())}>
-                  <MenuOutlined
-                    className={
-                      location.pathname.includes('/profile') ? styles.menuOnProfile : styles.menu
-                    }
-                  />
-                  <ArrowBack
-                    onClick={() => navigate('/')}
-                    className={
-                      location.pathname.includes('/profile')
-                        ? styles.arrowBackOnProfile
-                        : styles.arrowBack
-                    }
-                  ></ArrowBack>
+                  <MenuOutlined className={styles.menu} />
                 </div>
               )}
               <div onClick={() => dispatch(closeSidebar())}>

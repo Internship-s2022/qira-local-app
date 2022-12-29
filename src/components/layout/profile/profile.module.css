@@ -2,6 +2,13 @@
   display: flex;
 }
 
+.containerWithSidebar {
+  position: fixed;
+  width: 100vw;
+  height: auto;
+  overflow-y: hidden;
+}
+
 .contentContainer {
   display: flex;
   width: 100%;
@@ -63,4 +70,10 @@
 .outletContainer {
   display: flex;
   width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .profileNavBar {
+    display: none;
+  }
 }
