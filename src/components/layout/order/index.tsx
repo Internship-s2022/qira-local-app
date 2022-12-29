@@ -5,7 +5,6 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { OrderRoutes } from 'src/constants';
-import { resetState } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { createOrder } from 'src/redux/shopping-cart/thunks';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -44,7 +43,6 @@ const OrderLayout = (): JSX.Element => {
     };
     dispatch(createOrder(order));
     navigate(`/order${OrderRoutes.FINAL_SCREEN}`);
-    dispatch(resetState());
   };
 
   switch (location.pathname) {
