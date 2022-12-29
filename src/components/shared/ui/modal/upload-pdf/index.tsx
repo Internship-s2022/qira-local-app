@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Button } from '@mui/material';
 
@@ -19,9 +19,10 @@ export const UploadPdf = () => {
     setPreview(selectedFile.name);
   }, [selectedFile]);
 
-  const onSelectFile = (e: any) => {
+  const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files.length) {
-      setSelectedFile(e.target.files[0]);
+      const file = e.target.files[0] as CustomFile;
+      setSelectedFile(file);
     }
   };
 
