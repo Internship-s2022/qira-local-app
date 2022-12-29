@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Dispatch } from 'redux';
 
 import { FormValues } from 'src/components/shared/ui/modal/login/types';
-import { formattedUser } from 'src/components/shared/ui/modal/signup/types';
+import { FormattedUser } from 'src/components/shared/ui/modal/signup/types';
 import { auth } from 'src/helper/firebase';
 
 import { RootAction } from '../store';
@@ -51,7 +51,7 @@ export const getAuthUserThunk = () => {
   };
 };
 
-export const register = (user: formattedUser) => {
+export const register = (user: FormattedUser) => {
   return async (dispatch: Dispatch<RootAction>) => {
     try {
       dispatch(registerActions.request());

@@ -15,3 +15,7 @@ export interface CustomFile extends File {
   type: string;
   webkitRelativePath: string;
 }
+
+export interface Files {
+  files: CustomFile[];
+}

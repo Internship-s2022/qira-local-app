@@ -13,7 +13,7 @@ export interface SignUpFormValues {
   street: string;
 }
 
-export interface formattedUser {
+export interface FormattedUser {
   businessName: string;
   cuit: string;
   ivaCondition: string;
