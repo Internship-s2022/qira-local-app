@@ -11,6 +11,7 @@ import {
 } from '@mui/icons-material';
 import { Badge, BadgeProps, styled, Tooltip, useMediaQuery } from '@mui/material';
 
+import { formatDate } from 'src/helper/orders';
 import * as thunksCategories from 'src/redux/category/thunk';
 import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
 import { openModal } from 'src/redux/modal/actions';
@@ -61,7 +62,7 @@ const Header = () => {
             <>
               <p className={styles.exchangeRate}>{`ARS ${exchangeRate?.value}`}</p>
               <Tooltip
-                title={`La fecha de cotizacion es: ${exchangeRate.date}`}
+                title={`La fecha de cotización es: ${formatDate(exchangeRate.date)}`}
                 placement={isMobile ? 'bottom' : 'right'}
                 arrow
                 disableFocusListener
