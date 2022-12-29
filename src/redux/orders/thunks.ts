@@ -43,7 +43,7 @@ export const getOrderToDeliver = (data) => {
       const response = await API.getOrderToDeliver(data);
       return dispatch(getOrderToDeliverActions.success(response.data));
     } catch (error) {
-      return dispatch(getOrderToDeliverActions.failure(error));
+      return dispatch(getOrderToDeliverActions.failure(error.response.data));
     }
   };
 };
