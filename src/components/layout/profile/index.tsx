@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 import { Footer, Header, SidebarHome } from 'src/components/shared/common';
+import ShoppingCart from 'src/components/shared/ui/shopping-cart';
 import { logout } from 'src/redux/auth/thunks';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
@@ -16,6 +17,7 @@ const ClientLayout = (): JSX.Element => {
   const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
   return (
     <div className={isOpen ? styles.containerWithSidebar : ''}>
+      <ShoppingCart />
       <Header />
       <SidebarHome isOpen={isOpen} />
       <div className={styles.mainContainer}>
