@@ -1,11 +1,10 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Check, Close, Edit, LockPerson } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
 import * as thunks from 'src/redux/clients/thunk';
-import { Client as ClientType } from 'src/redux/clients/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -27,11 +26,7 @@ const Clients = (): JSX.Element => {
   const navigate = useNavigate();
   const clients = useSelector((state: RootState) => state.clients.clients);
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
-  const [sortedList, setSortedList] = useState<ClientType[]>([]);
-
-  useMemo(() => {
-    setSortedList(clients.reverse());
-  }, [clients]);
+  const sortedList = clients.reverse();
 
   useEffect(() => {
     dispatch(thunks.getClients());
