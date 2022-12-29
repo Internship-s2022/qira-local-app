@@ -10,9 +10,12 @@
   background: #ffffff;
   border-radius: 4px;
   box-shadow: rgb(99 99 99 / 20%) 0 2px 8px 0;
-  animation-name: fade-in;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
+  transition: 0.25s ease-in-out;
+}
+
+.cardContainer:hover {
+  box-shadow: rgb(99 99 99 / 30%) 0 4px 16px 0;
+  transform: scale(1.02);
 }
 
 .imageContainer {
