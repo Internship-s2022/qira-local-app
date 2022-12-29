@@ -29,6 +29,7 @@ const Clients = (): JSX.Element => {
   const navigate = useNavigate();
   const clients = useSelector((state: RootState) => state.clients.clients);
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
+  const sortedList = clients.reverse();
 
   useEffect(() => {
     dispatch(thunks.getClients());
@@ -135,7 +136,7 @@ const Clients = (): JSX.Element => {
       ) : (
         <List<Client>
           headers={headers}
-          data={formatData(clients)}
+          data={formatData(sortedList)}
           showButtons={true}
           buttons={buttons}
         ></List>
