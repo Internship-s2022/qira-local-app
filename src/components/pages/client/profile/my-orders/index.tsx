@@ -13,6 +13,10 @@ const MyOrders = (): JSX.Element => {
   const isFetching = useSelector((state: RootState) => state.orders.isFetching);
   const clientOrders = useSelector((state: RootState) => state.orders.orders);
 
+  const sortedList = clientOrders.sort(
+    (a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime(),
+  );
+
   useEffect(() => {
     dispatch(getClientOrders());
   }, []);
@@ -27,7 +31,7 @@ const MyOrders = (): JSX.Element => {
         <>
           <h1 className={styles.title}>Pedidos realizados</h1>
           <div className={styles.ordersContainer}>
-            {clientOrders.map((order) => (
+            {sortedList.map((order) => (
               <OrderCard key={order._id} order={order} />
             ))}
           </div>
