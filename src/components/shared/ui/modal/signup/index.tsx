@@ -68,8 +68,6 @@ const SignUpForm = () => {
       phoneNumber: data.codeArea + '-' + data.phoneNumber,
       email: data.email,
       password: data.password,
-      isActive: true,
-      logicDelete: false,
     };
     return formattedUser;
   };
