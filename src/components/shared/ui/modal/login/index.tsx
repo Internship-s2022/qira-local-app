@@ -53,7 +53,7 @@ export const LoginModal = () => {
     resolver: joiResolver(loginValidation),
   });
 
-  const onSubmit = async (User) => {
+  const onSubmit = async (User: FormValues) => {
     const modalOptions: Options = {};
     const response = await dispatch(login(User));
     if (response.type === AuthActions.LOGIN_SUCCESS) {

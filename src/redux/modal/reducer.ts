@@ -1,6 +1,6 @@
 import { Actions, ActionsType, ModalState } from './types';
 
-const initialState = {
+const initialState: ModalState = {
   isOpen: false,
   type: undefined,
   options: undefined,

@@ -1,10 +1,11 @@
-export interface Product {
+export interface FormattedProduct {
   id: string;
   category: string;
   name: string;
   currency: string;
-  price: number;
+  price: string;
   stock: number;
   isActive: boolean;
   logicDelete: boolean;
+  state: string;
 }

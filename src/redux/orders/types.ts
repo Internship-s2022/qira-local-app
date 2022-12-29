@@ -50,6 +50,16 @@ export interface Order {
   deliverDate?: Date;
 }
 
+export interface FormattedOrder {
+  id: string;
+  client: string;
+  orderDate: string;
+  payAuthDate?: string;
+  deliverDate?: string;
+  amounts: string;
+  state: string;
+}
+
 export type ActionsType = ActionType<typeof actions>;
 
 export type FilterInput = OrderState | undefined;

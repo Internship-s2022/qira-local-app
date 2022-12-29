@@ -6,6 +6,7 @@ import { Check, Close, Edit, HowToReg, LockPerson } from '@mui/icons-material';
 import List from 'src/components/shared/ui/list';
 import QiraLoader from 'src/components/shared/ui/qira-loader';
 import * as thunks from 'src/redux/clients/thunk';
+import { Client } from 'src/redux/clients/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -13,7 +14,7 @@ import { AppDispatch, RootState } from 'src/redux/store';
 import { Headers, TableButton } from '../../../shared/ui/list/types';
 import styles from './clients.module.css';
 
-interface Client {
+interface FormattedClient {
   id: string;
   businessName: string;
   cuit: string;
@@ -35,7 +36,7 @@ const Clients = (): JSX.Element => {
     dispatch(thunks.getClients());
   }, []);
 
-  const formatData = (data) => {
+  const formatData = (data: Client[]) => {
     const listData = data.map((client) => {
       return {
         id: client._id,
@@ -52,7 +53,7 @@ const Clients = (): JSX.Element => {
     return listData;
   };
 
-  const headers: Headers[] = [
+  const headers: Headers<FormattedClient>[] = [
     { header: 'CUIT', key: 'cuit' },
     { header: 'Razón Social', key: 'businessName' },
     { header: 'Email', key: 'email' },
@@ -60,7 +61,7 @@ const Clients = (): JSX.Element => {
     { header: 'Estado', key: 'state' },
   ];
 
-  const buttons: ((rowData: Client) => TableButton)[] = [
+  const buttons: ((rowData: FormattedClient) => TableButton)[] = [
     (rowData) => ({
       active: true,
       icon: rowData.approved ? rowData.isActive ? <Close /> : <Check /> : <HowToReg />,
@@ -134,7 +135,7 @@ const Clients = (): JSX.Element => {
           <QiraLoader />
         </div>
       ) : (
-        <List<Client>
+        <List<FormattedClient>
           headers={headers}
           data={formatData(sortedList)}
           showButtons={true}

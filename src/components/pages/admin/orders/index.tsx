@@ -10,11 +10,11 @@ import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { setFilterStateAction } from 'src/redux/orders/actions';
 import { getOrdersFilteredByState } from 'src/redux/orders/selectors/getOrdersByState';
 import { getOrders } from 'src/redux/orders/thunks';
+import { FormattedOrder } from 'src/redux/orders/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { OrderState } from 'src/types';
 
 import styles from './orders.module.css';
-import { FormattedOrder } from './types';
 
 const Orders = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
@@ -23,7 +23,7 @@ const Orders = (): JSX.Element => {
   const filteredOrderList = useSelector((state: RootState) => getOrdersFilteredByState(state));
   const filterState = useSelector((state: RootState) => state.orders.filterState);
 
-  const clickHandler = (param) => {
+  const clickHandler = (param: OrderState) => {
     if (param === filterState) {
       return dispatch(setFilterStateAction(undefined));
     }
@@ -34,7 +34,7 @@ const Orders = (): JSX.Element => {
     dispatch(getOrders());
   }, []);
 
-  const headers: Headers[] = [
+  const headers: Headers<FormattedOrder>[] = [
     { header: 'Fecha de pago', key: 'orderDate' },
     { header: 'Fecha de aprobación', key: 'payAuthDate' },
     { header: 'Fecha de entrega', key: 'deliverDate' },

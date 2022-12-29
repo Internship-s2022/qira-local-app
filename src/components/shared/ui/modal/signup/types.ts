@@ -12,3 +12,18 @@ export interface SignUpFormValues {
   zipCode: string;
   street: string;
 }
+
+export interface FormattedUser {
+  businessName: string;
+  cuit: string;
+  ivaCondition: string;
+  address: {
+    province: string;
+    city: string;
+    zipCode: string;
+    street: string;
+  };
+  phoneNumber: string;
+  email: string;
+  password: string;
+}

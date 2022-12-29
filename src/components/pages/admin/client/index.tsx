@@ -79,7 +79,7 @@ const ClientForm = (): JSX.Element => {
     { label: 'Monotributista', value: IvaCondition.selfEmployment },
   ];
 
-  const formatDataFunction = (data) => {
+  const formatDataFunction = (data: UpdateClientValues) => {
     const dataFormated = {
       email: data.email,
       phoneNumber: data.codeArea + '-' + data.phoneNumber,
@@ -96,7 +96,7 @@ const ClientForm = (): JSX.Element => {
     return dataFormated;
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: UpdateClientValues) => {
     const modalOptions: Options = {};
     const response = await dispatch(thunks.updateClient(params.id, formatDataFunction(data)));
     if (response?.type === Actions.UPDATE_CLIENT_SUCCESS) {

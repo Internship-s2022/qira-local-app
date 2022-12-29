@@ -35,6 +35,16 @@ export interface Amounts {
   total: number;
 }
 
+export interface OrderToCreate {
+  products: ShoppingCartProduct[];
+  client: string;
+  authorized: Authorized[];
+  amounts: Amounts;
+  payment: FileToSend;
+  exchangeRate: number;
+  estimatedDeliveryDate: string;
+}
+
 export enum Actions {
   ADD_PRODUCT = 'ADD_PRODUCT',
   DELETE_PRODUCT = 'DELETE_PRODUCT',

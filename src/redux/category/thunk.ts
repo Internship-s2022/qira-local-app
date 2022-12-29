@@ -12,6 +12,7 @@ import {
   updateCategoryActions,
 } from './actions';
 import * as API from './api';
+import { CategoryToSend } from './types';
 
 export const getCategory = () => {
   return async (dispatch: Dispatch) => {
@@ -37,7 +38,7 @@ export const getPublicCategories = () => {
   };
 };
 
-export const getCategoryById = (id) => {
+export const getCategoryById = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getCategoryActions.request());
@@ -49,7 +50,7 @@ export const getCategoryById = (id) => {
   };
 };
 
-export const createCategory = (category) => {
+export const createCategory = (category: CategoryToSend) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(createCategoryActions.request());
@@ -61,7 +62,7 @@ export const createCategory = (category) => {
   };
 };
 
-export const updateCategory = (id, category) => {
+export const updateCategory = (id: string, category: CategoryToSend) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(updateCategoryActions.request());
@@ -73,7 +74,7 @@ export const updateCategory = (id, category) => {
   };
 };
 
-export const activateCategory = (id) => {
+export const activateCategory = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(activateCategoryActions.request());
@@ -85,7 +86,7 @@ export const activateCategory = (id) => {
   };
 };
 
-export const inactivateCategory = (id) => {
+export const inactivateCategory = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(inactivateCategoryActions.request());
@@ -97,7 +98,7 @@ export const inactivateCategory = (id) => {
   };
 };
 
-export const deleteCategory = (id) => {
+export const deleteCategory = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(deleteCategoryActions.request());

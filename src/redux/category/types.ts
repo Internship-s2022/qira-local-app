@@ -1,5 +1,7 @@
 import { ActionType } from 'typesafe-actions';
 
+import { FileToSend } from 'src/types';
+
 import * as actions from './actions';
 
 interface Image {
@@ -21,6 +23,12 @@ export interface CategoryState {
   error: unknown;
   message: string;
   selectedCategory: Category;
+}
+
+export interface CategoryToSend {
+  name: string;
+  image: FileToSend;
+  url: string;
 }
 
 export type ActionsType = ActionType<typeof actions>;

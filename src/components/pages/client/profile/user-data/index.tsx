@@ -13,6 +13,11 @@ import { AppDispatch, RootState } from 'src/redux/store';
 import styles from './userData.module.css';
 import { updateUserData } from './validations';
 
+export interface formData {
+  codeArea: string;
+  phoneNumber: string;
+}
+
 const UserData = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const currentUser = useSelector((state: RootState) => state.auth.user);
@@ -33,7 +38,7 @@ const UserData = (): JSX.Element => {
     return currentUser.phoneNumber === codeAreaInput + '-' + phoneNumberInput;
   }, [currentUser, codeAreaInput, phoneNumberInput]);
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: formData) => {
     const modalOptions: Options = {};
     const response = await dispatch(
       updateClientInformation({ phoneNumber: data.codeArea + '-' + data.phoneNumber }),
