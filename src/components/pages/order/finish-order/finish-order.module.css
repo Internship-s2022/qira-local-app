@@ -67,18 +67,6 @@
   border-radius: 4px;
 }
 
-.clickableDataCard:last-child {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 10px;
-  margin-top: 10px;
-  cursor: pointer;
-  background-color: white;
-  border: 1px solid #bcbcbc;
-  border-radius: 4px;
-}
-
 .cardTitle {
   margin: 0 0 10px;
   font-size: 20px;
