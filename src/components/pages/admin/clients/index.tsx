@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Check, Close, Edit, HowToReg, LockPerson } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import * as thunks from 'src/redux/clients/thunk';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
@@ -128,7 +129,9 @@ const Clients = (): JSX.Element => {
         <h1>Clientes</h1>
       </div>
       {isFetching ? (
-        <></>
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
         <List<Client>
           headers={headers}

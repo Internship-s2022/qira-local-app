@@ -7,6 +7,7 @@ import { IconButton } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import * as thunks from 'src/redux/products/thunk';
@@ -20,7 +21,7 @@ const Products = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
   const products = useSelector((state: RootState) => state.products.products);
-  const isFetching = useSelector((state: RootState) => state.clients.isFetching);
+  const isFetching = useSelector((state: RootState) => state.products.isFetching);
 
   useEffect(() => {
     dispatch(thunks.getProducts());
@@ -116,7 +117,9 @@ const Products = (): JSX.Element => {
         </div>
       </div>
       {isFetching ? (
-        <></>
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
         <List<Product>
           headers={headers}

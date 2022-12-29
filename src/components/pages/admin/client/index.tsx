@@ -8,6 +8,7 @@ import { ArrowBack, MailOutlineOutlined, PhoneOutlined } from '@mui/icons-materi
 import { Button, IconButton, InputAdornment } from '@mui/material';
 
 import { InputText } from 'src/components/shared/ui/input';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options as SelectOptions } from 'src/components/shared/ui/select/types';
 import { Actions } from 'src/redux/clients/types';
@@ -113,7 +114,9 @@ const ClientForm = (): JSX.Element => {
   return (
     <>
       {isFetching ? (
-        <></>
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
         <section className={styles.sectionContainer}>
           <div className={styles.titleContainer}>
