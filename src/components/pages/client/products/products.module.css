@@ -42,4 +42,15 @@
 
 .message {
   font-style: italic;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .messageContainer {
+    padding: 2%;
+  }
+
+  .message {
+    font-size: 20px;
+  }
 }

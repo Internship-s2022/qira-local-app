@@ -9,7 +9,7 @@ import {
   Search,
   ShoppingCart,
 } from '@mui/icons-material';
-import { Badge, BadgeProps, styled, Tooltip } from '@mui/material';
+import { Badge, BadgeProps, styled, Tooltip, useMediaQuery } from '@mui/material';
 
 import * as thunksCategories from 'src/redux/category/thunk';
 import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
@@ -33,6 +33,7 @@ const Header = () => {
   const sidebarIsOpen = useSelector((state: RootState) => state.sidebar.isOpen);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
+  const isMobile = useMediaQuery('(max-width: 600px)');
   useEffect(() => {
     dispatch(thunksCategories.getPublicCategories());
     dispatch(getExchangeRate());
@@ -61,8 +62,9 @@ const Header = () => {
               <p className={styles.exchangeRate}>{`ARS ${exchangeRate?.value}`}</p>
               <Tooltip
                 title={`La fecha de cotizacion es: ${exchangeRate.date}`}
-                placement="right"
+                placement={isMobile ? 'bottom' : 'right'}
                 arrow
+                disableFocusListener
               >
                 <InfoOutlined className={styles.infoIcon} />
               </Tooltip>
