@@ -80,7 +80,7 @@ export const updateClient = (id: string, data: ClientToUpdate) => {
   };
 };
 
-export const approveClient = (id) => {
+export const approveClient = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(approveClientActions.request());

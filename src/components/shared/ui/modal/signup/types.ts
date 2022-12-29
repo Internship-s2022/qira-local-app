@@ -26,6 +26,4 @@ export interface formattedUser {
   phoneNumber: string;
   email: string;
   password: string;
-  isActive: boolean;
-  logicDelete: boolean;
 }

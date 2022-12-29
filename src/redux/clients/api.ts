@@ -10,7 +10,7 @@ export const inactivateClient = (id: string) => api.patch<Client>(`/admin/client
 
 export const getClient = (id: string) => api.get<Client>(`/admin/client/${id}`);
 
-export const approveClient = (id) => api.patch<Client>(`/admin/client/approve/${id}`);
+export const approveClient = (id: string) => api.patch<Client>(`/admin/client/approve/${id}`);
 
 export const updateClient = (id: string, data: ClientToUpdate) =>
   api.patch<Client>(`/admin/client/${id}`, data);
