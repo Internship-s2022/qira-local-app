@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -13,7 +13,7 @@ import { Options as SelectOptions } from 'src/components/shared/ui/select/types'
 import { Actions } from 'src/redux/clients/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes, Options } from 'src/redux/modal/types';
-import { AppDispatch, RootState } from 'src/redux/store';
+import { AppDispatch, RootState, useAppDispatch } from 'src/redux/store';
 import { IvaCondition } from 'src/types';
 
 import * as thunks from '../../../../redux/clients/thunk';
@@ -22,7 +22,7 @@ import { UpdateClientValues } from './types';
 import { updateClientValidations } from './validations';
 
 const ClientForm = (): JSX.Element => {
-  const dispatch: AppDispatch<null> = useDispatch();
+  const dispatch: AppDispatch<null> = useAppDispatch();
   const navigate = useNavigate();
   const params = useParams();
   const selectedClient = useSelector((state: RootState) => state.clients.selectedClient);
@@ -130,7 +130,7 @@ const ClientForm = (): JSX.Element => {
               </IconButton>
             </div>
           </div>
-          <form className={styles.formContainer}>
+          <form className={styles.formContainer} data-testid={'client-form'}>
             <div className={styles.container}>
               <div className={styles.columnContainer}>
                 <InputText

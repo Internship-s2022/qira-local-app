@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Check, Close, Edit, HowToReg, LockPerson } from '@mui/icons-material';
 
@@ -7,7 +7,7 @@ import List from 'src/components/shared/ui/list';
 import * as thunks from 'src/redux/clients/thunk';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { AppDispatch, RootState } from 'src/redux/store';
+import { AppDispatch, RootState, useAppDispatch } from 'src/redux/store';
 
 import { Headers, TableButton } from '../../../shared/ui/list/types';
 import styles from './clients.module.css';
@@ -24,7 +24,7 @@ interface Client {
 }
 
 const Clients = (): JSX.Element => {
-  const dispatch: AppDispatch<null> = useDispatch();
+  const dispatch: AppDispatch<null> = useAppDispatch();
   const navigate = useNavigate();
   const clients = useSelector((state: RootState) => state.clients.clients);
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
@@ -123,7 +123,7 @@ const Clients = (): JSX.Element => {
   ];
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid={'clients-list'}>
       <div className={styles.titleContainer}>
         <h1>Clientes</h1>
       </div>
