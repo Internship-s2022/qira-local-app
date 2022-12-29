@@ -189,9 +189,17 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 45px;
-  border: 1px solid #bcbcbc;
+}
+
+.counterInput {
+  width: 142px;
   border-radius: 8px;
+}
+
+.quantityIcons input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
 }
 
 .quantityIcons p {
