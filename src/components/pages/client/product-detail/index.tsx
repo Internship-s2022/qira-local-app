@@ -76,7 +76,12 @@ export const ProductDetail = (): JSX.Element => {
           </div>
           <div className={styles.imageAndPriceContainer}>
             <div className={styles.imageContainer}>
-              <img className={styles.image} src={selectedProduct?.image.url} />
+              <img
+                className={styles.image}
+                src={selectedProduct?.image.url}
+                alt={selectedProduct?.brand + ' ' + selectedProduct?.name}
+                title={selectedProduct?.brand + ' ' + selectedProduct?.name}
+              />
             </div>
             <div className={styles.priceContainer}>
               <div>
