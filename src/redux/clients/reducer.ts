@@ -16,6 +16,7 @@ export const clientReducer = (state = initialState, action: ActionsType): Client
     case Actions.INACTIVATE_CLIENT_PENDING:
     case Actions.GET_CLIENT_PENDING:
     case Actions.UPDATE_CLIENT_PENDING:
+    case Actions.APPROVE_CLIENT_PENDING:
       return {
         ...state,
         isFetching: true,
@@ -25,6 +26,7 @@ export const clientReducer = (state = initialState, action: ActionsType): Client
     case Actions.INACTIVATE_CLIENT_ERROR:
     case Actions.GET_CLIENT_ERROR:
     case Actions.UPDATE_CLIENT_ERROR:
+    case Actions.APPROVE_CLIENT_ERROR:
       return {
         ...state,
         isFetching: false,
@@ -41,6 +43,7 @@ export const clientReducer = (state = initialState, action: ActionsType): Client
     case Actions.ACTIVATE_CLIENT_SUCCESS:
     case Actions.INACTIVATE_CLIENT_SUCCESS:
     case Actions.UPDATE_CLIENT_SUCCESS:
+    case Actions.APPROVE_CLIENT_SUCCESS:
       newListClients = state.clients.map((client) => {
         if (client._id === action.payload._id) {
           return action.payload;

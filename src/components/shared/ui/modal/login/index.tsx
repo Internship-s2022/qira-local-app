@@ -43,6 +43,7 @@ const loginValidation = Joi.object({
 export const LoginModal = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const isFetching = useSelector((state: RootState) => state.auth.isFetching);
+  const options = useSelector((state: RootState) => state.modal.options);
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm<FormValues>({
     defaultValues: {
@@ -53,7 +54,7 @@ export const LoginModal = () => {
     resolver: joiResolver(loginValidation),
   });
 
-  const onSubmit = async (User) => {
+  const onSubmit = async (User: FormValues) => {
     const modalOptions: Options = {};
     const response = await dispatch(login(User));
     if (response.type === AuthActions.LOGIN_SUCCESS) {
@@ -61,6 +62,7 @@ export const LoginModal = () => {
       if (response.payload.role === UserRole.ADMIN) {
         navigate('/admin/orders');
       }
+      options?.onConfirmCallback();
     }
     if (response.type === AuthActions.LOGIN_ERROR) {
       dispatch(openModal(ModalTypes.INFO, modalOptions));

@@ -54,7 +54,7 @@ const SignUpForm = () => {
     { label: 'Monotributista', value: IvaCondition.selfEmployment },
   ];
 
-  const formatSubmitData = (data) => {
+  const formatSubmitData = (data: SignUpFormValues) => {
     const formattedUser = {
       businessName: data.businessName,
       cuit: data.cuit,
@@ -68,13 +68,11 @@ const SignUpForm = () => {
       phoneNumber: data.codeArea + '-' + data.phoneNumber,
       email: data.email,
       password: data.password,
-      isActive: true,
-      logicDelete: false,
     };
     return formattedUser;
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: SignUpFormValues) => {
     const formattedUser = formatSubmitData(data);
     const modalOptions: ModalOptions = {};
     const response = await dispatch(register(formattedUser));
@@ -82,12 +80,15 @@ const SignUpForm = () => {
       modalOptions.message = 'Cuenta creada exitosamente.';
       modalOptions.onCloseCallback = () => dispatch(closeModal());
       reset();
-    }
-    if (response.payload.message === 'The email address is already in use by another account.') {
+    } else if (
+      response.payload.message === 'The email address is already in use by another account.'
+    ) {
       modalOptions.message = 'La cuenta de email que intenta registrar ya existe.';
+      modalOptions.onCloseCallback = () => dispatch(openModal(ModalTypes.REGISTER_FORM));
     }
     if (!modalOptions.message) {
       modalOptions.message = 'Ha ocurrido un error';
+      modalOptions.onCloseCallback = () => dispatch(openModal(ModalTypes.REGISTER_FORM));
     }
     dispatch(openModal(ModalTypes.INFO, modalOptions));
   };
@@ -198,7 +199,6 @@ const SignUpForm = () => {
               options={IvaConditionOptions}
             />
           </div>
-
           <InputText
             className={styles.input}
             control={control}
@@ -268,6 +268,7 @@ const SignUpForm = () => {
           className={styles.signUpBtn}
           onClick={handleSubmit(onSubmit)}
           data-testid="signup-btn"
+          type="submit"
         >
           Crear cuenta
         </Button>

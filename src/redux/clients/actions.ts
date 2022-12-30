@@ -32,3 +32,9 @@ export const updateClientActions = createAsyncAction(
   Actions.UPDATE_CLIENT_SUCCESS,
   Actions.UPDATE_CLIENT_ERROR,
 )<void, Client, ApiResponse<unknown>>();
+
+export const approveClientActions = createAsyncAction(
+  Actions.APPROVE_CLIENT_PENDING,
+  Actions.APPROVE_CLIENT_SUCCESS,
+  Actions.APPROVE_CLIENT_ERROR,
+)<void, Client, ApiResponse<unknown>>();

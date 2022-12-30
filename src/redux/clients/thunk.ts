@@ -5,12 +5,14 @@ import { closeModal } from 'src/redux/modal/actions';
 import { AppThunk } from '../store';
 import {
   activateActions,
+  approveClientActions,
   getClientActions,
   getClientsActions,
   inactivateActions,
   updateClientActions,
 } from './actions';
 import * as API from './api';
+import { ClientToUpdate } from './types';
 
 export const getClients: AppThunk = () => {
   return async (dispatch: Dispatch) => {
@@ -24,7 +26,7 @@ export const getClients: AppThunk = () => {
   };
 };
 
-export const activateClient: AppThunk = (id) => {
+export const activateClient: AppThunk = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(activateActions.request());
@@ -38,7 +40,7 @@ export const activateClient: AppThunk = (id) => {
   };
 };
 
-export const inactivateClient: AppThunk = (id) => {
+export const inactivateClient: AppThunk = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(inactivateActions.request());
@@ -52,7 +54,7 @@ export const inactivateClient: AppThunk = (id) => {
   };
 };
 
-export const getClient: AppThunk = (id) => {
+export const getClient: AppThunk = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getClientActions.request());
@@ -66,7 +68,7 @@ export const getClient: AppThunk = (id) => {
   };
 };
 
-export const updateClient = (id, data) => {
+export const updateClient = (id: string, data: ClientToUpdate) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(updateClientActions.request());
@@ -74,6 +76,18 @@ export const updateClient = (id, data) => {
       return dispatch(updateClientActions.success(response.data));
     } catch (error) {
       dispatch(updateClientActions.failure(error));
+    }
+  };
+};
+
+export const approveClient = (id: string) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(approveClientActions.request());
+      const response = await API.approveClient(id);
+      return dispatch(approveClientActions.success(response.data));
+    } catch (error) {
+      dispatch(approveClientActions.failure(error));
     }
   };
 };

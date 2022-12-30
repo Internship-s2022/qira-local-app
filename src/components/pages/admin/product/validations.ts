@@ -7,7 +7,7 @@ export const ProductValidation = Joi.object({
     .min(3)
     .max(50)
     .required()
-    .regex(/^[a-zA-Z0-9 ]*$/)
+    .regex(/^([A-zÀ-ú]+\s)*[A-zÀ-ú]+$/)
     .trim()
     .messages({
       'string.min': 'Mínimo 3 caracteres.',
@@ -18,7 +18,7 @@ export const ProductValidation = Joi.object({
   description: Joi.string()
     .allow('')
     .min(3)
-    .regex(/^[a-zA-Z0-9 ]*$/)
+    .regex(/^[ A-zÀ-ú0-9\W]*$/)
     .trim()
     .messages({
       'string.min': 'Mínimo 3 caracteres.',
@@ -38,7 +38,7 @@ export const ProductValidation = Joi.object({
   }),
   brand: Joi.string()
     .min(2)
-    .regex(/^[a-zA-Z0-9 ]*$/)
+    .regex(/^([A-zÀ-ú]+\s)*[A-zÀ-ú]+$/)
     .required()
     .trim()
     .messages({

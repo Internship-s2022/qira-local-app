@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { Add, FileCopyOutlined, PaidOutlined, Remove, StoreOutlined } from '@mui/icons-material';
-import { Button, IconButton, Tooltip } from '@mui/material';
+import { Button, IconButton, InputAdornment, Tooltip } from '@mui/material';
 
+import { InputText } from 'src/components/shared/ui/input';
 import { formatPriceText } from 'src/helper/products';
 import { getProductById } from 'src/redux/products/selectors/getProductById';
 import { getPublicProducts } from 'src/redux/products/thunks';
-import { addProduct } from 'src/redux/shopping-cart/actions';
+import { addProduct, deleteProduct } from 'src/redux/shopping-cart/actions';
 import { getProductQuantity } from 'src/redux/shopping-cart/selectors/getProductQuantity';
 import { AppDispatch, RootState } from 'src/redux/store';
 
@@ -18,7 +20,10 @@ export const ProductDetail = (): JSX.Element => {
   const params = useParams();
   const selectedProduct = useSelector((state: RootState) => getProductById(state, params.id));
   const productQuantity = useSelector((state: RootState) => getProductQuantity(state, params.id));
-  const [disabled, setDisabled] = useState<boolean>(false);
+
+  interface FormValues {
+    counter: number;
+  }
 
   const [count, setCount] = useState<number>(0);
   const addToCart = () => {
@@ -28,20 +33,31 @@ export const ProductDetail = (): JSX.Element => {
         quantity: count,
       };
       dispatch(addProduct(shoppingCartProduct));
-      setDisabled(true);
     }
   };
 
   useEffect(() => {
     params.id && dispatch(getPublicProducts());
+  }, [params.id]);
+
+  useEffect(() => {
     if (productQuantity >= 1) {
       setCount(productQuantity);
-      setDisabled(true);
-    }
-    if (selectedProduct?.stock < 1) {
-      setDisabled(true);
     }
   }, [productQuantity]);
+
+  const disableBtn = useMemo(() => {
+    if (selectedProduct?.stock < 1 || productQuantity === count) {
+      return true;
+    }
+  }, [selectedProduct, productQuantity, count]);
+
+  const { control } = useForm<FormValues>({
+    defaultValues: {
+      counter: count,
+    },
+    mode: 'onBlur',
+  });
 
   return (
     <div className={styles.mainContainer}>
@@ -60,7 +76,12 @@ export const ProductDetail = (): JSX.Element => {
           </div>
           <div className={styles.imageAndPriceContainer}>
             <div className={styles.imageContainer}>
-              <img className={styles.image} src={selectedProduct?.image.url} />
+              <img
+                className={styles.image}
+                src={selectedProduct?.image.url}
+                alt={selectedProduct?.brand + ' ' + selectedProduct?.name}
+                title={selectedProduct?.brand + ' ' + selectedProduct?.name}
+              />
             </div>
             <div className={styles.priceContainer}>
               <div>
@@ -83,43 +104,70 @@ export const ProductDetail = (): JSX.Element => {
                 <div className={styles.quantity}>
                   <p>Seleccionar cantidad</p>
                   <div className={styles.quantityIcons}>
-                    <Tooltip title={'Quitar'}>
-                      <IconButton
-                        className={styles.iconButton}
-                        disabled={count === 0}
-                        onClick={() => {
-                          count >= 1 && setCount(count - 1);
-                          selectedProduct?.stock < 1 ? setDisabled(true) : setDisabled(false);
-                        }}
-                      >
-                        <Remove />
-                      </IconButton>
-                    </Tooltip>
-                    <p>{count}</p>
-                    <Tooltip
-                      title={
-                        count >= selectedProduct?.stock ? 'No hay más stock disponible.' : 'Añadir'
-                      }
-                    >
-                      <span>
-                        <IconButton
-                          className={styles.iconButton}
-                          disabled={count >= selectedProduct?.stock}
-                          onClick={() => {
-                            setCount(count + 1);
-                            selectedProduct?.stock < 1 ? setDisabled(true) : setDisabled(false);
-                          }}
-                        >
-                          <Add />
-                        </IconButton>
-                      </span>
-                    </Tooltip>
+                    <InputText
+                      control={control}
+                      className={styles.counterInput}
+                      name="counter"
+                      variant="outlined"
+                      type="number"
+                      margin="dense"
+                      size="small"
+                      value={count}
+                      onChange={(e) => {
+                        if (!e.target.value) {
+                          return setCount(0);
+                        }
+                        if (parseInt(e.target.value) > selectedProduct?.stock) {
+                          return setCount(selectedProduct.stock);
+                        }
+                        setCount(parseInt(e.target.value));
+                      }}
+                      data-testid="counter-input"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Tooltip title={'Quitar'}>
+                              <IconButton
+                                className={styles.iconButton}
+                                disabled={count === 0}
+                                onClick={() => {
+                                  count >= 1 && setCount(count - 1);
+                                }}
+                              >
+                                <Remove />
+                              </IconButton>
+                            </Tooltip>
+                          </InputAdornment>
+                        ),
+                        endAdornment: (
+                          <Tooltip
+                            title={
+                              count >= selectedProduct?.stock
+                                ? 'No hay más stock disponible.'
+                                : 'Añadir'
+                            }
+                          >
+                            <span>
+                              <IconButton
+                                className={styles.iconButton}
+                                disabled={count >= selectedProduct?.stock}
+                                onClick={() => {
+                                  setCount(count + 1);
+                                }}
+                              >
+                                <Add />
+                              </IconButton>
+                            </span>
+                          </Tooltip>
+                        ),
+                      }}
+                    />
                   </div>
                 </div>
               </div>
               <div>
                 <div className={styles.priceContainerAmount}>
-                  <p>TOTAL</p>
+                  {productQuantity ? <p>TOTAL</p> : <p>PRECIO UNITARIO</p>}
                   <p className={styles.priceText}>
                     {selectedProduct && formatPriceText(selectedProduct, count)}
                   </p>
@@ -129,8 +177,11 @@ export const ProductDetail = (): JSX.Element => {
                   className={styles.button}
                   variant="contained"
                   color="primary"
-                  disabled={productQuantity === count ? true : disabled}
+                  disabled={disableBtn}
                   onClick={() => {
+                    if (count === 0) {
+                      dispatch(deleteProduct(selectedProduct._id));
+                    }
                     addToCart();
                   }}
                 >

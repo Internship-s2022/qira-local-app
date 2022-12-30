@@ -198,7 +198,12 @@ const OrderDetails = (): JSX.Element => {
                 {selectedOrder?.products.map((cartProduct, index) => (
                   <div className={styles.productRow} key={index}>
                     <div className={styles.imageContainer}>
-                      <img className={styles.image} src={cartProduct.product.image.url} />
+                      <img
+                        className={styles.image}
+                        src={cartProduct.product.image.url}
+                        alt={cartProduct.product.brand + ' ' + cartProduct.product.name}
+                        title={cartProduct.product.brand + ' ' + cartProduct.product.name}
+                      />
                       <p>{cartProduct.product.brand + ' ' + cartProduct.product.name}</p>
                     </div>
                     <div className={styles.quantity}>{cartProduct.quantity}</div>
@@ -283,7 +288,7 @@ const OrderDetails = (): JSX.Element => {
                           }
                           color="primary"
                           variant="contained"
-                          className={styles.btnUpload}
+                          className={styles.btn}
                         >
                           {invoice
                             ? 'Modificar archivo'
@@ -306,6 +311,7 @@ const OrderDetails = (): JSX.Element => {
                             variant="contained"
                             color="primary"
                             disabled={invoice ? false : true}
+                            className={styles.btn}
                             onClick={() =>
                               dispatch(
                                 openModal(ModalTypes.CONFIRM, {
@@ -324,6 +330,7 @@ const OrderDetails = (): JSX.Element => {
                           <Button
                             variant="outlined"
                             color="primary"
+                            className={styles.btn}
                             onClick={() =>
                               dispatch(
                                 openModal(ModalTypes.CONFIRM, {
@@ -353,6 +360,7 @@ const OrderDetails = (): JSX.Element => {
                           <Button
                             variant="contained"
                             color="primary"
+                            className={styles.btn}
                             disabled={invoice ? false : true}
                             onClick={() =>
                               dispatch(

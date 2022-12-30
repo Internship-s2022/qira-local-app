@@ -8,6 +8,7 @@ import { Button, IconButton } from '@mui/material';
 
 import { ImageInput } from 'src/components/shared/ui/image-input';
 import { InputText } from 'src/components/shared/ui/input';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { toBase64 } from 'src/helper/form';
 import { resetCategory } from 'src/redux/category/actions';
 import { createCategory, getCategoryById, updateCategory } from 'src/redux/category/thunk';
@@ -26,6 +27,7 @@ const CategoryForm = (): JSX.Element => {
   const navigate = useNavigate();
   const category = useSelector((state: RootState) => state.categories.selectedCategory);
   const categories = useSelector((state: RootState) => state.categories.categories);
+  const isFetching = useSelector((state: RootState) => state.categories.isFetching);
   const categoriesNotSelected = categories.filter((item) => item?._id !== category?._id);
   const {
     handleSubmit,
@@ -91,7 +93,7 @@ const CategoryForm = (): JSX.Element => {
       }
     }
     const submitData = {
-      name: data.name,
+      name: data.name.trim(),
       image: imageToSend,
       url: data.url,
     };
@@ -137,46 +139,52 @@ const CategoryForm = (): JSX.Element => {
           </IconButton>
         </div>
       </div>
-      <form className={styles.formContainer}>
-        <div className={styles.columnsContainer}>
-          <div className={styles.inputsContainer}>
-            <InputText
-              className={styles.input}
-              control={control}
-              name="name"
-              type="text"
-              optionalLabel="Nombre *"
-              variant="outlined"
-              margin="dense"
-              size="small"
-            />
-            <InputText
-              className={styles.input}
-              control={control}
-              name="url"
-              type="text"
-              optionalLabel="URL *"
-              tooltipText={
-                'La URL debe contener sólo palabras en minúscula y separadas por un guión (-).'
-              }
-              variant="outlined"
-              margin="dense"
-              size="small"
-            />
-          </div>
-          <div className={styles.imageInputContainer}>
-            <ImageInput control={control} name="image" label="Imagen *" setValue={setValue} />
-          </div>
+      {isFetching ? (
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
         </div>
-        <Button
-          className={styles.button}
-          variant="contained"
-          onClick={handleSubmit(onSubmit)}
-          disabled={params.id ? !isDirty && !imageInput?.isNew : false}
-        >
-          {params.id ? 'Editar' : 'Agregar'}
-        </Button>
-      </form>
+      ) : (
+        <form className={styles.formContainer}>
+          <div className={styles.columnsContainer}>
+            <div className={styles.inputsContainer}>
+              <InputText
+                className={styles.input}
+                control={control}
+                name="name"
+                type="text"
+                optionalLabel="Nombre *"
+                variant="outlined"
+                margin="dense"
+                size="small"
+              />
+              <InputText
+                className={styles.input}
+                control={control}
+                name="url"
+                type="text"
+                optionalLabel="URL *"
+                tooltipText={
+                  'La URL debe contener sólo palabras en minúscula y separadas por un guión (-).'
+                }
+                variant="outlined"
+                margin="dense"
+                size="small"
+              />
+            </div>
+            <div className={styles.imageInputContainer}>
+              <ImageInput control={control} name="image" label="Imagen *" setValue={setValue} />
+            </div>
+          </div>
+          <Button
+            className={styles.button}
+            variant="contained"
+            onClick={handleSubmit(onSubmit)}
+            disabled={params.id ? !isDirty && !imageInput?.isNew : false}
+          >
+            {params.id ? 'Editar' : 'Agregar'}
+          </Button>
+        </form>
+      )}
     </>
   );
 };

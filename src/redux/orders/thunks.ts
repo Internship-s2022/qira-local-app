@@ -1,5 +1,8 @@
 import { Dispatch } from 'redux';
 
+import { DeliverFormValues } from 'src/components/pages/admin/deliver/types';
+import { FileToSend } from 'src/types';
+
 import {
   approveOrderActions,
   deliverOrderActions,
@@ -24,7 +27,7 @@ export const getOrders = () => {
   };
 };
 
-export const getOrderById = (id) => {
+export const getOrderById = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getOrderActions.request());
@@ -36,19 +39,19 @@ export const getOrderById = (id) => {
   };
 };
 
-export const getOrderToDeliver = (data) => {
+export const getOrderToDeliver = (data: DeliverFormValues) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getOrderToDeliverActions.request());
       const response = await API.getOrderToDeliver(data);
       return dispatch(getOrderToDeliverActions.success(response.data));
     } catch (error) {
-      return dispatch(getOrderToDeliverActions.failure(error));
+      return dispatch(getOrderToDeliverActions.failure(error.response.data));
     }
   };
 };
 
-export const approveOrder = (id, data) => {
+export const approveOrder = (id: string, data: { invoice: FileToSend }) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(approveOrderActions.request());
@@ -60,7 +63,7 @@ export const approveOrder = (id, data) => {
   };
 };
 
-export const deliverOrder = (id, data) => {
+export const deliverOrder = (id: string, data: { signedInvoice: FileToSend }) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(deliverOrderActions.request());
@@ -72,7 +75,7 @@ export const deliverOrder = (id, data) => {
   };
 };
 
-export const rejectOrder = (id) => {
+export const rejectOrder = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(rejectOrderActions.request());
@@ -96,7 +99,7 @@ export const getClientOrders = () => {
   };
 };
 
-export const getClientOrderById = (id) => {
+export const getClientOrderById = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(getClientOrderActions.request());

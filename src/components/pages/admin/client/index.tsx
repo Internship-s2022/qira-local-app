@@ -8,6 +8,7 @@ import { ArrowBack, MailOutlineOutlined, PhoneOutlined } from '@mui/icons-materi
 import { Button, IconButton, InputAdornment } from '@mui/material';
 
 import { InputText } from 'src/components/shared/ui/input';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options as SelectOptions } from 'src/components/shared/ui/select/types';
 import { Actions } from 'src/redux/clients/types';
@@ -78,7 +79,7 @@ const ClientForm = (): JSX.Element => {
     { label: 'Monotributista', value: IvaCondition.selfEmployment },
   ];
 
-  const formatDataFunction = (data) => {
+  const formatDataFunction = (data: UpdateClientValues) => {
     const dataFormated = {
       email: data.email,
       phoneNumber: data.codeArea + '-' + data.phoneNumber,
@@ -95,7 +96,7 @@ const ClientForm = (): JSX.Element => {
     return dataFormated;
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: UpdateClientValues) => {
     const modalOptions: Options = {};
     const response = await dispatch(thunks.updateClient(params.id, formatDataFunction(data)));
     if (response?.type === Actions.UPDATE_CLIENT_SUCCESS) {
@@ -113,7 +114,9 @@ const ClientForm = (): JSX.Element => {
   return (
     <>
       {isFetching ? (
-        <></>
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
         <section className={styles.sectionContainer}>
           <div className={styles.titleContainer}>
@@ -256,6 +259,7 @@ const ClientForm = (): JSX.Element => {
               className={styles.sendBtn}
               onClick={handleSubmit(onSubmit)}
               disabled={!isDirty}
+              type="submit"
             >
               Editar Cliente
             </Button>

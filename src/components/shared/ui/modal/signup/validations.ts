@@ -15,13 +15,13 @@ export const signUpValidations = Joi.object({
       'string.pattern.base': 'Debe tener formato válido de email.',
     }),
   password: Joi.string()
-    .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
     .min(8)
+    .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener letras y números.',
       'string.min': 'Debe contener al menos 8 caracteres.',
+      'string.pattern.base': 'Debe contener letras y números.',
     }),
   repeatPassword: Joi.string().valid(Joi.ref('password')).required().messages({
     'string.empty': 'Campo requerido.',
@@ -42,15 +42,16 @@ export const signUpValidations = Joi.object({
       'string.pattern.base': 'Debe contener 7-8 dígitos.',
     }),
   businessName: Joi.string()
-    .regex(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/)
+    .regex(/^([0-9]*)(\s?[A-zÀ-ú]+)(\s[0-9A-zÀ-ú]+)*\s?$/)
     .min(3)
     .max(50)
+    .trim()
     .required()
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
       'string.max': 'No debe contener mas de 50 caracteres.',
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Puede contener letras y números.',
+      'string.pattern.base': 'Razón social inválida.',
     }),
   cuit: Joi.string()
     .regex(/^[0-9\-+]{11}$/)
@@ -89,7 +90,7 @@ export const signUpValidations = Joi.object({
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Puede contener letras y números.',
+      'string.pattern.base': 'La localidad es inválida.',
     }),
   zipCode: Joi.string()
     .regex(/^[0-9\-+]{4}$/)
@@ -99,9 +100,10 @@ export const signUpValidations = Joi.object({
       'string.empty': 'Campo requerido.',
     }),
   street: Joi.string()
-    .regex(/[a-zA-Z0-9]+\s[a-zA-Z0-9]/)
+    .regex(/^([0-9]*)(\s?[A-zÀ-ú]+)(\s[0-9A-zÀ-ú]+)*\s?$/)
     .min(3)
     .required()
+    .trim()
     .messages({
       'string.min': 'Debe contener al menos 3 caracteres.',
       'string.pattern.base': 'La dirección es inválida.',

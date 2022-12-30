@@ -6,21 +6,24 @@ import { IconButton } from '@mui/material';
 
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import {
   activateCategory,
   deleteCategory,
   getCategory,
   inactivateCategory,
 } from 'src/redux/category/thunk';
+import { Category } from 'src/redux/category/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './categories.module.css';
 
-interface Category {
+interface FormattedCategory {
   id: string;
   name: string;
+  status: string;
   isActive: boolean;
   logicDelete: boolean;
 }
@@ -32,13 +35,14 @@ const Categories = (): JSX.Element => {
   const isFetching = useSelector((state: RootState) => state.categories.isFetching);
   const [categoriesList, setCategoriesList] = useState([]);
 
-  const formatData = (data) => {
-    const listData = data.map((category) => {
+  const formatData = (data: Category[]) => {
+    const listData = data.map<FormattedCategory>((category) => {
       return {
         id: category._id,
         name: category.name,
         status: category.isActive ? 'Activada' : 'Desactivada',
         isActive: category.isActive,
+        logicDelete: category.logicDelete,
       };
     });
     setCategoriesList(listData);
@@ -52,7 +56,7 @@ const Categories = (): JSX.Element => {
     formatData(categories);
   }, [categories]);
 
-  const buttons: ((rowData?: Category) => TableButton)[] = [
+  const buttons: ((rowData?: FormattedCategory) => TableButton)[] = [
     (rowData) => ({
       active: true,
       icon: <Edit />,
@@ -100,7 +104,7 @@ const Categories = (): JSX.Element => {
     }),
   ];
 
-  const headers: Headers[] = [
+  const headers: Headers<FormattedCategory>[] = [
     { header: 'Categoría', key: 'name' },
     { header: 'Estado', key: 'status' },
   ];
@@ -122,9 +126,11 @@ const Categories = (): JSX.Element => {
         </div>
       </div>
       {isFetching ? (
-        <></>
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
-        <List<Category>
+        <List<FormattedCategory>
           headers={headers}
           showButtons={true}
           buttons={buttons}

@@ -20,6 +20,7 @@ const ShoppingCart = (): JSX.Element => {
   const navigate = useNavigate();
   const token = useSelector((state: RootState) => state.auth.token);
   const userRole = useSelector((state: RootState) => state.auth.role);
+  const user = useSelector((state: RootState) => state.auth.user);
   const open = useSelector((state: RootState) => state.shoppingCart.isOpen);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const orderAmounts = useSelector((state: RootState) => getOrderAmounts(state));
@@ -27,7 +28,17 @@ const ShoppingCart = (): JSX.Element => {
   const checkLoggedUser = () => {
     dispatch(closeCart());
     if (token && userRole === UserRole.CLIENT) {
-      navigate('/order/summary');
+      if (!user.approved || !user.isActive) {
+        dispatch(resetState());
+        dispatch(
+          openModal(ModalTypes.INFO, {
+            message:
+              'Lo sentimos, su cuenta no se encuentra activa para realizar esta operación. Para más información comuníquese con soporte técnico.',
+          }),
+        );
+      } else {
+        navigate('/order/summary');
+      }
     } else if (UserRole.ADMIN === userRole) {
       dispatch(resetState());
       dispatch(
@@ -36,7 +47,13 @@ const ShoppingCart = (): JSX.Element => {
         }),
       );
     } else {
-      dispatch(openModal(ModalTypes.LOGIN));
+      dispatch(
+        openModal(ModalTypes.LOGIN, {
+          onConfirmCallback: () => {
+            navigate('/order/summary');
+          },
+        }),
+      );
     }
   };
 

@@ -28,7 +28,12 @@ const ProductBox = ({ product }: ProductBoxProps): JSX.Element => {
     <div className={styles.container}>
       <Close className={styles.delete} onClick={() => dispatch(deleteProduct(product._id))} />
       <div className={styles.firstRowContainer}>
-        <img className={styles.image} src={product.image.url}></img>
+        <img
+          className={styles.image}
+          src={product.image.url}
+          alt={product.brand + ' ' + product.name}
+          title={product.brand + ' ' + product.name}
+        ></img>
         <p className={styles.productName}>{product.brand + ' ' + product.name}</p>
       </div>
       <div className={styles.secondRowContainer}>

@@ -5,9 +5,9 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { OrderRoutes } from 'src/constants';
-import { resetState } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { createOrder } from 'src/redux/shopping-cart/thunks';
+import { OrderToCreate } from 'src/redux/shopping-cart/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './order.module.css';
@@ -33,7 +33,7 @@ const OrderLayout = (): JSX.Element => {
   };
 
   const handleCreateOrder = () => {
-    const order = {
+    const order: OrderToCreate = {
       products: cartProducts,
       client: clientId,
       authorized: authorized,
@@ -44,7 +44,6 @@ const OrderLayout = (): JSX.Element => {
     };
     dispatch(createOrder(order));
     navigate(`/order${OrderRoutes.FINAL_SCREEN}`);
-    dispatch(resetState());
   };
 
   switch (location.pathname) {
@@ -52,8 +51,11 @@ const OrderLayout = (): JSX.Element => {
       btnOptions = {
         text: 'Continuar compra',
         onClick: () => navigate(`/order${OrderRoutes.AUTHORIZED}`),
-        disabled: false,
+        disabled: cartProducts.length > 0 ? false : true,
       };
+      if (cartProducts.length === 0) {
+        setTimeout(() => navigate('/'), 1000);
+      }
       break;
     case `/order${OrderRoutes.AUTHORIZED}`:
       btnOptions = {

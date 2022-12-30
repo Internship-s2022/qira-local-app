@@ -37,7 +37,28 @@ const DeliverOrders = (): JSX.Element => {
     if (response?.type === Actions.GET_ORDER_TO_DELIVER_SUCCESS) {
       navigate(`/admin/order/${data.id}`);
     } else {
-      dispatch(openModal(ModalTypes.INFO, { message: 'Ha ocurrido un error ' }));
+      switch (response.payload.message) {
+        case `Could not find an order by the id of ${data.id}.`:
+          dispatch(
+            openModal(ModalTypes.INFO, {
+              message: 'No se encontró una órden pendiente de entrega con ese código.',
+            }),
+          );
+          break;
+        case `The order with the id ${data.id} is already delivered.`:
+          dispatch(
+            openModal(ModalTypes.INFO, { message: 'La órden con ese código ya fue entregada.' }),
+          );
+          break;
+        case `Could not find an authorized with the dni ${data.dni}.`:
+          dispatch(
+            openModal(ModalTypes.INFO, { message: 'No se encontró un autorizado con ese DNI.' }),
+          );
+          break;
+        default:
+          dispatch(openModal(ModalTypes.INFO, { message: 'Ha ocurrido un error.' }));
+          break;
+      }
     }
   };
 
@@ -69,7 +90,12 @@ const DeliverOrders = (): JSX.Element => {
             margin="dense"
             size="small"
           />
-          <Button className={styles.button} variant="contained" onClick={handleSubmit(onSubmit)}>
+          <Button
+            className={styles.button}
+            variant="contained"
+            onClick={handleSubmit(onSubmit)}
+            type="submit"
+          >
             Continuar
           </Button>
         </div>

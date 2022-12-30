@@ -1,6 +1,8 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Dispatch } from 'redux';
 
+import { FormValues } from 'src/components/shared/ui/modal/login/types';
+import { FormattedUser } from 'src/components/shared/ui/modal/signup/types';
 import { auth } from 'src/helper/firebase';
 
 import { RootAction } from '../store';
@@ -13,7 +15,7 @@ import {
 } from './actions';
 import { getAuthUser, registerUser, updateClientInformationApi } from './api';
 
-export const login = (credentials) => {
+export const login = (credentials: FormValues) => {
   return async (dispatch: Dispatch<RootAction>) => {
     try {
       dispatch(loginActions.request(''));
@@ -49,13 +51,13 @@ export const getAuthUserThunk = () => {
   };
 };
 
-export const register = (user) => {
+export const register = (user: FormattedUser) => {
   return async (dispatch: Dispatch<RootAction>) => {
     try {
       dispatch(registerActions.request());
       const response = await registerUser(user);
       if (response.data) {
-        dispatch(registerActions.success());
+        return dispatch(registerActions.success());
       }
     } catch (error) {
       return dispatch(registerActions.failure(error.response.data));
@@ -63,7 +65,7 @@ export const register = (user) => {
   };
 };
 
-export const updateClientInformation = (data) => {
+export const updateClientInformation = (data: { phoneNumber: string }) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(updateClientInformationActions.request());

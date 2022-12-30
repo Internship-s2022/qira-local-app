@@ -63,9 +63,13 @@
   margin-top: 88vh;
 }
 
-@media screen and (max-width: 678px) {
+@media screen and (max-width: 699px) {
+  .footerContainer {
+    flex-direction: column;
+  }
+
   .socialMediaContainer {
-    padding: 0;
+    padding: 0 0 15px;
   }
 
   .container {

@@ -1,6 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
   min-height: 200px;
   padding: 15px;
@@ -14,21 +15,60 @@
   border: 20px, #f05523;
 }
 
-.buttonEdit {
-  align-self: center;
-  color: #f05523;
-  background-color: white;
-  border: solid 1px #f05523;
+.button {
+  width: 191px;
+  font-weight: bold;
 }
 
 .buttonContainer {
   display: flex;
+  gap: 20px;
   justify-content: space-between;
 }
 
-.titleModalImage {
+.titleModalPdf {
   padding: 5px 10px;
   font-size: 25px;
+  font-weight: bold;
+  text-align: center;
   border-radius: 5px;
   box-shadow: solid 2px;
+}
+
+.fileName {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.fileName p {
+  max-width: 285px;
+  overflow-x: hidden;
+  font-size: 15px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.textContainer div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.text {
+  font-size: 16px;
+  font-weight: 400;
+  color: #637381;
+}
+
+.textBold {
+  margin-right: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #637381;
 }

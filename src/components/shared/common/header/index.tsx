@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   AccountCircle,
-  ArrowBack,
   InfoOutlined,
   KeyboardArrowDown,
   MenuOutlined,
   Search,
   ShoppingCart,
 } from '@mui/icons-material';
-import { Badge, BadgeProps, styled, Tooltip } from '@mui/material';
+import { Badge, BadgeProps, styled, Tooltip, useMediaQuery } from '@mui/material';
 
+import { formatDate } from 'src/helper/orders';
 import * as thunksCategories from 'src/redux/category/thunk';
 import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
 import { openModal } from 'src/redux/modal/actions';
@@ -26,7 +26,6 @@ import styles from './header.module.css';
 const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const categories = useSelector((state: RootState) => state.categories.categories);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const currentUser = useSelector((state: RootState) => state.auth.user);
@@ -35,6 +34,7 @@ const Header = () => {
   const sidebarIsOpen = useSelector((state: RootState) => state.sidebar.isOpen);
   const [openSelect, setOpenSelect] = useState<boolean>(false);
   const [searchInput, setSearchInput] = useState<string>('');
+  const isMobile = useMediaQuery('(max-width: 600px)');
   useEffect(() => {
     dispatch(thunksCategories.getPublicCategories());
     dispatch(getExchangeRate());
@@ -62,9 +62,10 @@ const Header = () => {
             <>
               <p className={styles.exchangeRate}>{`ARS ${exchangeRate?.value}`}</p>
               <Tooltip
-                title={`La fecha de cotizacion es: ${exchangeRate.date}`}
-                placement="right"
+                title={`La fecha de cotización es: ${formatDate(exchangeRate.date)}`}
+                placement={isMobile ? 'bottom' : 'right'}
                 arrow
+                disableFocusListener
               >
                 <InfoOutlined className={styles.infoIcon} />
               </Tooltip>
@@ -84,21 +85,9 @@ const Header = () => {
               />
             </Link>
             <div className={styles.menuAndLogoContainer}>
-              {currentRole != UserRole.ADMIN && (
+              {currentRole !== UserRole.ADMIN && (
                 <div onClick={() => dispatch(sidebarIsOpen ? closeSidebar() : openSidebar())}>
-                  <MenuOutlined
-                    className={
-                      location.pathname.includes('/profile') ? styles.menuOnProfile : styles.menu
-                    }
-                  />
-                  <ArrowBack
-                    onClick={() => navigate('/')}
-                    className={
-                      location.pathname.includes('/profile')
-                        ? styles.arrowBackOnProfile
-                        : styles.arrowBack
-                    }
-                  ></ArrowBack>
+                  <MenuOutlined className={styles.menu} />
                 </div>
               )}
               <div onClick={() => dispatch(closeSidebar())}>

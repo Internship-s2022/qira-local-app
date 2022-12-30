@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { ArrowBack } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
@@ -14,6 +14,25 @@ import { SidebarProps } from './types';
 
 const Sidebar = (props: SidebarProps): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const location = useLocation();
+
+  const routeComparation = () => {
+    switch (location.pathname) {
+      case '/admin/orders':
+        return 'Ordenes de compra';
+      case '/admin/clients':
+        return 'Clientes';
+      case '/admin/products':
+        return 'Productos';
+      case '/admin/categories':
+        return 'Categorias';
+      case '/admin/deliver':
+        return 'Entregar pedido';
+      default:
+        return '';
+    }
+  };
+
   return (
     <aside className={styles.aside}>
       <div className={styles.container}>
@@ -21,7 +40,7 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
           <p>{props.title}</p>
         </div>
         <nav className={styles.navList}>
-          <ul>
+          <ul className={styles.list}>
             {props.links.map((link, index) => {
               return (
                 <NavLink
@@ -34,7 +53,11 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
                       {link.title}
                     </li>
                   ) : (
-                    <li>{link.title}</li>
+                    <li
+                      className={routeComparation().includes(link.title) ? styles.linkSelected : ''}
+                    >
+                      {link.title}
+                    </li>
                   )}
                 </NavLink>
               );

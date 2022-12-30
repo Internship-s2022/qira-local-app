@@ -19,6 +19,33 @@
 
 .loaderContainer {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50vh;
+  left: 50vw;
+}
+
+@media screen and (max-width: 768px) {
+  .loaderContainer {
+    left: 40vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .loaderContainer {
+    left: 35vw;
+  }
+}
+
+.noOrderMessage {
+  width: 575px;
+  margin-left: 60px;
+}
+
+.buttonHome {
+  font-weight: bold;
+  color: #f05523;
+  text-decoration: none;
+}
+
+.buttonHome:hover {
+  cursor: pointer;
 }

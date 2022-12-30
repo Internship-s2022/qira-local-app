@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   IconButton,
   Table,
@@ -20,7 +20,7 @@ const List = <T extends RowData>(props: ListProps<T>) => {
         <TableHead className={styles.tableHeader}>
           <TableRow>
             {props.headers.map((row) => (
-              <TableCell key={row.key} className={styles.columnHeader}>
+              <TableCell key={row.key.toString()} className={styles.columnHeader}>
                 {row.header}
               </TableCell>
             ))}
@@ -32,7 +32,7 @@ const List = <T extends RowData>(props: ListProps<T>) => {
             <TableRow key={row.id} hover={true}>
               {props.headers.map((header, index) => (
                 <TableCell key={index} scope="row" className={styles.cell}>
-                  {row[header.key]}
+                  {row[header.key] as ReactNode}
                 </TableCell>
               ))}
               {props.showButtons && (

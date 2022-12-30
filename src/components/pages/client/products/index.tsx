@@ -34,8 +34,8 @@ export const ProductsList = (): JSX.Element => {
         <Link className={styles.navLink} to="/">
           Inicio
         </Link>
-        <p className={styles.navLink}>Categorias</p>
-        <p className={styles.navLink}>{capitalizeFirstLetter(params.url)}</p>
+        <p className={styles.navLink}>Categorías</p>
+        <p className={styles.navLink}>{capitalizeFirstLetter(params.url.replace('-', ' '))}</p>
       </div>
       <section className={styles.productsContainer}>
         {isFetching ? (

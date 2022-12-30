@@ -11,6 +11,7 @@ import { SharedCheckbox } from 'src/components/shared/ui/checkbox';
 import { ImageInput } from 'src/components/shared/ui/image-input';
 import { InputText } from 'src/components/shared/ui/input';
 import { PdfInput } from 'src/components/shared/ui/pdf-input';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options as SelectOptions } from 'src/components/shared/ui/select/types';
 import { toBase64 } from 'src/helper/form';
@@ -32,7 +33,7 @@ const ProductForm = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const params = useParams();
   const navigate = useNavigate();
-  const isFetching = useSelector((state: RootState) => state.clients.isFetching);
+  const isFetching = useSelector((state: RootState) => state.products.isFetching);
   const product = useSelector((state: RootState) => state.products.selectedProduct);
   const products = useSelector((state: RootState) => state.products.products);
   const categoryOptions = useSelector(getCategoryOptions);
@@ -187,7 +188,9 @@ const ProductForm = (): JSX.Element => {
   return (
     <>
       {isFetching ? (
-        <></>
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
         <>
           <div className={styles.titleContainer}>
@@ -305,6 +308,7 @@ const ProductForm = (): JSX.Element => {
               variant="contained"
               onClick={handleSubmit(onSubmit)}
               disabled={params.id ? !isDirty && !fileInputs : false}
+              type="submit"
             >
               {params.id ? 'Editar' : 'Agregar'}
             </Button>

@@ -1,12 +1,13 @@
 import { format } from 'date-fns';
 import Dinero from 'dinero.js';
 
+import { FormattedOrder, Order } from 'src/redux/orders/types';
 import { OrderState } from 'src/types';
 
-export const formatOrders = (data) => {
+export const formatOrders = (data: Order[]) => {
   data.sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime());
 
-  const listData = data.map((order) => {
+  const listData: FormattedOrder[] = data.map((order) => {
     return {
       id: order._id,
       client: order.client.businessName,

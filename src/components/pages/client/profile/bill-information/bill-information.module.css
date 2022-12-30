@@ -6,11 +6,26 @@
 
 .formContainer {
   display: flex;
+  gap: 40px;
   justify-content: space-between;
-  width: 500px;
 }
 
 .columnContainer {
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin: 20px 30px;
+  }
+
+  .formContainer {
+    flex-direction: column;
+    gap: 0;
+  }
 }

@@ -1,6 +1,6 @@
 import { IvaCondition } from 'src/types';
 
-export const formatIvaConditionsText = (iva) => {
+export const formatIvaConditionsText = (iva: IvaCondition) => {
   let ivaCondition: string;
   switch (iva) {
     case IvaCondition.exempt:

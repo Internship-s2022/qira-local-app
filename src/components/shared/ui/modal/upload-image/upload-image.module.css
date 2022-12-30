@@ -1,41 +1,110 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 300px;
-  padding: 15px;
+  align-items: center;
+  justify-content: space-around;
+  min-width: 420px;
+  min-height: 500px;
+  padding-bottom: 15px;
 }
 
 .imageContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2%;
-  border: 20px, #f05523;
 }
 
 .image {
   align-self: center;
   object-fit: cover;
-  width: 200px;
-  height: 200px;
+  width: 230px;
+  height: 230px;
 }
 
-.buttonEdit {
-  align-self: center;
-  color: #f05523;
-  background-color: white;
-  border: solid 1px #f05523;
+.imagePlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 230px;
+  height: 230px;
+  background-color: #c1c1c1;
+  border-radius: 5px;
+}
+
+.imageIcon {
+  width: 144px;
+  height: 144px;
+  color: #00000044;
+}
+
+.button {
+  font-weight: bold;
 }
 
 .buttonContainer {
   display: flex;
-  justify-content: space-between;
+  gap: 15px;
+  justify-content: center;
+}
+
+.buttonSend {
+  width: 191px;
+  font-weight: bold;
 }
 
 .titleModalImage {
   padding: 5px 10px;
   font-size: 25px;
+  font-weight: bold;
   border-radius: 5px;
   box-shadow: solid 2px;
+}
+
+.fileName {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.fileName p {
+  max-width: 385px;
+  overflow-x: hidden;
+  font-size: 15px;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.textContainer :first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.textContainer :last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: #637381;
+}
+
+.textBold {
+  margin: 0;
+  margin-right: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #637381;
 }

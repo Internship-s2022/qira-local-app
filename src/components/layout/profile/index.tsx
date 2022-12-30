@@ -1,21 +1,25 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
-import { Footer, Header } from 'src/components/shared/common';
+import { Footer, Header, SidebarHome } from 'src/components/shared/common';
+import ShoppingCart from 'src/components/shared/ui/shopping-cart';
 import { logout } from 'src/redux/auth/thunks';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
-import { AppDispatch } from 'src/redux/store';
+import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './profile.module.css';
 
 const ClientLayout = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const location = useLocation();
+  const isOpen = useSelector((state: RootState) => state.sidebar.isOpen);
   return (
-    <>
+    <div className={isOpen ? styles.containerWithSidebar : ''}>
+      <ShoppingCart />
       <Header />
+      <SidebarHome isOpen={isOpen} />
       <div className={styles.mainContainer}>
         <div className={styles.contentContainer}>
           <section className={styles.profileNavBar}>
@@ -74,7 +78,7 @@ const ClientLayout = (): JSX.Element => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

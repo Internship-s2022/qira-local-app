@@ -36,7 +36,7 @@ export const ChangePassword = () => {
     resolver: joiResolver(resetPasswordValidations),
   });
 
-  const submitHandler = (data) => {
+  const submitHandler = (data: any) => {
     options.onConfirmCallback(data);
     reset();
   };

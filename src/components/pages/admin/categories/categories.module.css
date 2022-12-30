@@ -26,3 +26,9 @@
   color: white;
   background-color: var(--color-primary);
 }
+
+.loaderContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

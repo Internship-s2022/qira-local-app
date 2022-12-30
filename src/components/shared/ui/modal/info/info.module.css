@@ -11,6 +11,11 @@
 }
 
 .container p {
+  max-width: 500px;
   margin: 0;
   text-align: center;
+}
+
+.button {
+  font-weight: bold;
 }

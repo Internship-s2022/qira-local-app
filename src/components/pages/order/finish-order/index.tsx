@@ -91,7 +91,12 @@ export const FinishOrder = (): JSX.Element => {
             {shoppingCartProducts.map((cartProduct, index) => (
               <div className={styles.productRow} key={index}>
                 <div className={styles.imageContainer}>
-                  <img className={styles.image} src={cartProduct.product.image.url} />
+                  <img
+                    className={styles.image}
+                    src={cartProduct.product.image.url}
+                    alt={cartProduct.product.brand + ' ' + cartProduct.product.name}
+                    title={cartProduct.product.brand + ' ' + cartProduct.product.name}
+                  />
                   <p>{cartProduct.product.brand + ' ' + cartProduct.product.name}</p>
                 </div>
                 <div className={styles.quantity}>{cartProduct.quantity}</div>

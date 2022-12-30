@@ -1,7 +1,6 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 }
 
 .navHistory {
@@ -54,6 +53,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 100vw;
   padding-top: 50px;
   background-color: rgb(231 231 231);
 }
@@ -133,7 +133,7 @@
 .informationContainer {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 100vw;
   margin-top: 20px;
   background-color: white;
 }
@@ -189,9 +189,17 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 45px;
-  border: 1px solid #bcbcbc;
+}
+
+.counterInput {
+  width: 142px;
   border-radius: 8px;
+}
+
+.quantityIcons input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
 }
 
 .quantityIcons p {
@@ -205,9 +213,32 @@
 
 .button {
   width: 100%;
+  font-weight: bold;
 }
 
 .subtitle {
   font-size: 12;
   font-weight: bold;
+}
+@media screen and (max-width: 768px) {
+  .productContainer {
+    padding-top: 20px;
+  }
+
+  .imageAndPriceContainer {
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    height: auto;
+    padding-top: 15px;
+  }
+
+  .priceContainer {
+    margin-left: 0;
+  }
+
+  .information {
+    width: 80%;
+  }
 }

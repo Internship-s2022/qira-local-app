@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Check, Close, Edit, LockPerson } from '@mui/icons-material';
+import { Check, Close, Edit, HowToReg, LockPerson } from '@mui/icons-material';
 
 import List from 'src/components/shared/ui/list';
+import QiraLoader from 'src/components/shared/ui/qira-loader';
 import * as thunks from 'src/redux/clients/thunk';
+import { Client } from 'src/redux/clients/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -12,13 +14,15 @@ import { AppDispatch, RootState } from 'src/redux/store';
 import { Headers, TableButton } from '../../../shared/ui/list/types';
 import styles from './clients.module.css';
 
-interface Client {
+interface FormattedClient {
   id: string;
   businessName: string;
   cuit: string;
   phoneNumber: string;
   email: string;
   isActive: boolean;
+  state: string;
+  approved: boolean;
 }
 
 const Clients = (): JSX.Element => {
@@ -26,12 +30,13 @@ const Clients = (): JSX.Element => {
   const navigate = useNavigate();
   const clients = useSelector((state: RootState) => state.clients.clients);
   const isFetching = useSelector((state: RootState) => state.clients.isFetching);
+  const sortedList = clients.reverse();
 
   useEffect(() => {
     dispatch(thunks.getClients());
   }, []);
 
-  const formatData = (data) => {
+  const formatData = (data: Client[]) => {
     const listData = data.map((client) => {
       return {
         id: client._id,
@@ -40,14 +45,15 @@ const Clients = (): JSX.Element => {
         email: client.email,
         phoneNumber: client.phoneNumber,
         isActive: client.isActive,
-        state: client.isActive ? 'Aprobado' : 'Pendiente',
+        state: client.approved ? (client.isActive ? 'Habilitado' : 'Inhabilitado') : 'Pendiente',
         firebaseUid: client.firebaseUid ? client.firebaseUid : '',
+        approved: client.approved,
       };
     });
     return listData;
   };
 
-  const headers: Headers[] = [
+  const headers: Headers<FormattedClient>[] = [
     { header: 'CUIT', key: 'cuit' },
     { header: 'Razón Social', key: 'businessName' },
     { header: 'Email', key: 'email' },
@@ -55,24 +61,41 @@ const Clients = (): JSX.Element => {
     { header: 'Estado', key: 'state' },
   ];
 
-  const buttons: ((rowData: Client) => TableButton)[] = [
+  const buttons: ((rowData: FormattedClient) => TableButton)[] = [
     (rowData) => ({
       active: true,
-      icon: rowData.isActive ? <Close /> : <Check />,
-      title: rowData.isActive ? 'Desactivar' : 'Activar',
+      icon: rowData.approved ? rowData.isActive ? <Close /> : <Check /> : <HowToReg />,
+      title: rowData.approved ? (rowData.isActive ? 'Deshabilitar' : 'Habilitar') : 'Aprobar',
       onClick: () => {
-        rowData.isActive
-          ? dispatch(
-              openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro de que desea desactivar el cliente?',
-                onConfirmCallback: () => dispatch(thunks.inactivateClient(rowData.id)),
-                onCloseCallback: () => dispatch(closeModal()),
-              }),
-            )
+        rowData.approved
+          ? rowData.isActive
+            ? dispatch(
+                openModal(ModalTypes.CONFIRM, {
+                  message: '¿Está seguro de que desea deshabilitar el cliente?',
+                  onConfirmCallback: () => {
+                    dispatch(thunks.inactivateClient(rowData.id));
+                    dispatch(closeModal());
+                  },
+                  onCloseCallback: () => dispatch(closeModal()),
+                }),
+              )
+            : dispatch(
+                openModal(ModalTypes.CONFIRM, {
+                  message: '¿Está seguro de que desea habilitar el cliente?',
+                  onConfirmCallback: () => {
+                    dispatch(thunks.activateClient(rowData.id));
+                    dispatch(closeModal());
+                  },
+                  onCloseCallback: () => dispatch(closeModal()),
+                }),
+              )
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
-                message: '¿Está seguro de que desea activar el cliente?',
-                onConfirmCallback: () => dispatch(thunks.activateClient(rowData.id)),
+                message: '¿Está seguro de que desea aprobar el cliente?',
+                onConfirmCallback: () => {
+                  dispatch(thunks.approveClient(rowData.id));
+                  dispatch(closeModal());
+                },
                 onCloseCallback: () => dispatch(closeModal()),
               }),
             );
@@ -108,11 +131,13 @@ const Clients = (): JSX.Element => {
         <h1>Clientes</h1>
       </div>
       {isFetching ? (
-        <></>
+        <div className={styles.loaderContainer}>
+          <QiraLoader />
+        </div>
       ) : (
-        <List<Client>
+        <List<FormattedClient>
           headers={headers}
-          data={formatData(clients)}
+          data={formatData(sortedList)}
           showButtons={true}
           buttons={buttons}
         ></List>
