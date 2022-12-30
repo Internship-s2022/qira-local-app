@@ -248,3 +248,7 @@
   justify-content: center;
   width: 100%;
 }
+
+.btn {
+  font-weight: bold;
+}

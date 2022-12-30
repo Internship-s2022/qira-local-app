@@ -72,7 +72,7 @@ export const UploadImage = () => {
         {preview && (
           <Button
             onClick={() => options.onConfirmCallback(selectedFile)}
-            className={styles.buttonSend}
+            className={styles.button}
             variant="contained"
             component="label"
           >

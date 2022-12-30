@@ -20,6 +20,7 @@ export const Info = () => {
         <Button
           onClick={handleConfirm}
           variant="contained"
+          className={styles.button}
           color="primary"
           data-testid="info-modal-btn"
         >

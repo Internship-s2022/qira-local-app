@@ -37,6 +37,10 @@
   color: #00000044;
 }
 
+.button {
+  font-weight: bold;
+}
+
 .buttonContainer {
   display: flex;
   gap: 15px;
@@ -45,6 +49,7 @@
 
 .buttonSend {
   width: 191px;
+  font-weight: bold;
 }
 
 .titleModalImage {

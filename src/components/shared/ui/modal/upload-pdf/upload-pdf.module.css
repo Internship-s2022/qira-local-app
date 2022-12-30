@@ -19,6 +19,10 @@
   width: 192px;
 }
 
+.button {
+  font-weight: bold;
+}
+
 .buttonContainer {
   display: flex;
   gap: 20px;

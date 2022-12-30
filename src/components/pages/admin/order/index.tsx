@@ -288,7 +288,7 @@ const OrderDetails = (): JSX.Element => {
                           }
                           color="primary"
                           variant="contained"
-                          className={styles.btnUpload}
+                          className={styles.btn}
                         >
                           {invoice
                             ? 'Modificar archivo'
@@ -311,6 +311,7 @@ const OrderDetails = (): JSX.Element => {
                             variant="contained"
                             color="primary"
                             disabled={invoice ? false : true}
+                            className={styles.btn}
                             onClick={() =>
                               dispatch(
                                 openModal(ModalTypes.CONFIRM, {
@@ -329,6 +330,7 @@ const OrderDetails = (): JSX.Element => {
                           <Button
                             variant="outlined"
                             color="primary"
+                            className={styles.btn}
                             onClick={() =>
                               dispatch(
                                 openModal(ModalTypes.CONFIRM, {
@@ -358,6 +360,7 @@ const OrderDetails = (): JSX.Element => {
                           <Button
                             variant="contained"
                             color="primary"
+                            className={styles.btn}
                             disabled={invoice ? false : true}
                             onClick={() =>
                               dispatch(

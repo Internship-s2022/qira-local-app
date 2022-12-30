@@ -17,6 +17,7 @@
 .button {
   width: 85%;
   margin: 5px;
+  font-weight: bold;
 }
 
 .titleContainer {
