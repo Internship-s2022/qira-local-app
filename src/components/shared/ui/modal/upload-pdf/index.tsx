@@ -62,7 +62,7 @@ export const UploadPdf = () => {
             variant="contained"
             component="label"
           >
-            Subir
+            Confirmar
           </Button>
         )}
       </div>
