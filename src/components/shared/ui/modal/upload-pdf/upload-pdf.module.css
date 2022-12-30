@@ -15,11 +15,8 @@
   border: 20px, #f05523;
 }
 
-.buttonSend {
-  width: 192px;
-}
-
 .button {
+  width: 191px;
   font-weight: bold;
 }
 

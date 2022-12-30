@@ -76,7 +76,7 @@ export const UploadImage = () => {
             variant="contained"
             component="label"
           >
-            Subir imagen
+            Confirmar
           </Button>
         )}
       </div>
