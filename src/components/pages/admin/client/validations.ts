@@ -29,7 +29,7 @@ export const updateClientValidations = Joi.object({
       'string.pattern.base': 'Debe contener 7-8 dígitos.',
     }),
   businessName: Joi.string()
-    .regex(/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+/)
+    .regex(/^([0-9]*)(\s?[A-zÀ-ú]+)(\s[0-9A-zÀ-ú]+)*\s?$/)
     .min(3)
     .max(50)
     .trim()
@@ -87,7 +87,7 @@ export const updateClientValidations = Joi.object({
       'string.empty': 'Campo requerido.',
     }),
   street: Joi.string()
-    .regex(/[a-zA-Z0-9]+\s[a-zA-Z0-9]/)
+    .regex(/^([0-9]*)(\s?[A-zÀ-ú]+)(\s[0-9A-zÀ-ú]+)*\s?$/)
     .min(3)
     .required()
     .messages({
