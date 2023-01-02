@@ -8,6 +8,7 @@ import { closeModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
+import { ChangePassword } from './change-password';
 import { Confirm } from './confirm';
 import { Error } from './error';
 import { Info } from './info';
@@ -49,6 +50,9 @@ export const SharedModal = (): JSX.Element => {
       break;
     case ModalTypes.RECOVER_PASSWORD:
       modalComponent = <RecoverPassword />;
+      break;
+    case ModalTypes.CHANGE_PASSWORD:
+      modalComponent = <ChangePassword />;
       break;
     default:
   }

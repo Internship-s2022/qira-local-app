@@ -6,6 +6,7 @@ import { AppThunk } from '../store';
 import {
   activateActions,
   approveClientActions,
+  changePasswordActions,
   getClientActions,
   getClientsActions,
   inactivateActions,
@@ -88,6 +89,18 @@ export const approveClient = (id: string) => {
       return dispatch(approveClientActions.success(response.data));
     } catch (error) {
       dispatch(approveClientActions.failure(error));
+    }
+  };
+};
+
+export const changePassword = (id: string, data: { password: string }) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(changePasswordActions.request());
+      const response = await API.changePasswordApi(id, data);
+      return dispatch(changePasswordActions.success(response.data));
+    } catch (error) {
+      dispatch(changePasswordActions.failure(error));
     }
   };
 };

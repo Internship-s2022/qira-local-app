@@ -17,6 +17,7 @@ export const clientReducer = (state = initialState, action: ActionsType): Client
     case Actions.GET_CLIENT_PENDING:
     case Actions.UPDATE_CLIENT_PENDING:
     case Actions.APPROVE_CLIENT_PENDING:
+    case Actions.CHANGE_PASSWORD_PENDING:
       return {
         ...state,
         isFetching: true,
@@ -27,6 +28,7 @@ export const clientReducer = (state = initialState, action: ActionsType): Client
     case Actions.GET_CLIENT_ERROR:
     case Actions.UPDATE_CLIENT_ERROR:
     case Actions.APPROVE_CLIENT_ERROR:
+    case Actions.CHANGE_PASSWORD_ERROR:
       return {
         ...state,
         isFetching: false,
@@ -61,6 +63,12 @@ export const clientReducer = (state = initialState, action: ActionsType): Client
         ...state,
         selectedClient: action.payload,
         isFetching: false,
+      };
+    case Actions.CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        error: false,
       };
     default:
       return state;
