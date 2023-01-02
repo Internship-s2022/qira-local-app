@@ -3,8 +3,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  width: 370px;
   min-height: 200px;
-  padding: 15px;
+  padding: 10px;
 }
 
 .fileContainer {
@@ -16,13 +17,13 @@
 }
 
 .button {
-  width: 191px;
+  width: 170px;
   font-weight: bold;
 }
 
 .buttonContainer {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   justify-content: space-between;
 }
 

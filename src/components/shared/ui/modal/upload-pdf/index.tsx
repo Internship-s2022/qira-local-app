@@ -51,6 +51,7 @@ export const UploadPdf = () => {
           variant={preview ? 'outlined' : 'contained'}
           className={styles.button}
           component="label"
+          size="small"
         >
           {preview ? <> Elegir otro archivo </> : <> Subir Archivo </>}
           <input hidden type="file" accept=".pdf" onChange={onSelectFile} />
@@ -61,6 +62,7 @@ export const UploadPdf = () => {
             className={styles.button}
             variant="contained"
             component="label"
+            size="small"
           >
             Confirmar
           </Button>
