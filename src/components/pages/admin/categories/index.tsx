@@ -13,7 +13,7 @@ import {
   getCategory,
   inactivateCategory,
 } from 'src/redux/category/thunk';
-import { Category } from 'src/redux/category/types';
+import { Actions, Category } from 'src/redux/category/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -74,7 +74,20 @@ const Categories = (): JSX.Element => {
           ? dispatch(
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea desactivar la categoría?',
-                onConfirmCallback: () => dispatch(inactivateCategory(rowData.id)),
+                onConfirmCallback: async () => {
+                  const response = await dispatch(inactivateCategory(rowData.id));
+                  if (
+                    response.type === Actions.INACTIVATE_CATEGORY_ERROR &&
+                    response.payload.message === 'This category has products assigned.'
+                  ) {
+                    dispatch(
+                      openModal(ModalTypes.INFO, {
+                        message:
+                          'No es posible desactivar la categoría debido a que la misma posee productos asignados.',
+                      }),
+                    );
+                  }
+                },
                 onCloseCallback: () => dispatch(closeModal()),
               }),
             )
@@ -96,7 +109,20 @@ const Categories = (): JSX.Element => {
         dispatch(
           openModal(ModalTypes.CONFIRM, {
             message: '¿Está seguro de que desea eliminar la categoría?',
-            onConfirmCallback: () => dispatch(deleteCategory(rowData.id)),
+            onConfirmCallback: async () => {
+              const response = await dispatch(deleteCategory(rowData.id));
+              if (
+                response.type === Actions.DELETE_CATEGORY_ERROR &&
+                response.payload.message === 'This category has products assigned.'
+              ) {
+                dispatch(
+                  openModal(ModalTypes.INFO, {
+                    message:
+                      'No es posible borrar la categoría debido a que la misma posee productos asignados.',
+                  }),
+                );
+              }
+            },
             onCloseCallback: () => dispatch(closeModal()),
           }),
         );
