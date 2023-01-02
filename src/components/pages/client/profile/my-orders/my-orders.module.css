@@ -24,7 +24,7 @@
   left: 50vw;
 }
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .loaderContainer {
     left: 40vw;
   }
@@ -34,7 +34,7 @@
   .loaderContainer {
     left: 35vw;
   }
-}
+} */
 
 .noOrderMessage {
   width: 575px;
