@@ -26,6 +26,7 @@ export enum ProfileClientRoutes {
   MY_ORDERS = '/my-orders',
   ORDER_DETAILS = '/my-orders/:id',
   USER_DATA = '/user-data',
+  PASSWORD = '/password',
 }
 export enum OrderRoutes {
   SUMMARY = '/summary',
