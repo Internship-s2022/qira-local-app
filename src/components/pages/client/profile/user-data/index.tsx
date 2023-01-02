@@ -5,6 +5,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { Button } from '@mui/material';
 
 import { InputText } from 'src/components/shared/ui/input';
+import { Loader } from 'src/components/shared/ui/loader';
 import { updateClientInformation } from 'src/redux/auth/thunks';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes, Options } from 'src/redux/modal/types';
@@ -21,6 +22,7 @@ export interface formData {
 const UserData = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const currentUser = useSelector((state: RootState) => state.auth.user);
+  const isFetching = useSelector((state: RootState) => state.auth.isFetching);
 
   const { control, handleSubmit, watch } = useForm({
     defaultValues: {
@@ -95,17 +97,23 @@ const UserData = (): JSX.Element => {
               size="small"
             />
           </div>
-          <Button
-            onClick={handleSubmit(onSubmit)}
-            color="primary"
-            variant="contained"
-            fullWidth
-            className={styles.button}
-            disabled={disabledBtn}
-            type="submit"
-          >
-            Guardar
-          </Button>
+          {isFetching ? (
+            <div className={styles.loaderContainer}>
+              <Loader />
+            </div>
+          ) : (
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              color="primary"
+              variant="contained"
+              fullWidth
+              className={styles.button}
+              disabled={disabledBtn}
+              type="submit"
+            >
+              Guardar
+            </Button>
+          )}
         </form>
       </section>
     </>
