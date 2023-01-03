@@ -77,7 +77,8 @@ const SignUpForm = () => {
     const modalOptions: ModalOptions = {};
     const response = await dispatch(register(formattedUser));
     if (response?.type !== Actions.REGISTER_ERROR) {
-      modalOptions.message = 'Cuenta creada exitosamente.';
+      modalOptions.message =
+        '¡Muchas gracias! La cuenta se ha creado exitosamente. Se enviará un mail al correo electrónico registrado cuando haya sido aprobada.';
       modalOptions.onCloseCallback = () => dispatch(closeModal());
       reset();
     } else if (
