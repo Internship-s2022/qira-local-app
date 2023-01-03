@@ -7,6 +7,7 @@ import { IconButton } from '@mui/material';
 import List from 'src/components/shared/ui/list';
 import { Headers, TableButton } from 'src/components/shared/ui/list/types';
 import QiraLoader from 'src/components/shared/ui/qira-loader';
+import { SubCodes } from 'src/constants';
 import {
   activateCategory,
   deleteCategory,
@@ -78,7 +79,7 @@ const Categories = (): JSX.Element => {
                   const response = await dispatch(inactivateCategory(rowData.id));
                   if (
                     response.type === Actions.INACTIVATE_CATEGORY_ERROR &&
-                    response.payload.message === 'This category has products assigned.'
+                    response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS
                   ) {
                     dispatch(
                       openModal(ModalTypes.INFO, {
@@ -113,7 +114,7 @@ const Categories = (): JSX.Element => {
               const response = await dispatch(deleteCategory(rowData.id));
               if (
                 response.type === Actions.DELETE_CATEGORY_ERROR &&
-                response.payload.message === 'This category has products assigned.'
+                response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS
               ) {
                 dispatch(
                   openModal(ModalTypes.INFO, {
