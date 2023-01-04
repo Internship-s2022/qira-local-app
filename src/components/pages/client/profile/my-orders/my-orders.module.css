@@ -20,21 +20,9 @@
 
 .loaderContainer {
   position: absolute;
-  top: 50vh;
-  left: 50vw;
+  top: 50%;
+  left: 50%;
 }
-
-/* @media screen and (max-width: 768px) {
-  .loaderContainer {
-    left: 40vw;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .loaderContainer {
-    left: 35vw;
-  }
-} */
 
 .noOrderMessage {
   width: 575px;

@@ -35,7 +35,9 @@ export const SearchProductsList = (): JSX.Element => {
       </div>
       <section className={styles.productsContainer}>
         {isFetching ? (
-          <QiraLoader />
+          <div className={styles.loaderContainer}>
+            <QiraLoader />
+          </div>
         ) : filteredProducts.length > 0 ? (
           filteredProducts.map((product) => {
             return <ProductCard key={product._id} product={product} />;
