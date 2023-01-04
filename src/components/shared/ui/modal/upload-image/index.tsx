@@ -65,7 +65,6 @@ export const UploadImage = () => {
           variant={preview ? 'outlined' : 'contained'}
           component="label"
           className={styles.buttonSend}
-          size="small"
         >
           {preview ? 'Elegir otro archivo' : 'Subir imagen'}
           <input hidden type="file" accept="image/*" onChange={onSelectFile} />
@@ -76,7 +75,6 @@ export const UploadImage = () => {
             className={styles.button}
             variant="contained"
             component="label"
-            size="small"
           >
             Confirmar
           </Button>
