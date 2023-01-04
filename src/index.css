@@ -13,3 +13,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+.loaderContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.loaderContainer > * {
+  transform: translate(-50%, -50%);
+}
