@@ -17,6 +17,7 @@ export const categoryReducer = (state = initialState, action: ActionsType): Cate
     case Actions.INACTIVATE_CATEGORY_PENDING:
     case Actions.DELETE_CATEGORY_PENDING:
     case Actions.UPDATE_CATEGORY_PENDING:
+    case Actions.CREATE_CATEGORY_PENDING:
       return {
         ...state,
         isFetching: true,
@@ -28,6 +29,7 @@ export const categoryReducer = (state = initialState, action: ActionsType): Cate
     case Actions.INACTIVATE_CATEGORY_ERROR:
     case Actions.DELETE_CATEGORY_ERROR:
     case Actions.UPDATE_CATEGORY_ERROR:
+    case Actions.CREATE_CATEGORY_ERROR:
       return {
         ...state,
         isFetching: false,
