@@ -5,7 +5,6 @@
   justify-content: space-around;
   min-width: 420px;
   min-height: 500px;
-  padding-bottom: 15px;
 }
 
 .imageContainer {
@@ -37,17 +36,14 @@
   color: #00000044;
 }
 
-.button {
-  font-weight: bold;
-}
-
 .buttonContainer {
   display: flex;
   gap: 15px;
   justify-content: center;
 }
 
-.buttonSend {
+.buttonSend,
+.button {
   width: 191px;
   font-weight: bold;
 }
