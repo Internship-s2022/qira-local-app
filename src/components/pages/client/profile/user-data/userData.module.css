@@ -21,6 +21,13 @@
   font-weight: bold;
 }
 
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+}
+
 @media screen and (max-width: 768px) {
   .container {
     align-items: center;
