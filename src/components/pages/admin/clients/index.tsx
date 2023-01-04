@@ -8,7 +8,7 @@ import QiraLoader from 'src/components/shared/ui/qira-loader';
 import * as thunks from 'src/redux/clients/thunk';
 import { Client } from 'src/redux/clients/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
-import { ModalTypes, Options } from 'src/redux/modal/types';
+import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import { Headers, TableButton } from '../../../shared/ui/list/types';
@@ -109,20 +109,7 @@ const Clients = (): JSX.Element => {
         dispatch(
           openModal(ModalTypes.CHANGE_PASSWORD, {
             message: `Está cambiando la contraseña del cliente: "${rowData.businessName}."`,
-            onConfirmCallback: async (data) => {
-              const modalOptions: Options = {};
-              const response = await dispatch(thunks.changePassword(rowData.id, data));
-              if (response) {
-                if (response.type === 'CHANGE_PASSWORD_SUCCESS') {
-                  modalOptions.message = 'Contraseña editada exitosamente.';
-                  modalOptions.onCloseCallback = () => dispatch(closeModal());
-                }
-              }
-              if (!modalOptions.message) {
-                modalOptions.message = 'Algo salió mal ';
-              }
-              dispatch(openModal(ModalTypes.INFO, modalOptions));
-            },
+            id: rowData.id,
             onCloseCallback: () => dispatch(closeModal()),
           }),
         );

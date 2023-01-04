@@ -1,11 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { LockOutlined } from '@mui/icons-material';
 import { Button, InputAdornment } from '@mui/material';
 
-import { RootState } from 'src/redux/store';
+import * as thunks from 'src/redux/clients/thunk';
+import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes, Options } from 'src/redux/modal/types';
+import { AppDispatch, RootState } from 'src/redux/store';
 
 import { InputText } from '../../input';
 import styles from './change-password.module.css';
@@ -14,6 +17,7 @@ import { changePasswordValidation } from './validations';
 
 export const ChangePassword = () => {
   const options = useSelector((state: RootState) => state.modal.options);
+  const dispatch: AppDispatch<null> = useDispatch();
 
   const { handleSubmit, control } = useForm<ChangePasswordFormValues>({
     defaultValues: {
@@ -25,7 +29,28 @@ export const ChangePassword = () => {
   });
 
   const onSubmit = async (data: ChangePasswordFormValues) => {
-    options.onConfirmCallback({ password: data.password });
+    const newPassword = { password: data.password };
+    dispatch(
+      openModal(ModalTypes.CONFIRM, {
+        message: '¿Está seguro de que desea cambiar la contraseña del cliente?',
+        onConfirmCallback: async () => {
+          const modalOptions: Options = {};
+          dispatch(closeModal());
+          const response = await dispatch(thunks.changePassword(options.id, newPassword));
+          if (response) {
+            if (response.type === 'CHANGE_PASSWORD_SUCCESS') {
+              modalOptions.message = 'Contraseña editada exitosamente.';
+              modalOptions.onCloseCallback = () => dispatch(closeModal());
+            }
+          }
+          if (!modalOptions.message) {
+            modalOptions.message = 'Algo salió mal ';
+          }
+          dispatch(openModal(ModalTypes.INFO, modalOptions));
+        },
+        onCloseCallback: () => dispatch(closeModal()),
+      }),
+    );
   };
 
   return (
