@@ -50,7 +50,16 @@ const ShoppingCart = (): JSX.Element => {
       dispatch(
         openModal(ModalTypes.LOGIN, {
           onConfirmCallback: () => {
-            navigate('/order/summary');
+            if (!user.approved || !user.isActive) {
+              dispatch(
+                openModal(ModalTypes.INFO, {
+                  message:
+                    'Lo sentimos, su cuenta no se encuentra activa para realizar esta operación. Para más información comuníquese con soporte técnico.',
+                }),
+              );
+            } else {
+              navigate('/order/summary');
+            }
           },
         }),
       );
