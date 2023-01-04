@@ -12,8 +12,9 @@ import {
   logoutActions,
   registerActions,
   updateClientInformationActions,
+  updatePasswordActions,
 } from './actions';
-import { getAuthUser, registerUser, updateClientInformationApi } from './api';
+import { getAuthUser, registerUser, updateClientInformationApi, updatePasswordApi } from './api';
 
 export const login = (credentials: FormValues) => {
   return async (dispatch: Dispatch<RootAction>) => {
@@ -73,6 +74,18 @@ export const updateClientInformation = (data: { phoneNumber: string }) => {
       return dispatch(updateClientInformationActions.success(response.data));
     } catch (error) {
       dispatch(updateClientInformationActions.failure(error));
+    }
+  };
+};
+
+export const updatePassword = (data: { password: string }) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(updatePasswordActions.request());
+      const response = await updatePasswordApi(data);
+      return dispatch(updatePasswordActions.success(response.data));
+    } catch (error) {
+      dispatch(updatePasswordActions.failure(error));
     }
   };
 };
