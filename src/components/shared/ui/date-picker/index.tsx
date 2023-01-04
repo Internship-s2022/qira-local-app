@@ -1,3 +1,4 @@
+import { isWeekend } from 'date-fns';
 import React from 'react';
 import { FieldValues, useController } from 'react-hook-form';
 import { TextField } from '@mui/material';
@@ -25,6 +26,7 @@ const DatePickerInput = <TValuesForm extends FieldValues>({
         value={value}
         label={label}
         className={className}
+        shouldDisableDate={isWeekend}
         disabled={disabled}
         minDate={minDate}
         renderInput={(params) => (
