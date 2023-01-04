@@ -20,6 +20,7 @@ const Home = (): JSX.Element => {
   const isFetchingProducts = useSelector((state: RootState) => state.products.isFetching);
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     dispatch(getPublicProducts());
     dispatch(getPublicCategories());
     dispatch(clearOrderData());
