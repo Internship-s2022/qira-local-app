@@ -21,6 +21,7 @@ export enum ClientRoutes {
   CLIENT_PROFILE = '/client',
   PRODUCT_DETAIL = '/product/:id',
 }
+
 export enum ProfileClientRoutes {
   BILL_INFORMATION = '/bill-information',
   MY_ORDERS = '/my-orders',
@@ -28,6 +29,7 @@ export enum ProfileClientRoutes {
   USER_DATA = '/user-data',
   PASSWORD = '/password',
 }
+
 export enum OrderRoutes {
   SUMMARY = '/summary',
   AUTHORIZED = '/authorized',
@@ -35,4 +37,15 @@ export enum OrderRoutes {
   FINISH_ORDER = '/finish',
   PAYMENT_METHOD = '/payment',
   FINAL_SCREEN = '/final',
+}
+
+export enum SubCodes {
+  CATEGORY_WITH_PRODUCTS = 1,
+  INCORRECT_ORDER_STATE = 2,
+  DELIVERED_ORDER = 3,
+  INCORRECT_DNI = 4,
+  CLIENT_NOT_FOUND = 5,
+  NO_STOCK = 6,
+  INCORRECT_PRICES = 7,
+  CANNOT_UPDATE_STOCK = 8,
 }

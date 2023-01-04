@@ -4,6 +4,8 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
+import { SubCodes } from 'src/constants';
+
 import { authReducer } from './auth/reducer';
 import { ActionsType as AuthActionsType } from './auth/types';
 import { categoryReducer } from './category/reducer';
@@ -48,5 +50,5 @@ export const { store, persistor } = createPersistedStore();
 export type RootState = ReturnType<typeof rootReducer>;
 export type RootAction = AuthActionsType | CategoryActionsType;
 export type AppThunk = ActionCreator<ThunkAction<void, RootState, null, RootAction>>;
-export type ApiResponse<T> = { message: string; data: T; error: boolean };
+export type ApiResponse<T> = { message: string; data: T; error: boolean; subcode?: SubCodes };
 export type AppDispatch<T> = ThunkDispatch<RootState, T, AnyAction>;
