@@ -58,3 +58,19 @@
   width: 50%;
   font-weight: bold;
 }
+
+@media screen and (max-width: 767px) {
+  .container {
+    width: 375px;
+  }
+
+  .columnContainer {
+    width: 350px;
+  }
+
+  .formContainer {
+    flex-direction: column;
+    gap: 0;
+    width: 350px;
+  }
+}
