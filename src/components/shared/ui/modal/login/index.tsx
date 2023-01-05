@@ -62,7 +62,9 @@ export const LoginModal = () => {
       if (response.payload.role === UserRole.ADMIN) {
         navigate('/admin/orders');
       }
-      options?.onConfirmCallback();
+      if (response.payload.user.approved && response.payload.user.isActive) {
+        options?.onConfirmCallback();
+      }
     }
     if (response.type === AuthActions.LOGIN_ERROR) {
       dispatch(openModal(ModalTypes.INFO, modalOptions));
