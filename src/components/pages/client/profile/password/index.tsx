@@ -82,19 +82,19 @@ const Password = () => {
               ),
             }}
           />
+          <div className={styles.buttonContainer}>
+            <Button
+              onClick={handleSubmit(onSubmit)}
+              color="primary"
+              variant="contained"
+              fullWidth
+              className={styles.button}
+              type="submit"
+            >
+              Guardar
+            </Button>
+          </div>
         </form>
-        <div className={styles.buttonContainer}>
-          <Button
-            onClick={handleSubmit(onSubmit)}
-            color="primary"
-            variant="contained"
-            fullWidth
-            className={styles.button}
-            type="submit"
-          >
-            Guardar
-          </Button>
-        </div>
       </section>
     </>
   );
