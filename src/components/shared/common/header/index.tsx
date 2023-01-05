@@ -123,6 +123,7 @@ const Header = () => {
                       to={`/category/${category.url}`}
                       className={styles.categoryLinks}
                       data-testid={`category-${index}`}
+                      onClick={() => setOpenSelect(false)}
                     >
                       {category.name}
                     </Link>
