@@ -79,7 +79,8 @@ export const activateCategory = (id: string) => {
     try {
       dispatch(activateCategoryActions.request());
       const response = await API.activateCategory(id);
-      return dispatch(activateCategoryActions.success(response.data)), dispatch(closeModal());
+      dispatch(closeModal());
+      return dispatch(activateCategoryActions.success(response.data));
     } catch (error) {
       return dispatch(activateCategoryActions.failure(error));
     }
@@ -91,9 +92,10 @@ export const inactivateCategory = (id: string) => {
     try {
       dispatch(inactivateCategoryActions.request());
       const response = await API.inactivateCategory(id);
-      return dispatch(inactivateCategoryActions.success(response.data)), dispatch(closeModal());
+      dispatch(closeModal());
+      return dispatch(inactivateCategoryActions.success(response.data));
     } catch (error) {
-      return dispatch(inactivateCategoryActions.failure(error));
+      return dispatch(inactivateCategoryActions.failure(error.response.data));
     }
   };
 };
@@ -103,9 +105,10 @@ export const deleteCategory = (id: string) => {
     try {
       dispatch(deleteCategoryActions.request());
       const response = await API.deleteCategory(id);
-      return dispatch(deleteCategoryActions.success(response.data)), dispatch(closeModal());
+      dispatch(closeModal());
+      return dispatch(deleteCategoryActions.success(response.data));
     } catch (error) {
-      return dispatch(deleteCategoryActions.failure(error));
+      return dispatch(deleteCategoryActions.failure(error.response.data));
     }
   };
 };

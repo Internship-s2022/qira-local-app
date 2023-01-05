@@ -38,3 +38,9 @@ export const approveClientActions = createAsyncAction(
   Actions.APPROVE_CLIENT_SUCCESS,
   Actions.APPROVE_CLIENT_ERROR,
 )<void, Client, ApiResponse<unknown>>();
+
+export const changePasswordActions = createAsyncAction(
+  Actions.CHANGE_PASSWORD_PENDING,
+  Actions.CHANGE_PASSWORD_SUCCESS,
+  Actions.CHANGE_PASSWORD_ERROR,
+)<void, Client, ApiResponse<unknown>>();

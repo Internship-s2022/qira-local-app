@@ -29,6 +29,12 @@ export const updateClientInformationActions = createAsyncAction(
   Actions.UPDATE_CLIENT_INFORMATION_ERROR,
 )<void, User, ApiResponse<unknown>>();
 
+export const updatePasswordActions = createAsyncAction(
+  Actions.UPDATE_PASSWORD_PENDING,
+  Actions.UPDATE_PASSWORD_SUCCESS,
+  Actions.UPDATE_PASSWORD_ERROR,
+)<void, User, ApiResponse<unknown>>();
+
 export const logoutActions = createAsyncAction(
   Actions.LOGOUT_PENDING,
   Actions.LOGOUT_SUCCESS,

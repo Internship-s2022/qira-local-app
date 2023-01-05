@@ -1,44 +1,56 @@
-import Joi from 'joi';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { LockOutlined } from '@mui/icons-material';
 import { Button, InputAdornment } from '@mui/material';
 
-import { RootState } from 'src/redux/store';
+import * as thunks from 'src/redux/clients/thunk';
+import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes, Options } from 'src/redux/modal/types';
+import { AppDispatch, RootState } from 'src/redux/store';
 
 import { InputText } from '../../input';
 import styles from './change-password.module.css';
 import { ChangePasswordFormValues } from './types';
+import { changePasswordValidation } from './validations';
 
 export const ChangePassword = () => {
   const options = useSelector((state: RootState) => state.modal.options);
+  const dispatch: AppDispatch<null> = useDispatch();
 
-  const resetPasswordValidations = Joi.object({
-    password: Joi.string().alphanum().min(8).required().messages({
-      'string.empty': 'Contraseña es un campo requerido.',
-      'string.alphanum': 'Contraseña inválida, debe contener letras y números.',
-      'string.min': 'Contraseña inválida, debe contener al menos 8 caracteres.',
-    }),
-    repeatPassword: Joi.string().valid(Joi.ref('password')).required().messages({
-      'string.empty': 'Repetir contraseña es un campo requerido.',
-      'string.valid': 'Las contraseñas no coinciden.',
-    }),
-  });
-
-  const { handleSubmit, control, reset } = useForm<ChangePasswordFormValues>({
+  const { handleSubmit, control } = useForm<ChangePasswordFormValues>({
     defaultValues: {
       password: '',
       repeatPassword: '',
     },
-    mode: 'onSubmit',
-    resolver: joiResolver(resetPasswordValidations),
+    mode: 'onBlur',
+    resolver: joiResolver(changePasswordValidation),
   });
 
-  const submitHandler = (data: any) => {
-    options.onConfirmCallback(data);
-    reset();
+  const onSubmit = async (data: ChangePasswordFormValues) => {
+    const newPassword = { password: data.password };
+    dispatch(
+      openModal(ModalTypes.CONFIRM, {
+        message: '¿Está seguro de que desea cambiar la contraseña del cliente?',
+        onConfirmCallback: async () => {
+          const modalOptions: Options = {};
+          dispatch(closeModal());
+          const response = await dispatch(thunks.changePassword(options.id, newPassword));
+          if (response) {
+            if (response.type === 'CHANGE_PASSWORD_SUCCESS') {
+              modalOptions.message = 'Contraseña editada exitosamente.';
+              modalOptions.onCloseCallback = () => dispatch(closeModal());
+            }
+          }
+          if (!modalOptions.message) {
+            modalOptions.message = 'Algo salió mal ';
+          }
+          dispatch(openModal(ModalTypes.INFO, modalOptions));
+        },
+        onCloseCallback: () => dispatch(closeModal()),
+      }),
+    );
   };
 
   return (
@@ -82,19 +94,21 @@ export const ChangePassword = () => {
       </form>
       <div className={styles.buttonContainer}>
         <Button
-          variant="contained"
+          variant="outlined"
           component="label"
-          color="error"
-          className={styles.buttonCancel}
+          color="primary"
+          size="medium"
+          className={styles.button}
           onClick={options.onCloseCallback}
         >
           Cancelar
         </Button>
         <Button
-          onClick={handleSubmit(submitHandler)}
-          color="success"
+          onClick={handleSubmit(onSubmit)}
+          color="primary"
+          size="medium"
           variant="contained"
-          className={styles.buttonAccept}
+          className={styles.button}
           component="label"
         >
           Aceptar

@@ -52,6 +52,14 @@ const ClientLayout = (): JSX.Element => {
                 >
                   Datos de usuario
                 </Link>
+                <Link
+                  className={
+                    location.pathname === '/profile/password' ? styles.linkSelected : styles.link
+                  }
+                  to="/profile/password"
+                >
+                  Cambiar constraseña
+                </Link>
                 <p
                   onClick={() =>
                     dispatch(

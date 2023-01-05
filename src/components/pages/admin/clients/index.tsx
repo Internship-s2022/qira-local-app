@@ -102,14 +102,14 @@ const Clients = (): JSX.Element => {
       },
     }),
     (rowData) => ({
-      active: false,
+      active: true,
       icon: <LockPerson />,
       title: 'Cambiar contraseña',
       onClick: () => {
         dispatch(
           openModal(ModalTypes.CHANGE_PASSWORD, {
-            message: `Esta cambiando la contraseña del cliente: "${rowData.businessName}"`,
-            onConfirmCallback: () => dispatch(thunks.inactivateClient(rowData.id)),
+            message: `Está cambiando la contraseña del cliente: "${rowData.businessName}."`,
+            id: rowData.id,
             onCloseCallback: () => dispatch(closeModal()),
           }),
         );

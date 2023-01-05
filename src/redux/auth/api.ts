@@ -10,3 +10,6 @@ export const registerUser = (user: FormattedUser) => api.post<User>('/auth/user'
 
 export const updateClientInformationApi = (data: { phoneNumber: string }) =>
   api.patch<User>('/client/profile/update', data);
+
+export const updatePasswordApi = (data: { password: string }) =>
+  api.patch<User>('/client/profile/update/password', data);

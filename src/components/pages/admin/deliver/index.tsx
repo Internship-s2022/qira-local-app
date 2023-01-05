@@ -6,6 +6,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { Button } from '@mui/material';
 
 import { InputText } from 'src/components/shared/ui/input';
+import { SubCodes } from 'src/constants';
 import { openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { getOrderToDeliver } from 'src/redux/orders/thunks';
@@ -37,20 +38,20 @@ const DeliverOrders = (): JSX.Element => {
     if (response?.type === Actions.GET_ORDER_TO_DELIVER_SUCCESS) {
       navigate(`/admin/order/${data.id}`);
     } else {
-      switch (response.payload.message) {
-        case `Could not find an order by the id of ${data.id}.`:
+      switch (response.payload.subcode) {
+        case SubCodes.INCORRECT_ORDER_STATE:
           dispatch(
             openModal(ModalTypes.INFO, {
               message: 'No se encontró una órden pendiente de entrega con ese código.',
             }),
           );
           break;
-        case `The order with the id ${data.id} is already delivered.`:
+        case SubCodes.DELIVERED_ORDER:
           dispatch(
             openModal(ModalTypes.INFO, { message: 'La órden con ese código ya fue entregada.' }),
           );
           break;
-        case `Could not find an authorized with the dni ${data.dni}.`:
+        case SubCodes.INCORRECT_DNI:
           dispatch(
             openModal(ModalTypes.INFO, { message: 'No se encontró un autorizado con ese DNI.' }),
           );

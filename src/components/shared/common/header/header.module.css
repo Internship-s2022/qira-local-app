@@ -181,7 +181,7 @@
   color: white;
 }
 
-.shoppingCart :hover {
+.shoppingCartContainer :hover {
   cursor: pointer;
 }
 
