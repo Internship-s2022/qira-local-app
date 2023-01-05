@@ -14,3 +14,6 @@ export const approveClient = (id: string) => api.patch<Client>(`/admin/client/ap
 
 export const updateClient = (id: string, data: ClientToUpdate) =>
   api.patch<Client>(`/admin/client/${id}`, data);
+
+export const changePasswordApi = (id: string, data: { password: string }) =>
+  api.patch<Client>(`/admin/client/password/${id}`, data);
