@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Check } from '@mui/icons-material';
+import { Check, Close } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 import { RootState } from 'src/redux/store';
@@ -27,18 +27,33 @@ export const UploadPdf = () => {
     }
   };
 
+  const checkIfPDF = (name: string) => {
+    if (name.includes('.pdf')) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.titleModalPdf}>Seleccionar archivo</div>
       <div className={styles.fileContainer}>
         {preview ? (
-          <div className={styles.fileName}>
-            <Check color="success" />
-            <p>{preview}</p>
-          </div>
+          checkIfPDF(preview) ? (
+            <div className={styles.fileName}>
+              <Check color="success" />
+              <p>{preview}</p>
+            </div>
+          ) : (
+            <div className={styles.fileName}>
+              <Close color="error" />
+              <p>{preview}</p>
+            </div>
+          )
         ) : (
           <div className={styles.textContainer}>
-            <p className={styles.text}>Por favor, selecciona un archivo de tu dispositivo.</p>
+            <p className={styles.text}>Por favor, selecciona un archivo .pdf de tu dispositivo.</p>
             <div>
               <p className={styles.textBold}>Tamaño máximo:</p>
               <p className={styles.text}>5MB</p>
@@ -61,6 +76,7 @@ export const UploadPdf = () => {
             className={styles.button}
             variant="contained"
             component="label"
+            disabled={!checkIfPDF(preview)}
           >
             Confirmar
           </Button>
