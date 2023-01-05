@@ -125,6 +125,18 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
                       Datos de usuario
                     </Link>
                   </span>
+                  <span className={styles.options}>
+                    <Link
+                      className={
+                        location.pathname === '/profile/password'
+                          ? styles.linkSelected
+                          : styles.linkProfile
+                      }
+                      to="/profile/password"
+                    >
+                      Cambiar contraseña
+                    </Link>
+                  </span>
                 </div>
               )}
               <li>
