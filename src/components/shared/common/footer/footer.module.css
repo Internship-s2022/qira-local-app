@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-between;
   max-width: 1200px;
+  min-height: 101px;
   margin: auto;
 }
 

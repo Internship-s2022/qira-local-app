@@ -24,34 +24,32 @@ const MyOrders = (): JSX.Element => {
   }, []);
   return (
     <section className={styles.mainContainer}>
-      {isFetching ? (
-        <div className={styles.loaderContainer}>
-          <QiraLoader />
-        </div>
-      ) : (
-        <>
-          <h1 className={styles.title}>Pedidos realizados</h1>
-          {clientOrders.length >= 1 ? (
-            <div className={styles.ordersContainer}>
-              {sortedList.map((order) => (
-                <OrderCard key={order._id} order={order} />
-              ))}
-            </div>
-          ) : (
-            <div className={styles.noOrderMessage}>
-              <p>
-                {`Todavía no se ha creado ninguna órden asociada a ${currentUser.businessName}.
+      <>
+        <h1 className={styles.title}>Pedidos realizados</h1>
+        {isFetching ? (
+          <div className={styles.loaderContainer}>
+            <QiraLoader />
+          </div>
+        ) : clientOrders.length >= 1 ? (
+          <div className={styles.ordersContainer}>
+            {sortedList.map((order) => (
+              <OrderCard key={order._id} order={order} />
+            ))}
+          </div>
+        ) : (
+          <div className={styles.noOrderMessage}>
+            <p>
+              {`Todavía no se ha creado ninguna órden asociada a ${currentUser.businessName}.
                 Por favor, diríjase a
                 la`}{' '}
-                <Link to={'/'} className={styles.buttonHome}>
-                  página principal
-                </Link>{' '}
-                {'para comenzar.'}
-              </p>
-            </div>
-          )}
-        </>
-      )}
+              <Link to={'/'} className={styles.buttonHome}>
+                página principal
+              </Link>{' '}
+              {'para comenzar.'}
+            </p>
+          </div>
+        )}
+      </>
     </section>
   );
 };

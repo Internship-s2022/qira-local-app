@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { SharedModal } from './components/shared/ui/modal';
-import QiraLoader from './components/shared/ui/qira-loader';
+import QiraLogo from './components/shared/ui/qira-loader';
 import { tokenListener } from './helper/firebase';
 import PrivateRoute from './helper/routes/private-routes';
 import { UserRole } from './types';
@@ -20,8 +20,8 @@ const App = (): JSX.Element => {
     <BrowserRouter>
       <Suspense
         fallback={
-          <div style={{ position: 'absolute', top: '50%', left: '50%' }}>
-            <QiraLoader />
+          <div className="loaderContainer">
+            <QiraLogo />
           </div>
         }
       >
