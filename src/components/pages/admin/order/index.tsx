@@ -254,7 +254,7 @@ const OrderDetails = (): JSX.Element => {
                     {selectedOrder?.signedInvoice?.url && (
                       <div className={styles.invoiceContainer}>
                         <a
-                          href={selectedOrder?.invoice?.url}
+                          href={selectedOrder?.signedInvoice?.url}
                           target="blank"
                           className={styles.link}
                         >
