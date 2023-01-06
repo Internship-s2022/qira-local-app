@@ -6,7 +6,7 @@ export const AuthorizedValidations = Joi.object({
       firstName: Joi.string()
         .min(3)
         .required()
-        .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+        .regex(/^([A-zÀ-úñ]+\s)*[A-zÀ-úñ]+$/)
         .messages({
           'string.min': 'Debe contener al menos 3 caracteres.',
           'string.pattern.base': 'Debe contener solo letras.',
@@ -15,7 +15,7 @@ export const AuthorizedValidations = Joi.object({
       lastName: Joi.string()
         .min(3)
         .required()
-        .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+        .regex(/^([A-zÀ-úñ]+\s)*[A-zÀ-úñ]+$/)
         .messages({
           'string.min': 'Debe contener al menos 3 caracteres.',
           'string.pattern.base': 'Debe contener solo letras.',
