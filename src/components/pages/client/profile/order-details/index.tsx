@@ -131,6 +131,12 @@ const OrderDetails = (): JSX.Element => {
             {selectedOrder?.state !== OrderState.REJECTED && (
               <div className={styles.dataContainer}>
                 <div className={styles.filesContainer}>
+                  <div>
+                    <a href={selectedOrder?.payment.url} target="blank" className={styles.link}>
+                      <InsertDriveFile />
+                      Comprobante de pago
+                    </a>
+                  </div>
                   {selectedOrder?.invoice?.url && (
                     <div className={styles.invoiceContainer}>
                       <a href={selectedOrder?.invoice?.url} target="blank" className={styles.link}>
