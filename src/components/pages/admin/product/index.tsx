@@ -38,7 +38,7 @@ const ProductForm = (): JSX.Element => {
   const products = useSelector((state: RootState) => state.products.products);
   const categoryOptions = useSelector(getCategoryOptions);
   const productsNotSelected = products.filter((item) => item?._id !== product?._id);
-
+  console.log(categoryOptions);
   const {
     handleSubmit,
     control,
