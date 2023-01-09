@@ -138,6 +138,23 @@ const ClientForm = (): JSX.Element => {
               <div className={styles.columnContainer}>
                 <InputText
                   control={control}
+                  name="email"
+                  optionalLabel="Email *"
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                  disabled
+                  fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <MailOutlineOutlined color="primary" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <InputText
+                  control={control}
                   name="businessName"
                   type="text"
                   optionalLabel="Razón Social *"
@@ -164,22 +181,6 @@ const ClientForm = (): JSX.Element => {
                   size="small"
                   options={IvaConditionOptions}
                   fullWidth
-                />
-                <InputText
-                  control={control}
-                  name="email"
-                  optionalLabel="Email *"
-                  variant="outlined"
-                  margin="dense"
-                  size="small"
-                  fullWidth
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <MailOutlineOutlined color="primary" />
-                      </InputAdornment>
-                    ),
-                  }}
                 />
                 <div className={styles.phoneInputs}>
                   <InputText
