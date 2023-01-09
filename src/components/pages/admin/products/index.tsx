@@ -11,7 +11,7 @@ import QiraLoader from 'src/components/shared/ui/qira-loader';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import * as thunks from 'src/redux/products/thunk';
-import { Product } from 'src/redux/products/types';
+import { Actions, Product } from 'src/redux/products/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { Currency } from 'src/types';
 
@@ -72,9 +72,16 @@ const Products = (): JSX.Element => {
           ? dispatch(
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea desactivar el producto?',
-                onConfirmCallback: () => {
+                onConfirmCallback: async () => {
                   dispatch(closeModal());
-                  dispatch(thunks.inactivateProduct(rowData.id));
+                  const response = await dispatch(thunks.inactivateProduct(rowData.id));
+                  if (response.type === Actions.INACTIVATE_PRODUCT_ERROR) {
+                    dispatch(
+                      openModal(ModalTypes.INFO, {
+                        message: 'Ha ocurrido un error.',
+                      }),
+                    );
+                  }
                 },
                 onCloseCallback: () => dispatch(closeModal()),
               }),
@@ -82,9 +89,16 @@ const Products = (): JSX.Element => {
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea activar el producto?',
-                onConfirmCallback: () => {
+                onConfirmCallback: async () => {
                   dispatch(closeModal());
-                  dispatch(thunks.activateProduct(rowData.id));
+                  const response = await dispatch(thunks.activateProduct(rowData.id));
+                  if (response.type === Actions.ACTIVATE_PRODUCT_ERROR) {
+                    dispatch(
+                      openModal(ModalTypes.INFO, {
+                        message: 'Ha ocurrido un error.',
+                      }),
+                    );
+                  }
                 },
                 onCloseCallback: () => dispatch(closeModal()),
               }),
@@ -100,9 +114,16 @@ const Products = (): JSX.Element => {
         dispatch(
           openModal(ModalTypes.CONFIRM, {
             message: '¿Está seguro de que desea eliminar el producto?',
-            onConfirmCallback: () => {
+            onConfirmCallback: async () => {
               dispatch(closeModal());
-              dispatch(thunks.deleteProduct(rowData.id));
+              const response = await dispatch(thunks.deleteProduct(rowData.id));
+              if (response.type === Actions.DELETE_PRODUCT_ERROR) {
+                dispatch(
+                  openModal(ModalTypes.INFO, {
+                    message: 'Ha ocurrido un error.',
+                  }),
+                );
+              }
             },
             onCloseCallback: () => dispatch(closeModal()),
           }),

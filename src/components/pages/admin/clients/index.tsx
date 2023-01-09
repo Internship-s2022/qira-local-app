@@ -6,7 +6,7 @@ import { Check, Close, Edit, HowToReg, LockPerson } from '@mui/icons-material';
 import List from 'src/components/shared/ui/list';
 import QiraLoader from 'src/components/shared/ui/qira-loader';
 import * as thunks from 'src/redux/clients/thunk';
-import { Client } from 'src/redux/clients/types';
+import { Actions, Client } from 'src/redux/clients/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -72,8 +72,15 @@ const Clients = (): JSX.Element => {
             ? dispatch(
                 openModal(ModalTypes.CONFIRM, {
                   message: '¿Está seguro de que desea deshabilitar el cliente?',
-                  onConfirmCallback: () => {
-                    dispatch(thunks.inactivateClient(rowData.id));
+                  onConfirmCallback: async () => {
+                    const response = await dispatch(thunks.inactivateClient(rowData.id));
+                    if (response.type === Actions.INACTIVATE_CLIENT_ERROR) {
+                      dispatch(
+                        openModal(ModalTypes.INFO, {
+                          message: 'Ha ocurrido un error.',
+                        }),
+                      );
+                    }
                     dispatch(closeModal());
                   },
                   onCloseCallback: () => dispatch(closeModal()),
@@ -82,8 +89,15 @@ const Clients = (): JSX.Element => {
             : dispatch(
                 openModal(ModalTypes.CONFIRM, {
                   message: '¿Está seguro de que desea habilitar el cliente?',
-                  onConfirmCallback: () => {
-                    dispatch(thunks.activateClient(rowData.id));
+                  onConfirmCallback: async () => {
+                    const response = await dispatch(thunks.activateClient(rowData.id));
+                    if (response.type === Actions.ACTIVATE_CLIENT_ERROR) {
+                      dispatch(
+                        openModal(ModalTypes.INFO, {
+                          message: 'Ha ocurrido un error.',
+                        }),
+                      );
+                    }
                     dispatch(closeModal());
                   },
                   onCloseCallback: () => dispatch(closeModal()),
@@ -92,8 +106,15 @@ const Clients = (): JSX.Element => {
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea aprobar el cliente?',
-                onConfirmCallback: () => {
-                  dispatch(thunks.approveClient(rowData.id));
+                onConfirmCallback: async () => {
+                  const response = await dispatch(thunks.approveClient(rowData.id));
+                  if (response.type === Actions.APPROVE_CLIENT_ERROR) {
+                    dispatch(
+                      openModal(ModalTypes.INFO, {
+                        message: 'Ha ocurrido un error.',
+                      }),
+                    );
+                  }
                   dispatch(closeModal());
                 },
                 onCloseCallback: () => dispatch(closeModal()),

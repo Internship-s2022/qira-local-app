@@ -78,16 +78,21 @@ const Categories = (): JSX.Element => {
                 onConfirmCallback: async () => {
                   dispatch(closeModal());
                   const response = await dispatch(inactivateCategory(rowData.id));
-                  if (
-                    response.type === Actions.INACTIVATE_CATEGORY_ERROR &&
-                    response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS
-                  ) {
-                    dispatch(
-                      openModal(ModalTypes.INFO, {
-                        message:
-                          'No es posible desactivar la categoría debido a que la misma posee productos asignados.',
-                      }),
-                    );
+                  if (response.type === Actions.INACTIVATE_CATEGORY_ERROR) {
+                    if (response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS) {
+                      dispatch(
+                        openModal(ModalTypes.INFO, {
+                          message:
+                            'No es posible desactivar la categoría debido a que la misma posee productos asignados.',
+                        }),
+                      );
+                    } else {
+                      dispatch(
+                        openModal(ModalTypes.INFO, {
+                          message: 'Ha ocurrido un error.',
+                        }),
+                      );
+                    }
                   }
                 },
                 onCloseCallback: () => dispatch(closeModal()),
@@ -117,16 +122,21 @@ const Categories = (): JSX.Element => {
             onConfirmCallback: async () => {
               dispatch(closeModal());
               const response = await dispatch(deleteCategory(rowData.id));
-              if (
-                response.type === Actions.DELETE_CATEGORY_ERROR &&
-                response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS
-              ) {
-                dispatch(
-                  openModal(ModalTypes.INFO, {
-                    message:
-                      'No es posible borrar la categoría debido a que la misma posee productos asignados.',
-                  }),
-                );
+              if (response.type === Actions.DELETE_CATEGORY_ERROR) {
+                if (response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS) {
+                  dispatch(
+                    openModal(ModalTypes.INFO, {
+                      message:
+                        'No es posible borrar la categoría debido a que la misma posee productos asignados.',
+                    }),
+                  );
+                } else {
+                  dispatch(
+                    openModal(ModalTypes.INFO, {
+                      message: 'Ha ocurrido un error.',
+                    }),
+                  );
+                }
               }
             },
             onCloseCallback: () => dispatch(closeModal()),
