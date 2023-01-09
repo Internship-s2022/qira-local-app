@@ -32,7 +32,7 @@ const Authorized = () => {
     defaultValues: {
       authorized: authorizedState.length ? authorizedState : [authorizedInitial],
     },
-    resolver: joiResolver(AuthorizedValidations),
+    resolver: joiResolver(AuthorizedValidations(authorizedState[0]?.dni)),
     mode: 'onBlur',
   });
   const { fields, append, remove } = useFieldArray({
