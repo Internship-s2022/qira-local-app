@@ -8,7 +8,6 @@ const getCategories = (state: RootState) => state.categories.categories;
 export const getCategoryOptions = createSelector([getCategories], (categoryList) => {
   return categoryList.reduce((acc: Options[], category) => {
     if (category.isActive) {
-      console.log('entro');
       acc.push({
         value: category._id,
         label: category.name,
