@@ -136,11 +136,13 @@ const Header = () => {
                 <input
                   data-testid="search-input"
                   type="text"
+                  value={searchInput}
                   placeholder="Buscar..."
                   onChange={(e) => setSearchInput(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       navigate(`/search-results/${searchInput}`);
+                      setSearchInput('');
                     }
                   }}
                 />
@@ -151,6 +153,7 @@ const Header = () => {
                     color="secondary"
                     onClick={() => {
                       navigate(`/search-results/${searchInput}`);
+                      setSearchInput('');
                     }}
                   />
                 </div>
