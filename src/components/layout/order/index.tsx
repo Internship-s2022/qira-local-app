@@ -1,10 +1,11 @@
 import Dinero from 'dinero.js';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 import { OrderRoutes } from 'src/constants';
+import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
 import { createOrder } from 'src/redux/shopping-cart/thunks';
 import { OrderToCreate } from 'src/redux/shopping-cart/types';
@@ -14,7 +15,7 @@ import styles from './order.module.css';
 
 const OrderLayout = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
-  const dollarRate = useSelector((state: RootState) => state.exchangeRate.exchangeRate.value);
+  const dollarRate = useSelector((state: RootState) => state.exchangeRate?.exchangeRate?.value);
   const clientId = useSelector((state: RootState) => state.auth.user._id);
   const cartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const authorized = useSelector((state: RootState) => state.shoppingCart.authorized);
@@ -31,6 +32,10 @@ const OrderLayout = (): JSX.Element => {
     onClick: () => void;
     disabled: boolean;
   };
+
+  useEffect(() => {
+    dispatch(getExchangeRate());
+  }, []);
 
   const handleCreateOrder = () => {
     const order: OrderToCreate = {
@@ -125,7 +130,7 @@ const OrderLayout = (): JSX.Element => {
               size="large"
               className={styles.button}
               onClick={btnOptions.onClick}
-              disabled={btnOptions.disabled}
+              disabled={btnOptions.disabled || !dollarRate}
             >
               {btnOptions.text}
             </Button>
