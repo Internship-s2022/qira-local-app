@@ -1,7 +1,7 @@
 import { addBusinessDays, format } from 'date-fns';
 import Joi from 'joi';
 
-const formattedDate = format(addBusinessDays(new Date(), 5), 'MM-dd-yyyy');
+const formattedDate = format(addBusinessDays(new Date(), 5), 'MM/dd/yyyy');
 
 export const DeliveryDateValidations = Joi.object({
   estimatedDeliveryDate: Joi.date().required().min(formattedDate).messages({
