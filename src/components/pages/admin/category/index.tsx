@@ -147,16 +147,18 @@ const CategoryForm = (): JSX.Element => {
         <form className={styles.formContainer}>
           <div className={styles.columnsContainer}>
             <div className={styles.inputsContainer}>
-              <InputText
-                className={styles.input}
-                control={control}
-                name="name"
-                type="text"
-                optionalLabel="Nombre *"
-                variant="outlined"
-                margin="dense"
-                size="small"
-              />
+              <div className={styles.nameContainer}>
+                <InputText
+                  className={styles.input}
+                  control={control}
+                  name="name"
+                  type="text"
+                  optionalLabel="Nombre *"
+                  variant="outlined"
+                  margin="dense"
+                  size="small"
+                />
+              </div>
               <InputText
                 className={styles.input}
                 control={control}
