@@ -9,7 +9,6 @@ import { formatIvaConditionsText } from 'src/helper/clients/clients';
 import { formatOrderStateText } from 'src/helper/orders';
 import { getClientOrderById } from 'src/redux/orders/thunks';
 import { AppDispatch, RootState } from 'src/redux/store';
-import { OrderState } from 'src/types';
 import { capitalizeFirstLetter } from 'src/utils/formatters';
 
 import styles from './order-details.module.css';
