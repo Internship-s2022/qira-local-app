@@ -7,6 +7,7 @@ import { logout } from 'src/redux/auth/thunks';
 import * as thunksCategories from 'src/redux/category/thunk';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
+import { resetState } from 'src/redux/shopping-cart/actions';
 import { closeSidebar } from 'src/redux/sidebar/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
@@ -147,6 +148,7 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
                         message: '¿Está seguro de que desea cerrar sesión?',
                         onConfirmCallback: () => {
                           dispatch(logout());
+                          dispatch(resetState());
                           dispatch(closeModal());
                           dispatch(closeSidebar());
                         },
