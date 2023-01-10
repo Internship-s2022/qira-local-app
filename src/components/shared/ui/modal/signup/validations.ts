@@ -1,7 +1,6 @@
 import Joi from 'joi';
 
 import { IvaCondition } from 'src/types';
-
 export const signUpValidations = Joi.object({
   email: Joi.string()
     .email({ tlds: { allow: false } })
@@ -16,7 +15,7 @@ export const signUpValidations = Joi.object({
     }),
   password: Joi.string()
     .min(8)
-    .regex(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+    .regex(/^(?=.*[A-Za-zñ])(?=.*\d)[A-Za-zñ\d]{8,}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
@@ -73,7 +72,7 @@ export const signUpValidations = Joi.object({
       'any.only': 'Campo requerido.',
     }),
   province: Joi.string()
-    .regex(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+    .regex(/^([a-zA-Zñ]+\s)*[a-zA-Zñ]+$/)
     .min(3)
     .trim()
     .required()
@@ -83,7 +82,7 @@ export const signUpValidations = Joi.object({
       'string.pattern.base': 'Debe contener solo letras.',
     }),
   city: Joi.string()
-    .regex(/^([a-zA-Z0-9]+\s)?([a-zA-Z]+\s*)*$/)
+    .regex(/^([a-zA-Zñ0-9]+\s)?([a-zA-Zñ]+\s*)*$/)
     .min(3)
     .trim()
     .required()

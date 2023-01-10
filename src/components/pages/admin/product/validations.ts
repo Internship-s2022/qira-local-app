@@ -31,6 +31,7 @@ export const ProductValidation = Joi.object({
     'number.precision': 'Máximo 2 decimales.',
     'any.required': 'Campo requerido.',
     'number.base': 'Solo números.',
+    'number.unsafe': 'Precio inválido.',
   }),
   image: Joi.object().required().messages({
     'any.required': 'Campo requerido.',
