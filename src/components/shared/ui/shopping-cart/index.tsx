@@ -29,7 +29,6 @@ const ShoppingCart = (): JSX.Element => {
     dispatch(closeCart());
     if (token && userRole === UserRole.CLIENT) {
       if (!user.approved || !user.isActive) {
-        dispatch(resetState());
         dispatch(
           openModal(ModalTypes.INFO, {
             message:
@@ -40,7 +39,6 @@ const ShoppingCart = (): JSX.Element => {
         navigate('/order/summary');
       }
     } else if (UserRole.ADMIN === userRole) {
-      dispatch(resetState());
       dispatch(
         openModal(ModalTypes.INFO, {
           message: 'Las compras pueden ser realizadas sólo por clientes.',
