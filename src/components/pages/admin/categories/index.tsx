@@ -76,6 +76,7 @@ const Categories = (): JSX.Element => {
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea desactivar la categoría?',
                 onConfirmCallback: async () => {
+                  dispatch(closeModal());
                   const response = await dispatch(inactivateCategory(rowData.id));
                   if (
                     response.type === Actions.INACTIVATE_CATEGORY_ERROR &&
@@ -95,7 +96,10 @@ const Categories = (): JSX.Element => {
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea activar la categoría?',
-                onConfirmCallback: () => dispatch(activateCategory(rowData.id)),
+                onConfirmCallback: () => {
+                  dispatch(closeModal());
+                  dispatch(activateCategory(rowData.id));
+                },
                 onCloseCallback: () => dispatch(closeModal()),
               }),
             );
@@ -111,6 +115,7 @@ const Categories = (): JSX.Element => {
           openModal(ModalTypes.CONFIRM, {
             message: '¿Está seguro de que desea eliminar la categoría?',
             onConfirmCallback: async () => {
+              dispatch(closeModal());
               const response = await dispatch(deleteCategory(rowData.id));
               if (
                 response.type === Actions.DELETE_CATEGORY_ERROR &&
