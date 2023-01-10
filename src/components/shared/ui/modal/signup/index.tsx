@@ -234,7 +234,7 @@ const SignUpForm = () => {
               />
             </div>
           </div>
-          <div className={styles.addressInputs}>
+          <div className={styles.locationInputs}>
             <div className={styles.midInput}>
               <InputText
                 control={control}
@@ -263,16 +263,18 @@ const SignUpForm = () => {
       {isFetching ? (
         <Loader />
       ) : (
-        <Button
-          color="primary"
-          variant="contained"
-          className={styles.signUpBtn}
-          onClick={handleSubmit(onSubmit)}
-          data-testid="signup-btn"
-          type="submit"
-        >
-          Crear cuenta
-        </Button>
+        <div className={styles.btnContainer}>
+          <Button
+            color="primary"
+            variant="contained"
+            className={styles.signUpBtn}
+            onClick={handleSubmit(onSubmit)}
+            data-testid="signup-btn"
+            type="submit"
+          >
+            Crear cuenta
+          </Button>
+        </div>
       )}
       <div className={styles.loginContainer} data-testid="back-login">
         <AccountCircleOutlined color="primary" />

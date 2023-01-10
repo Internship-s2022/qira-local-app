@@ -32,7 +32,7 @@ export const signUpValidations = Joi.object({
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 2-4 dígitos.',
+      'string.pattern.base': 'Código inválido.',
     }),
   phoneNumber: Joi.string()
     .regex(/^[0-9\-+]{7,8}$/)
