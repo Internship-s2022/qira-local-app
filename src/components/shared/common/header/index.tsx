@@ -76,7 +76,7 @@ const Header = () => {
       <nav className={styles.mainHeaderContainer}>
         <div className={styles.mainHeader}>
           <div>
-            <Link to="/">
+            <Link to="/" onClick={() => setSearchInput('')}>
               <img
                 className={styles.logoQira}
                 src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.svg`}
@@ -123,7 +123,10 @@ const Header = () => {
                       to={`/category/${category.url}`}
                       className={styles.categoryLinks}
                       data-testid={`category-${index}`}
-                      onClick={() => setOpenSelect(false)}
+                      onClick={() => {
+                        setOpenSelect(false);
+                        setSearchInput('');
+                      }}
                     >
                       {category.name}
                     </Link>
@@ -136,6 +139,7 @@ const Header = () => {
                 <input
                   data-testid="search-input"
                   type="text"
+                  value={searchInput}
                   placeholder="Buscar..."
                   onChange={(e) => setSearchInput(e.target.value)}
                   onKeyDown={(e) => {
