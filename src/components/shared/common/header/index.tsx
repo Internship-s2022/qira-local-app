@@ -201,8 +201,9 @@ const Header = () => {
               max={9}
               color="info"
               className={styles.shoppingCartContainer}
+              onClick={() => dispatch(openCart())}
             >
-              <ShoppingCart className={styles.shoppingCart} onClick={() => dispatch(openCart())} />
+              <ShoppingCart className={styles.shoppingCart} />
             </StyledBadge>
           </div>
         </div>
