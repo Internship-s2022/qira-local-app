@@ -1,4 +1,4 @@
-import { addBusinessDays, format, isValid, parse } from 'date-fns';
+import { addBusinessDays, addYears, format, isValid, parse } from 'date-fns';
 import React, { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ import { DeliveryDateValidations } from './validations';
 const DeliveryDate = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const futureDate = addBusinessDays(new Date(), 5);
+  const maximumDate = addYears(futureDate, 1);
   const estimatedDeliveryDate = useSelector(
     (state: RootState) => state.shoppingCart.estimatedDeliveryDate,
   );
@@ -61,6 +62,7 @@ const DeliveryDate = () => {
           name="estimatedDeliveryDate"
           control={control}
           minDate={futureDate}
+          maxDate={maximumDate}
         />
         <Button
           color="primary"
