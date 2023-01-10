@@ -27,18 +27,18 @@ export const signUpValidations = Joi.object({
     'any.only': 'Las contraseñas no coinciden.',
   }),
   codeArea: Joi.string()
-    .regex(/^[0-9\-+]{2,4}$/)
+    .regex(/^[0-9]{2,4}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
       'string.pattern.base': 'Código inválido.',
     }),
   phoneNumber: Joi.string()
-    .regex(/^[0-9\-+]{7,8}$/)
+    .regex(/^[0-9]{6,8}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 7-8 dígitos.',
+      'string.pattern.base': 'Debe contener 6-8 dígitos.',
     }),
   businessName: Joi.string()
     .regex(/^([0-9]*)(\s?[A-zÀ-ú]+)(\s[0-9A-zÀ-ú]+)*\s?$/)

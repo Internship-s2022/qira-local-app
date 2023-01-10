@@ -15,18 +15,18 @@ export const updateClientValidations = Joi.object({
       'string.pattern.base': 'Debe tener formato válido de email.',
     }),
   codeArea: Joi.string()
-    .regex(/^[0-9\-+]{2,4}$/)
+    .regex(/^[0-9]{2,4}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 2-4 dígitos.',
+      'string.pattern.base': 'Código inválido.',
     }),
   phoneNumber: Joi.string()
-    .regex(/^[0-9\-+]{7,8}$/)
+    .regex(/^[0-9]{6,8}$/)
     .required()
     .messages({
       'string.empty': 'Campo requerido.',
-      'string.pattern.base': 'Debe contener 7-8 dígitos.',
+      'string.pattern.base': 'Debe contener 6-8 dígitos.',
     }),
   businessName: Joi.string()
     .regex(/^([0-9]*)(\s?[A-zÀ-úñ]+)(\s[0-9A-zÀ-úñ]+)*\s?$/)
