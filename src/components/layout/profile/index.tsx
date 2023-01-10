@@ -58,7 +58,7 @@ const ClientLayout = (): JSX.Element => {
                   }
                   to="/profile/password"
                 >
-                  Cambiar constraseña
+                  Cambiar contraseña
                 </Link>
                 <p
                   onClick={() =>
