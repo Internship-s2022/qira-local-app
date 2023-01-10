@@ -164,7 +164,7 @@ const Header = () => {
           <div className={styles.profileContainer}>
             <div className={styles.routes}>
               {currentUser?.email ? (
-                <div className={styles.btnLogin}>
+                <div className={styles.btnLogin} onClick={() => dispatch(closeSidebar())}>
                   <Link
                     className={styles.userIconLink}
                     to={currentRole === UserRole.ADMIN ? '/admin' : '/profile/my-orders'}
