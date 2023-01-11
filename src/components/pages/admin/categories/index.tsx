@@ -101,9 +101,16 @@ const Categories = (): JSX.Element => {
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea activar la categoría?',
-                onConfirmCallback: () => {
+                onConfirmCallback: async () => {
                   dispatch(closeModal());
-                  dispatch(activateCategory(rowData.id));
+                  const response = await dispatch(activateCategory(rowData.id));
+                  if (response.type === Actions.ACTIVATE_CATEGORY_ERROR) {
+                    dispatch(
+                      openModal(ModalTypes.INFO, {
+                        message: 'Ha ocurrido un error.',
+                      }),
+                    );
+                  }
                 },
                 onCloseCallback: () => dispatch(closeModal()),
               }),

@@ -76,7 +76,7 @@ const Products = (): JSX.Element => {
                   dispatch(closeModal());
                   const response = await dispatch(thunks.inactivateProduct(rowData.id));
                   if (response.type === Actions.INACTIVATE_PRODUCT_ERROR) {
-                    dispatch(
+                    return dispatch(
                       openModal(ModalTypes.INFO, {
                         message: 'Ha ocurrido un error.',
                       }),
@@ -93,7 +93,7 @@ const Products = (): JSX.Element => {
                   dispatch(closeModal());
                   const response = await dispatch(thunks.activateProduct(rowData.id));
                   if (response.type === Actions.ACTIVATE_PRODUCT_ERROR) {
-                    dispatch(
+                    return dispatch(
                       openModal(ModalTypes.INFO, {
                         message: 'Ha ocurrido un error.',
                       }),
@@ -118,7 +118,7 @@ const Products = (): JSX.Element => {
               dispatch(closeModal());
               const response = await dispatch(thunks.deleteProduct(rowData.id));
               if (response.type === Actions.DELETE_PRODUCT_ERROR) {
-                dispatch(
+                return dispatch(
                   openModal(ModalTypes.INFO, {
                     message: 'Ha ocurrido un error.',
                   }),

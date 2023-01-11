@@ -73,9 +73,10 @@ const Clients = (): JSX.Element => {
                 openModal(ModalTypes.CONFIRM, {
                   message: '¿Está seguro de que desea deshabilitar el cliente?',
                   onConfirmCallback: async () => {
+                    dispatch(closeModal());
                     const response = await dispatch(thunks.inactivateClient(rowData.id));
                     if (response.type === Actions.INACTIVATE_CLIENT_ERROR) {
-                      dispatch(
+                      return dispatch(
                         openModal(ModalTypes.INFO, {
                           message: 'Ha ocurrido un error.',
                         }),
@@ -90,9 +91,10 @@ const Clients = (): JSX.Element => {
                 openModal(ModalTypes.CONFIRM, {
                   message: '¿Está seguro de que desea habilitar el cliente?',
                   onConfirmCallback: async () => {
+                    dispatch(closeModal());
                     const response = await dispatch(thunks.activateClient(rowData.id));
                     if (response.type === Actions.ACTIVATE_CLIENT_ERROR) {
-                      dispatch(
+                      return dispatch(
                         openModal(ModalTypes.INFO, {
                           message: 'Ha ocurrido un error.',
                         }),
@@ -107,9 +109,10 @@ const Clients = (): JSX.Element => {
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea aprobar el cliente?',
                 onConfirmCallback: async () => {
+                  dispatch(closeModal());
                   const response = await dispatch(thunks.approveClient(rowData.id));
                   if (response.type === Actions.APPROVE_CLIENT_ERROR) {
-                    dispatch(
+                    return dispatch(
                       openModal(ModalTypes.INFO, {
                         message: 'Ha ocurrido un error.',
                       }),
