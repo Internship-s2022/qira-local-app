@@ -186,11 +186,11 @@ const Header = () => {
               ) : (
                 <div
                   onClick={() => {
-                    dispatch(openModal(ModalTypes.LOGIN, modalOptions));
                     modalOptions.onCloseCallback = () => {
                       dispatch(closeModal());
                       dispatch(resetError());
                     };
+                    dispatch(openModal(ModalTypes.LOGIN, modalOptions));
                   }}
                   className={styles.btnLogin}
                 >

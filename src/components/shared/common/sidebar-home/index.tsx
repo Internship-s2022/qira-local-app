@@ -57,11 +57,11 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
                     <span
                       className={styles.options}
                       onClick={() => {
-                        dispatch(openModal(ModalTypes.LOGIN, modalOptions));
                         modalOptions.onCloseCallback = () => {
                           dispatch(closeModal());
                           dispatch(resetError());
                         };
+                        dispatch(openModal(ModalTypes.LOGIN, modalOptions));
                       }}
                       data-testid="login-btn"
                     >

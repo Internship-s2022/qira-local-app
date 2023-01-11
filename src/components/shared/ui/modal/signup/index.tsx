@@ -282,11 +282,11 @@ const SignUpForm = () => {
         <p
           className={styles.loginText}
           onClick={() => {
-            dispatch(openModal(ModalTypes.LOGIN, modalOptions));
             modalOptions.onCloseCallback = () => {
               dispatch(closeModal());
               dispatch(resetError());
             };
+            dispatch(openModal(ModalTypes.LOGIN, modalOptions));
           }}
         >
           ¿Ya estás registrado? Inicia sesión.
