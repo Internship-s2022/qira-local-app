@@ -7,7 +7,7 @@ export const ProductValidation = Joi.object({
     .min(3)
     .max(50)
     .required()
-    .regex(/^([A-zÀ-úñ0-9+-]+\s)*[ñA-zÀ-ú0-9+-]+$/)
+    .regex(/^([A-zÀ-úñ0-9+-\W]+\s)*[ñA-zÀ-ú0-9+-\W]+$/)
     .trim()
     .messages({
       'string.min': 'Mínimo 3 caracteres.',
@@ -18,7 +18,7 @@ export const ProductValidation = Joi.object({
   description: Joi.string()
     .allow('')
     .min(3)
-    .regex(/^[ A-zÀ-ú+-0-9\W]*$/)
+    .regex(/^[A-zÀ-ú+0-9\W]*$/)
     .trim()
     .messages({
       'string.min': 'Mínimo 3 caracteres.',
@@ -41,7 +41,7 @@ export const ProductValidation = Joi.object({
   }),
   brand: Joi.string()
     .min(2)
-    .regex(/^([A-zÀ-úñ]+\s)*[A-zÀ-úñ]+$/)
+    .regex(/^([A-zÀ-úñ0-9\W]+\s)*[A-zÀ-úñ0-9\W]+$/)
     .required()
     .trim()
     .messages({
@@ -61,6 +61,7 @@ export const ProductValidation = Joi.object({
     'any.required': 'Campo requerido.',
     'number.base': 'Solo números.',
     'number.integer': 'Solo números enteros.',
+    'number.unsafe': 'Stock inválido',
   }),
   isNew: Joi.boolean(),
 });
