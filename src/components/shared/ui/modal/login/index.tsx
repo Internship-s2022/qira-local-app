@@ -131,7 +131,7 @@ export const LoginModal = () => {
 
           {showAlert && (
             <p className={styles.alertContainer}>
-              <Alert severity="error" variant="outlined">
+              <Alert severity="error" variant="standard">
                 Usuario o contraseña incorrecta.
               </Alert>
             </p>
