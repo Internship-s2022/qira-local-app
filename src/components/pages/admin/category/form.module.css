@@ -56,6 +56,10 @@
   justify-content: flex-start;
 }
 
+.nameContainer {
+  height: 115px;
+}
+
 .input {
   width: 255px;
 }

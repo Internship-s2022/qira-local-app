@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import { logout } from 'src/redux/auth/thunks';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
+import { resetState } from 'src/redux/shopping-cart/actions';
 import { AppDispatch } from 'src/redux/store';
 
 import styles from './sidebar.module.css';
@@ -75,6 +76,7 @@ const Sidebar = (props: SidebarProps): JSX.Element => {
                 message: '¿Está seguro de que desea cerrar sesión?',
                 onConfirmCallback: () => {
                   dispatch(logout());
+                  dispatch(resetState());
                   dispatch(closeModal());
                 },
                 onCloseCallback: () => dispatch(closeModal()),

@@ -76,7 +76,7 @@ const Header = () => {
       <nav className={styles.mainHeaderContainer}>
         <div className={styles.mainHeader}>
           <div>
-            <Link to="/">
+            <Link to="/" onClick={() => setSearchInput('')}>
               <img
                 className={styles.logoQira}
                 src={`${process.env.PUBLIC_URL}/assets/images/logo-qira.svg`}
@@ -123,7 +123,10 @@ const Header = () => {
                       to={`/category/${category.url}`}
                       className={styles.categoryLinks}
                       data-testid={`category-${index}`}
-                      onClick={() => setOpenSelect(false)}
+                      onClick={() => {
+                        setOpenSelect(false);
+                        setSearchInput('');
+                      }}
                     >
                       {category.name}
                     </Link>
@@ -136,6 +139,7 @@ const Header = () => {
                 <input
                   data-testid="search-input"
                   type="text"
+                  value={searchInput}
                   placeholder="Buscar..."
                   onChange={(e) => setSearchInput(e.target.value)}
                   onKeyDown={(e) => {
@@ -160,7 +164,7 @@ const Header = () => {
           <div className={styles.profileContainer}>
             <div className={styles.routes}>
               {currentUser?.email ? (
-                <div className={styles.btnLogin}>
+                <div className={styles.btnLogin} onClick={() => dispatch(closeSidebar())}>
                   <Link
                     className={styles.userIconLink}
                     to={currentRole === UserRole.ADMIN ? '/admin' : '/profile/my-orders'}
@@ -197,8 +201,9 @@ const Header = () => {
               max={9}
               color="info"
               className={styles.shoppingCartContainer}
+              onClick={() => dispatch(openCart())}
             >
-              <ShoppingCart className={styles.shoppingCart} onClick={() => dispatch(openCart())} />
+              <ShoppingCart className={styles.shoppingCart} />
             </StyledBadge>
           </div>
         </div>

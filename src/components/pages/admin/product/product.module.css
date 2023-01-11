@@ -43,13 +43,14 @@
 
 .columnsContainer {
   display: flex;
+  gap: 50px;
   align-self: center;
   justify-content: space-between;
   margin-top: 30px;
 }
 
 .column {
-  width: 45%;
+  width: 260px;
 }
 
 .column > div {
@@ -87,7 +88,7 @@
 }
 
 .stock {
-  width: 90%;
+  width: 220px;
 }
 
 .brand {

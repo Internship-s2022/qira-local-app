@@ -59,7 +59,6 @@
 .searchBar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 300px;
   padding: 6px;
   background-color: white;
@@ -68,7 +67,7 @@
 
 .searchBar input {
   align-self: center;
-  margin: none;
+  width: fill-available;
   border: none;
   outline: none;
 }

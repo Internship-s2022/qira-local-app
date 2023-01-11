@@ -18,7 +18,7 @@ const DatePickerInput = <TValuesForm extends FieldValues>({
     fieldState: { error },
   } = useController({ name, control, defaultValue });
 
-  const { label, testId, className, disabled, minDate } = props;
+  const { label, testId, className, disabled, minDate, maxDate } = props;
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DatePicker
@@ -29,6 +29,7 @@ const DatePickerInput = <TValuesForm extends FieldValues>({
         shouldDisableDate={isWeekend}
         disabled={disabled}
         minDate={minDate}
+        maxDate={maxDate}
         renderInput={(params) => (
           <TextField
             {...params}
