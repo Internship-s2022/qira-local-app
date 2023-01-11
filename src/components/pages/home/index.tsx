@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Skeleton } from '@mui/material';
 
 import ProductCard from 'src/components/shared/ui/product-card';
+import { resetError } from 'src/redux/auth/actions';
 import { getPublicCategories } from 'src/redux/category/thunk';
 import { getNewProducts } from 'src/redux/products/selectors/new-products';
 import { getPublicProducts } from 'src/redux/products/thunks';
@@ -24,6 +25,7 @@ const Home = (): JSX.Element => {
     dispatch(getPublicProducts());
     dispatch(getPublicCategories());
     dispatch(clearOrderData());
+    dispatch(resetError());
   }, []);
   return (
     <section className={styles.container}>
