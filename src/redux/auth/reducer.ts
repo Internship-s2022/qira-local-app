@@ -79,6 +79,11 @@ export const authReducer = (state: AuthState = initialState, action: ActionsType
         ...state,
         message: '',
       };
+    case Actions.RESET_ERROR:
+      return {
+        ...state,
+        error: undefined,
+      };
     case Actions.UPDATE_CLIENT_INFORMATION_SUCCESS:
       return {
         ...state,

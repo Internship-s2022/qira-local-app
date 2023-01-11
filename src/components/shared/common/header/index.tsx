@@ -12,10 +12,11 @@ import {
 import { Badge, BadgeProps, styled, Tooltip, useMediaQuery } from '@mui/material';
 
 import { formatDate } from 'src/helper/orders';
+import { resetError } from 'src/redux/auth/actions';
 import * as thunksCategories from 'src/redux/category/thunk';
 import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
-import { openModal } from 'src/redux/modal/actions';
-import { ModalTypes } from 'src/redux/modal/types';
+import { closeModal, openModal } from 'src/redux/modal/actions';
+import { ModalTypes, Options } from 'src/redux/modal/types';
 import { closeCart, openCart } from 'src/redux/shopping-cart/actions';
 import { closeSidebar, openSidebar } from 'src/redux/sidebar/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -26,6 +27,7 @@ import styles from './header.module.css';
 const Header = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const navigate = useNavigate();
+  const modalOptions: Options = {};
   const categories = useSelector((state: RootState) => state.categories.categories);
   const shoppingCartProducts = useSelector((state: RootState) => state.shoppingCart.products);
   const currentUser = useSelector((state: RootState) => state.auth.user);
@@ -183,7 +185,13 @@ const Header = () => {
                 </div>
               ) : (
                 <div
-                  onClick={() => dispatch(openModal(ModalTypes.LOGIN))}
+                  onClick={() => {
+                    dispatch(openModal(ModalTypes.LOGIN, modalOptions));
+                    modalOptions.onCloseCallback = () => {
+                      dispatch(closeModal());
+                      dispatch(resetError());
+                    };
+                  }}
                   className={styles.btnLogin}
                 >
                   <>

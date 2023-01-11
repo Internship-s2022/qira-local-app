@@ -48,3 +48,5 @@ export const setToken = (role: UserRole, token: string) =>
   action(Actions.SET_TOKEN, { role, token });
 
 export const resetMessage = () => action(Actions.RESET_MESSAGE);
+
+export const resetError = () => action(Actions.RESET_ERROR);

@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { AccountCircleOutlined, LockOutlined, MailOutlineOutlined } from '@mui/icons-material';
-import { Button, InputAdornment } from '@mui/material';
+import { Alert, Button, InputAdornment } from '@mui/material';
 
 import { login } from 'src/redux/auth/thunks';
 import { Actions as AuthActions } from 'src/redux/auth/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
-import { ModalTypes, Options } from 'src/redux/modal/types';
+import { ModalTypes } from 'src/redux/modal/types';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
 
@@ -44,6 +44,7 @@ export const LoginModal = () => {
   const dispatch: AppDispatch<null> = useDispatch();
   const isFetching = useSelector((state: RootState) => state.auth.isFetching);
   const options = useSelector((state: RootState) => state.modal.options);
+  const showAlert = useSelector((state: RootState) => state.auth.error);
   const navigate = useNavigate();
   const { handleSubmit, control } = useForm<FormValues>({
     defaultValues: {
@@ -55,7 +56,6 @@ export const LoginModal = () => {
   });
 
   const onSubmit = async (User: FormValues) => {
-    const modalOptions: Options = {};
     const response = await dispatch(login(User));
     if (response.type === AuthActions.LOGIN_SUCCESS) {
       dispatch(closeModal());
@@ -65,11 +65,6 @@ export const LoginModal = () => {
       if (response.payload.user.approved && response.payload.user.isActive) {
         options?.onConfirmCallback();
       }
-    }
-    if (response.type === AuthActions.LOGIN_ERROR) {
-      dispatch(openModal(ModalTypes.INFO, modalOptions));
-      modalOptions.message = 'Usuario o contraseña incorrecta.';
-      modalOptions.onCloseCallback = () => dispatch(openModal(ModalTypes.LOGIN));
     }
   };
 
@@ -134,6 +129,14 @@ export const LoginModal = () => {
             </Button>
           )}
 
+          {showAlert && (
+            <p className={styles.alertContainer}>
+              <Alert severity="error" variant="outlined">
+                Usuario o contraseña incorrecta.
+              </Alert>
+            </p>
+          )}
+
           <p
             className={styles.recoverText}
             onClick={() => dispatch(openModal(ModalTypes.RECOVER_PASSWORD))}
@@ -142,12 +145,15 @@ export const LoginModal = () => {
           </p>
           <div className={styles.registerContainer}>
             <AccountCircleOutlined color="primary" />
-            <p
-              data-testid="sign-up-btn"
-              className={styles.registerText}
-              onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}
-            >
-              ¿Eres nuevo en QIRA? Registrate
+            <p>
+              ¿Eres nuevo en QIRA?
+              <span
+                data-testid="sign-up-btn"
+                className={styles.registerText}
+                onClick={() => dispatch(openModal(ModalTypes.REGISTER_FORM))}
+              >
+                Regístrate
+              </span>
             </p>
           </div>
         </div>
