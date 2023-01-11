@@ -14,6 +14,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import { InputText } from 'src/components/shared/ui/input';
 import { SharedSelect } from 'src/components/shared/ui/select';
 import { Options } from 'src/components/shared/ui/select/types';
+import { resetError } from 'src/redux/auth/actions';
 import { register } from 'src/redux/auth/thunks';
 import { Actions } from 'src/redux/auth/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
@@ -28,6 +29,7 @@ import { signUpValidations } from './validations';
 
 const SignUpForm = () => {
   const dispatch: AppDispatch<null> = useDispatch();
+  const modalOptions: ModalOptions = {};
   const isFetching = useSelector((state: RootState) => state.auth.isFetching);
   const { handleSubmit, control, reset } = useForm<SignUpFormValues>({
     defaultValues: {
@@ -74,7 +76,6 @@ const SignUpForm = () => {
 
   const onSubmit = async (data: SignUpFormValues) => {
     const formattedUser = formatSubmitData(data);
-    const modalOptions: ModalOptions = {};
     const response = await dispatch(register(formattedUser));
     if (response?.type !== Actions.REGISTER_ERROR) {
       modalOptions.message =
@@ -278,7 +279,16 @@ const SignUpForm = () => {
       )}
       <div className={styles.loginContainer} data-testid="back-login">
         <AccountCircleOutlined color="primary" />
-        <p className={styles.loginText} onClick={() => dispatch(openModal(ModalTypes.LOGIN))}>
+        <p
+          className={styles.loginText}
+          onClick={() => {
+            modalOptions.onCloseCallback = () => {
+              dispatch(closeModal());
+              dispatch(resetError());
+            };
+            dispatch(openModal(ModalTypes.LOGIN, modalOptions));
+          }}
+        >
           ¿Ya estás registrado? Inicia sesión.
         </p>
       </div>

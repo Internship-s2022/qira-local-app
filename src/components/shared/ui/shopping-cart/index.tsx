@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Close, Delete, ShoppingCartOutlined } from '@mui/icons-material';
 import { Box, Button, IconButton, Modal, Tooltip } from '@mui/material';
 
-import { openModal } from 'src/redux/modal/actions';
+import { resetError } from 'src/redux/auth/actions';
+import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { closeCart, resetState } from 'src/redux/shopping-cart/actions';
 import { getOrderAmounts } from 'src/redux/shopping-cart/selectors/getOrderAmounts';
@@ -49,6 +50,10 @@ const ShoppingCart = (): JSX.Element => {
         openModal(ModalTypes.LOGIN, {
           onConfirmCallback: () => {
             navigate('/order/summary');
+          },
+          onCloseCallback: () => {
+            dispatch(closeModal());
+            dispatch(resetError());
           },
         }),
       );

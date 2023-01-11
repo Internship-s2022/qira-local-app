@@ -7,7 +7,7 @@ export const ProductValidation = Joi.object({
     .min(3)
     .max(50)
     .required()
-    .regex(/^([A-zÀ-ú]+\s)*[A-zÀ-ú]+$/)
+    .regex(/^([A-zÀ-úñ0-9+-\W]+\s)*[ñA-zÀ-ú0-9+-\W]+$/)
     .trim()
     .messages({
       'string.min': 'Mínimo 3 caracteres.',
@@ -18,17 +18,20 @@ export const ProductValidation = Joi.object({
   description: Joi.string()
     .allow('')
     .min(3)
-    .regex(/^[ A-zÀ-ú0-9\W]*$/)
+    .regex(/^[A-zÀ-ú+0-9\W]*$/)
     .trim()
     .messages({
       'string.min': 'Mínimo 3 caracteres.',
       'string.pattern.base': 'Solo letras y números.',
     }),
-  price: Joi.number().positive().precision(2).required().messages({
+  price: Joi.number().positive().min(0).max(999999999).precision(2).required().messages({
     'number.positive': 'Precio inválido.',
+    'number.min': 'Precio inválido.',
+    'number.max': 'Precio inválido.',
     'number.precision': 'Máximo 2 decimales.',
     'any.required': 'Campo requerido.',
     'number.base': 'Solo números.',
+    'number.unsafe': 'Precio inválido.',
   }),
   image: Joi.object().required().messages({
     'any.required': 'Campo requerido.',
@@ -38,7 +41,7 @@ export const ProductValidation = Joi.object({
   }),
   brand: Joi.string()
     .min(2)
-    .regex(/^([A-zÀ-ú]+\s)*[A-zÀ-ú]+$/)
+    .regex(/^([A-zÀ-úñ0-9\W]+\s)*[A-zÀ-úñ0-9\W]+$/)
     .required()
     .trim()
     .messages({
@@ -58,6 +61,7 @@ export const ProductValidation = Joi.object({
     'any.required': 'Campo requerido.',
     'number.base': 'Solo números.',
     'number.integer': 'Solo números enteros.',
+    'number.unsafe': 'Stock inválido',
   }),
   isNew: Joi.boolean(),
 });

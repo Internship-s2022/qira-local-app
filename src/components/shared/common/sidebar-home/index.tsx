@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowDropDownOutlined, ArrowLeftOutlined } from '@mui/icons-material';
 
+import { resetError } from 'src/redux/auth/actions';
 import { logout } from 'src/redux/auth/thunks';
 import * as thunksCategories from 'src/redux/category/thunk';
 import { closeModal, openModal } from 'src/redux/modal/actions';
-import { ModalTypes } from 'src/redux/modal/types';
+import { ModalTypes, Options } from 'src/redux/modal/types';
 import { resetState } from 'src/redux/shopping-cart/actions';
 import { closeSidebar } from 'src/redux/sidebar/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
@@ -18,6 +19,7 @@ import { propsSidebar } from './types';
 const SidebarHome = (props: propsSidebar): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
   const location = useLocation();
+  const modalOptions: Options = {};
   const categories = useSelector((state: RootState) => state.categories.categories);
   const currentUser = useSelector((state: RootState) => state.auth.user);
   const role = useSelector((state: RootState) => state.auth.role);
@@ -54,7 +56,13 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
                   <>
                     <span
                       className={styles.options}
-                      onClick={() => dispatch(openModal(ModalTypes.LOGIN))}
+                      onClick={() => {
+                        modalOptions.onCloseCallback = () => {
+                          dispatch(closeModal());
+                          dispatch(resetError());
+                        };
+                        dispatch(openModal(ModalTypes.LOGIN, modalOptions));
+                      }}
                       data-testid="login-btn"
                     >
                       Iniciar sesión
