@@ -5,6 +5,8 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import { Button } from '@mui/material';
 
 import { InputText } from 'src/components/shared/ui/input';
+import { openModal } from 'src/redux/modal/actions';
+import { ModalTypes } from 'src/redux/modal/types';
 import { setAuthorized } from 'src/redux/shopping-cart/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 
@@ -32,14 +34,13 @@ const Authorized = () => {
     defaultValues: {
       authorized: authorizedState.length ? authorizedState : [authorizedInitial],
     },
-    resolver: joiResolver(AuthorizedValidations(authorizedState[0]?.dni)),
+    resolver: joiResolver(AuthorizedValidations()),
     mode: 'onBlur',
   });
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'authorized',
   });
-
   const watchFieldArray = watch('authorized');
 
   const handleAccept = async (index: number) => {
@@ -54,7 +55,15 @@ const Authorized = () => {
       const updatedAuthorized = {
         ...watchFieldArray[index],
       };
-      dispatch(setAuthorized([...authorizedState, updatedAuthorized]));
+      if (watch('authorized').length > 1) {
+        if (watch('authorized')[0].dni != watch('authorized')[1].dni) {
+          dispatch(setAuthorized([...authorizedState, updatedAuthorized]));
+        } else {
+          dispatch(openModal(ModalTypes.INFO, { message: 'No se puede utilizar el mismo dni' }));
+        }
+      } else {
+        dispatch(setAuthorized([...authorizedState, updatedAuthorized]));
+      }
     }
   };
 
@@ -74,14 +83,21 @@ const Authorized = () => {
       setUpdatingIndex(null);
       const updatedAuthorized = [...watchFieldArray];
 
-      dispatch(setAuthorized(updatedAuthorized));
+      if (watch('authorized').length > 1) {
+        if (watch('authorized')[0].dni != watch('authorized')[1].dni) {
+          dispatch(setAuthorized(updatedAuthorized));
+        } else {
+          dispatch(openModal(ModalTypes.INFO, { message: 'No se puede utilizar el mismo dni' }));
+        }
+      } else {
+        dispatch(setAuthorized(updatedAuthorized));
+      }
     }
   };
 
   const handleDeleteAuthorized = (index: number) => {
     const currentFieldArray = [...watchFieldArray];
     currentFieldArray.splice(index, 1);
-
     dispatch(setAuthorized(currentFieldArray));
     remove(index);
   };
