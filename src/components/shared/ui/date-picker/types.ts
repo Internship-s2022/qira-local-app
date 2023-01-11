@@ -7,4 +7,5 @@ export type DatePickerProps<Form extends FieldValues> = {
   error?: boolean;
   disabled?: boolean;
   minDate?: Date;
+  maxDate?: Date;
 } & UseControllerProps<Form>;
