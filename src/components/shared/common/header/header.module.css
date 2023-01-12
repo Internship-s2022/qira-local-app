@@ -100,10 +100,14 @@
   border-radius: 5px;
 }
 
-.optionsContainer {
+.superContainer {
   position: absolute;
-  top: 102px;
+  top: 100px;
   z-index: 1;
+  padding-top: 6px;
+}
+
+.optionsContainer {
   display: flex;
   flex-direction: column;
   min-width: 164px;
