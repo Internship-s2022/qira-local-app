@@ -76,11 +76,12 @@ const Products = (): JSX.Element => {
                   dispatch(closeModal());
                   const response = await dispatch(thunks.inactivateProduct(rowData.id));
                   if (response.type === Actions.INACTIVATE_PRODUCT_ERROR) {
-                    return dispatch(
-                      openModal(ModalTypes.INFO, {
-                        message: 'Ha ocurrido un error.',
-                      }),
-                    );
+                    await dispatch(thunks.getProducts()),
+                      dispatch(
+                        openModal(ModalTypes.INFO, {
+                          message: 'Ha ocurrido un error.',
+                        }),
+                      );
                   }
                 },
                 onCloseCallback: () => dispatch(closeModal()),
@@ -93,11 +94,12 @@ const Products = (): JSX.Element => {
                   dispatch(closeModal());
                   const response = await dispatch(thunks.activateProduct(rowData.id));
                   if (response.type === Actions.ACTIVATE_PRODUCT_ERROR) {
-                    return dispatch(
-                      openModal(ModalTypes.INFO, {
-                        message: 'Ha ocurrido un error.',
-                      }),
-                    );
+                    await dispatch(thunks.getProducts()),
+                      dispatch(
+                        openModal(ModalTypes.INFO, {
+                          message: 'Ha ocurrido un error.',
+                        }),
+                      );
                   }
                 },
                 onCloseCallback: () => dispatch(closeModal()),
@@ -118,11 +120,12 @@ const Products = (): JSX.Element => {
               dispatch(closeModal());
               const response = await dispatch(thunks.deleteProduct(rowData.id));
               if (response.type === Actions.DELETE_PRODUCT_ERROR) {
-                return dispatch(
-                  openModal(ModalTypes.INFO, {
-                    message: 'Ha ocurrido un error.',
-                  }),
-                );
+                await dispatch(thunks.getProducts()),
+                  dispatch(
+                    openModal(ModalTypes.INFO, {
+                      message: 'Ha ocurrido un error.',
+                    }),
+                  );
               }
             },
             onCloseCallback: () => dispatch(closeModal()),

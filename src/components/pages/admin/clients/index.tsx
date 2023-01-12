@@ -76,6 +76,7 @@ const Clients = (): JSX.Element => {
                     dispatch(closeModal());
                     const response = await dispatch(thunks.inactivateClient(rowData.id));
                     if (response.type === Actions.INACTIVATE_CLIENT_ERROR) {
+                      await dispatch(thunks.getClients());
                       return dispatch(
                         openModal(ModalTypes.INFO, {
                           message: 'Ha ocurrido un error.',
@@ -94,6 +95,7 @@ const Clients = (): JSX.Element => {
                     dispatch(closeModal());
                     const response = await dispatch(thunks.activateClient(rowData.id));
                     if (response.type === Actions.ACTIVATE_CLIENT_ERROR) {
+                      await dispatch(thunks.getClients());
                       return dispatch(
                         openModal(ModalTypes.INFO, {
                           message: 'Ha ocurrido un error.',
@@ -112,6 +114,7 @@ const Clients = (): JSX.Element => {
                   dispatch(closeModal());
                   const response = await dispatch(thunks.approveClient(rowData.id));
                   if (response.type === Actions.APPROVE_CLIENT_ERROR) {
+                    await dispatch(thunks.getClients());
                     return dispatch(
                       openModal(ModalTypes.INFO, {
                         message: 'Ha ocurrido un error.',

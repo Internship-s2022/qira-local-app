@@ -87,11 +87,12 @@ const Categories = (): JSX.Element => {
                         }),
                       );
                     } else {
-                      dispatch(
-                        openModal(ModalTypes.INFO, {
-                          message: 'Ha ocurrido un error.',
-                        }),
-                      );
+                      await dispatch(getCategory()),
+                        dispatch(
+                          openModal(ModalTypes.INFO, {
+                            message: 'Ha ocurrido un error.',
+                          }),
+                        );
                     }
                   }
                 },
@@ -105,11 +106,12 @@ const Categories = (): JSX.Element => {
                   dispatch(closeModal());
                   const response = await dispatch(activateCategory(rowData.id));
                   if (response.type === Actions.ACTIVATE_CATEGORY_ERROR) {
-                    dispatch(
-                      openModal(ModalTypes.INFO, {
-                        message: 'Ha ocurrido un error.',
-                      }),
-                    );
+                    await dispatch(getCategory()),
+                      dispatch(
+                        openModal(ModalTypes.INFO, {
+                          message: 'Ha ocurrido un error.',
+                        }),
+                      );
                   }
                 },
                 onCloseCallback: () => dispatch(closeModal()),
@@ -138,11 +140,12 @@ const Categories = (): JSX.Element => {
                     }),
                   );
                 } else {
-                  dispatch(
-                    openModal(ModalTypes.INFO, {
-                      message: 'Ha ocurrido un error.',
-                    }),
-                  );
+                  await dispatch(getCategory()),
+                    dispatch(
+                      openModal(ModalTypes.INFO, {
+                        message: 'Ha ocurrido un error.',
+                      }),
+                    );
                 }
               }
             },
