@@ -115,25 +115,27 @@ const Header = () => {
             </div>
             {openSelect && (
               <div
-                className={styles.optionsContainer}
+                className={styles.superContainer}
                 onMouseEnter={() => setOpenSelect(true)}
                 onMouseLeave={() => setOpenSelect(false)}
               >
-                {categories.map((category, index) => (
-                  <span className={styles.categoryOption} key={index}>
-                    <Link
-                      to={`/category/${category.url}`}
-                      className={styles.categoryLinks}
-                      data-testid={`category-${index}`}
-                      onClick={() => {
-                        setOpenSelect(false);
-                        setSearchInput('');
-                      }}
-                    >
-                      {category.name}
-                    </Link>
-                  </span>
-                ))}
+                <div className={styles.optionsContainer}>
+                  {categories.map((category, index) => (
+                    <span className={styles.categoryOption} key={index}>
+                      <Link
+                        to={`/category/${category.url}`}
+                        className={styles.categoryLinks}
+                        data-testid={`category-${index}`}
+                        onClick={() => {
+                          setOpenSelect(false);
+                          setSearchInput('');
+                        }}
+                      >
+                        {category.name}
+                      </Link>
+                    </span>
+                  ))}
+                </div>
               </div>
             )}
             <div>

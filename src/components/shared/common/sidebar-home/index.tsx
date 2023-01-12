@@ -72,7 +72,7 @@ const SidebarHome = (props: propsSidebar): JSX.Element => {
               </li>
               <li>
                 <div className={styles.categoriesContainer} onClick={() => setShowList(!showList)}>
-                  <span className={styles.options}>Categorias</span>
+                  <span className={styles.options}>Categorías</span>
                   {showList ? <ArrowDropDownOutlined /> : <ArrowLeftOutlined />}
                 </div>
               </li>

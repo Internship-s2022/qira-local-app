@@ -10,10 +10,10 @@ const AdminLayout = (): JSX.Element => {
   const baseUrl = '/admin';
   const adminLinks: SidebarLinks[] = [
     { link: '/', title: 'Volver a QIRA' },
-    { link: '/orders', title: 'Ordenes de compra' },
+    { link: '/orders', title: 'Órdenes de compra' },
     { link: '/clients', title: 'Clientes' },
     { link: '/products', title: 'Productos' },
-    { link: '/categories', title: 'Categorias' },
+    { link: '/categories', title: 'Categorías' },
     { link: '/deliver', title: 'Entregar pedido' },
   ];
   const title = 'APP WEB Administrador';
