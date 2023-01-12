@@ -9,7 +9,6 @@ import { formatIvaConditionsText } from 'src/helper/clients/clients';
 import { formatOrderStateText } from 'src/helper/orders';
 import { getClientOrderById } from 'src/redux/orders/thunks';
 import { AppDispatch, RootState } from 'src/redux/store';
-import { OrderState } from 'src/types';
 import { capitalizeFirstLetter } from 'src/utils/formatters';
 
 import styles from './order-details.module.css';
@@ -128,20 +127,24 @@ const OrderDetails = (): JSX.Element => {
                 <p>{Dinero({ amount: selectedOrder?.amounts.total || 0 }).toFormat('$0,0.00')}</p>
               </div>
             </div>
-            {selectedOrder?.state !== OrderState.REJECTED && (
-              <div className={styles.dataContainer}>
-                <div className={styles.filesContainer}>
-                  {selectedOrder?.invoice?.url && (
-                    <div className={styles.invoiceContainer}>
-                      <a href={selectedOrder?.invoice?.url} target="blank" className={styles.link}>
-                        <InsertDriveFile />
-                        Factura
-                      </a>
-                    </div>
-                  )}
+            <div className={styles.dataContainer}>
+              <div className={styles.filesContainer}>
+                <div>
+                  <a href={selectedOrder?.payment.url} target="blank" className={styles.link}>
+                    <InsertDriveFile />
+                    Comprobante de pago
+                  </a>
                 </div>
+                {selectedOrder?.invoice?.url && (
+                  <div className={styles.invoiceContainer}>
+                    <a href={selectedOrder?.invoice?.url} target="blank" className={styles.link}>
+                      <InsertDriveFile />
+                      Factura
+                    </a>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
         </div>
       )}
