@@ -230,14 +230,14 @@ const OrderDetails = (): JSX.Element => {
                   <p>{Dinero({ amount: selectedOrder?.amounts.total || 0 }).toFormat('$0,0.00')}</p>
                 </div>
               </div>
+              <div>
+                <a href={selectedOrder?.payment.url} target="blank" className={styles.link}>
+                  <InsertDriveFile />
+                  Comprobante de pago
+                </a>
+              </div>
               {selectedOrder?.state !== OrderState.REJECTED && (
                 <div className={styles.dataContainer}>
-                  <div>
-                    <a href={selectedOrder?.payment.url} target="blank" className={styles.link}>
-                      <InsertDriveFile />
-                      Comprobante de pago
-                    </a>
-                  </div>
                   <div className={styles.filesContainer}>
                     {selectedOrder?.invoice?.url && (
                       <div className={styles.invoiceContainer}>
