@@ -1,11 +1,12 @@
 import Dinero from 'dinero.js';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Close, Delete, ShoppingCartOutlined } from '@mui/icons-material';
 import { Box, Button, IconButton, Modal, Tooltip } from '@mui/material';
 
 import { resetError } from 'src/redux/auth/actions';
+import { getAuthUserThunk } from 'src/redux/auth/thunks';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
 import { closeCart, resetState } from 'src/redux/shopping-cart/actions';
