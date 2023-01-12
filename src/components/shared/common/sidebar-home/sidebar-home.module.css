@@ -28,8 +28,10 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  height: calc(100vh - 252px);
   padding: 0;
   margin-left: 20px;
+  overflow-y: scroll;
   list-style: none;
 }
 
@@ -48,6 +50,7 @@
 .linkProfile {
   color: black;
   text-decoration: none;
+  text-transform: capitalize;
 }
 
 .linkProfile:hover {
@@ -58,6 +61,7 @@
 .linkSelected {
   color: #f05523;
   text-decoration: none;
+  text-transform: capitalize;
 }
 
 .options:hover {
