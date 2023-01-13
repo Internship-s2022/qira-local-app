@@ -49,7 +49,7 @@ export const ProductDetail = (): JSX.Element => {
   }, [productQuantity]);
 
   const disableBtn = useMemo(() => {
-    if (selectedProduct?.stock < 1 || productQuantity === count) {
+    if (selectedProduct?.stock < 1 || productQuantity === count || count > selectedProduct?.stock) {
       return true;
     }
   }, [selectedProduct, productQuantity, count]);
