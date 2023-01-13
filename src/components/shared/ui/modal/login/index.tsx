@@ -11,6 +11,7 @@ import { login } from 'src/redux/auth/thunks';
 import { Actions as AuthActions } from 'src/redux/auth/types';
 import { closeModal, openModal } from 'src/redux/modal/actions';
 import { ModalTypes } from 'src/redux/modal/types';
+import { closeSidebar } from 'src/redux/sidebar/actions';
 import { AppDispatch, RootState } from 'src/redux/store';
 import { UserRole } from 'src/types';
 
@@ -59,6 +60,7 @@ export const LoginModal = () => {
     const response = await dispatch(login(User));
     if (response.type === AuthActions.LOGIN_SUCCESS) {
       dispatch(closeModal());
+      dispatch(closeSidebar());
       if (response.payload.role === UserRole.ADMIN) {
         navigate('/admin/orders');
       }
