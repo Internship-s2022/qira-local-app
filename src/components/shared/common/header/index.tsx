@@ -13,6 +13,7 @@ import { Badge, BadgeProps, styled, Tooltip, useMediaQuery } from '@mui/material
 
 import { formatDate } from 'src/helper/orders';
 import { resetError } from 'src/redux/auth/actions';
+import { getAuthUserThunk } from 'src/redux/auth/thunks';
 import * as thunksCategories from 'src/redux/category/thunk';
 import { getExchangeRate } from 'src/redux/exchange-rate/thunks';
 import { closeModal, openModal } from 'src/redux/modal/actions';
@@ -209,7 +210,10 @@ const Header = () => {
               max={9}
               color="info"
               className={styles.shoppingCartContainer}
-              onClick={() => dispatch(openCart())}
+              onClick={() => {
+                dispatch(openCart());
+                dispatch(getAuthUserThunk());
+              }}
             >
               <ShoppingCart className={styles.shoppingCart} />
             </StyledBadge>
