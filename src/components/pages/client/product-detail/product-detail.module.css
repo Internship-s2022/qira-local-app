@@ -71,7 +71,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 400px;
+  width: 380px;
   height: 500px;
   background-color: white;
 }
@@ -80,6 +80,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 360px;
   padding: 20px;
   margin-left: 10px;
   background-color: white;
@@ -124,6 +125,7 @@
 .priceText {
   margin-left: 50px;
   font-weight: bold;
+  word-break: break-word;
 }
 
 .ivaText {
@@ -175,11 +177,10 @@
 .quantity {
   display: flex;
   justify-content: space-between;
-  padding-left: 10px;
 }
 
 .quantity p {
-  margin-right: 20px;
+  margin: 10px 10px 0 0;
   font-size: 11;
   font-weight: bold;
 }
@@ -191,6 +192,10 @@
   justify-content: space-around;
 }
 
+.inputIcons {
+  padding: 0;
+}
+
 .counterInput {
   width: 142px;
   border-radius: 8px;
@@ -200,6 +205,14 @@
 input::-webkit-inner-spin-button {
   appearance: none;
   margin: 0;
+}
+
+.stock p {
+  position: relative;
+  bottom: 40px;
+  margin-top: 0;
+  font-size: 14px;
+  font-weight: lighter;
 }
 
 .quantityIcons p {
@@ -230,11 +243,13 @@ input::-webkit-inner-spin-button {
   }
 
   .imageContainer {
+    width: 400px;
     height: auto;
     padding-top: 15px;
   }
 
   .priceContainer {
+    width: 360px;
     margin-left: 0;
   }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { joiResolver } from '@hookform/resolvers/joi';
 import { Add, FileCopyOutlined, PaidOutlined, Remove, StoreOutlined } from '@mui/icons-material';
 import { Button, IconButton, InputAdornment, Tooltip } from '@mui/material';
 
@@ -14,6 +15,7 @@ import { getProductQuantity } from 'src/redux/shopping-cart/selectors/getProduct
 import { AppDispatch, RootState } from 'src/redux/store';
 
 import styles from './product-detail.module.css';
+import { CounterValidation } from './validations';
 
 export const ProductDetail = (): JSX.Element => {
   const dispatch: AppDispatch<null> = useDispatch();
@@ -25,7 +27,7 @@ export const ProductDetail = (): JSX.Element => {
     counter: number;
   }
 
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(1);
   const addToCart = () => {
     if (count >= 1) {
       const shoppingCartProduct = {
@@ -52,10 +54,11 @@ export const ProductDetail = (): JSX.Element => {
     }
   }, [selectedProduct, productQuantity, count]);
 
-  const { control } = useForm<FormValues>({
+  const { trigger, setValue, control } = useForm<FormValues>({
     defaultValues: {
       counter: count,
     },
+    resolver: joiResolver(CounterValidation(selectedProduct?.stock)),
     mode: 'onBlur',
   });
 
@@ -112,14 +115,14 @@ export const ProductDetail = (): JSX.Element => {
                       type="number"
                       margin="dense"
                       size="small"
-                      value={count}
+                      value={count.toString()}
+                      inputProps={{ style: { textAlign: 'center' } }}
                       onChange={(e) => {
                         if (!e.target.value) {
+                          setValue('counter', 0);
                           return setCount(0);
                         }
-                        if (parseInt(e.target.value) > selectedProduct?.stock) {
-                          return setCount(selectedProduct.stock);
-                        }
+                        setValue('counter', parseInt(e.target.value));
                         setCount(parseInt(e.target.value));
                       }}
                       data-testid="counter-input"
@@ -128,9 +131,12 @@ export const ProductDetail = (): JSX.Element => {
                           <InputAdornment position="start">
                             <Tooltip title={'Quitar'}>
                               <IconButton
-                                className={styles.iconButton}
+                                style={{ paddingLeft: '0px' }}
+                                className={styles.inputIcons}
                                 disabled={count === 0}
                                 onClick={() => {
+                                  setValue('counter', count - 1);
+                                  trigger('counter');
                                   count >= 1 && setCount(count - 1);
                                 }}
                               >
@@ -149,7 +155,7 @@ export const ProductDetail = (): JSX.Element => {
                           >
                             <span>
                               <IconButton
-                                className={styles.iconButton}
+                                className={styles.inputIcons}
                                 disabled={count >= selectedProduct?.stock}
                                 onClick={() => {
                                   setCount(count + 1);
@@ -163,6 +169,9 @@ export const ProductDetail = (): JSX.Element => {
                       }}
                     />
                   </div>
+                </div>
+                <div className={styles.stock}>
+                  <p>Stock disponible: {selectedProduct?.stock}</p>
                 </div>
               </div>
               <div>
