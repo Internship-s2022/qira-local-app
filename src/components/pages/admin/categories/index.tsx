@@ -78,16 +78,22 @@ const Categories = (): JSX.Element => {
                 onConfirmCallback: async () => {
                   dispatch(closeModal());
                   const response = await dispatch(inactivateCategory(rowData.id));
-                  if (
-                    response.type === Actions.INACTIVATE_CATEGORY_ERROR &&
-                    response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS
-                  ) {
-                    dispatch(
-                      openModal(ModalTypes.INFO, {
-                        message:
-                          'No es posible desactivar la categoría debido a que la misma posee productos asignados.',
-                      }),
-                    );
+                  if (response.type === Actions.INACTIVATE_CATEGORY_ERROR) {
+                    if (response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS) {
+                      dispatch(
+                        openModal(ModalTypes.INFO, {
+                          message:
+                            'No es posible desactivar la categoría debido a que la misma posee productos asignados.',
+                        }),
+                      );
+                    } else {
+                      await dispatch(getCategory()),
+                        dispatch(
+                          openModal(ModalTypes.INFO, {
+                            message: 'Ha ocurrido un error.',
+                          }),
+                        );
+                    }
                   }
                 },
                 onCloseCallback: () => dispatch(closeModal()),
@@ -96,9 +102,17 @@ const Categories = (): JSX.Element => {
           : dispatch(
               openModal(ModalTypes.CONFIRM, {
                 message: '¿Está seguro de que desea activar la categoría?',
-                onConfirmCallback: () => {
+                onConfirmCallback: async () => {
                   dispatch(closeModal());
-                  dispatch(activateCategory(rowData.id));
+                  const response = await dispatch(activateCategory(rowData.id));
+                  if (response.type === Actions.ACTIVATE_CATEGORY_ERROR) {
+                    await dispatch(getCategory()),
+                      dispatch(
+                        openModal(ModalTypes.INFO, {
+                          message: 'Ha ocurrido un error.',
+                        }),
+                      );
+                  }
                 },
                 onCloseCallback: () => dispatch(closeModal()),
               }),
@@ -117,16 +131,22 @@ const Categories = (): JSX.Element => {
             onConfirmCallback: async () => {
               dispatch(closeModal());
               const response = await dispatch(deleteCategory(rowData.id));
-              if (
-                response.type === Actions.DELETE_CATEGORY_ERROR &&
-                response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS
-              ) {
-                dispatch(
-                  openModal(ModalTypes.INFO, {
-                    message:
-                      'No es posible borrar la categoría debido a que la misma posee productos asignados.',
-                  }),
-                );
+              if (response.type === Actions.DELETE_CATEGORY_ERROR) {
+                if (response.payload.subcode === SubCodes.CATEGORY_WITH_PRODUCTS) {
+                  dispatch(
+                    openModal(ModalTypes.INFO, {
+                      message:
+                        'No es posible borrar la categoría debido a que la misma posee productos asignados.',
+                    }),
+                  );
+                } else {
+                  await dispatch(getCategory()),
+                    dispatch(
+                      openModal(ModalTypes.INFO, {
+                        message: 'Ha ocurrido un error.',
+                      }),
+                    );
+                }
               }
             },
             onCloseCallback: () => dispatch(closeModal()),
